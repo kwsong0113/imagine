@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+if [ $(git rev-parse --abbrev-ref HEAD) = main ]; then
+  echo 'Pushing to main branch is not allowed'
+  exit 1
+fi
