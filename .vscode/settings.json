@@ -25,8 +25,13 @@
   },
   "eslint.format.enable": true,
   "search.exclude": {
-    "**/.yarn": true
+    "**/.yarn": true,
+    "**/.pnp.*": true
   },
   "eslint.packageManager": "yarn",
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "eslint.nodePath": ".yarn/sdks",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }
