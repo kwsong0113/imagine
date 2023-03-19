@@ -63,11 +63,10 @@ yarn-error.log
 .metro-health-check*
 
 # yarn
+.pnp.*
 .yarn/*
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-
