@@ -1,0 +1,1 @@
+export { TabNavigator } from './TabNavigator';

@@ -1,14 +1,13 @@
+import { Box, Text } from 'native-base';
 import React from 'react';
-import { Text, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const Custom = () => {
-  const insets = useSafeAreaInsets();
-
   return (
-    <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
-      <Text>Custom</Text>
-    </View>
+    <Box flex="1" safeArea>
+      <Box bg="orange.900">
+        <Text fontSize="24px">안녕하세요</Text>
+      </Box>
+    </Box>
   );
 };
 
