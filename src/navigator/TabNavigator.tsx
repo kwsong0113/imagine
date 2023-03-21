@@ -6,44 +6,66 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
+const tabBarIconMap: Record<
+  string,
+  ({ color }: { color: string }) => JSX.Element
+> = {
+  Statistics: ({ color }) => (
+    <Icon name="stats-chart" size={34.67} color={color} />
+  ),
+  Custom: ({ color }) => <Icon name="add-circle" size={40} color={color} />,
+  Setting: ({ color }) => <Icon name="cog-sharp" size={40} color={color} />,
+};
+
 export const TabNavigator = () => {
   const { colors } = useTheme();
 
   return (
     <Tab.Navigator
       initialRouteName="Custom"
-      screenOptions={{
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
         tabBarActiveTintColor: colors.orange[700],
         tabBarInactiveTintColor: colors.gray[400],
-      }}
+        tabBarStyle: {
+          height: 86,
+          backgroundColor: colors.gray[100],
+          borderTopWidth: 0,
+        },
+        tabBarIcon: tabBarIconMap[route.name],
+      })}
     >
       <Tab.Screen
         name="Statistics"
         component={Statistics}
         options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="stats-chart" color={color} size={32.5} />
-          ),
+          tabBarItemStyle: {
+            borderTopLeftRadius: 30,
+            borderTopColor: colors.gray[300],
+            borderTopWidth: 1,
+          },
         }}
       />
       <Tab.Screen
         name="Custom"
         component={Custom}
         options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="add-circle" color={color} size={40} />
-          ),
+          tabBarItemStyle: {
+            borderTopColor: colors.gray[300],
+            borderTopWidth: 1,
+          },
         }}
       />
       <Tab.Screen
         name="Setting"
         component={Setting}
         options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="cog-sharp" color={color} size={40} />
-          ),
+          tabBarItemStyle: {
+            borderTopRightRadius: 30,
+            borderTopColor: colors.gray[300],
+            borderTopWidth: 1,
+          },
         }}
       />
     </Tab.Navigator>
