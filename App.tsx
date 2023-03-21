@@ -1,16 +1,16 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { NativeBaseProvider } from 'native-base';
-import { theme } from './src/theme';
-import { TabNavigator } from './src/navigator';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { RootNavigator } from './src/navigator';
+import { persistor, store } from './src/store';
 
 function App() {
   return (
-    <NativeBaseProvider theme={theme}>
-      <NavigationContainer>
-        <TabNavigator />
-      </NavigationContainer>
-    </NativeBaseProvider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <RootNavigator />
+      </PersistGate>
+    </Provider>
   );
 }
 
