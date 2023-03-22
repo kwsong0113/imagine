@@ -21,8 +21,7 @@ type ReducersState = ReturnType<typeof rootReducer>;
 const persistConfig: PersistConfig<ReducersState> = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['baseSettingReducer'], // persist store에 저장 할 reducer들
-  blacklist: ['globalStateReducer'], // persist store에 저장하지 않을 reducer들
+  whitelist: ['setting'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
