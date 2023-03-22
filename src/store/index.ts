@@ -14,6 +14,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { reducers } from './slices';
+import reactotron from '../../ReactotronConfig';
 
 const rootReducer = combineReducers({ ...reducers });
 type ReducersState = ReturnType<typeof rootReducer>;
@@ -21,11 +22,12 @@ type ReducersState = ReturnType<typeof rootReducer>;
 const persistConfig: PersistConfig<ReducersState> = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['baseSettingReducer'], // persist store에 저장 할 reducer들
-  blacklist: ['globalStateReducer'], // persist store에 저장하지 않을 reducer들
+  whitelist: ['setting'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const enhancer = reactotron.createEnhancer?.();
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -35,6 +37,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+  enhancers: enhancer ? [enhancer] : undefined,
 });
 export const persistor = persistStore(store);
 
