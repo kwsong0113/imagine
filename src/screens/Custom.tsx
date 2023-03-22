@@ -2,7 +2,7 @@ import { Box, Text, Button } from 'native-base';
 import React from 'react';
 import { useAppDispatch } from '../hooks';
 import { settingActions } from '../store/slices';
-import { StatusBar } from '../components';
+import { StatusBar, Header } from '../components';
 
 export const Custom = () => {
   const dispatch = useAppDispatch();
@@ -10,6 +10,10 @@ export const Custom = () => {
   return (
     <Box flex="1" bg="gray.100" safeArea>
       <StatusBar />
+      <Header
+        title="커스텀 제스처"
+        description="원하는 액션을 커스텀 제스처로 실행해요"
+      />
       <Box bg="orange.900">
         <Text fontSize="24px">안녕하세요</Text>
       </Box>

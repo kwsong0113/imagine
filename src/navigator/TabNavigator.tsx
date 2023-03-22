@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Setting, Custom, Statistics } from '../screens';
 import { useTheme } from 'native-base';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { IonIcon } from '../components';
 
 const Tab = createBottomTabNavigator();
 
@@ -11,10 +11,10 @@ const tabBarIconMap: Record<
   ({ color }: { color: string }) => JSX.Element
 > = {
   Statistics: ({ color }) => (
-    <Icon name="stats-chart" size={34.67} color={color} />
+    <IonIcon name="stats-chart" size="34.67px" color={color} />
   ),
-  Custom: ({ color }) => <Icon name="add-circle" size={40} color={color} />,
-  Setting: ({ color }) => <Icon name="cog-sharp" size={40} color={color} />,
+  Custom: ({ color }) => <IonIcon name="add-circle" size="10" color={color} />,
+  Setting: ({ color }) => <IonIcon name="cog-sharp" size="10" color={color} />,
 };
 
 export const TabNavigator = () => {
@@ -26,7 +26,7 @@ export const TabNavigator = () => {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: colors.orange[700],
+        tabBarActiveTintColor: 'orange.700',
         tabBarInactiveTintColor: colors.gray[400],
         tabBarStyle: {
           height: 86,
