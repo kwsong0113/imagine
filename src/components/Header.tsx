@@ -1,24 +1,22 @@
 import React from 'react';
-import { VStack, Text, HStack } from 'native-base';
+import { VStack, HStack } from 'native-base';
 import { IonIcon } from './IonIcon';
+import { Typography } from './Typography';
 
 interface HeaderProps {
+  leftIcon?: string;
   title: string;
   description: string;
 }
 
-export const Header = ({ title, description }: HeaderProps) => {
+export const Header = ({ leftIcon, title, description }: HeaderProps) => {
   return (
     <VStack space={3}>
       <HStack space={2.5} alignItems="center">
-        <IonIcon name="chevron-back-circle" color="gray.500" size="30px" />
-        <Text fontSize="4xl" color="gray.900">
-          {title}
-        </Text>
+        {leftIcon && <IonIcon name={leftIcon} color="gray.500" size="30px" />}
+        <Typography variant="title">{title}</Typography>
       </HStack>
-      <Text fontSize="md" color="gray.900">
-        {description}
-      </Text>
+      <Typography variant="body">{description}</Typography>
     </VStack>
   );
 };
