@@ -11,13 +11,13 @@ const tabBarIconMap: Record<
   ({ color }: { color: string }) => JSX.Element
 > = {
   Statistics: ({ color }) => (
-    <IonIcon name="stats-chart" size="34.67px" color={color} />
+    <IonIcon name="stats-chart" size={34.67} color={color} />
   ),
-  Custom: ({ color }) => <IonIcon name="add-circle" size="10" color={color} />,
-  Setting: ({ color }) => <IonIcon name="cog-sharp" size="10" color={color} />,
+  Custom: ({ color }) => <IonIcon name="add-circle" size={10} color={color} />,
+  Setting: ({ color }) => <IonIcon name="cog-sharp" size={10} color={color} />,
 };
 
-export const TabNavigator = () => {
+export const RootTabNavigator = () => {
   const { colors } = useTheme();
 
   return (

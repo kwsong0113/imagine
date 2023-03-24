@@ -44,8 +44,8 @@ export const Header = ({
   });
 
   return (
-    <VStack space="3">
-      <HStack space="2.5" alignItems="center">
+    <VStack space={3}>
+      <HStack space={2.5} alignItems="center">
         {hasBackButton && (
           <TouchableWithoutFeedback
             onPressIn={() => {
@@ -57,14 +57,14 @@ export const Header = ({
             onPress={navigation.goBack}
           >
             <Animated.View style={outlineStyle}>
-              <IonIcon name="chevron-back-circle" color="gray.500" size="30" />
+              <IonIcon name="chevron-back-circle" color="gray.500" size={30} />
             </Animated.View>
           </TouchableWithoutFeedback>
         )}
         {variant === 'left' ? (
           <Typography variant="title">{title}</Typography>
         ) : (
-          <Center flex="1" pr={hasBackButton ? '10' : '0'}>
+          <Center flex={1} pr={hasBackButton ? 10 : 0}>
             <Typography variant="title">{title}</Typography>
           </Center>
         )}
