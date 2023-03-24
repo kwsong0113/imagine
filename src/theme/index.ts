@@ -1,10 +1,11 @@
 import { extendTheme } from 'native-base';
 import { darkThemeColors, lightThemeColors } from './colors';
-import { fontConfig, fonts } from './fonts';
+import { space } from './space';
+import { typography } from './typography';
 
 const defaultTheme = {
-  fontConfig,
-  fonts,
+  ...typography,
+  space,
   components: {
     Text: {
       defaultProps: {
