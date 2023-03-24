@@ -1,8 +1,12 @@
 import React from 'react';
 import { Pressable } from 'native-base';
 import { Header, IonIcon, ScreenContainer } from '../../components';
+import { CustomStackParamList } from '../../navigation';
+import { StackScreenProps } from '@react-navigation/stack';
 
-export const Custom = ({ navigation }) => {
+type Props = StackScreenProps<CustomStackParamList, 'Home'>;
+
+export const Custom = ({ navigation }: Props) => {
   return (
     <ScreenContainer>
       <Header

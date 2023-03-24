@@ -2,11 +2,18 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppList, Custom, ActionList } from '../screens/Custom';
 
-const Stack = createStackNavigator();
+export type CustomStackParamList = {
+  Home: undefined;
+  AppList: undefined;
+  ActionList: undefined;
+};
+
+const Stack = createStackNavigator<CustomStackParamList>();
 
 export const CustomStackNavigator = () => {
   return (
     <Stack.Navigator
+      id="Custom"
       screenOptions={{
         headerShown: false,
       }}
