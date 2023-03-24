@@ -1,16 +1,16 @@
 import React from 'react';
-import { VStack, Switch, HStack } from 'native-base';
+import { Switch, HStack } from 'native-base';
 import { useColorMode } from '../hooks';
 import { useAppDispatch } from '../hooks';
 import { settingActions } from '../store/slices';
-import { Header, Typography } from '../components';
+import { Header, ScreenContainer, Typography } from '../components';
 
 export const Setting = () => {
   const colorMode = useColorMode();
   const dispatch = useAppDispatch();
 
   return (
-    <VStack flex={1} p={6} space={6} bg="gray.100" safeArea>
+    <ScreenContainer>
       <Header
         hasBackButton={false}
         title="설정"
@@ -27,6 +27,7 @@ export const Setting = () => {
       >
         <Typography variant="body">테마</Typography>
         <Switch
+          size="sm"
           isChecked={colorMode === 'light'}
           onTrackColor="orange.800"
           onThumbColor="gray.100"
@@ -41,6 +42,6 @@ export const Setting = () => {
           }}
         />
       </HStack>
-    </VStack>
+    </ScreenContainer>
   );
 };

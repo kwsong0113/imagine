@@ -1,8 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Setting, Custom, Statistics } from '../screens';
+import { Setting, Statistics } from '../screens';
 import { useTheme } from 'native-base';
 import { IonIcon } from '../components';
+import { CustomStackNavigator } from './CustomStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +50,7 @@ export const RootTabNavigator = () => {
       />
       <Tab.Screen
         name="Custom"
-        component={Custom}
+        component={CustomStackNavigator}
         options={{
           tabBarItemStyle: {
             borderTopColor: colors.gray[300],
