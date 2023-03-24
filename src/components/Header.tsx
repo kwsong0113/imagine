@@ -1,6 +1,5 @@
 import React from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
-import { VStack, HStack, Center } from 'native-base';
+import { VStack, HStack, Center, Pressable } from 'native-base';
 import { IonIcon } from './IonIcon';
 import { Typography } from './Typography';
 import { useNavigation } from '@react-navigation/native';
@@ -10,6 +9,7 @@ import Animated, {
   useAnimatedStyle,
   interpolate,
   Extrapolate,
+  Easing,
 } from 'react-native-reanimated';
 
 interface HeaderProps {
@@ -35,7 +35,7 @@ export const Header = ({
           scale: interpolate(
             pressing.value,
             [0, 1],
-            [1, 0.7],
+            [1, 0.5],
             Extrapolate.CLAMP,
           ),
         },
@@ -47,9 +47,11 @@ export const Header = ({
     <VStack space={3}>
       <HStack space={2.5} alignItems="center">
         {hasBackButton && (
-          <TouchableWithoutFeedback
+          <Pressable
             onPressIn={() => {
-              pressing.value = withTiming(1);
+              pressing.value = withTiming(1, {
+                easing: Easing.linear,
+              });
             }}
             onPressOut={() => {
               pressing.value = withTiming(0);
@@ -59,7 +61,7 @@ export const Header = ({
             <Animated.View style={outlineStyle}>
               <IonIcon name="chevron-back-circle" color="gray.500" size={30} />
             </Animated.View>
-          </TouchableWithoutFeedback>
+          </Pressable>
         )}
         {variant === 'left' ? (
           <Typography variant="title">{title}</Typography>
