@@ -4,3 +4,4 @@ export * from './Header';
 export * from './IonIcon';
 export * from './Typography';
 export * from './ScreenContainer';
+export * from './AnimatedIconButton';

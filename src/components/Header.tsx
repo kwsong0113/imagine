@@ -1,16 +1,8 @@
 import React from 'react';
-import { VStack, HStack, Center, Pressable } from 'native-base';
-import { IonIcon } from './IonIcon';
+import { VStack, HStack, Center } from 'native-base';
 import { Typography } from './Typography';
+import { AnimatedIconButton } from './AnimatedIconButton';
 import { useNavigation } from '@react-navigation/native';
-import Animated, {
-  useSharedValue,
-  withTiming,
-  useAnimatedStyle,
-  interpolate,
-  Extrapolate,
-  Easing,
-} from 'react-native-reanimated';
 
 interface HeaderProps {
   variant?: 'left' | 'center';
@@ -26,42 +18,17 @@ export const Header = ({
   description,
 }: HeaderProps) => {
   const navigation = useNavigation();
-  const pressing = useSharedValue(0);
-
-  const outlineStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          scale: interpolate(
-            pressing.value,
-            [0, 1],
-            [1, 0.5],
-            Extrapolate.CLAMP,
-          ),
-        },
-      ],
-    };
-  });
 
   return (
     <VStack space={3}>
       <HStack space={2.5} alignItems="center">
         {hasBackButton && (
-          <Pressable
-            onPressIn={() => {
-              pressing.value = withTiming(1, {
-                easing: Easing.linear,
-              });
-            }}
-            onPressOut={() => {
-              pressing.value = withTiming(0);
-            }}
+          <AnimatedIconButton
+            name="chevron-back-circle"
+            color="gray.500"
+            size={30}
             onPress={navigation.goBack}
-          >
-            <Animated.View style={outlineStyle}>
-              <IonIcon name="chevron-back-circle" color="gray.500" size={30} />
-            </Animated.View>
-          </Pressable>
+          />
         )}
         {variant === 'left' ? (
           <Typography variant="title">{title}</Typography>
