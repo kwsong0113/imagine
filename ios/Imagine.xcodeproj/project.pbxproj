@@ -43,6 +43,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Imagine/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Imagine-ImagineTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Imagine-ImagineTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B22BBEEF1B440699BB18BFB /* NanumGothic-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NanumGothic-ExtraBold.ttf"; path = "../src/assets/fonts/NanumGothic-ExtraBold.ttf"; sourceTree = "<group>"; };
+		1CC303A9E616489585115905 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../src/assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-Imagine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Imagine.debug.xcconfig"; path = "Target Support Files/Pods-Imagine/Pods-Imagine.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Imagine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Imagine.release.xcconfig"; path = "Target Support Files/Pods-Imagine/Pods-Imagine.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-Imagine-ImagineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Imagine-ImagineTests.debug.xcconfig"; path = "Target Support Files/Pods-Imagine-ImagineTests/Pods-Imagine-ImagineTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 				1B22BBEEF1B440699BB18BFB /* NanumGothic-ExtraBold.ttf */,
 				086EAFC186114799B1EC6653 /* NanumGothic-Regular.ttf */,
 				FE1A70976B11468AA3146BDD /* Ionicons.ttf */,
+				1CC303A9E616489585115905 /* MaterialCommunityIcons.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
