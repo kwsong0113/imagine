@@ -1,10 +1,11 @@
 import React from 'react';
-import { AppProvider } from './src/components/AppProvider';
+import { StatusBar, AppProvider } from './src/components';
 import { RootTabNavigator } from './src/navigation';
 
 function App() {
   return (
     <AppProvider>
+      <StatusBar />
       <RootTabNavigator />
     </AppProvider>
   );
