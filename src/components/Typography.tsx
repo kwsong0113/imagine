@@ -12,6 +12,7 @@ type Variant =
 type TypographyProps = {
   variant: Variant;
   color?: string;
+  truncate?: boolean;
   children?: ReactNode | string;
 };
 
@@ -45,9 +46,18 @@ const typographyMap: Record<
   },
 };
 
-export const Typography = ({ variant, color, children }: TypographyProps) => {
+export const Typography = ({
+  variant,
+  color,
+  truncate = false,
+  children,
+}: TypographyProps) => {
   return (
-    <Text color={color ?? 'gray.900'} {...typographyMap[variant]}>
+    <Text
+      color={color ?? 'gray.900'}
+      numberOfLines={truncate ? 1 : undefined}
+      {...typographyMap[variant]}
+    >
       {children}
     </Text>
   );

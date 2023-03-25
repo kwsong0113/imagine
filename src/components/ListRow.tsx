@@ -33,12 +33,12 @@ export const ListRow = ({
       <VStack flex={1} space={2}>
         <Typography variant="body">{title}</Typography>
         {description && (
-          <Typography variant="description" color="gray.600">
+          <Typography variant="description" color="gray.600" truncate>
             {description}
           </Typography>
         )}
         {caption && (
-          <Typography variant="caption" color="gray.600">
+          <Typography variant="caption" color="gray.600" truncate>
             {caption}
           </Typography>
         )}
