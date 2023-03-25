@@ -1,9 +1,9 @@
 import { useColorScheme } from 'react-native';
-import { selectTheme } from '../store/slices';
+import { selectThemeMode } from '../store/slices';
 import { useAppSelector } from './useApp';
 
 export const useColorMode = () => {
-  const theme = useAppSelector(selectTheme);
-  const systemTheme = useColorScheme();
-  return theme === 'system' ? systemTheme ?? 'light' : theme;
+  const themeMode = useAppSelector(selectThemeMode);
+  const systemColorMode = useColorScheme();
+  return themeMode === 'system' ? systemColorMode ?? 'light' : themeMode;
 };
