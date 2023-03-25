@@ -5,6 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { useCustomTheme } from '../hooks';
 import { persistor, store } from '../store';
 import { NavigationContainer } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 interface Props {
   children: React.ReactNode;
@@ -20,7 +21,12 @@ export const AppProvider = ({ children }: Props) => {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <NavigationContainer>
-          <NativeBaseThemeProvider>{children}</NativeBaseThemeProvider>
+          <NativeBaseThemeProvider>
+            {/* eslint-disable react-native/no-inline-styles */}
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              {children}
+            </GestureHandlerRootView>
+          </NativeBaseThemeProvider>
         </NavigationContainer>
       </PersistGate>
     </Provider>
