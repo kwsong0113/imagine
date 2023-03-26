@@ -6,6 +6,7 @@ import { useCustomTheme } from '../hooks';
 import { persistor, store } from '../store';
 import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 interface Props {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ export const AppProvider = ({ children }: Props) => {
           <NativeBaseThemeProvider>
             {/* eslint-disable react-native/no-inline-styles */}
             <GestureHandlerRootView style={{ flex: 1 }}>
-              {children}
+              <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
             </GestureHandlerRootView>
           </NativeBaseThemeProvider>
         </NavigationContainer>

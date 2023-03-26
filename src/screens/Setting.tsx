@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Switch, VStack } from 'native-base';
+import React, { useCallback, useRef, useState } from 'react';
+import { Switch, VStack, Pressable } from 'native-base';
 import { useThemeMode } from '../hooks';
 import {
   Header,
@@ -7,6 +7,8 @@ import {
   MaterialCommunityIcon,
   ListRow,
   ScreenContainer,
+  Typography,
+  SingleBottomSheetModal,
 } from '../components';
 
 const themeModeCaption: Record<
@@ -20,20 +22,38 @@ const themeModeCaption: Record<
 
 const SettingThemeModeRow = () => {
   const { themeMode } = useThemeMode();
+  const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
+
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
 
   return (
-    <ListRow
-      left={
-        <MaterialCommunityIcon
-          name="theme-light-dark"
-          size="40px"
-          color="gray.900"
+    <>
+      <Pressable onPress={handlePresentModalPress}>
+        <ListRow
+          left={
+            <MaterialCommunityIcon
+              name="theme-light-dark"
+              size="40px"
+              color="gray.900"
+            />
+          }
+          title="테마"
+          caption={themeModeCaption[themeMode]}
+          right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
         />
-      }
-      title="테마"
-      caption={themeModeCaption[themeMode]}
-      right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
-    />
+      </Pressable>
+      <SingleBottomSheetModal ref={bottomSheetModalRef}>
+        <VStack px={6} space={31}>
+          <Typography variant="subtitle1">언어</Typography>
+          <Typography variant="body">한국어</Typography>
+          <Typography variant="body" color="gray.500">
+            영어
+          </Typography>
+        </VStack>
+      </SingleBottomSheetModal>
+    </>
   );
 };
 
