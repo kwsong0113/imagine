@@ -1,9 +1,11 @@
-import React, { ReactNode, forwardRef } from 'react';
+import React, { ReactNode, forwardRef, useMemo } from 'react';
 import { useTheme } from 'native-base';
 import {
   BottomSheetBackdropProps,
   BottomSheetBackdrop,
   BottomSheetModal,
+  useBottomSheetDynamicSnapPoints,
+  BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { StyleSheet } from 'react-native';
@@ -50,12 +52,23 @@ const SingleBottomSheetModal = forwardRef<
   SingleBottomSheetModalProps
 >((props, ref) => {
   const { colors } = useTheme();
+  const initialSnapPoints = useMemo(() => ['CONTENT_HEIGHT'], []);
+
+  const {
+    animatedHandleHeight,
+    animatedSnapPoints,
+    animatedContentHeight,
+    handleContentLayout,
+  } = useBottomSheetDynamicSnapPoints(initialSnapPoints);
 
   return (
     <BottomSheetModal
       ref={ref}
-      index={0}
-      snapPoints={['30%']}
+      snapPoints={animatedSnapPoints}
+      handleHeight={animatedHandleHeight}
+      contentHeight={animatedContentHeight}
+      detached={true}
+      bottomInset={30}
       backdropComponent={CustomBackdrop}
       style={styles.container}
       handleStyle={styles.handle}
@@ -67,10 +80,10 @@ const SingleBottomSheetModal = forwardRef<
         styles.background,
         { backgroundColor: colors.gray[100] },
       ]}
-      detached={true}
-      bottomInset={30}
     >
-      {props.children}
+      <BottomSheetView onLayout={handleContentLayout}>
+        {props.children}
+      </BottomSheetView>
     </BottomSheetModal>
   );
 });
