@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
   },
   handle: {
-    padding: 8,
+    padding: 10,
   },
   handleIndicator: {
     width: 40,

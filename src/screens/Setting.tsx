@@ -44,7 +44,7 @@ const SettingThemeModeRow = () => {
         />
       </Pressable>
       <SingleBottomSheetModal ref={bottomSheetModalRef}>
-        <VStack pt={4} pb={7.5} space={4}>
+        <VStack pt={3.5} pb={7.5} space={4}>
           <Box px={6}>
             <Typography variant="subtitle1">테마</Typography>
           </Box>

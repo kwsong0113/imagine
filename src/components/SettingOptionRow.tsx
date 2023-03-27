@@ -13,9 +13,11 @@ export const SettingOptionRow = ({ title, isSelected, onPress }: Props) => {
     <Pressable onPress={onPress}>
       {({ isPressed }) => (
         <HStack
-          px={6}
+          px={3}
+          mx={3}
           py={3}
           bg={isPressed && !isSelected ? 'gray.200' : 'gray.100'}
+          borderRadius={18}
           justifyContent="space-between"
           alignItems="center"
         >
