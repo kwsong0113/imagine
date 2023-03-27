@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Switch, VStack } from 'native-base';
+import React, { useCallback, useRef, useState } from 'react';
+import { Switch, VStack, Pressable, Box } from 'native-base';
 import { useThemeMode } from '../hooks';
 import {
   Header,
@@ -7,33 +7,65 @@ import {
   MaterialCommunityIcon,
   ListRow,
   ScreenContainer,
+  Typography,
+  SingleBottomSheetModal,
+  SettingOptionRow,
 } from '../components';
+import { ThemeMode } from '../store/slices';
 
-const themeModeCaption: Record<
-  ReturnType<typeof useThemeMode>['themeMode'],
-  string
-> = {
+const themeModeCaption: Record<ThemeMode, string> = {
   light: '라이트 모드',
   dark: '다크 모드',
   system: '시스템 설정과 같이',
 };
 
 const SettingThemeModeRow = () => {
-  const { themeMode } = useThemeMode();
+  const { themeMode, changeThemeMode } = useThemeMode();
+  const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
+
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
 
   return (
-    <ListRow
-      left={
-        <MaterialCommunityIcon
-          name="theme-light-dark"
-          size="40px"
-          color="gray.900"
+    <>
+      <Pressable onPress={handlePresentModalPress}>
+        <ListRow
+          left={
+            <MaterialCommunityIcon
+              name="theme-light-dark"
+              size="40px"
+              color="gray.900"
+            />
+          }
+          title="테마"
+          caption={themeModeCaption[themeMode]}
+          right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
         />
-      }
-      title="테마"
-      caption={themeModeCaption[themeMode]}
-      right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
-    />
+      </Pressable>
+      <SingleBottomSheetModal ref={bottomSheetModalRef}>
+        <VStack pt={3.5} pb={7.5} space={4}>
+          <Box px={6}>
+            <Typography variant="subtitle1">테마</Typography>
+          </Box>
+          <VStack>
+            {Object.entries(themeModeCaption).map(
+              ([themeModeOption, caption]) => (
+                <SettingOptionRow
+                  key={themeModeOption}
+                  title={caption}
+                  isSelected={themeModeOption === themeMode}
+                  onPress={() => changeThemeMode(themeModeOption as ThemeMode)}
+                />
+              ),
+            )}
+            {/* <SettingOptionRow title="라이트 모드" isSelected={true} />
+            <SettingOptionRow title="다크 모드" isSelected={false} />
+            <SettingOptionRow title="시스템 모드" isSelected={false} /> */}
+          </VStack>
+        </VStack>
+      </SingleBottomSheetModal>
+    </>
   );
 };
 
@@ -56,7 +88,6 @@ const SettingDynamicIslandRow = () => {
       left={<IonIcon name="toggle-sharp" size="40px" color="gray.900" />}
       title="다이나믹 아일랜드"
       caption="다이나믹 아일랜드에서 앱을 바로 실행해요"
-      hasBottomBorder={true}
       right={
         <Switch
           size="sm"

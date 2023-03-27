@@ -7,3 +7,5 @@ export * from './Typography';
 export * from './ScreenContainer';
 export * from './AnimatedIconButton';
 export * from './ListRow';
+export * from './SettingOptionRow';
+export { default as SingleBottomSheetModal } from './SingleBottomSheetModal';

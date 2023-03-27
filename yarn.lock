@@ -1582,6 +1582,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gorhom/bottom-sheet@npm:^4.4.5":
+  version: 4.4.5
+  resolution: "@gorhom/bottom-sheet@npm:4.4.5"
+  dependencies:
+    "@gorhom/portal": 1.0.14
+    invariant: ^2.2.4
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: ">=1.10.1"
+    react-native-reanimated: ">=2.2.0"
+  checksum: 19b3efeaacdd0eddb3f6c6e6c225dd20fcf21fae9d20f760c94e81b7ecba47a56737cb0e681225c368c93779beebe7a61102e064656a376eeb7761366b9874d6
+  languageName: node
+  linkType: hard
+
+"@gorhom/portal@npm:1.0.14":
+  version: 1.0.14
+  resolution: "@gorhom/portal@npm:1.0.14"
+  dependencies:
+    nanoid: ^3.3.1
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 227bb96a2db854ab29bb9da8d4f3823c7f7448358de459709dd1b78522110da564c9a8734c6bc7d7153ed7c99320e0fb5d60b420c2ebb75ecaf2f0d757f410f9
+  languageName: node
+  linkType: hard
+
 "@hapi/hoek@npm:^9.0.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
@@ -3700,6 +3727,7 @@ __metadata:
     "@babel/core": ^7.20.0
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
+    "@gorhom/bottom-sheet": ^4.4.5
     "@react-native-async-storage/async-storage": ^1.17.12
     "@react-native-community/eslint-config": ^3.2.0
     "@react-navigation/bottom-tabs": ^6.5.7
@@ -8246,7 +8274,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.1.23":
+"nanoid@npm:^3.1.23, nanoid@npm:^3.3.1":
   version: 3.3.4
   resolution: "nanoid@npm:3.3.4"
   bin:

@@ -1,4 +1,4 @@
-import { selectThemeMode, settingActions } from '../store/slices';
+import { selectThemeMode, settingActions, ThemeMode } from '../store/slices';
 import { useAppDispatch, useAppSelector } from './useApp';
 
 export const useThemeMode = () => {
@@ -6,7 +6,7 @@ export const useThemeMode = () => {
   const dispatch = useAppDispatch();
   return {
     themeMode,
-    changeThemeMode: (newThemeMode: ReturnType<typeof selectThemeMode>) =>
+    changeThemeMode: (newThemeMode: ThemeMode) =>
       dispatch(settingActions.changeThemeMode(newThemeMode)),
   };
 };

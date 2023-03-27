@@ -8,6 +8,7 @@ interface Props {
   title: string;
   description?: string;
   caption?: string;
+  hasTopBorder?: boolean;
   hasBottomBorder?: boolean;
 }
 
@@ -17,6 +18,7 @@ export const ListRow = ({
   title,
   description,
   caption,
+  hasTopBorder = true,
   hasBottomBorder = false,
 }: Props) => {
   return (
@@ -26,7 +28,7 @@ export const ListRow = ({
       space={3}
       alignItems="center"
       borderColor="gray.300"
-      borderTopWidth={1}
+      borderTopWidth={hasTopBorder ? 1 : 0}
       borderBottomWidth={hasBottomBorder ? 1 : 0}
     >
       {left}
