@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Switch, VStack, Pressable, Box } from 'native-base';
+import { Switch, VStack, Box } from 'native-base';
 import { useThemeMode } from '../hooks';
 import {
   Header,
@@ -35,20 +35,19 @@ const SettingThemeModeRow = () => {
 
   return (
     <>
-      <Pressable onPress={handlePress}>
-        <ListRow
-          left={
-            <MaterialCommunityIcon
-              name="theme-light-dark"
-              size="40px"
-              color="gray.900"
-            />
-          }
-          title="테마"
-          caption={themeModeCaption[themeMode]}
-          right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
-        />
-      </Pressable>
+      <ListRow
+        left={
+          <MaterialCommunityIcon
+            name="theme-light-dark"
+            size="40px"
+            color="gray.900"
+          />
+        }
+        title="테마"
+        caption={themeModeCaption[themeMode]}
+        right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
+        onPress={handlePress}
+      />
       <SingleBottomSheetModal ref={bottomSheetModalRef}>
         <VStack pt={3.5} pb={7.5} space={4}>
           <Box px={6}>
@@ -88,14 +87,13 @@ const SettingLanguageRow = () => {
 
   return (
     <>
-      <Pressable onPress={handlePress}>
-        <ListRow
-          left={<IonIcon name="language" size="40px" color="gray.900" />}
-          title="언어"
-          caption={languageCaption[language]}
-          right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
-        />
-      </Pressable>
+      <ListRow
+        left={<IonIcon name="language" size="40px" color="gray.900" />}
+        title="언어"
+        caption={languageCaption[language]}
+        right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
+        onPress={handlePress}
+      />
       <SingleBottomSheetModal ref={bottomSheetModalRef}>
         <VStack pt={3.5} pb={7.5} space={4}>
           <Box px={6}>
@@ -142,6 +140,7 @@ const SettingDynamicIslandRow = () => {
           offThumbColor="gray.100"
         />
       }
+      isPressable={false}
     />
   );
 };
