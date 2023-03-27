@@ -49,11 +49,9 @@ const SettingThemeModeRow = () => {
         onPress={handlePress}
       />
       <SingleBottomSheetModal ref={bottomSheetModalRef}>
-        <VStack pt={3.5} pb={7.5} space={4}>
-          <Box px={6}>
-            <Typography variant="subtitle1">테마</Typography>
-          </Box>
-          <VStack>
+        <VStack px={6} pt={3.5} pb={7.5} space={4}>
+          <Typography variant="subtitle1">테마</Typography>
+          <VStack mx={-3}>
             {Object.entries(themeModeCaption).map(
               ([themeModeOption, caption]) => (
                 <SettingOptionRow
