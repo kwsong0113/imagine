@@ -59,9 +59,6 @@ const SettingThemeModeRow = () => {
                 />
               ),
             )}
-            {/* <SettingOptionRow title="라이트 모드" isSelected={true} />
-            <SettingOptionRow title="다크 모드" isSelected={false} />
-            <SettingOptionRow title="시스템 모드" isSelected={false} /> */}
           </VStack>
         </VStack>
       </SingleBottomSheetModal>

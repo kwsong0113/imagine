@@ -1,6 +1,6 @@
 import React from 'react';
-import { HStack, Pressable } from 'native-base';
-import { Typography, IonIcon } from './';
+import { HStack, Pressable, useTheme } from 'native-base';
+import { Typography, AnimatedCheckmark } from './';
 
 interface Props {
   title: string;
@@ -9,6 +9,7 @@ interface Props {
 }
 
 export const SettingOptionRow = ({ title, isSelected, onPress }: Props) => {
+  const { colors } = useTheme();
   return (
     <Pressable onPress={onPress}>
       {({ isPressed }) => (
@@ -27,12 +28,10 @@ export const SettingOptionRow = ({ title, isSelected, onPress }: Props) => {
           >
             {title}
           </Typography>
-          <IonIcon
-            name="checkmark"
-            color={
-              isSelected ? 'teal.600' : isPressed ? 'teal.100' : 'gray.100'
-            }
-            size={6}
+          <AnimatedCheckmark
+            isChecked={isSelected}
+            size={24}
+            color={colors.teal[600]}
           />
         </HStack>
       )}
