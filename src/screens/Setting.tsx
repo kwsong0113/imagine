@@ -11,7 +11,13 @@ import {
   SingleBottomSheetModal,
   SettingOptionRow,
 } from '../components';
-import { ThemeMode } from '../store/slices';
+import {
+  Language,
+  selectLanguage,
+  settingActions,
+  ThemeMode,
+} from '../store/slices';
+import { useAppSelector, useAppDispatch } from '../hooks';
 
 const themeModeCaption: Record<ThemeMode, string> = {
   light: '라이트 모드',
@@ -23,13 +29,13 @@ const SettingThemeModeRow = () => {
   const { themeMode, changeThemeMode } = useThemeMode();
   const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
 
-  const handlePresentModalPress = useCallback(() => {
+  const handlePress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
 
   return (
     <>
-      <Pressable onPress={handlePresentModalPress}>
+      <Pressable onPress={handlePress}>
         <ListRow
           left={
             <MaterialCommunityIcon
@@ -66,14 +72,54 @@ const SettingThemeModeRow = () => {
   );
 };
 
+const languageCaption: Record<Language, string> = {
+  kor: '한국어',
+  eng: '영어',
+};
+
 const SettingLanguageRow = () => {
+  const language = useAppSelector(selectLanguage);
+  const dispatch = useAppDispatch();
+  const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
+
+  const handlePress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+
   return (
-    <ListRow
-      left={<IonIcon name="language" size="40px" color="gray.900" />}
-      title="언어"
-      caption="한국어"
-      right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
-    />
+    <>
+      <Pressable onPress={handlePress}>
+        <ListRow
+          left={<IonIcon name="language" size="40px" color="gray.900" />}
+          title="언어"
+          caption={languageCaption[language]}
+          right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
+        />
+      </Pressable>
+      <SingleBottomSheetModal ref={bottomSheetModalRef}>
+        <VStack pt={3.5} pb={7.5} space={4}>
+          <Box px={6}>
+            <Typography variant="subtitle1">언어</Typography>
+          </Box>
+          <VStack>
+            {Object.entries(languageCaption).map(
+              ([languageOption, caption]) => (
+                <SettingOptionRow
+                  key={languageOption}
+                  title={caption}
+                  isSelected={languageOption === language}
+                  onPress={() =>
+                    dispatch(
+                      settingActions.changeLanguage(languageOption as Language),
+                    )
+                  }
+                />
+              ),
+            )}
+          </VStack>
+        </VStack>
+      </SingleBottomSheetModal>
+    </>
   );
 };
 
