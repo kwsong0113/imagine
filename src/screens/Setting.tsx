@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Switch, VStack, Box } from 'native-base';
+import { Switch, VStack } from 'native-base';
 import { useThemeMode } from '../hooks';
 import {
   Header,
@@ -93,11 +93,9 @@ const SettingLanguageRow = () => {
         onPress={handlePress}
       />
       <SingleBottomSheetModal ref={bottomSheetModalRef}>
-        <VStack pt={3.5} pb={7.5} space={4}>
-          <Box px={6}>
-            <Typography variant="subtitle1">언어</Typography>
-          </Box>
-          <VStack>
+        <VStack px={6} pt={3.5} pb={7.5} space={4}>
+          <Typography variant="subtitle1">언어</Typography>
+          <VStack mx={-3}>
             {Object.entries(languageCaption).map(
               ([languageOption, caption]) => (
                 <SettingOptionRow
