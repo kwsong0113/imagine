@@ -27,7 +27,8 @@
     "react-native-svg": "^13.8.0",
     "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.5",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "rn-perfect-sketch-canvas": "^0.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
