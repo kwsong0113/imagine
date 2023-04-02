@@ -20,7 +20,12 @@ export const Custom = ({ navigation }: Props) => {
           title="커스텀 제스처"
           description="원하는 액션을 커스텀 제스처로 실행해요"
         />
-        <AnimatedIconButton name="hand-left" color="orange.700" size={26} />
+        <AnimatedIconButton
+          name="hand-left"
+          color="orange.700"
+          size={26}
+          onPress={() => navigation.navigate('CanvasTest')}
+        />
       </HStack>
       <Pressable onPress={() => navigation.navigate('AppList')}>
         <IonIcon name="chevron-forward-outline" size={30} />
