@@ -3806,6 +3806,7 @@ __metadata:
     react-native-safe-area-context: ^4.5.0
     react-native-screens: ^3.20.0
     react-native-svg: ^13.8.0
+    react-native-uuid: ^2.0.1
     react-native-vector-icons: ^9.2.0
     react-redux: ^8.0.5
     react-test-renderer: 18.2.0
@@ -9330,6 +9331,13 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: dfcad65978bb2e06a81b6f6262fad0699fa48e720ac2e521e983da4f6fb7747435f6a15df08b9d57559299272d0ffa674b4f0a55482f8b37905ee1e96f51b46a
+  languageName: node
+  linkType: hard
+
+"react-native-uuid@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "react-native-uuid@npm:2.0.1"
+  checksum: 2fae6e2ee6cef108a31ae9d5be661a1947a86f4c6a812c7386b57d970861b364dc887bc4fe3225227aeea7925ccdc24d4478ff30193305abc283eb4a30ee2138
   languageName: node
   linkType: hard
 
