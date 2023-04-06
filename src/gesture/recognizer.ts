@@ -8,6 +8,7 @@ const gestureList: PointCloud[] = [];
 type GestureAdditionResult =
   | {
       success: true;
+      pointCloud: PointCloud;
     }
   | {
       success: false;
@@ -23,9 +24,9 @@ export const addGesture = (
     if (preprocessedData.isValid) {
       const { points: preprocessedPoints } = preprocessedData;
       const LUT = computeLUT(preprocessedPoints);
-      gestureList.push(new PointCloud(name, preprocessedPoints, LUT));
       return {
         success: true,
+        pointCloud: { points: preprocessedPoints, LUT },
       };
     } else {
       return {
@@ -160,7 +161,7 @@ export const recognize = (points: Point[]): GestureRecognitionResult => {
       const { points: preprocessedPoints } = preprocessedData;
       const LUT = computeLUT(preprocessedPoints);
 
-      const candidate = new PointCloud('', preprocessedPoints, LUT);
+      const candidate = { points: preprocessedPoints, LUT };
 
       let minIdx = -1;
       let minDistance = Infinity;
@@ -174,7 +175,7 @@ export const recognize = (points: Point[]): GestureRecognitionResult => {
 
       return {
         success: true,
-        name: minIdx === -1 ? undefined : gestureList[minIdx].name,
+        name: minIdx === -1 ? undefined : undefined,
       };
     } else {
       return {

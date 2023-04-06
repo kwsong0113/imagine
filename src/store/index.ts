@@ -22,7 +22,7 @@ type ReducersState = ReturnType<typeof rootReducer>;
 const persistConfig: PersistConfig<ReducersState> = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['setting'],
+  whitelist: ['setting', 'gesture'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -33,8 +33,10 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
+      immutableCheck: { warnAfter: 128 },
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        warnAfter: 128,
       },
     }),
   enhancers: enhancer ? [enhancer] : undefined,

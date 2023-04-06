@@ -54,7 +54,13 @@ const resample = (points: Point[], numPoints: number) => {
           points[i - 1].y +
           ((interval - sumDistance) / distance) *
             (points[i].y - points[i - 1].y);
-        const newPoint = new Point(newX, newY, points[i].id);
+        const newPoint = {
+          x: newX,
+          y: newY,
+          id: points[i].id,
+          intX: 0,
+          intY: 0,
+        };
         newPoints.push(newPoint);
         points.splice(i, 0, newPoint);
         sumDistance = 0;
@@ -66,7 +72,7 @@ const resample = (points: Point[], numPoints: number) => {
 
   if (newPoints.length === numPoints - 1) {
     const lastPoint = points[points.length - 1];
-    newPoints.push(new Point(lastPoint.x, lastPoint.y, lastPoint.id));
+    newPoints.push({ ...lastPoint });
   }
 
   if (newPoints.length !== numPoints) {
@@ -95,22 +101,30 @@ const scale = (points: Point[]) => {
     throw new Error(GestureError.ZeroSize);
   }
 
-  return points.map(
-    ({ x, y, id }) => new Point((x - minX) / size, (y - minY) / size, id),
-  );
+  return points.map(({ x, y, id }) => ({
+    x: (x - minX) / size,
+    y: (y - minY) / size,
+    id,
+    intX: 0,
+    intY: 0,
+  }));
 };
 
 const centroid = (points: Point[]) => {
   const centerX = points.reduce((acc, { x }) => acc + x, 0) / points.length;
   const centerY = points.reduce((acc, { y }) => acc + y, 0) / points.length;
-  return new Point(centerX, centerY);
+  return { x: centerX, y: centerY, id: 0, intX: 0, intY: 0 };
 };
 
 const translateTo = (points: Point[], to: Point) => {
   const { x: centerX, y: centerY } = centroid(points);
-  return points.map(
-    ({ x, y, id }) => new Point(x + to.x - centerX, y + to.y - centerY, id),
-  );
+  return points.map(({ x, y, id }) => ({
+    x: x + to.x - centerX,
+    y: y + to.y - centerY,
+    id,
+    intX: 0,
+    intY: 0,
+  }));
 };
 
 const makeIntCoords = (points: Point[]) => {

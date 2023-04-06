@@ -22,7 +22,7 @@ export const convertPoints = (canvasPoints: CanvasPoints): Point[] => {
   const flatPoints: Point[] = [];
   canvasPoints.forEach((stroke, id) => {
     stroke.forEach(([x, y]) => {
-      flatPoints.push(new Point(x, y, id));
+      flatPoints.push({ x, y, id, intX: 0, intY: 0 });
     });
   });
   return flatPoints;
