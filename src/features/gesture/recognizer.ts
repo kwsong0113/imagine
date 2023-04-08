@@ -1,11 +1,16 @@
 import { LUTScaleFactor } from './constants';
 import { computeLUT, preprocess } from './preprocess';
-import { GestureError, Point, PointCloud } from './types';
-import { sqrEuclideanDistance } from './utils';
+import {
+  CanvasPoints,
+  Gesture,
+  GestureError,
+  Point,
+  PointCloud,
+  RecognitionError,
+} from './types';
+import { convertPoints, sqrEuclideanDistance } from './utils';
 
-const gestureList: PointCloud[] = [];
-
-type GestureAdditionResult =
+type PointCloudResult =
   | {
       success: true;
       pointCloud: PointCloud;
@@ -15,11 +20,9 @@ type GestureAdditionResult =
       error: GestureError;
     };
 
-export const addGesture = (
-  name: string,
-  points: Point[],
-): GestureAdditionResult => {
+export const getPointCloud = (canvasPoints: CanvasPoints): PointCloudResult => {
   try {
+    const points = convertPoints(canvasPoints);
     const preprocessedData = preprocess(points);
     if (preprocessedData.isValid) {
       const { points: preprocessedPoints } = preprocessedData;
@@ -144,50 +147,54 @@ const cloudMatch = (
   return minSoFar;
 };
 
-type GestureRecognitionResult =
+export type RecognitionResult =
   | {
       success: true;
-      name?: string;
+      id?: string;
     }
   | {
       success: false;
-      error: GestureError;
+      error: GestureError | RecognitionError;
     };
 
-export const recognize = (points: Point[]): GestureRecognitionResult => {
-  try {
-    const preprocessedData = preprocess(points);
-    if (preprocessedData.isValid) {
-      const { points: preprocessedPoints } = preprocessedData;
-      const LUT = computeLUT(preprocessedPoints);
+export const recognize = (
+  gestureList: Gesture[],
+  canvasPoints: CanvasPoints,
+): RecognitionResult => {
+  const pointCloudResult = getPointCloud(canvasPoints);
+  if (pointCloudResult.success) {
+    try {
+      if (gestureList.length === 0) {
+        return {
+          success: false,
+          error: RecognitionError.NoGesture,
+        };
+      }
+      const candidate = pointCloudResult.pointCloud;
 
-      const candidate = { points: preprocessedPoints, LUT };
-
-      let minIdx = -1;
+      let minId: string | undefined;
       let minDistance = Infinity;
-      gestureList.forEach((gesture, idx) => {
-        const distance = cloudMatch(candidate, gesture, minDistance);
-        if (distance < minDistance) {
-          minDistance = distance;
-          minIdx = idx;
-        }
+      gestureList.forEach(({ id, data }) => {
+        data.forEach(({ pointCloud }) => {
+          const distance = cloudMatch(candidate, pointCloud, minDistance);
+          if (distance < minDistance) {
+            minDistance = distance;
+            minId = id;
+          }
+        });
       });
 
       return {
         success: true,
-        name: minIdx === -1 ? undefined : undefined,
+        id: minId,
       };
-    } else {
+    } catch (e) {
       return {
         success: false,
-        error: preprocessedData.error,
+        error: RecognitionError.Else,
       };
     }
-  } catch (e) {
-    console.error(e);
-    return {
-      success: false,
-      error: GestureError.Else,
-    };
+  } else {
+    return pointCloudResult;
   }
 };

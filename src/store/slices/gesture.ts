@@ -1,24 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CanvasPoints, PointCloud } from '../../gesture/types';
-import uuid from 'react-native-uuid';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Gesture, GestureDataElement } from '../../features/gesture/types';
 import { RootState } from '..';
-
-interface Gesture {
-  id: string;
-  name: string;
-  data: GestureDataElement[];
-}
-
-interface GestureDataElement {
-  canvasPoints: CanvasPoints;
-  pointCloud: PointCloud;
-}
-
-interface ActionInstance {
-  appId: number;
-  actionId: number;
-  param?: string;
-}
+import { ActionInstance } from '../../features/action/types';
 
 interface GestureState {
   gestureList: Gesture[];
@@ -36,28 +19,41 @@ const gestureSlice = createSlice({
   reducers: {
     addGesture: (
       state,
-      action: PayloadAction<{ name: string; gesture: GestureDataElement }>,
+      action: PayloadAction<{
+        id: string;
+        name: string;
+        data: GestureDataElement[];
+      }>,
     ) => {
-      const id = uuid.v4() as string;
-      const { name, gesture } = action.payload;
+      const { id, name, data } = action.payload;
       state.gestureList.push({
         id,
         name,
-        data: [gesture],
+        data,
       });
     },
-    addGestureData: (
-      state,
-      action: PayloadAction<{ id: string; gesture: GestureDataElement }>,
-    ) => {
-      state.gestureList.forEach(({ id, data }) => {
-        if (id === action.payload.id) {
-          data.push(action.payload.gesture);
-        }
-      });
+    deleteGesture: (state, action: PayloadAction<{ id: string }>) => {
+      const { id: idToBeDeleted } = action.payload;
+      const idx = state.gestureList.findIndex(
+        gesture => gesture.id === idToBeDeleted,
+      );
+      if (idx > -1) {
+        state.gestureList.splice(idx, 1);
+      }
+      delete state.gestureToActionMap[idToBeDeleted];
     },
     deleteAllGestures: state => {
       state.gestureList = [];
+    },
+    assignGestureToAction: (
+      state,
+      action: PayloadAction<{ id: string; actionInstance: ActionInstance }>,
+    ) => {
+      const { id, actionInstance } = action.payload;
+      state.gestureToActionMap[id] = actionInstance;
+    },
+    unassignGestureToAction: (state, action: PayloadAction<{ id: string }>) => {
+      delete state.gestureToActionMap[action.payload.id];
     },
   },
 });
@@ -65,5 +61,22 @@ const gestureSlice = createSlice({
 export const gestureActions = gestureSlice.actions;
 export const selectGestureList = (state: RootState) =>
   state.gesture.gestureList;
+export const selectGestureToActionMap = (state: RootState) =>
+  state.gesture.gestureToActionMap;
+export const selectActionToGestureMap = createSelector(
+  selectGestureToActionMap,
+  gestureToActionMap =>
+    Object.fromEntries(
+      Object.entries(gestureToActionMap).map(([gestureId, actionInstance]) => [
+        actionInstance,
+        gestureId,
+      ]),
+    ),
+);
+export const selectActionForGestureId = createSelector(
+  selectGestureToActionMap,
+  (state: RootState, id: string) => id,
+  (gestureToActionMap, id) => gestureToActionMap[id],
+);
 
 export default gestureSlice.reducer;

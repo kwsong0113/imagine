@@ -2,31 +2,40 @@ import React, { useRef } from 'react';
 import { HStack, useToast } from 'native-base';
 import { Alert, Button, KeyboardAvoidingView } from 'react-native';
 import { Canvas, ScreenContainer } from '../../components';
-import { addGesture, recognize } from '../../gesture/recognizer';
-import { convertPoints } from '../../gesture/utils';
-import { CanvasPoints } from '../../gesture/types';
+import { getPointCloud } from '../../features/gesture/recognizer';
+import { CanvasPoints } from '../../features/gesture/types';
 import { useAppDispatch } from '../../hooks';
-import { gestureActions } from '../../store/slices/gesture';
+import {
+  gestureActions,
+  selectGestureToActionMap,
+} from '../../store/slices/gesture';
+import { useSelector } from 'react-redux';
+import { executeActionInstance } from '../../features/action/utils';
+import { generateId } from '../../utils';
 
 export const CanvasTest = () => {
   const canvasRef = useRef<Canvas>(null);
   const toast = useToast();
   const dispatch = useAppDispatch();
+  const gestureToActionMap = useSelector(selectGestureToActionMap);
 
   const handleAddGesture = () => {
     const canvasPoints = canvasRef.current?.toPoints();
     if (canvasPoints) {
-      Alert.prompt('Add Gesture', undefined, name => {
-        const qDollarPoints = convertPoints(canvasPoints);
-        const result = addGesture(name, qDollarPoints);
-        if (result.success) {
+      const pointCloudResult = getPointCloud(canvasPoints);
+      if (pointCloudResult.success) {
+        Alert.prompt('Add Gesture', undefined, name => {
+          const id = generateId();
           dispatch(
             gestureActions.addGesture({
+              id,
               name,
-              gesture: {
-                canvasPoints: canvasPoints as CanvasPoints,
-                pointCloud: result.pointCloud,
-              },
+              data: [
+                {
+                  canvasPoints: canvasPoints as CanvasPoints,
+                  pointCloud: pointCloudResult.pointCloud,
+                },
+              ],
             }),
           );
           toast.show({
@@ -34,15 +43,15 @@ export const CanvasTest = () => {
             placement: 'top',
             duration: 500,
           });
-        } else {
-          toast.show({
-            title: 'Failed to Add Gesture',
-            description: result.error,
-            placement: 'top',
-            duration: 500,
-          });
-        }
-      });
+        });
+      } else {
+        toast.show({
+          title: 'Failed to Add Gesture',
+          description: pointCloudResult.error,
+          placement: 'top',
+          duration: 500,
+        });
+      }
     } else {
       toast.show({
         title: 'Empty Ref',
@@ -55,20 +64,24 @@ export const CanvasTest = () => {
   };
 
   const handleRecognize = () => {
-    const canvasPoints = canvasRef.current?.toPoints();
-    if (canvasPoints) {
-      const qDollarPoints = convertPoints(canvasPoints);
-      const result = recognize(qDollarPoints);
-      if (result.success) {
+    const recognitionResult = canvasRef.current?.recognize();
+    if (recognitionResult) {
+      if (recognitionResult.success) {
+        const actionInstance = recognitionResult.id
+          ? gestureToActionMap[recognitionResult.id]
+          : undefined;
         toast.show({
-          title: result.name ?? 'No Match',
+          title: actionInstance ? JSON.stringify(actionInstance) : 'No Match',
           placement: 'top',
           duration: 500,
         });
+        if (actionInstance) {
+          executeActionInstance(actionInstance);
+        }
       } else {
         toast.show({
           title: 'Gesture Recognition Failure',
-          description: result.error,
+          description: recognitionResult.error,
           placement: 'top',
           duration: 500,
         });

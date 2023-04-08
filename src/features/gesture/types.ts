@@ -18,5 +18,20 @@ export enum GestureError {
   DotStroke = 'dot-stroke',
   WrongNumPoints = 'wrong-num-points',
   ZeroSize = 'zero-size',
-  Else = 'else',
+  Else = 'gesture-else',
+}
+
+export enum RecognitionError {
+  NoGesture = 'no-gesture',
+  Else = 'recognition-else',
+}
+
+export interface Gesture {
+  id: string;
+  name: string;
+  data: GestureDataElement[];
+}
+export interface GestureDataElement {
+  canvasPoints: CanvasPoints;
+  pointCloud: PointCloud;
 }
