@@ -1,5 +1,8 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  StackNavigationProp,
+} from '@react-navigation/stack';
 import { AppList, Custom, ActionList, CanvasTest } from '../screens/Custom';
 
 export type CustomStackParamList = {
@@ -8,6 +11,9 @@ export type CustomStackParamList = {
   ActionList: undefined;
   CanvasTest: undefined;
 };
+
+export type CustomStackNavigationProp =
+  StackNavigationProp<CustomStackParamList>;
 
 const Stack = createStackNavigator<CustomStackParamList>();
 
