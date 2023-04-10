@@ -16,7 +16,7 @@
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
     "@reduxjs/toolkit": "^1.9.3",
-    "@shopify/react-native-skia": "^0.1.180",
+    "@shopify/react-native-skia": "^0.1.182",
     "native-base": "^3.4.28",
     "react": "18.2.0",
     "react-native": "0.71.4",
