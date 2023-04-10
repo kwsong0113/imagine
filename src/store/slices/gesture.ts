@@ -26,7 +26,7 @@ const gestureSlice = createSlice({
       }>,
     ) => {
       const { id, name, data } = action.payload;
-      state.gestureList.push({
+      state.gestureList.unshift({
         id,
         name,
         data,
@@ -73,6 +73,7 @@ export const selectActionToGestureMap = createSelector(
       ]),
     ),
 );
+
 export const selectActionForGestureId = createSelector(
   selectGestureToActionMap,
   (state: RootState, id: string) => id,

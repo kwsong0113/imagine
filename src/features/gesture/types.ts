@@ -34,4 +34,5 @@ export interface Gesture {
 export interface GestureDataElement {
   canvasPoints: CanvasPoints;
   pointCloud: PointCloud;
+  base64: string;
 }

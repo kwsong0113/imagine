@@ -12,7 +12,7 @@ import { Typography } from './Typography';
 interface Props {
   left?: React.ReactNode;
   right?: React.ReactNode;
-  title: string;
+  title?: string;
   description?: string;
   caption?: string;
   hasTopBorder?: boolean;
@@ -82,9 +82,11 @@ export const ListRow = ({
       >
         {left}
         <VStack flex={1} space={2}>
-          <Typography variant="body" color={titleColor}>
-            {title}
-          </Typography>
+          {title && (
+            <Typography variant="body" color={titleColor}>
+              {title}
+            </Typography>
+          )}
           {description && (
             <Typography
               variant="description"

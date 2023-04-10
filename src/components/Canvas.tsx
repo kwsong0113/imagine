@@ -1,4 +1,9 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useLayoutEffect,
+} from 'react';
 import { useTheme } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { SketchCanvas, SketchCanvasRef } from 'rn-perfect-sketch-canvas';
@@ -37,13 +42,18 @@ const Canvas = forwardRef<CanvasRef, {}>((_, ref) => {
   const sketchCanvasRef = useRef<SketchCanvasRef>(null);
   const gestureList = useAppSelector(selectGestureList);
 
+  useLayoutEffect(() => {
+    sketchCanvasRef.current?.reset();
+  }, []);
+
   useImperativeHandle(
     ref,
     () => ({
       ...sketchCanvasRef.current!,
       getGesture: () => {
         const canvasPoints = sketchCanvasRef.current?.toPoints();
-        if (!canvasPoints) {
+        const base64 = sketchCanvasRef.current?.toImage()?.encodeToBase64();
+        if (!canvasPoints || !base64) {
           return {
             success: false,
             error: GestureError.Else,
@@ -53,7 +63,11 @@ const Canvas = forwardRef<CanvasRef, {}>((_, ref) => {
         if (pointCloudResult.success) {
           return {
             success: true,
-            data: { canvasPoints, pointCloud: pointCloudResult.pointCloud },
+            data: {
+              canvasPoints,
+              pointCloud: pointCloudResult.pointCloud,
+              base64,
+            },
           };
         } else {
           return pointCloudResult;

@@ -33,10 +33,10 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      immutableCheck: { warnAfter: 128 },
+      immutableCheck: { warnAfter: 1000 },
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        warnAfter: 128,
+        warnAfter: 1000,
       },
     }),
   enhancers: enhancer ? [enhancer] : undefined,

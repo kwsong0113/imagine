@@ -43,7 +43,7 @@ export const Feature = ({ iconName, title, caption, link }: Props) => {
   return (
     <Pressable
       flex={1}
-      onPress={() => navigation.push(link)}
+      onPress={() => navigation.navigate(link)}
       onPressIn={() => {
         progress.value = withTiming(1, {
           easing: Easing.linear,

@@ -3,13 +3,20 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { AppList, Custom, ActionList, CanvasTest } from '../screens/Custom';
+import {
+  AppList,
+  Custom,
+  ActionList,
+  CanvasTest,
+  GestureList,
+} from '../screens/Custom';
 
 export type CustomStackParamList = {
   Home: undefined;
   AppList: undefined;
   ActionList: undefined;
   CanvasTest: undefined;
+  GestureList: undefined;
 };
 
 export type CustomStackNavigationProp =
@@ -30,6 +37,7 @@ export const CustomStackNavigator = () => {
       <Stack.Screen name="AppList" component={AppList} />
       <Stack.Screen name="ActionList" component={ActionList} />
       <Stack.Screen name="CanvasTest" component={CanvasTest} />
+      <Stack.Screen name="GestureList" component={GestureList} />
     </Stack.Navigator>
   );
 };

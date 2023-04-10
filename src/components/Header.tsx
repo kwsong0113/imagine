@@ -34,7 +34,7 @@ export const Header = ({
           <Typography variant="title">{title}</Typography>
         ) : (
           <Center flex={1} pr={hasBackButton ? 10 : 0}>
-            <Typography variant="title">{title}</Typography>
+            <Typography variant="subtitle2">{title}</Typography>
           </Center>
         )}
       </HStack>

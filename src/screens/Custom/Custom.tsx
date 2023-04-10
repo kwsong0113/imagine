@@ -34,6 +34,7 @@ export const Custom = ({ navigation }: Props) => {
           title="내 제스처 목록 보기"
           titleColor="blue.600"
           right={<IonIcon size={6} color="blue.600" name="chevron-forward" />}
+          onPress={() => navigation.navigate('GestureList')}
         />
         <ListRow
           title="내 액션 목록 보기"
@@ -45,7 +46,7 @@ export const Custom = ({ navigation }: Props) => {
       <Feature
         iconName="logo-apple-appstore"
         title="앱 빠르게 실행하기"
-        caption="애플 앱, 써드파티 앱, 설저을 모두 지원해요"
+        caption="애플 앱, 써드파티 앱, 설정을 모두 지원해요"
         link="AppList"
       />
       <Feature

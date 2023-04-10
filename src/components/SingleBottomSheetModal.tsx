@@ -1,4 +1,4 @@
-import React, { ReactNode, forwardRef, useMemo } from 'react';
+import React, { ReactNode, forwardRef, useMemo, ComponentProps } from 'react';
 import { useTheme } from 'native-base';
 import {
   BottomSheetBackdropProps,
@@ -24,9 +24,9 @@ const CustomBackdrop = (props: BottomSheetBackdropProps) => {
   );
 };
 
-interface SingleBottomSheetModalProps {
+type SingleBottomSheetModalProps = {
   children: ReactNode;
-}
+} & Partial<ComponentProps<typeof BottomSheetModal>>;
 
 type SingleBottomSheetModal = BottomSheetModalMethods;
 
@@ -80,6 +80,7 @@ const SingleBottomSheetModal = forwardRef<
         styles.background,
         { backgroundColor: colors.gray[100] },
       ]}
+      {...props}
     >
       <BottomSheetView onLayout={handleContentLayout}>
         {props.children}
