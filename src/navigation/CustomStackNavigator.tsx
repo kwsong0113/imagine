@@ -14,7 +14,7 @@ import {
 export type CustomStackParamList = {
   Home: undefined;
   AppList: undefined;
-  ActionList: undefined;
+  ActionList: { appId: number };
   CanvasTest: undefined;
   GestureList: undefined;
 };

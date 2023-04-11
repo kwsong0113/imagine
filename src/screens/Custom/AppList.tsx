@@ -7,15 +7,48 @@ import {
   ListRow,
   ScreenContainer,
 } from '../../components';
-import { StackScreenProps } from '@react-navigation/stack';
-import { CustomStackParamList } from '../../navigation';
+import { CustomStackNavigationProp } from '../../navigation';
 import { appList } from '../../features/action/app';
 import { useAppSelector } from '../../hooks';
 import { selectGestureToActionMap } from '../../store/slices/gesture';
+import { App } from '../../features/action/types';
+import { useNavigation } from '@react-navigation/native';
 
-type Props = StackScreenProps<CustomStackParamList, 'AppList'>;
+interface AppRowProps {
+  app: App;
+  numActiveActions: number;
+  hasBottomBorder: boolean;
+}
 
-export const AppList = ({}: Props) => {
+const AppRow = ({
+  app: { id, name, actions },
+  numActiveActions,
+  hasBottomBorder,
+}: AppRowProps) => {
+  const navigation = useNavigation<CustomStackNavigationProp>();
+
+  return (
+    <ListRow
+      key={id}
+      left={<AppIcon id={id} name={name} />}
+      right={<IonIcon name="add-circle-outline" color="gray.500" size={8} />}
+      title={name}
+      description={`${actions.length}개의 액션${
+        numActiveActions > 0 ? ' 중 ${numActiveActions}개 사용 중' : ''
+      }`}
+      hasBottomBorder={hasBottomBorder}
+      onPress={() => {
+        navigation.navigate('ActionList', {
+          appId: id,
+        });
+      }}
+    />
+  );
+};
+
+// type AppListProps = StackScreenProps<CustomStackParamList, 'AppList'>;
+
+export const AppList = () => {
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
 
   const getNumActiveActions = useCallback(
@@ -33,19 +66,13 @@ export const AppList = ({}: Props) => {
         description="앱의 원하는 지점으로 빠르게 이동하세요"
       />
       <ScrollView mx={-3} px={3}>
-        {appList.map(({ id, name, actions }, idx) => {
-          const numActiveActions = getNumActiveActions(id);
+        {appList.map((app, idx) => {
+          const numActiveActions = getNumActiveActions(app.id);
           return (
-            <ListRow
-              key={id}
-              left={<AppIcon id={id} name={name} />}
-              right={
-                <IonIcon name="add-circle-outline" color="gray.500" size={8} />
-              }
-              title={name}
-              description={`${actions.length}개의 액션${
-                numActiveActions > 0 ? ' 중 ${numActiveActions}개 사용 중' : ''
-              }`}
+            <AppRow
+              key={app.id}
+              app={app}
+              numActiveActions={numActiveActions}
               hasBottomBorder={idx === appList.length - 1}
             />
           );
