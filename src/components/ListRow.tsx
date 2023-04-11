@@ -1,19 +1,28 @@
-import { HStack, VStack, Pressable } from 'native-base';
+import { HStack, VStack, Pressable, useTheme } from 'native-base';
 import React from 'react';
+import Animated, {
+  useSharedValue,
+  withTiming,
+  interpolateColor,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import { useColorModeValue } from '../hooks';
 import { Typography } from './Typography';
 
 interface Props {
   left?: React.ReactNode;
   right?: React.ReactNode;
-  title: string;
+  title?: string;
   description?: string;
   caption?: string;
   hasTopBorder?: boolean;
   hasBottomBorder?: boolean;
+  titleColor?: string;
   isPressable?: boolean;
   onPress?: () => void;
 }
+
+const AnimatedHStack = Animated.createAnimatedComponent(HStack);
 
 export const ListRow = ({
   left,
@@ -23,47 +32,78 @@ export const ListRow = ({
   caption,
   hasTopBorder = true,
   hasBottomBorder = false,
+  titleColor,
   isPressable = true,
   onPress,
 }: Props) => {
-  const subColor = useColorModeValue('gray.300', 'gray.200');
+  const { colors } = useTheme();
+  const subColor = useColorModeValue(300, 200);
+  const progress = useSharedValue(0);
+  const animatedProps = useAnimatedStyle(() => {
+    return {
+      backgroundColor: interpolateColor(
+        progress.value,
+        [0, 1],
+        [
+          colors.gray[100],
+          isPressable ? colors.gray[subColor] : colors.gray[100],
+        ],
+      ),
+    };
+  });
 
   return (
-    <Pressable onPress={onPress}>
-      {({ isPressed }) => (
-        <HStack
-          mx={-3}
-          px={5}
-          py={3}
-          space={3}
-          alignItems="center"
-          borderColor={subColor}
-          borderTopWidth={hasTopBorder ? 1 : 0}
-          borderBottomWidth={hasBottomBorder ? 1 : 0}
-          borderRadius={16}
-          bg={isPressable && isPressed ? subColor : undefined}
-        >
-          {left}
-          <VStack flex={1} space={2}>
-            <Typography variant="body">{title}</Typography>
-            {description && (
-              <Typography
-                variant="description"
-                color="gray.600"
-                isTruncated={true}
-              >
-                {description}
-              </Typography>
-            )}
-            {caption && (
-              <Typography variant="caption" color="gray.600" isTruncated={true}>
-                {caption}
-              </Typography>
-            )}
-          </VStack>
-          {right}
-        </HStack>
-      )}
+    <Pressable
+      onPress={onPress}
+      onPressIn={() => {
+        progress.value = withTiming(1, {
+          // easing: Easing.linear,
+          // duration: 300,
+        });
+      }}
+      onPressOut={() => {
+        progress.value = withTiming(0, {
+          duration: 500,
+        });
+      }}
+    >
+      <AnimatedHStack
+        mx={-1}
+        px={3}
+        py={3}
+        space={3}
+        alignItems="center"
+        borderColor={`gray.${subColor}`}
+        borderTopWidth={hasTopBorder ? 1 : 0}
+        borderBottomWidth={hasBottomBorder ? 1 : 0}
+        borderRadius={8}
+        // bg={isPressable && isPressed ? subColor : undefined}
+        style={animatedProps}
+      >
+        {left}
+        <VStack flex={1} space={2}>
+          {title && (
+            <Typography variant="body" color={titleColor}>
+              {title}
+            </Typography>
+          )}
+          {description && (
+            <Typography
+              variant="description"
+              color="gray.600"
+              isTruncated={true}
+            >
+              {description}
+            </Typography>
+          )}
+          {caption && (
+            <Typography variant="caption" color="gray.600" isTruncated={true}>
+              {caption}
+            </Typography>
+          )}
+        </VStack>
+        {right}
+      </AnimatedHStack>
     </Pressable>
   );
 };

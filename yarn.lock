@@ -3345,9 +3345,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:^0.1.180":
-  version: 0.1.180
-  resolution: "@shopify/react-native-skia@npm:0.1.180"
+"@shopify/react-native-skia@npm:^0.1.182":
+  version: 0.1.182
+  resolution: "@shopify/react-native-skia@npm:0.1.182"
   dependencies:
     "@types/pixelmatch": ^5.2.4
     "@types/pngjs": ^6.0.1
@@ -3366,7 +3366,7 @@ __metadata:
       optional: true
   bin:
     setup-skia-web: scripts/setup-canvaskit.js
-  checksum: 6318f6991088bc1b82623f8c46c790f6df5f4c366ccbdb1f83da9620f64a584abc134e176a8244881becbd25a9e9922bed2c1e7f4895641091ac745b7bd4631d
+  checksum: 0b71be4d759fd425d21864cf195e97bb1ba8fe2ecc8d743ae1e587607a4a6ecaf21802028867167b427befec9481b51a23732fa829d035c57e6b9143a7f2c585
   languageName: node
   linkType: hard
 
@@ -3786,7 +3786,7 @@ __metadata:
     "@react-navigation/native": ^6.1.6
     "@react-navigation/stack": ^6.3.16
     "@reduxjs/toolkit": ^1.9.3
-    "@shopify/react-native-skia": ^0.1.180
+    "@shopify/react-native-skia": ^0.1.182
     "@tsconfig/react-native": ^2.0.2
     "@types/jest": ^29.2.1
     "@types/react": ^18.0.24

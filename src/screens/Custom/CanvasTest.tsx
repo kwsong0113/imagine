@@ -2,8 +2,6 @@ import React, { useRef } from 'react';
 import { HStack, useToast } from 'native-base';
 import { Alert, Button, KeyboardAvoidingView } from 'react-native';
 import { Canvas, ScreenContainer } from '../../components';
-import { getPointCloud } from '../../features/gesture/recognizer';
-import { CanvasPoints } from '../../features/gesture/types';
 import { useAppDispatch } from '../../hooks';
 import {
   gestureActions,
@@ -20,22 +18,16 @@ export const CanvasTest = () => {
   const gestureToActionMap = useSelector(selectGestureToActionMap);
 
   const handleAddGesture = () => {
-    const canvasPoints = canvasRef.current?.toPoints();
-    if (canvasPoints) {
-      const pointCloudResult = getPointCloud(canvasPoints);
-      if (pointCloudResult.success) {
+    const gestureResult = canvasRef.current?.getGesture();
+    if (gestureResult) {
+      if (gestureResult.success) {
         Alert.prompt('Add Gesture', undefined, name => {
           const id = generateId();
           dispatch(
             gestureActions.addGesture({
               id,
               name,
-              data: [
-                {
-                  canvasPoints: canvasPoints as CanvasPoints,
-                  pointCloud: pointCloudResult.pointCloud,
-                },
-              ],
+              data: [gestureResult.data],
             }),
           );
           toast.show({
@@ -47,7 +39,7 @@ export const CanvasTest = () => {
       } else {
         toast.show({
           title: 'Failed to Add Gesture',
-          description: pointCloudResult.error,
+          description: gestureResult.error,
           placement: 'top',
           duration: 500,
         });
