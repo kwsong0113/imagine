@@ -18,3 +18,4 @@ export * from './AnimatedCircularProgress';
 export * from './AnimatedConfirm';
 export * from './AnimatedSentence';
 export * from './Toast';
+export * from './AppIcon';
