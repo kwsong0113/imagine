@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { VStack, HStack, Image, ScrollView, Text } from 'native-base';
+import { VStack, HStack, Image, ScrollView, Text, useToast } from 'native-base';
 import {
   ScreenContainer,
   Header,
@@ -10,6 +10,7 @@ import {
   Typography,
   IonIcon,
   GestureViewBottomSheetModal,
+  Toast,
 } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { gestureActions, selectGestureList } from '../../store/slices/gesture';
@@ -20,14 +21,34 @@ export const GestureList = () => {
   const gestureList = useAppSelector(selectGestureList);
   const dispatch = useAppDispatch();
   const [selectedGesture, setSelectedGesture] = useState<Gesture>();
+  const toast = useToast();
 
   const gestureAdditionBottomSheetModalRef =
     useRef<SingleBottomSheetModal>(null);
   const gestureViewBottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
-  const handleGesturePress = useCallback((gesture: Gesture) => {
+
+  const handleViewGesture = useCallback((gesture: Gesture) => {
     setSelectedGesture(gesture);
     gestureViewBottomSheetModalRef.current?.present();
   }, []);
+
+  const handleRemoveGesture = useCallback(
+    (id: string, name: string) => {
+      dispatch(gestureActions.deleteGesture({ id }));
+      toast.show({
+        render: () => (
+          <Toast
+            iconName="checkmark-circle"
+            iconColor="red.700"
+            bg="gray.300"
+            message={`${name} 제스처를 삭제했어요`}
+          />
+        ),
+        duration: 1000,
+      });
+    },
+    [dispatch, toast],
+  );
 
   return (
     <ScreenContainer>
@@ -94,11 +115,11 @@ export const GestureList = () => {
                   name="remove-circle-outline"
                   color="red.500"
                   size={8}
-                  onPress={() => dispatch(gestureActions.deleteGesture({ id }))}
+                  onPress={() => handleRemoveGesture(id, name)}
                 />
               }
               hasBottomBorder={idx === gestureList.length - 1}
-              onPress={() => handleGesturePress({ id, name, data })}
+              onPress={() => handleViewGesture({ id, name, data })}
             />
           </Animated.View>
         ))}
