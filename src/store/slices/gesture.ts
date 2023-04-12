@@ -78,6 +78,13 @@ export const selectActionToGestureMap = createSelector(
     ),
 );
 
+export const selectActiveGestureList = createSelector(
+  selectGestureList,
+  selectGestureToActionMap,
+  (gestureList, gestureToActionMap) =>
+    gestureList.filter(({ id }) => id in gestureToActionMap),
+);
+
 export const selectActionForGestureId = createSelector(
   selectGestureToActionMap,
   (state: RootState, id: string) => id,

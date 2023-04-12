@@ -10,6 +10,7 @@ import {
   CanvasTest,
   GestureList,
   ParamActionList,
+  BlankCanvas,
 } from '../screens/Custom';
 
 export type CustomStackParamList = {
@@ -19,6 +20,7 @@ export type CustomStackParamList = {
   ParamActionList: { appId: number; actionId: number };
   CanvasTest: undefined;
   GestureList: undefined;
+  BlankCanvas: undefined;
 };
 
 export type CustomStackNavigationProp =
@@ -41,6 +43,11 @@ export const CustomStackNavigator = () => {
       <Stack.Screen name="ParamActionList" component={ParamActionList} />
       <Stack.Screen name="CanvasTest" component={CanvasTest} />
       <Stack.Screen name="GestureList" component={GestureList} />
+      <Stack.Screen
+        name="BlankCanvas"
+        component={BlankCanvas}
+        options={{ animationEnabled: false }}
+      />
     </Stack.Navigator>
   );
 };

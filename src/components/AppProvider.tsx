@@ -12,6 +12,21 @@ interface Props {
   children: React.ReactNode;
 }
 
+const config = {
+  screens: {
+    Custom: {
+      screens: {
+        BlankCanvas: 'blank',
+      },
+    },
+  },
+};
+
+const linking = {
+  prefixes: ['imagine://'],
+  config,
+};
+
 const NativeBaseThemeProvider = ({ children }: Props) => {
   const theme = useCustomTheme();
   return <NativeBaseProvider theme={theme}>{children}</NativeBaseProvider>;
@@ -21,7 +36,8 @@ export const AppProvider = ({ children }: Props) => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <NavigationContainer>
+        {/* @ts-ignore */}
+        <NavigationContainer linking={linking}>
           <NativeBaseThemeProvider>
             {/* eslint-disable react-native/no-inline-styles */}
             <GestureHandlerRootView style={{ flex: 1 }}>

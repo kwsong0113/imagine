@@ -26,7 +26,7 @@ export const Custom = ({ navigation }: Props) => {
           name="hand-left"
           color="orange.700"
           size={26}
-          onPress={() => navigation.navigate('CanvasTest')}
+          onPress={() => navigation.navigate('BlankCanvas')}
         />
       </HStack>
       <VStack>

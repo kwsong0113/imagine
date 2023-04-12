@@ -4,6 +4,7 @@ import { Setting, Statistics } from '../screens';
 import { useTheme } from 'native-base';
 import { IonIcon } from '../components';
 import { CustomStackNavigator } from './CustomStackNavigator';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -51,12 +52,15 @@ export const RootTabNavigator = () => {
       <Tab.Screen
         name="Custom"
         component={CustomStackNavigator}
-        options={{
+        options={({ route }) => ({
           tabBarItemStyle: {
             borderTopColor: colors.gray[300],
             borderTopWidth: 1,
           },
-        }}
+          ...(getFocusedRouteNameFromRoute(route) === 'BlankCanvas'
+            ? { tabBarStyle: { display: 'none' } }
+            : {}),
+        })}
       />
       <Tab.Screen
         name="Setting"
