@@ -27,3 +27,14 @@ const executeAction = (action: Action, param?: string) => {
     Linking.openURL(action.urlSchemeFunc(param as string));
   }
 };
+
+export const getActionDescription = (actionInstance: ActionInstance) => {
+  const action = getActionFromActionInstance(actionInstance);
+  if (!action) {
+    return undefined;
+  }
+  if ('descriptionFunc' in action && actionInstance.param !== undefined) {
+    return action.descriptionFunc(actionInstance.param);
+  }
+  return action.description;
+};

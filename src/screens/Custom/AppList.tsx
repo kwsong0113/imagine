@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { ScrollView } from 'native-base';
 import {
   AppIcon,
@@ -6,11 +6,11 @@ import {
   IonIcon,
   ListRow,
   ScreenContainer,
+  ProgressIcon,
 } from '../../components';
 import { CustomStackNavigationProp } from '../../navigation';
 import { appList } from '../../features/action/app';
-import { useAppSelector } from '../../hooks';
-import { selectGestureToActionMap } from '../../store/slices/gesture';
+import { useGetNumActiveActions } from '../../hooks';
 import { App } from '../../features/action/types';
 import { useNavigation } from '@react-navigation/native';
 
@@ -31,7 +31,13 @@ const AppRow = ({
     <ListRow
       key={id}
       left={<AppIcon id={id} name={name} />}
-      right={<IonIcon name="add-circle-outline" color="gray.500" size={8} />}
+      right={
+        numActiveActions === 0 ? (
+          <IonIcon name="add-circle-outline" color="gray.500" size={8} />
+        ) : (
+          <ProgressIcon progress={numActiveActions} total={actions.length} />
+        )
+      }
       title={name}
       description={`${actions.length}개의 액션${
         numActiveActions > 0 ? ` 중 ${numActiveActions}개 사용 중` : ''
@@ -46,18 +52,8 @@ const AppRow = ({
   );
 };
 
-// type AppListProps = StackScreenProps<CustomStackParamList, 'AppList'>;
-
 export const AppList = () => {
-  const gestureToActionMap = useAppSelector(selectGestureToActionMap);
-
-  const getNumActiveActions = useCallback(
-    (id: number) =>
-      Object.values(gestureToActionMap).reduce((acc, { appId }) => {
-        return appId === id ? acc + 1 : acc;
-      }, 0),
-    [gestureToActionMap],
-  );
+  const getNumActiveActions = useGetNumActiveActions();
 
   return (
     <ScreenContainer>

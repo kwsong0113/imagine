@@ -19,6 +19,7 @@ export const appList: App[] = [
         id: 2,
         urlSchemeFunc: (param: string) => `sms://${param}`,
         description: '저장된 번호로 메시지 보내기',
+        placeholder: '전화번호를 입력해주세요',
         descriptionFunc: (param: string) => `${param}으로 메시지 보내기`,
       },
     ],

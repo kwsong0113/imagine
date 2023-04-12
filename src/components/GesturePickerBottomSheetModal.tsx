@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo, useState } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import { Dimensions } from 'react-native';
 import { HStack, VStack, Image, Text, ScrollView, useTheme } from 'native-base';
 import SingleBottomSheetModal from './SingleBottomSheetModal';
@@ -13,45 +13,36 @@ import {
 import { ListRow } from './ListRow';
 import { AnimatedCheckmark } from './AnimatedCheckmark';
 import { useBottomSheetModal } from '@gorhom/bottom-sheet';
-import { App } from '../features/action/types';
-import { appList } from '../features/action/app';
-import { getActionFromActionInstance } from '../features/action/utils';
+import { getActionDescription } from '../features/action/utils';
 import Animated, {
   FadeInDown,
   Layout,
   LightSpeedOutRight,
 } from 'react-native-reanimated';
+import { useGetGestureIdForActionInstance } from '../hooks/useGetGestureIdForActionInstance';
 
 interface Props {
   appId: number;
   actionId: number;
+  param?: string;
 }
 
 export const GesturePickerBottomSheetModal = forwardRef<
   SingleBottomSheetModal,
   Props
->(({ appId, actionId }, ref) => {
+>(({ appId, actionId, param }, ref) => {
   const gestureList = useAppSelector(selectGestureList);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const dispatch = useAppDispatch();
-  const selectedGestureId = useMemo(() => {
-    return Object.keys(gestureToActionMap).find(id => {
-      const actionInstance = gestureToActionMap[id];
-      return (
-        actionInstance.appId === appId && actionInstance.actionId === actionId
-      );
-    });
-  }, [gestureToActionMap, appId, actionId]);
+  const getGestureIdForActionInstance = useGetGestureIdForActionInstance();
+  const selectedGestureId = getGestureIdForActionInstance({
+    appId,
+    actionId,
+    param,
+  });
   const [shouldFilterGestures, setShouldFilterGestures] = useState(false);
   const { colors } = useTheme();
   const { dismiss } = useBottomSheetModal();
-  const action = useMemo(
-    () =>
-      (appList.find(({ id }) => id === appId) as App).actions.find(
-        ({ id }) => id === actionId,
-      ),
-    [appId, actionId],
-  );
 
   const handleSelectGesture = useCallback(
     (gestureId: string) => {
@@ -63,11 +54,11 @@ export const GesturePickerBottomSheetModal = forwardRef<
       dispatch(
         gestureActions.assignGestureToAction({
           id: gestureId,
-          actionInstance: { appId, actionId },
+          actionInstance: { appId, actionId, param },
         }),
       );
     },
-    [actionId, appId, dispatch, selectedGestureId],
+    [actionId, appId, param, dispatch, selectedGestureId],
   );
 
   return (
@@ -91,8 +82,8 @@ export const GesturePickerBottomSheetModal = forwardRef<
           <AnimatedIconButton name="close-circle" size={10} color="gray.300" />
           <VStack flex={1} space={2} alignItems="center">
             <Typography variant="body">제스처 선택</Typography>
-            <Typography variant="description" color="gray.600">
-              {action?.description}
+            <Typography variant="description" color="gray.600" isTruncated>
+              {getActionDescription({ appId, actionId, param })}
             </Typography>
           </VStack>
           <AnimatedIconButton
@@ -113,7 +104,7 @@ export const GesturePickerBottomSheetModal = forwardRef<
             }
 
             const description = gestureToActionMap[id]
-              ? getActionFromActionInstance(gestureToActionMap[id])?.description
+              ? getActionDescription(gestureToActionMap[id])
               : undefined;
 
             return (
@@ -140,7 +131,7 @@ export const GesturePickerBottomSheetModal = forwardRef<
                           resizeMode="contain"
                         />
                       </HStack>
-                      <VStack space={1} pb={1}>
+                      <VStack flex={1} space={1} pb={1}>
                         <Text fontSize="md" color="gray.900" isTruncated>
                           {name}
                         </Text>

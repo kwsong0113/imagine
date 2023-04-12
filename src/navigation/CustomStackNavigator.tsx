@@ -9,12 +9,14 @@ import {
   ActionList,
   CanvasTest,
   GestureList,
+  ParamActionList,
 } from '../screens/Custom';
 
 export type CustomStackParamList = {
   Home: undefined;
   AppList: undefined;
   ActionList: { appId: number };
+  ParamActionList: { appId: number; actionId: number };
   CanvasTest: undefined;
   GestureList: undefined;
 };
@@ -36,6 +38,7 @@ export const CustomStackNavigator = () => {
       <Stack.Screen name="Home" component={Custom} />
       <Stack.Screen name="AppList" component={AppList} />
       <Stack.Screen name="ActionList" component={ActionList} />
+      <Stack.Screen name="ParamActionList" component={ParamActionList} />
       <Stack.Screen name="CanvasTest" component={CanvasTest} />
       <Stack.Screen name="GestureList" component={GestureList} />
     </Stack.Navigator>

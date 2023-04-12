@@ -18,7 +18,7 @@ import {
   selectGestureList,
   selectGestureToActionMap,
 } from '../../store/slices/gesture';
-import { getActionFromActionInstance } from '../../features/action/utils';
+import { getActionDescription } from '../../features/action/utils';
 import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
 import { Gesture } from '../../features/gesture/types';
 
@@ -79,7 +79,7 @@ export const GestureList = () => {
         />
         {gestureList.map(({ id, name, data }, idx) => {
           const description = gestureToActionMap[id]
-            ? getActionFromActionInstance(gestureToActionMap[id])?.description
+            ? getActionDescription(gestureToActionMap[id])
             : undefined;
           return (
             <Animated.View
