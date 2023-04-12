@@ -3,3 +3,8 @@ export * from './useThemeMode';
 export * from './useColorModevalue';
 export * from './useCustomTheme';
 export * from './useApp';
+export * from './useMatchedApp';
+export * from './useGetGestureForActionInstance';
+export * from './useGetGestureIdForActionInstance';
+export * from './useGetNumActiveActions';
+export * from './useHandleRemoveAction';

@@ -6,6 +6,7 @@ type Variant =
   | 'subtitle1'
   | 'subtitle2'
   | 'body'
+  | 'info'
   | 'description'
   | 'caption';
 
@@ -35,6 +36,10 @@ const typographyMap: Record<
   body: {
     fontSize: 'md',
     lineHeight: 18,
+  },
+  info: {
+    fontSize: 'sm',
+    lineHeight: 16,
   },
   description: {
     fontSize: 'xs',

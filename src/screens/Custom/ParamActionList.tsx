@@ -1,0 +1,150 @@
+import React, { useMemo, useRef, useState } from 'react';
+import { StackScreenProps } from '@react-navigation/stack';
+import {
+  ScreenContainer,
+  Header,
+  ListRow,
+  AnimatedIconButton,
+  GesturePickerBottomSheetModal,
+  SingleBottomSheetModal,
+} from '../../components';
+import { CustomStackParamList } from '../../navigation';
+import { useMatchedAction } from '../../hooks/useMatchedAction';
+import { Input, ScrollView } from 'native-base';
+import { useAppSelector, useHandleRemoveAction } from '../../hooks';
+import { selectGestureToActionMap } from '../../store/slices/gesture';
+import { ActionInstance, ParamAction } from '../../features/action/types';
+import { getActionDescription } from '../../features/action/utils';
+import { useGetGestureForActionInstance } from '../../hooks/useGetGestureForActionInstance';
+import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
+
+type ParamActionProps = StackScreenProps<
+  CustomStackParamList,
+  'ParamActionList'
+>;
+
+interface ParamActionRowProps {
+  actionInstance: ActionInstance;
+  gestureName?: string;
+  onRemove?: () => void;
+  hasBottomBorder: boolean;
+  onPress?: () => void;
+}
+
+const ParamActionRow = ({
+  actionInstance,
+  gestureName,
+  onRemove,
+  ...props
+}: ParamActionRowProps) => {
+  return (
+    <Animated.View layout={Layout.springify()} exiting={LightSpeedOutRight}>
+      <ListRow
+        title={actionInstance.param}
+        description={gestureName ? `${gestureName} 제스처` : undefined}
+        right={
+          <AnimatedIconButton
+            name="remove-circle-outline"
+            color="red.500"
+            size={8}
+            onPress={onRemove}
+          />
+        }
+        {...props}
+      />
+    </Animated.View>
+  );
+};
+
+export const ParamActionList = ({ route }: ParamActionProps) => {
+  const { appId, actionId } = route.params;
+  const matchedAction = useMatchedAction(appId, actionId);
+  const gestureToActionMap = useAppSelector(selectGestureToActionMap);
+  const filteredParamActionList = useMemo(
+    () =>
+      Object.entries(gestureToActionMap).filter(
+        ([_, actionInstance]) =>
+          actionInstance.appId === appId &&
+          actionInstance.actionId === actionId,
+      ),
+    [gestureToActionMap, appId, actionId],
+  );
+  const [actionParam, setActionParam] = useState('');
+  const [selectedActionParam, setSelectedActionParam] = useState('');
+  const gesturePickerBottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
+  const getGestureForActionInstance = useGetGestureForActionInstance();
+
+  const handleRemoveParamAction = useHandleRemoveAction();
+
+  return (
+    <ScreenContainer>
+      <Header variant="center" title={matchedAction?.description} />
+      {matchedAction && (
+        <ScrollView mx={-3} px={3}>
+          <ListRow
+            left={
+              <Input
+                flex={1}
+                variant="unstyled"
+                value={actionParam}
+                onChangeText={text => setActionParam(text)}
+                placeholder={(matchedAction as ParamAction).placeholder}
+                placeholderTextColor="gray.600"
+                color="gray.900"
+                p={0}
+                fontSize="md"
+                lineHeight={18}
+                fontWeight={500}
+              />
+            }
+            right={
+              <AnimatedIconButton
+                name="add-circle-outline"
+                color={actionParam === '' ? 'gray.500' : 'blue.500'}
+                size={8}
+                onPress={() => {
+                  if (actionParam === '') {
+                    return;
+                  }
+                  setSelectedActionParam(actionParam);
+                  setActionParam('');
+                  gesturePickerBottomSheetModalRef.current?.present();
+                }}
+              />
+            }
+            hasBottomBorder={filteredParamActionList.length === 0}
+            isPressable={false}
+          />
+          {filteredParamActionList.map(([gestureId, actionInstance], idx) => {
+            return (
+              <ParamActionRow
+                key={`${gestureId}-${actionInstance.appId}-${actionInstance.actionId}-${actionInstance.param}`}
+                actionInstance={actionInstance}
+                gestureName={getGestureForActionInstance(actionInstance)?.name}
+                onRemove={() =>
+                  handleRemoveParamAction(
+                    gestureId,
+                    getActionDescription(actionInstance) ?? '',
+                  )
+                }
+                hasBottomBorder={idx === filteredParamActionList.length - 1}
+                onPress={() => {
+                  if (actionInstance.param !== undefined) {
+                    setSelectedActionParam(actionInstance.param);
+                    gesturePickerBottomSheetModalRef.current?.present();
+                  }
+                }}
+              />
+            );
+          })}
+        </ScrollView>
+      )}
+      <GesturePickerBottomSheetModal
+        ref={gesturePickerBottomSheetModalRef}
+        appId={appId}
+        actionId={actionId}
+        param={selectedActionParam}
+      />
+    </ScreenContainer>
+  );
+};

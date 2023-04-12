@@ -15,6 +15,7 @@ interface NonParamAction {
 export interface ParamAction {
   id: number;
   urlSchemeFunc: (param: string) => string;
+  placeholder: string;
   description: string;
   descriptionFunc: (param: string) => string;
 }

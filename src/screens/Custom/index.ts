@@ -3,3 +3,4 @@ export * from './AppList';
 export * from './ActionList';
 export * from './CanvasTest';
 export * from './GestureList';
+export * from './ParamActionList';

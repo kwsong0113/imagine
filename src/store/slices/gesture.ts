@@ -44,6 +44,7 @@ const gestureSlice = createSlice({
     },
     deleteAllGestures: state => {
       state.gestureList = [];
+      state.gestureToActionMap = {};
     },
     assignGestureToAction: (
       state,
@@ -54,6 +55,9 @@ const gestureSlice = createSlice({
     },
     unassignGestureToAction: (state, action: PayloadAction<{ id: string }>) => {
       delete state.gestureToActionMap[action.payload.id];
+    },
+    clearGestureToActionMap: state => {
+      state.gestureToActionMap = {};
     },
   },
 });

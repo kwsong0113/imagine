@@ -4,12 +4,14 @@ import { IonIcon } from './IonIcon';
 import { Typography } from './Typography';
 
 type Props = {
+  variant?: 'description' | 'body';
   iconName: string;
   iconColor: ComponentProps<typeof IonIcon>['color'];
   message: string;
 } & Pick<ComponentProps<typeof HStack>, 'bg'>;
 
 export const Toast = ({
+  variant = 'body',
   iconName,
   iconColor,
   message,
@@ -25,8 +27,12 @@ export const Toast = ({
       space={1.5}
       mb={12}
     >
-      <IonIcon name={iconName} size={5} color={iconColor} />
-      <Typography variant="body">{message}</Typography>
+      <IonIcon
+        name={iconName}
+        size={variant === 'body' ? 5 : 4}
+        color={iconColor}
+      />
+      <Typography variant={variant}>{message}</Typography>
     </HStack>
   );
 };
