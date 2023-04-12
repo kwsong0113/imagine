@@ -81,27 +81,29 @@ export const ListRow = ({
         style={animatedProps}
       >
         {left}
-        <VStack flex={1} space={2}>
-          {title && (
-            <Typography variant="body" color={titleColor}>
-              {title}
-            </Typography>
-          )}
-          {description && (
-            <Typography
-              variant="description"
-              color="gray.600"
-              isTruncated={true}
-            >
-              {description}
-            </Typography>
-          )}
-          {caption && (
-            <Typography variant="caption" color="gray.600" isTruncated={true}>
-              {caption}
-            </Typography>
-          )}
-        </VStack>
+        {(title || description || caption) && (
+          <VStack flex={1} space={2}>
+            {title && (
+              <Typography variant="body" color={titleColor}>
+                {title}
+              </Typography>
+            )}
+            {description && (
+              <Typography
+                variant="description"
+                color="gray.600"
+                isTruncated={true}
+              >
+                {description}
+              </Typography>
+            )}
+            {caption && (
+              <Typography variant="caption" color="gray.600" isTruncated={true}>
+                {caption}
+              </Typography>
+            )}
+          </VStack>
+        )}
         {right}
       </AnimatedHStack>
     </Pressable>

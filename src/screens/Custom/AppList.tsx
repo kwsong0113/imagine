@@ -34,7 +34,7 @@ const AppRow = ({
       right={<IonIcon name="add-circle-outline" color="gray.500" size={8} />}
       title={name}
       description={`${actions.length}개의 액션${
-        numActiveActions > 0 ? ' 중 ${numActiveActions}개 사용 중' : ''
+        numActiveActions > 0 ? ` 중 ${numActiveActions}개 사용 중` : ''
       }`}
       hasBottomBorder={hasBottomBorder}
       onPress={() => {

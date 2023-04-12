@@ -9,7 +9,7 @@ export const executeActionInstance = (actionInstance: ActionInstance) => {
   }
 };
 
-const getActionFromActionInstance = (actionInstance: ActionInstance) => {
+export const getActionFromActionInstance = (actionInstance: ActionInstance) => {
   const matchedApp = appList.find(app => app.id === actionInstance.appId);
   if (!matchedApp) {
     return undefined;

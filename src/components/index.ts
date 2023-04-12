@@ -14,6 +14,7 @@ export { default as Canvas } from './Canvas';
 export * from './Feature';
 export * from './GestureAdditionBottomSheetModal';
 export * from './GestureViewBottomSheetModal';
+export * from './GesturePickerBottomSheetModal';
 export * from './AnimatedCircularProgress';
 export * from './AnimatedConfirm';
 export * from './AnimatedSentence';

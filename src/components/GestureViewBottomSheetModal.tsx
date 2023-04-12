@@ -49,21 +49,21 @@ export const GestureViewBottomSheetModal = forwardRef<
           <AnimatedIconButton
             name="chevron-back-circle"
             size={10}
-            color={dataIdx === 0 ? 'gray.400' : 'teal.400'}
+            color={dataIdx === 0 ? 'gray.400' : 'teal.600'}
             onPress={handleDecreaseIdx}
           />
           <VStack flex={1} space={2} alignItems="center">
-            <Typography variant="body" color="teal.400">
+            <Typography variant="body" color="teal.600">
               {`${dataIdx + 1} / 4`}
             </Typography>
-            <Text fontSize="xs" isTruncated>
+            <Text fontSize="xs" color="gray.600" isTruncated>
               {gesture?.name}
             </Text>
           </VStack>
           <AnimatedIconButton
             name="chevron-forward-circle"
             size={10}
-            color={dataIdx === 3 ? 'gray.400' : 'teal.400'}
+            color={dataIdx === 3 ? 'gray.400' : 'teal.600'}
             onPress={handleIncreaseIdx}
           />
         </HStack>
