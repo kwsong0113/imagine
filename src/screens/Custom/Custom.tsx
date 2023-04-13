@@ -32,7 +32,7 @@ export const Custom = ({ navigation }: Props) => {
       </HStack>
       <VStack>
         <ListRow
-          title="내 제스처 목록 보기"
+          title="내 제스처 목록 보기 / 추가하기"
           titleColor="blue.600"
           right={<IonIcon size={6} color="blue.600" name="chevron-forward" />}
           onPress={() => navigation.navigate('GestureList')}
@@ -42,6 +42,7 @@ export const Custom = ({ navigation }: Props) => {
           titleColor="blue.600"
           hasBottomBorder={true}
           right={<IonIcon size={6} color="blue.600" name="chevron-forward" />}
+          onPress={() => navigation.navigate('WholeActionList')}
         />
       </VStack>
       <Feature

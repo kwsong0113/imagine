@@ -1,0 +1,96 @@
+import React, { useCallback, useRef, useState } from 'react';
+import { VStack, HStack, Image, ScrollView, Text } from 'native-base';
+import {
+  ScreenContainer,
+  Header,
+  ListRow,
+  AnimatedIconButton,
+  SingleBottomSheetModal,
+  Typography,
+  GestureViewBottomSheetModal,
+} from '../../components';
+import { useAppSelector, useHandleRemoveAction } from '../../hooks';
+import {
+  selectActiveGestureList,
+  selectGestureToActionMap,
+} from '../../store/slices/gesture';
+import { getActionDescription } from '../../features/action/utils';
+import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
+import { Gesture } from '../../features/gesture/types';
+
+export const WholeActionList = () => {
+  const activeGestureList = useAppSelector(selectActiveGestureList);
+  const gestureToActionMap = useAppSelector(selectGestureToActionMap);
+  const [selectedGesture, setSelectedGesture] = useState<Gesture>();
+
+  const gestureViewBottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
+
+  const handleViewGesture = useCallback((gesture: Gesture) => {
+    setSelectedGesture(gesture);
+    gestureViewBottomSheetModalRef.current?.present();
+  }, []);
+
+  const handleRemoveAction = useHandleRemoveAction();
+
+  return (
+    <ScreenContainer>
+      <Header variant="center" title="액션 목록" />
+      <ScrollView mx={-3} px={3}>
+        <GestureViewBottomSheetModal
+          ref={gestureViewBottomSheetModalRef}
+          gesture={selectedGesture}
+        />
+        {activeGestureList.map(({ id, name, data }, idx) => {
+          const description = gestureToActionMap[id]
+            ? getActionDescription(gestureToActionMap[id])
+            : undefined;
+          return (
+            <Animated.View
+              key={id}
+              layout={Layout.springify()}
+              exiting={LightSpeedOutRight}
+            >
+              <ListRow
+                left={
+                  <HStack flex={1} space={3} alignItems="center">
+                    <HStack space={1}>
+                      <Image
+                        alt={name}
+                        width={8}
+                        height={10}
+                        bg="gray.300"
+                        borderRadius={8}
+                        source={{
+                          uri: `data:image/png;base64,${data[0].base64}`,
+                        }}
+                        resizeMode="contain"
+                      />
+                    </HStack>
+                    <VStack flex={1} space={1}>
+                      <Typography variant="info" isTruncated>
+                        {description}
+                      </Typography>
+                      <Text fontSize="xs" color={'teal.600'} isTruncated>
+                        {name}
+                      </Text>
+                    </VStack>
+                  </HStack>
+                }
+                right={
+                  <AnimatedIconButton
+                    name="remove-circle-outline"
+                    color="red.500"
+                    size={8}
+                    onPress={() => handleRemoveAction(id, description ?? '')}
+                  />
+                }
+                hasBottomBorder={idx === activeGestureList.length - 1}
+                onPress={() => handleViewGesture({ id, name, data })}
+              />
+            </Animated.View>
+          );
+        })}
+      </ScrollView>
+    </ScreenContainer>
+  );
+};
