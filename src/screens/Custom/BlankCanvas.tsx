@@ -1,11 +1,6 @@
 import React, { useState, useRef, ComponentProps, ReactNode } from 'react';
 import { Box, Center, Pressable, useToast } from 'native-base';
-import {
-  Canvas,
-  IonIcon,
-  MaterialCommunityIcon,
-  Toast,
-} from '../../components';
+import { Canvas, IonIcon, Toast } from '../../components';
 import { StackScreenProps } from '@react-navigation/stack';
 import { CustomStackParamList } from '../../navigation';
 import { useAppSelector } from '../../hooks';
@@ -129,7 +124,7 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
             <IonIcon name="close-circle" size={5} color="gray.500" />
           </FloatingButton>
           <FloatingButton top={60} right={6} onPress={handleRecognize}>
-            <MaterialCommunityIcon name="crop-free" size={5} color="blue.500" />
+            <IonIcon name="scan" size={18} color="blue.500" />
           </FloatingButton>
         </>
       )}
