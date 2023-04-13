@@ -7,10 +7,12 @@ import {
   AnimatedIconButton,
   GesturePickerBottomSheetModal,
   SingleBottomSheetModal,
+  Typography,
+  IonIcon,
 } from '../../components';
 import { CustomStackParamList } from '../../navigation';
 import { useMatchedAction } from '../../hooks/useMatchedAction';
-import { Input, ScrollView } from 'native-base';
+import { Input, ScrollView, VStack, HStack, Box, Pressable } from 'native-base';
 import { useAppSelector, useHandleRemoveAction } from '../../hooks';
 import { selectGestureToActionMap } from '../../store/slices/gesture';
 import { ActionInstance, ParamAction } from '../../features/action/types';
@@ -56,7 +58,7 @@ const ParamActionRow = ({
   );
 };
 
-export const ParamActionList = ({ route }: ParamActionProps) => {
+export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
   const { appId, actionId, type } = route.params;
   const matchedAction = useMatchedAction(appId, actionId);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
@@ -84,15 +86,34 @@ export const ParamActionList = ({ route }: ParamActionProps) => {
           description="단축어를 실행해 작업을 빠르게 완료하세요"
         />
       ) : type === 'customURLSchemeList' ? (
-        <Header
-          title="커스텀 URL Scheme"
-          description="URL Scheme을 활용해 액션을 등록하세요"
-        />
+        <VStack>
+          <Header
+            title="커스텀 URL Scheme"
+            description="URL Scheme을 활용해 액션을 등록하세요"
+          />
+          <Pressable onPress={() => navigation.navigate('UrlSchemeHelp')}>
+            {({ isPressed }) => (
+              <HStack
+                space={1}
+                py={3.5}
+                alignItems="center"
+                opacity={isPressed ? 0.4 : 1}
+              >
+                <IonIcon name="help-circle" color="gray.500" size={3} />
+                <Box borderBottomWidth={1} borderBottomColor="gray.500">
+                  <Typography variant="caption" color="gray.500">
+                    URL Scheme이 무엇인가요?
+                  </Typography>
+                </Box>
+              </HStack>
+            )}
+          </Pressable>
+        </VStack>
       ) : (
         <Header variant="center" title={matchedAction?.description} />
       )}
       {matchedAction && (
-        <ScrollView mx={-3} px={3}>
+        <ScrollView mx={-3} px={3} mt={type === 'customURLSchemeList' ? -6 : 0}>
           <ListRow
             left={
               <Input

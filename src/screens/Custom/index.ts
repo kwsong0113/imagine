@@ -6,3 +6,4 @@ export * from './GestureList';
 export * from './ParamActionList';
 export * from './BlankCanvas';
 export * from './WholeActionList';
+export * from './UrlSchemeHelp';

@@ -12,6 +12,7 @@ import {
   WholeActionList,
   ParamActionList,
   BlankCanvas,
+  UrlSchemeHelp,
 } from '../screens/Custom';
 
 export type CustomStackParamList = {
@@ -27,6 +28,7 @@ export type CustomStackParamList = {
   GestureList: undefined;
   WholeActionList: undefined;
   BlankCanvas: undefined;
+  UrlSchemeHelp: undefined;
 };
 
 export type CustomStackNavigationProp =
@@ -50,6 +52,8 @@ export const CustomStackNavigator = () => {
       <Stack.Screen name="CanvasTest" component={CanvasTest} />
       <Stack.Screen name="GestureList" component={GestureList} />
       <Stack.Screen name="WholeActionList" component={WholeActionList} />
+      <Stack.Screen name="UrlSchemeHelp" component={UrlSchemeHelp} />
+
       <Stack.Screen
         name="BlankCanvas"
         component={BlankCanvas}

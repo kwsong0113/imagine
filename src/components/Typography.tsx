@@ -13,9 +13,8 @@ type Variant =
 type TypographyProps = {
   variant: Variant;
   color?: string;
-  isTruncated?: boolean;
   children?: ReactNode | string;
-};
+} & Partial<ComponentProps<typeof Text>>;
 
 const typographyMap: Record<
   Variant,
@@ -54,15 +53,11 @@ const typographyMap: Record<
 export const Typography = ({
   variant,
   color,
-  isTruncated = false,
   children,
+  ...props
 }: TypographyProps) => {
   return (
-    <Text
-      color={color ?? 'gray.900'}
-      isTruncated={isTruncated}
-      {...typographyMap[variant]}
-    >
+    <Text color={color ?? 'gray.900'} {...typographyMap[variant]} {...props}>
       {children}
     </Text>
   );
