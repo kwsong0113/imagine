@@ -1,5 +1,8 @@
 import { App } from './types';
 
+export const SHORTCUT_ID = 1000;
+export const CUSTOM_URL_SCHEME_ID = 1001;
+
 export const appList: App[] = [
   {
     id: 0,
@@ -204,7 +207,7 @@ export const appList: App[] = [
     ],
   },
   {
-    id: 13,
+    id: SHORTCUT_ID,
     name: '단축어',
     actions: [
       {
@@ -219,6 +222,19 @@ export const appList: App[] = [
         description: '저장된 단축어 실행하기',
         placeholder: '단축어 이름을 입력해주세요',
         descriptionFunc: (param: string) => `${param} 단축어 실행하기`,
+      },
+    ],
+  },
+  {
+    id: CUSTOM_URL_SCHEME_ID,
+    name: '커스텀 URL Scheme',
+    actions: [
+      {
+        id: 0,
+        urlSchemeFunc: (param: string) => `${param}`,
+        description: '커스텀 URL Scheme 실행하기',
+        placeholder: 'URL Scheme을 입력해주세요',
+        descriptionFunc: (param: string) => `${param} 이동하기`,
       },
     ],
   },

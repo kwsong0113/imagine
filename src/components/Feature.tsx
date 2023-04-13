@@ -2,8 +2,6 @@ import React from 'react';
 import { HStack, VStack, Pressable } from 'native-base';
 import { Typography } from './Typography';
 import { IonIcon } from './IonIcon';
-import { useNavigation } from '@react-navigation/native';
-import { CustomStackNavigationProp, CustomStackParamList } from '../navigation';
 import Animated, {
   Easing,
   Extrapolate,
@@ -17,13 +15,12 @@ interface Props {
   iconName: string;
   title: string;
   caption: string;
-  link: keyof CustomStackParamList;
+  onPress?: () => void;
 }
 
 const AnimatedHStack = Animated.createAnimatedComponent(HStack);
 
-export const Feature = ({ iconName, title, caption, link }: Props) => {
-  const navigation = useNavigation<CustomStackNavigationProp>();
+export const Feature = ({ iconName, title, caption, onPress }: Props) => {
   const progress = useSharedValue(0);
 
   const style = useAnimatedStyle(() => ({
@@ -43,7 +40,7 @@ export const Feature = ({ iconName, title, caption, link }: Props) => {
   return (
     <Pressable
       flex={1}
-      onPress={() => navigation.navigate(link)}
+      onPress={onPress}
       onPressIn={() => {
         progress.value = withTiming(1, {
           easing: Easing.linear,

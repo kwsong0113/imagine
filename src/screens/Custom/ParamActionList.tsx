@@ -57,7 +57,7 @@ const ParamActionRow = ({
 };
 
 export const ParamActionList = ({ route }: ParamActionProps) => {
-  const { appId, actionId } = route.params;
+  const { appId, actionId, type } = route.params;
   const matchedAction = useMatchedAction(appId, actionId);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const filteredParamActionList = useMemo(
@@ -78,7 +78,19 @@ export const ParamActionList = ({ route }: ParamActionProps) => {
 
   return (
     <ScreenContainer>
-      <Header variant="center" title={matchedAction?.description} />
+      {type === 'shortcutList' ? (
+        <Header
+          title="단축어 실행하기"
+          description="단축어를 실행해 작업을 빠르게 완료하세요"
+        />
+      ) : type === 'customURLSchemeList' ? (
+        <Header
+          title="커스텀 URL Scheme"
+          description="URL Scheme을 활용해 액션을 등록하세요"
+        />
+      ) : (
+        <Header variant="center" title={matchedAction?.description} />
+      )}
       {matchedAction && (
         <ScrollView mx={-3} px={3}>
           <ListRow

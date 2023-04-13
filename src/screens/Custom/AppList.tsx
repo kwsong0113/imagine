@@ -13,7 +13,7 @@ import {
   AnimatedIconButton,
 } from '../../components';
 import { CustomStackParamList } from '../../navigation';
-import { appList } from '../../features/action/app';
+import { appList, CUSTOM_URL_SCHEME_ID } from '../../features/action/app';
 import {
   useGetGestureForActionInstance,
   useGetNumActiveActions,
@@ -91,6 +91,9 @@ export const AppList = ({ navigation }: AppListProps) => {
       />
       <ScrollView mx={-3} px={3}>
         {appList.map((app, idx) => {
+          if (app.id === CUSTOM_URL_SCHEME_ID) {
+            return;
+          }
           const numActiveActions = getNumActiveActions(app.id);
           const hasSingleAction = app.actions.length === 1;
           let gesture: Gesture | undefined;

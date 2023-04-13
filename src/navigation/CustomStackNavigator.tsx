@@ -17,7 +17,11 @@ export type CustomStackParamList = {
   Home: undefined;
   AppList: undefined;
   ActionList: { appId: number };
-  ParamActionList: { appId: number; actionId: number };
+  ParamActionList: {
+    appId: number;
+    actionId: number;
+    type?: 'shortcutList' | 'customURLSchemeList';
+  };
   CanvasTest: undefined;
   GestureList: undefined;
   BlankCanvas: undefined;
