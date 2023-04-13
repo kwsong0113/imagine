@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useState } from 'react';
+import React, { forwardRef, useCallback, useState, useRef } from 'react';
 import { Dimensions } from 'react-native';
 import { HStack, VStack, Image, Text, ScrollView, useTheme } from 'native-base';
 import SingleBottomSheetModal from './SingleBottomSheetModal';
@@ -20,6 +20,8 @@ import Animated, {
   LightSpeedOutRight,
 } from 'react-native-reanimated';
 import { useGetGestureIdForActionInstance } from '../hooks/useGetGestureIdForActionInstance';
+import { GestureAdditionBottomSheetModal } from './GestureAdditionBottomSheetModal';
+import { IonIcon } from './IonIcon';
 
 interface Props {
   appId: number;
@@ -61,6 +63,9 @@ export const GesturePickerBottomSheetModal = forwardRef<
     [actionId, appId, param, dispatch, selectedGestureId],
   );
 
+  const gestureAdditionBottomSheetModalRef =
+    useRef<SingleBottomSheetModal>(null);
+
   return (
     <SingleBottomSheetModal ref={ref} enableContentPanningGesture={false}>
       <VStack
@@ -86,6 +91,10 @@ export const GesturePickerBottomSheetModal = forwardRef<
               {getActionDescription({ appId, actionId, param })}
             </Typography>
           </VStack>
+          <GestureAdditionBottomSheetModal
+            ref={gestureAdditionBottomSheetModalRef}
+            onRedirect={handleSelectGesture}
+          />
           <AnimatedIconButton
             name="close-circle"
             size={10}
@@ -94,6 +103,16 @@ export const GesturePickerBottomSheetModal = forwardRef<
           />
         </HStack>
         <ScrollView mx={-3} px={3}>
+          <ListRow
+            title="새로운 제스처"
+            right={
+              <IonIcon name="add-circle-outline" color="blue.500" size={8} />
+            }
+            hasBottomBorder={gestureList.length === 0}
+            onPress={() => {
+              gestureAdditionBottomSheetModalRef.current?.present();
+            }}
+          />
           {gestureList.map(({ id, name, data }, idx) => {
             if (
               shouldFilterGestures &&

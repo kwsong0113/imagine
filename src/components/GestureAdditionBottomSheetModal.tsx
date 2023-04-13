@@ -32,10 +32,14 @@ import { AnimatedConfirm } from './AnimatedConfirm';
 import { AnimatedSentence } from './AnimatedSentence';
 import { Toast } from './Toast';
 
+interface Props {
+  onRedirect?: (id: string) => void;
+}
+
 export const GestureAdditionBottomSheetModal = forwardRef<
   SingleBottomSheetModal,
-  {}
->((_, ref) => {
+  Props
+>(({ onRedirect }, ref) => {
   const dispatch = useAppDispatch();
   const canvasRef = useRef<Canvas>(null);
   const inputRef = useRef<ComponentRef<typeof Input>>(null);
@@ -104,6 +108,10 @@ export const GestureAdditionBottomSheetModal = forwardRef<
           data: gestureData,
         }),
       );
+      if (onRedirect) {
+        onRedirect(id);
+        dismiss();
+      }
     }
 
     if (gestureData.length >= 1 && gestureData.length <= 3) {
