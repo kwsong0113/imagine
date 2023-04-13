@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { ScrollView } from 'native-base';
+import { StackScreenProps } from '@react-navigation/stack';
 import {
   AppIcon,
   Header,
@@ -7,26 +8,37 @@ import {
   ListRow,
   ScreenContainer,
   ProgressIcon,
+  GesturePickerBottomSheetModal,
+  SingleBottomSheetModal,
+  AnimatedIconButton,
 } from '../../components';
-import { CustomStackNavigationProp } from '../../navigation';
+import { CustomStackParamList } from '../../navigation';
 import { appList } from '../../features/action/app';
-import { useGetNumActiveActions } from '../../hooks';
-import { App } from '../../features/action/types';
-import { useNavigation } from '@react-navigation/native';
+import {
+  useGetGestureForActionInstance,
+  useGetNumActiveActions,
+  useHandleRemoveAction,
+} from '../../hooks';
+import { Action, App } from '../../features/action/types';
+import { Gesture } from '../../features/gesture/types';
 
 interface AppRowProps {
   app: App;
   numActiveActions: number;
   hasBottomBorder: boolean;
+  gestureName?: string;
+  onPress?: () => void;
+  onRemove?: () => void;
 }
 
 const AppRow = ({
   app: { id, name, actions },
   numActiveActions,
   hasBottomBorder,
+  gestureName,
+  onPress,
+  onRemove,
 }: AppRowProps) => {
-  const navigation = useNavigation<CustomStackNavigationProp>();
-
   return (
     <ListRow
       key={id}
@@ -34,26 +46,42 @@ const AppRow = ({
       right={
         numActiveActions === 0 ? (
           <IonIcon name="add-circle-outline" color="gray.500" size={8} />
+        ) : actions.length === 1 ? (
+          <AnimatedIconButton
+            name="remove-circle-outline"
+            color="red.500"
+            size={8}
+            onPress={onRemove}
+          />
         ) : (
           <ProgressIcon progress={numActiveActions} total={actions.length} />
         )
       }
       title={name}
-      description={`${actions.length}개의 액션${
-        numActiveActions > 0 ? ` 중 ${numActiveActions}개 사용 중` : ''
-      }`}
+      description={
+        actions.length === 1
+          ? gestureName
+            ? `${gestureName} 제스처`
+            : actions[0].description
+          : `${actions.length}개의 액션${
+              numActiveActions > 0 ? ` 중 ${numActiveActions}개 사용 중` : ''
+            }`
+      }
       hasBottomBorder={hasBottomBorder}
-      onPress={() => {
-        navigation.navigate('ActionList', {
-          appId: id,
-        });
-      }}
+      onPress={onPress}
     />
   );
 };
 
-export const AppList = () => {
+type AppListProps = StackScreenProps<CustomStackParamList, 'AppList'>;
+
+export const AppList = ({ navigation }: AppListProps) => {
   const getNumActiveActions = useGetNumActiveActions();
+  const gesturePickerBottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
+  const [selectedAppId, setSelectedAppId] = useState<number>(0);
+  const [selectedActionId, setSelectedActionId] = useState<number>(0);
+  const handleRemoveAction = useHandleRemoveAction();
+  const getGestureForActionInstance = useGetGestureForActionInstance();
 
   return (
     <ScreenContainer>
@@ -64,16 +92,55 @@ export const AppList = () => {
       <ScrollView mx={-3} px={3}>
         {appList.map((app, idx) => {
           const numActiveActions = getNumActiveActions(app.id);
+          const hasSingleAction = app.actions.length === 1;
+          let gesture: Gesture | undefined;
+          let singleAction: Action;
+          if (hasSingleAction) {
+            singleAction = app.actions[0];
+            gesture = getGestureForActionInstance({
+              appId: app.id,
+              actionId: singleAction.id,
+            });
+          }
           return (
             <AppRow
               key={app.id}
               app={app}
               numActiveActions={numActiveActions}
               hasBottomBorder={idx === appList.length - 1}
+              gestureName={hasSingleAction ? gesture?.name : undefined}
+              onPress={() => {
+                if (hasSingleAction) {
+                  setSelectedAppId(app.id);
+                  setSelectedActionId(singleAction.id);
+                  gesturePickerBottomSheetModalRef.current?.present();
+                } else {
+                  navigation.navigate('ActionList', {
+                    appId: app.id,
+                  });
+                }
+              }}
+              onRemove={
+                hasSingleAction
+                  ? () => {
+                      if (gesture?.id) {
+                        handleRemoveAction(
+                          gesture.id,
+                          singleAction.description,
+                        );
+                      }
+                    }
+                  : undefined
+              }
             />
           );
         })}
       </ScrollView>
+      <GesturePickerBottomSheetModal
+        ref={gesturePickerBottomSheetModalRef}
+        appId={selectedAppId}
+        actionId={selectedActionId}
+      />
     </ScreenContainer>
   );
 };
