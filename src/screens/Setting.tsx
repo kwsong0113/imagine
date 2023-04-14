@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Switch, VStack } from 'native-base';
+import { Switch, VStack, HStack, Box, useTheme } from 'native-base';
 import { useThemeMode } from '../hooks';
 import {
   Header,
@@ -10,6 +10,10 @@ import {
   Typography,
   SingleBottomSheetModal,
   SettingOptionRow,
+  AnimatedConfirm,
+  AnimatedSentence,
+  AnimatedIconButton,
+  AnimatedButton,
 } from '../components';
 import {
   Language,
@@ -18,6 +22,8 @@ import {
   ThemeMode,
 } from '../store/slices';
 import { useAppSelector, useAppDispatch } from '../hooks';
+import { useBottomSheetModal } from '@gorhom/bottom-sheet';
+import { gestureActions } from '../store/slices/gesture';
 
 const themeModeCaption: Record<ThemeMode, string> = {
   light: '라이트 모드',
@@ -153,13 +159,78 @@ const SettingGestureStorageRow = () => {
 };
 
 const SettingClearGestureRow = () => {
+  const dispatch = useAppDispatch();
+  const { dismiss } = useBottomSheetModal();
+  const { colors } = useTheme();
+  const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
+  const [isCleared, setIsCleared] = useState(false);
+
+  const handlePress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+
+  const handleClearGesture = useCallback(() => {
+    setIsCleared(true);
+    dispatch(gestureActions.deleteAllGestures());
+  }, [dispatch]);
+
   return (
-    <ListRow
-      left={<IonIcon name="trash-bin" size="40px" color="gray.900" />}
-      title="제스처 초기화"
-      caption="등록된 제스처를 모두 삭제해요"
-      right={<IonIcon name="close-circle" color="gray.600" size={6} />}
-    />
+    <>
+      <ListRow
+        left={<IonIcon name="trash-bin" size="40px" color="gray.900" />}
+        title="제스처 초기화"
+        caption="등록된 제스처를 모두 삭제해요"
+        right={<IonIcon name="close-circle" color="gray.600" size={6} />}
+        onPress={handlePress}
+      />
+      <SingleBottomSheetModal
+        ref={bottomSheetModalRef}
+        onDismiss={() => setIsCleared(false)}
+      >
+        {isCleared ? (
+          <VStack alignItems="center" pb={12} space={0}>
+            <Box position="absolute" right={2} top={-16}>
+              <AnimatedIconButton
+                name="close-circle"
+                size={8}
+                color="gray.400"
+                onPress={() => dismiss()}
+              />
+            </Box>
+            <AnimatedConfirm color={colors.red[600]} />
+            <AnimatedSentence
+              fontSize="xl"
+              color={colors.gray[900]}
+              content="제스처를 초기화했어요"
+              duration={800}
+            />
+          </VStack>
+        ) : (
+          <VStack px={6} pt={3.5} pb={7.5} space={4}>
+            <VStack space={2}>
+              <Typography variant="subtitle1">
+                제스처를 초기화할까요?
+              </Typography>
+              <Typography variant="description" color="gray.600" py={1}>
+                기존 제스처가 모두 삭제되고 되돌릴 수 없으니 주의하세요
+              </Typography>
+            </VStack>
+            <HStack space={4}>
+              <AnimatedButton
+                bg="gray.500"
+                title="취소"
+                onPress={() => dismiss()}
+              />
+              <AnimatedButton
+                bg="red.600"
+                title="확인"
+                onPress={handleClearGesture}
+              />
+            </HStack>
+          </VStack>
+        )}
+      </SingleBottomSheetModal>
+    </>
   );
 };
 

@@ -13,7 +13,11 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const Radius = 36;
 const Length = 2 * Math.PI * Radius;
 
-export const AnimatedConfirm = () => {
+interface Props {
+  color?: string;
+}
+
+export const AnimatedConfirm = ({ color }: Props) => {
   const { colors } = useTheme();
   const circleProgress = useSharedValue(0);
   const circleAreaProgress = useSharedValue(0);
@@ -63,7 +67,7 @@ export const AnimatedConfirm = () => {
           cy={70}
           r={Radius}
           fill="none"
-          stroke={colors.blue[500]}
+          stroke={color ?? colors.blue[500]}
           strokeWidth={6}
           strokeDasharray={Length}
           strokeLinecap="round"
@@ -73,7 +77,7 @@ export const AnimatedConfirm = () => {
         <AnimatedCircle
           cx={70}
           cy={70}
-          fill={colors.blue[500]}
+          fill={color ?? colors.blue[500]}
           animatedProps={animatedCircleAreaProps}
         />
       </Svg>

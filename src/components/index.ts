@@ -21,3 +21,4 @@ export * from './AnimatedSentence';
 export * from './Toast';
 export * from './AppIcon';
 export * from './ProgressIcon';
+export * from './AnimatedButton';

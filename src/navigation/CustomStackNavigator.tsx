@@ -9,16 +9,26 @@ import {
   ActionList,
   CanvasTest,
   GestureList,
+  WholeActionList,
   ParamActionList,
+  BlankCanvas,
+  UrlSchemeHelp,
 } from '../screens/Custom';
 
 export type CustomStackParamList = {
   Home: undefined;
   AppList: undefined;
   ActionList: { appId: number };
-  ParamActionList: { appId: number; actionId: number };
+  ParamActionList: {
+    appId: number;
+    actionId: number;
+    type?: 'shortcutList' | 'customURLSchemeList';
+  };
   CanvasTest: undefined;
   GestureList: undefined;
+  WholeActionList: undefined;
+  BlankCanvas: undefined;
+  UrlSchemeHelp: undefined;
 };
 
 export type CustomStackNavigationProp =
@@ -41,6 +51,14 @@ export const CustomStackNavigator = () => {
       <Stack.Screen name="ParamActionList" component={ParamActionList} />
       <Stack.Screen name="CanvasTest" component={CanvasTest} />
       <Stack.Screen name="GestureList" component={GestureList} />
+      <Stack.Screen name="WholeActionList" component={WholeActionList} />
+      <Stack.Screen name="UrlSchemeHelp" component={UrlSchemeHelp} />
+
+      <Stack.Screen
+        name="BlankCanvas"
+        component={BlankCanvas}
+        options={{ animationEnabled: false }}
+      />
     </Stack.Navigator>
   );
 };

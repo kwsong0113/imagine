@@ -18,7 +18,7 @@ import {
   recognize as gestureRecognize,
 } from '../features/gesture/recognizer';
 import { useAppSelector } from '../hooks';
-import { selectGestureList } from '../store/slices/gesture';
+import { selectActiveGestureList } from '../store/slices/gesture';
 
 type GestureResult =
   | {
@@ -40,7 +40,7 @@ type Canvas = CanvasRef;
 const Canvas = forwardRef<CanvasRef, {}>((_, ref) => {
   const { colors } = useTheme();
   const sketchCanvasRef = useRef<SketchCanvasRef>(null);
-  const gestureList = useAppSelector(selectGestureList);
+  const activeGestureList = useAppSelector(selectActiveGestureList);
 
   useLayoutEffect(() => {
     sketchCanvasRef.current?.reset();
@@ -81,10 +81,13 @@ const Canvas = forwardRef<CanvasRef, {}>((_, ref) => {
             error: GestureError.Else,
           };
         }
-        return gestureRecognize(gestureList, canvasPoints as CanvasPoints);
+        return gestureRecognize(
+          activeGestureList,
+          canvasPoints as CanvasPoints,
+        );
       },
     }),
-    [gestureList],
+    [activeGestureList],
   );
 
   return (
