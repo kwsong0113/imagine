@@ -8,3 +8,4 @@ export * from './useGetGestureForActionInstance';
 export * from './useGetGestureIdForActionInstance';
 export * from './useGetNumActiveActions';
 export * from './useHandleRemoveAction';
+export * from './useActionStat';

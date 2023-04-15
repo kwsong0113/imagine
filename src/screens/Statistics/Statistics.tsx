@@ -1,23 +1,21 @@
 import React, { ComponentProps, useMemo } from 'react';
-import { HStack, VStack, Center, Pressable } from 'native-base';
+import { HStack, VStack } from 'native-base';
+import { StackScreenProps } from '@react-navigation/stack';
 import {
   ScreenContainer,
   Header,
   Typography,
-  ListRow,
-  AppIcon,
-} from '../components';
-import { useAppSelector } from '../hooks';
-import { selectActiveGestureList } from '../store/slices/gesture';
+  ListRowButton,
+  StatisticsActionRow,
+} from '../../components';
+import { useAppSelector, useActionStat } from '../../hooks';
+import { selectActiveGestureList } from '../../store/slices/gesture';
 import {
   selectActionHistoryListToday,
   selectNumActionsPerDay,
-} from '../store/slices/history';
-import { ActionInstance } from '../features/action/types';
-import {
-  getActionDescription,
-  getAppForAction,
-} from '../features/action/utils';
+} from '../../store/slices/history';
+import { ActionInstance } from '../../features/action/types';
+import { StatisticsStackParamList } from '../../navigation/StatisticsStackNavigator';
 
 type CountInfoProps = {
   count: number;
@@ -42,35 +40,20 @@ const CountInfo = ({ count, description, ...props }: CountInfoProps) => {
   );
 };
 
-export const Statistics = () => {
+type Props = StackScreenProps<StatisticsStackParamList, 'StatisticsHome'>;
+
+export const Statistics = ({ navigation }: Props) => {
   const activeGestureList = useAppSelector(selectActiveGestureList);
   const numActionsPerDay = useAppSelector(selectNumActionsPerDay);
   const actionHistoryListToday = useAppSelector(selectActionHistoryListToday);
+  const actionStat = useActionStat();
 
-  const topActionInstances: {
+  const topActionStat: {
     actionInstance: ActionInstance;
     numExecution: number;
   }[] = useMemo(() => {
-    const actionInstanceMap: Record<string, number> = {};
-    actionHistoryListToday.forEach(({ actionInstance }) => {
-      const actionInstanceString = JSON.stringify(actionInstance);
-      if (actionInstanceString in actionInstanceMap) {
-        actionInstanceMap[actionInstanceString] += 1;
-      } else {
-        actionInstanceMap[actionInstanceString] = 1;
-      }
-    });
-    return Object.entries(actionInstanceMap)
-      .map(([actionInstanceString, numExecution]) => ({
-        actionInstance: JSON.parse(actionInstanceString),
-        numExecution,
-      }))
-      .sort(
-        ({ numExecution: numExecution1 }, { numExecution: numExecution2 }) =>
-          numExecution2 - numExecution1,
-      )
-      .slice(0, 4);
-  }, [actionHistoryListToday]);
+    return actionStat.slice(0, 4);
+  }, [actionStat]);
 
   return (
     <ScreenContainer>
@@ -113,42 +96,21 @@ export const Statistics = () => {
               : '평소보다 액션을 더 적게 실행했어요!'}
           </Typography>
         </HStack>
-        {topActionInstances.map(({ actionInstance, numExecution }, idx) => {
-          const app = getAppForAction(actionInstance);
-          const description = getActionDescription(actionInstance);
-
+        {topActionStat.map((props, idx) => {
           return (
-            app &&
-            description && (
-              <ListRow
-                key={JSON.stringify(actionInstance)}
-                left={<AppIcon id={app.id} name={app.name} />}
-                right={
-                  <Typography variant="subtitle2" color="gray.700">
-                    {numExecution}
-                  </Typography>
-                }
-                title={app.name}
-                description={description}
-                hasTopBorder={idx > 0}
-                isPressable={false}
-              />
-            )
+            <StatisticsActionRow
+              key={JSON.stringify(props.actionInstance)}
+              {...props}
+              hasTopBorder={idx > 0}
+            />
           );
         })}
-        <Pressable>
-          <Center
-            bg="gray.200"
-            py={3}
-            borderBottomWidth={1}
-            borderTopWidth={1}
-            borderColor="gray.300"
-          >
-            <Typography variant="body" color="blue.600">
-              모두 보기
-            </Typography>
-          </Center>
-        </Pressable>
+        {topActionStat.length === 4 && (
+          <ListRowButton
+            title="모두 보기"
+            onPress={() => navigation.navigate('Detail')}
+          />
+        )}
       </VStack>
     </ScreenContainer>
   );
