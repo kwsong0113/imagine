@@ -22,7 +22,7 @@ type ReducersState = ReturnType<typeof rootReducer>;
 const persistConfig: PersistConfig<ReducersState> = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['setting', 'gesture'],
+  whitelist: ['setting', 'gesture', 'history'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

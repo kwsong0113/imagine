@@ -5,11 +5,9 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { CustomStackParamList } from '../../navigation';
 import { useAppSelector } from '../../hooks';
 import { selectGestureToActionMap } from '../../store/slices/gesture';
-import {
-  executeActionInstance,
-  getActionDescription,
-} from '../../features/action/utils';
+import { getActionDescription } from '../../features/action/utils';
 import { GestureError, RecognitionError } from '../../features/gesture/types';
+import { useExecuteActionInstance } from '../../hooks/useExecuteActionInstance';
 
 type FloatingButtonProps = {
   children: ReactNode;
@@ -46,6 +44,7 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const toast = useToast();
   const [shouldShowButtons, setShouldShowButtons] = useState(true);
+  const executeActionInstance = useExecuteActionInstance();
 
   const handleRecognize = () => {
     const recognitionResult = canvasRef.current?.recognize();

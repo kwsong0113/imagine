@@ -10,7 +10,7 @@ export const executeActionInstance = (actionInstance: ActionInstance) => {
 };
 
 export const getActionFromActionInstance = (actionInstance: ActionInstance) => {
-  const matchedApp = appList.find(app => app.id === actionInstance.appId);
+  const matchedApp = getAppForAction(actionInstance);
   if (!matchedApp) {
     return undefined;
   }
@@ -20,7 +20,7 @@ export const getActionFromActionInstance = (actionInstance: ActionInstance) => {
   return matchedAction;
 };
 
-const executeAction = (action: Action, param?: string) => {
+export const executeAction = (action: Action, param?: string) => {
   if ('urlScheme' in action) {
     Linking.openURL(action.urlScheme);
   } else {
@@ -37,4 +37,8 @@ export const getActionDescription = (actionInstance: ActionInstance) => {
     return action.descriptionFunc(actionInstance.param);
   }
   return action.description;
+};
+
+export const getAppForAction = (actionInstance: ActionInstance) => {
+  return appList.find(app => app.id === actionInstance.appId);
 };
