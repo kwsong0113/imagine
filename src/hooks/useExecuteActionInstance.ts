@@ -10,7 +10,7 @@ import { useAppDispatch } from './useApp';
 export const useExecuteActionInstance = () => {
   const dispatch = useAppDispatch();
   const callback = useCallback(
-    (actionInstance: ActionInstance) => {
+    async (actionInstance: ActionInstance, delay: number = 0) => {
       const action = getActionFromActionInstance(actionInstance);
       if (action) {
         dispatch(
@@ -19,8 +19,9 @@ export const useExecuteActionInstance = () => {
             date: new Date().getTime(),
           }),
         );
-        executeAction(action, actionInstance.param);
+        return await executeAction(action, actionInstance.param, delay);
       }
+      return false;
     },
     [dispatch],
   );

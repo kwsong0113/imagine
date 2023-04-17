@@ -44,36 +44,48 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const toast = useToast();
   const [shouldShowButtons, setShouldShowButtons] = useState(true);
+  const [shouldAlsoShowButtons, setShouldAlsoShowButtons] = useState(true);
   const executeActionInstance = useExecuteActionInstance();
 
-  const handleRecognize = () => {
+  const handleRecognize = async () => {
     const recognitionResult = canvasRef.current?.recognize();
+    let message: string;
+    let iconName: string;
+    let iconColor: string;
     if (recognitionResult?.success) {
       const actionInstance = recognitionResult.id
         ? gestureToActionMap[recognitionResult.id]
         : undefined;
       if (actionInstance) {
-        setShouldShowButtons(false);
-        toast.show({
-          render: () => (
-            <Toast
-              iconName="checkmark-circle"
-              iconColor="blue.500"
-              bg="gray.100"
-              message={`${getActionDescription(actionInstance)}`}
-            />
-          ),
-          placement: 'top',
-          duration: 500,
+        message = `${getActionDescription(actionInstance)}`;
+        iconName = 'checkmark-circle';
+        iconColor = 'blue.500';
+        executeActionInstance(actionInstance, 400).then(success => {
+          if (success) {
+            return;
+          }
+          setShouldAlsoShowButtons(false);
+          setTimeout(() => {
+            setShouldAlsoShowButtons(true);
+          }, 600);
+          toast.show({
+            render: () => (
+              <Toast
+                iconName="close-circle"
+                iconColor="red.500"
+                message="이 액션을 실행할 수 없어요"
+              />
+            ),
+            duration: 500,
+            placement: 'top',
+          });
         });
-
-        setTimeout(() => {
-          executeActionInstance(actionInstance);
-          setShouldShowButtons(true);
-        }, 500);
+      } else {
+        message = '액션을 찾지 못했어요';
+        iconName = 'close-circle';
+        iconColor = 'red.500';
       }
     } else {
-      let message = '';
       switch (recognitionResult?.error) {
         case RecognitionError.NoGesture:
           message = '사용 중인 제스처가 없어요';
@@ -87,18 +99,24 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
         default:
           message = '허용되지 않은 제스처에요';
       }
-      setShouldShowButtons(false);
-      setTimeout(() => {
-        setShouldShowButtons(true);
-      }, 500);
-      toast.show({
-        render: () => (
-          <Toast iconName="warning" iconColor="orange.700" message={message} />
-        ),
-        duration: 500,
-        placement: 'top',
-      });
+      iconName = 'warning';
+      iconColor = 'orange.700';
     }
+
+    setShouldShowButtons(false);
+    setTimeout(
+      () => {
+        setShouldShowButtons(true);
+      },
+      iconName === 'checkmark-circle' ? 500 : 700,
+    );
+    toast.show({
+      render: () => (
+        <Toast iconName={iconName} iconColor={iconColor} message={message} />
+      ),
+      duration: iconName === 'checkmark-circle' ? 400 : 600,
+      placement: 'top',
+    });
 
     canvasRef.current?.reset();
   };
@@ -113,7 +131,7 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
       >
         <IonIcon name="home" size={5} color="orange.700" />
       </FloatingButton>
-      {shouldShowButtons && (
+      {shouldShowButtons && shouldAlsoShowButtons && (
         <>
           <FloatingButton
             top={60}

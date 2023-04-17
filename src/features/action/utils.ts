@@ -1,4 +1,5 @@
 import { Linking } from 'react-native';
+import { sleepTimeout } from '../../utils';
 import { appList } from './app';
 import { Action, ActionInstance } from './types';
 
@@ -20,12 +21,22 @@ export const getActionFromActionInstance = (actionInstance: ActionInstance) => {
   return matchedAction;
 };
 
-export const executeAction = (action: Action, param?: string) => {
-  if ('urlScheme' in action) {
-    Linking.openURL(action.urlScheme);
-  } else {
-    Linking.openURL(action.urlSchemeFunc(param as string));
-  }
+export const executeAction = async (
+  action: Action,
+  param?: string,
+  delay: number = 0,
+) => {
+  const url =
+    'urlScheme' in action
+      ? action.urlScheme
+      : action.urlSchemeFunc(param as string);
+
+  let success = true;
+  await sleepTimeout(delay);
+  await Linking.openURL(url).catch(() => {
+    success = false;
+  });
+  return success;
 };
 
 export const getActionDescription = (actionInstance: ActionInstance) => {
