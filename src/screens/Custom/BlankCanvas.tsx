@@ -72,7 +72,7 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
             render: () => (
               <Toast
                 iconName="close-circle"
-                iconColor="red.500"
+                iconColor="red.600"
                 message="이 액션을 실행할 수 없어요"
               />
             ),
@@ -83,7 +83,7 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
       } else {
         message = '액션을 찾지 못했어요';
         iconName = 'close-circle';
-        iconColor = 'red.500';
+        iconColor = 'red.600';
       }
     } else {
       switch (recognitionResult?.error) {
