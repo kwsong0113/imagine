@@ -89,7 +89,9 @@ export const Statistics = ({ navigation }: Props) => {
           borderColor="gray.300"
         >
           <Typography variant="description" color="red.700">
-            {actionHistoryListToday.length > numActionsPerDay
+            {actionHistoryListToday.length === 0
+              ? '오늘 액션을 실행하지 않았어요!'
+              : actionHistoryListToday.length > numActionsPerDay
               ? '평소보다 액션을 더 많이 실행했어요!'
               : actionHistoryListToday.length === numActionsPerDay
               ? '평소만큼 액션을 실행했어요!'
