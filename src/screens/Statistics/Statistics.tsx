@@ -75,7 +75,7 @@ export const Statistics = ({ navigation }: Props) => {
           />
           <CountInfo
             flex={1}
-            count={numActionsPerDay}
+            count={Math.round(numActionsPerDay * 10) / 10}
             description="하루 평균 액션 실행 횟수"
           />
         </HStack>
