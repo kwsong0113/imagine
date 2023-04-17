@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { VStack, HStack, Image, ScrollView, Text, useToast } from 'native-base';
+import { VStack, HStack, ScrollView, Text, useToast } from 'native-base';
 import {
   ScreenContainer,
   Header,
@@ -11,6 +11,7 @@ import {
   IonIcon,
   GestureViewBottomSheetModal,
   Toast,
+  GesturePreview,
 } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
@@ -91,17 +92,7 @@ export const GestureList = () => {
                 left={
                   <HStack flex={1} space={3} alignItems="center">
                     <HStack space={1}>
-                      <Image
-                        alt={name}
-                        width={8}
-                        height={10}
-                        bg="gray.300"
-                        borderRadius={8}
-                        source={{
-                          uri: `data:image/png;base64,${data[0].base64}`,
-                        }}
-                        resizeMode="contain"
-                      />
+                      <GesturePreview name={name} base64={data[0].base64} />
                     </HStack>
                     <VStack space={1} pb={1}>
                       <Text fontSize="md" color="gray.900" isTruncated>

@@ -70,7 +70,8 @@ export const ListRow = ({
       <AnimatedHStack
         mx={-1}
         px={3}
-        py={3}
+        pt={3}
+        pb={description ? '11px' : 3}
         space={3}
         alignItems="center"
         borderColor={`gray.${subColor}`}
@@ -82,7 +83,7 @@ export const ListRow = ({
       >
         {left}
         {(title || description || caption) && (
-          <VStack flex={1} space={2}>
+          <VStack flex={1} space={description ? '7px' : 2}>
             {title && (
               <Typography variant="body" color={titleColor}>
                 {title}
@@ -93,6 +94,7 @@ export const ListRow = ({
                 variant="description"
                 color="gray.600"
                 isTruncated={true}
+                lineHeight={16}
               >
                 {description}
               </Typography>

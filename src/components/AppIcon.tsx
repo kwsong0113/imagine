@@ -16,6 +16,7 @@ const appIconMap: Record<number, any> = {
   11: require('../assets/images/apps/11.png'),
   12: require('../assets/images/apps/12.png'),
   1000: require('../assets/images/apps/1000.png'),
+  1001: require('../assets/images/apps/1001.png'),
 };
 
 interface Props {

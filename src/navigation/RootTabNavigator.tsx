@@ -1,9 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Setting, Statistics } from '../screens';
+import { Setting } from '../screens';
 import { useTheme } from 'native-base';
 import { IonIcon } from '../components';
 import { CustomStackNavigator } from './CustomStackNavigator';
+import { StatisticsStackNavigator } from './StatisticsStackNavigator';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
@@ -40,7 +41,7 @@ export const RootTabNavigator = () => {
     >
       <Tab.Screen
         name="Statistics"
-        component={Statistics}
+        component={StatisticsStackNavigator}
         options={{
           tabBarItemStyle: {
             borderTopLeftRadius: 30,

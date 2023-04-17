@@ -1,4 +1,5 @@
 import { Linking } from 'react-native';
+import { sleepTimeout } from '../../utils';
 import { appList } from './app';
 import { Action, ActionInstance } from './types';
 
@@ -10,7 +11,7 @@ export const executeActionInstance = (actionInstance: ActionInstance) => {
 };
 
 export const getActionFromActionInstance = (actionInstance: ActionInstance) => {
-  const matchedApp = appList.find(app => app.id === actionInstance.appId);
+  const matchedApp = getAppForAction(actionInstance);
   if (!matchedApp) {
     return undefined;
   }
@@ -20,12 +21,22 @@ export const getActionFromActionInstance = (actionInstance: ActionInstance) => {
   return matchedAction;
 };
 
-const executeAction = (action: Action, param?: string) => {
-  if ('urlScheme' in action) {
-    Linking.openURL(action.urlScheme);
-  } else {
-    Linking.openURL(action.urlSchemeFunc(param as string));
-  }
+export const executeAction = async (
+  action: Action,
+  param?: string,
+  delay: number = 0,
+) => {
+  const url =
+    'urlScheme' in action
+      ? action.urlScheme
+      : action.urlSchemeFunc(param as string);
+
+  let success = true;
+  await sleepTimeout(delay);
+  await Linking.openURL(url).catch(() => {
+    success = false;
+  });
+  return success;
 };
 
 export const getActionDescription = (actionInstance: ActionInstance) => {
@@ -37,4 +48,8 @@ export const getActionDescription = (actionInstance: ActionInstance) => {
     return action.descriptionFunc(actionInstance.param);
   }
   return action.description;
+};
+
+export const getAppForAction = (actionInstance: ActionInstance) => {
+  return appList.find(app => app.id === actionInstance.appId);
 };

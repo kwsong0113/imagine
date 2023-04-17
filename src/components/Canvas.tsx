@@ -93,7 +93,7 @@ const Canvas = forwardRef<CanvasRef, {}>((_, ref) => {
   return (
     <SketchCanvas
       ref={sketchCanvasRef}
-      strokeColor={colors.orange[900]}
+      strokeColor={colors.blue[500]}
       strokeWidth={15}
       containerStyle={[styles.container, { backgroundColor: colors.gray[300] }]}
     />

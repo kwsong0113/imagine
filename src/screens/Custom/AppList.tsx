@@ -110,7 +110,7 @@ export const AppList = ({ navigation }: AppListProps) => {
               key={app.id}
               app={app}
               numActiveActions={numActiveActions}
-              hasBottomBorder={idx === appList.length - 1}
+              hasBottomBorder={idx === appList.length - 2}
               gestureName={hasSingleAction ? gesture?.name : undefined}
               onPress={() => {
                 if (hasSingleAction) {
