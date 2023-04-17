@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { VStack, HStack, Image, ScrollView, Text } from 'native-base';
+import { VStack, HStack, ScrollView, Text } from 'native-base';
 import {
   ScreenContainer,
   Header,
@@ -8,6 +8,7 @@ import {
   SingleBottomSheetModal,
   Typography,
   GestureViewBottomSheetModal,
+  GesturePreview,
 } from '../../components';
 import { useAppSelector, useHandleRemoveAction } from '../../hooks';
 import {
@@ -54,17 +55,7 @@ export const WholeActionList = () => {
                 left={
                   <HStack flex={1} space={3} alignItems="center">
                     <HStack space={1}>
-                      <Image
-                        alt={name}
-                        width={8}
-                        height={10}
-                        bg="gray.300"
-                        borderRadius={8}
-                        source={{
-                          uri: `data:image/png;base64,${data[0].base64}`,
-                        }}
-                        resizeMode="contain"
-                      />
+                      <GesturePreview name={name} base64={data[0].base64} />
                     </HStack>
                     <VStack flex={1} space={1}>
                       <Typography variant="info" isTruncated>

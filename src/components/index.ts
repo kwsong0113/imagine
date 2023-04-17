@@ -24,3 +24,4 @@ export * from './ProgressIcon';
 export * from './AnimatedButton';
 export * from './ListRowButton';
 export * from './StatisticsActionRow';
+export * from './GesturePreview';

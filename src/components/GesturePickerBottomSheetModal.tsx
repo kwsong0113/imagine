@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useState, useRef } from 'react';
 import { Dimensions } from 'react-native';
-import { HStack, VStack, Image, Text, ScrollView, useTheme } from 'native-base';
+import { HStack, VStack, Text, ScrollView, useTheme } from 'native-base';
 import SingleBottomSheetModal from './SingleBottomSheetModal';
 import { Typography } from './Typography';
 import { AnimatedIconButton } from './AnimatedIconButton';
@@ -22,6 +22,7 @@ import Animated, {
 import { useGetGestureIdForActionInstance } from '../hooks/useGetGestureIdForActionInstance';
 import { GestureAdditionBottomSheetModal } from './GestureAdditionBottomSheetModal';
 import { IonIcon } from './IonIcon';
+import { GesturePreview } from './GesturePreview';
 
 interface Props {
   appId: number;
@@ -138,17 +139,7 @@ export const GesturePickerBottomSheetModal = forwardRef<
                   left={
                     <HStack flex={1} space={3} alignItems="center">
                       <HStack space={1}>
-                        <Image
-                          alt={name}
-                          width={8}
-                          height={10}
-                          bg="gray.300"
-                          borderRadius={8}
-                          source={{
-                            uri: `data:image/png;base64,${data[0].base64}`,
-                          }}
-                          resizeMode="contain"
-                        />
+                        <GesturePreview name={name} base64={data[0].base64} />
                       </HStack>
                       <VStack flex={1} space={1} pb={1}>
                         <Text fontSize="md" color="gray.900" isTruncated>
