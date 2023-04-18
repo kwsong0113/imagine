@@ -11,10 +11,13 @@ import {
 import { CustomStackParamList } from '../../navigation';
 import { StackScreenProps } from '@react-navigation/stack';
 import { CUSTOM_URL_SCHEME_ID, SHORTCUT_ID } from '../../features/action/app';
+import { useRenderToast } from '../../hooks';
 
 type Props = StackScreenProps<CustomStackParamList, 'Home'>;
 
 export const Custom = ({ navigation }: Props) => {
+  const renderToast = useRenderToast();
+
   return (
     <ScreenContainer>
       <HStack justifyContent="space-between">
@@ -67,6 +70,16 @@ export const Custom = ({ navigation }: Props) => {
         iconName="logo-apple"
         title="네이티브 액션 실행하기"
         caption="아이폰을 효율적으로 활용하는 기능을 제공해요"
+        onPress={() => {
+          renderToast({
+            iconName: 'construct',
+            iconColor: 'teal.700',
+            message: '아직 준비 중인 기능이에요',
+            duration: 1000,
+            placement: 'top',
+            bg: 'gray.300',
+          });
+        }}
       />
       <Feature
         iconName="globe"
