@@ -49,7 +49,7 @@ export const UrlSchemeHelp = () => {
     <ScreenContainer>
       <Header variant="center" title="URL Scheme이 무엇인가요?" />
       <ScrollView px={5} mx={-3} mb={-6}>
-        <VStack space={4}>
+        <VStack space={4} pb={4}>
           {/* <Typography variant="subtitle1">URL Scheme이 무엇인가요?</Typography> */}
           <VStack space={3}>
             <Subtitle>URL Scheme = 앱의 주소</Subtitle>
