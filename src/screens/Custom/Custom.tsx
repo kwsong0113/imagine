@@ -154,7 +154,7 @@ const OpenHelpBottomSheetModal = () => {
         <HStack space={4}>
           <AnimatedButton
             bg="gray.500"
-            title="다시 보지 않기"
+            title="그만 보기"
             onPress={() => {
               dispatch(settingActions.stopShowHelp());
               dismiss();
