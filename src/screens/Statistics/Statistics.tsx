@@ -16,6 +16,7 @@ import {
 } from '../../store/slices/history';
 import { ActionInstance } from '../../features/action/types';
 import { StatisticsStackParamList } from '../../navigation/StatisticsStackNavigator';
+import { useWindowDimensions } from 'react-native';
 
 type CountInfoProps = {
   count: number;
@@ -48,12 +49,14 @@ export const Statistics = ({ navigation }: Props) => {
   const actionHistoryListToday = useAppSelector(selectActionHistoryListToday);
   const actionStat = useActionStat();
 
+  const numTopActionStat = useNumTopActionStat();
+
   const topActionStat: {
     actionInstance: ActionInstance;
     numExecution: number;
   }[] = useMemo(() => {
-    return actionStat.slice(0, 4);
-  }, [actionStat]);
+    return actionStat.slice(0, numTopActionStat);
+  }, [actionStat, numTopActionStat]);
 
   return (
     <ScreenContainer>
@@ -107,7 +110,7 @@ export const Statistics = ({ navigation }: Props) => {
             />
           );
         })}
-        {topActionStat.length === 4 && (
+        {topActionStat.length === numTopActionStat && (
           <ListRowButton
             title="모두 보기"
             onPress={() => navigation.navigate('Detail')}
@@ -116,4 +119,21 @@ export const Statistics = ({ navigation }: Props) => {
       </VStack>
     </ScreenContainer>
   );
+};
+
+const useNumTopActionStat = () => {
+  const { height } = useWindowDimensions();
+  if (height < 656) {
+    return 1;
+  }
+  if (height < 744) {
+    return 2;
+  }
+  if (height < 832) {
+    return 3;
+  }
+  if (height < 920) {
+    return 4;
+  }
+  return 5;
 };

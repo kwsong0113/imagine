@@ -613,7 +613,7 @@ export const appList: App[] = [
         id: 1,
         urlSchemeFunc: (param: string) => `${param}`,
         description: 'Safari 앱으로 특정 사이트 접속하기',
-        placeholder: 'https://... 또는 http://',
+        placeholder: 'https://... 또는 http://...',
         descriptionFunc: (param: string) => `${param} 이동하기`,
       },
     ],
