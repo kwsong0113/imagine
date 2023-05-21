@@ -3,9 +3,23 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Setting } from '../screens';
 import { useTheme } from 'native-base';
 import { IonIcon } from '../components';
-import { CustomStackNavigator } from './CustomStackNavigator';
+import {
+  CustomStackNavigator,
+  CustomStackParamList,
+} from './CustomStackNavigator';
 import { StatisticsStackNavigator } from './StatisticsStackNavigator';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import {
+  getFocusedRouteNameFromRoute,
+  NavigatorScreenParams,
+} from '@react-navigation/native';
+
+const CUSTOM_SCREEN_WITHOUT_TABBAR = ['BlankCanvas', 'Help'];
+
+export type RootTabParamList = {
+  Custom: NavigatorScreenParams<CustomStackParamList>;
+  Statistics: undefined;
+  Setting: undefined;
+};
 
 const Tab = createBottomTabNavigator();
 
@@ -58,7 +72,9 @@ export const RootTabNavigator = () => {
             borderTopColor: colors.gray[300],
             borderTopWidth: 1,
           },
-          ...(getFocusedRouteNameFromRoute(route) === 'BlankCanvas'
+          ...(CUSTOM_SCREEN_WITHOUT_TABBAR.includes(
+            getFocusedRouteNameFromRoute(route) ?? '',
+          )
             ? { tabBarStyle: { display: 'none' } }
             : {}),
         })}

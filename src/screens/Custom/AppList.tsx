@@ -89,7 +89,7 @@ export const AppList = ({ navigation }: AppListProps) => {
         title="앱 빠르게 실행하기"
         description="앱의 원하는 지점으로 빠르게 이동하세요"
       />
-      <ScrollView mx={-3} px={3}>
+      <ScrollView mx={-3} px={3} mb={-12}>
         {appList.map((app, idx) => {
           if (app.id === CUSTOM_URL_SCHEME_ID) {
             return;

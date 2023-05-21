@@ -75,7 +75,7 @@ export const ActionList = ({ navigation, route }: ActionListProps) => {
   return (
     <ScreenContainer>
       <Header variant="center" title={matchedApp?.name} />
-      <ScrollView mx={-3} px={3}>
+      <ScrollView mx={-3} px={3} mb={-12}>
         {matchedApp?.actions.map((action, idx) => {
           const isParam = 'urlSchemeFunc' in action;
           const gesture = getGestureForActionInstance({

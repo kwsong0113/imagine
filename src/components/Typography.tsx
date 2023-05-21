@@ -2,7 +2,9 @@ import React, { ComponentProps, ReactNode } from 'react';
 import { Text } from 'native-base';
 
 type Variant =
+  | 'bigTitle'
   | 'title'
+  | 'bigText'
   | 'subtitle1'
   | 'subtitle2'
   | 'body'
@@ -20,9 +22,17 @@ const typographyMap: Record<
   Variant,
   Pick<ComponentProps<typeof Text>, 'lineHeight' | 'fontSize'>
 > = {
+  bigTitle: {
+    fontSize: '6xl',
+    lineHeight: 35,
+  },
   title: {
     fontSize: '4xl',
     lineHeight: 30,
+  },
+  bigText: {
+    fontSize: '2xl',
+    lineHeight: 25,
   },
   subtitle1: {
     fontSize: 'xl',

@@ -48,7 +48,7 @@ export const UrlSchemeHelp = () => {
   return (
     <ScreenContainer>
       <Header variant="center" title="URL Scheme이 무엇인가요?" />
-      <ScrollView px={5} mx={-3}>
+      <ScrollView px={5} mx={-3} mb={-6}>
         <VStack space={4}>
           {/* <Typography variant="subtitle1">URL Scheme이 무엇인가요?</Typography> */}
           <VStack space={3}>
@@ -59,7 +59,7 @@ export const UrlSchemeHelp = () => {
               들면, 아래의 URL Scheme은 네이버 앱을 실행시켜요.
             </Article>
             <LinkWithDescription link="naversearchapp://" />
-            <Subtitle>URL Scheme = 앱의 주소</Subtitle>
+            <Subtitle>앱의 원하는 지점으로 이동하기</Subtitle>
             <Article>
               URL Scheme의 특별한 점은 단순히 앱을 실행시키는 것이 아니라 앱의
               특정 지점으로 바로 이동할 수 있다는 거에요. 인스타그램 앱을 예를
