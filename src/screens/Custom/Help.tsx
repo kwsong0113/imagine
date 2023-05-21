@@ -4,12 +4,13 @@ import {
   Typography,
   AnimatedIconButton,
   MaterialCommunityIcon,
+  AnimatedButton,
 } from '../../components';
-import { HStack, VStack } from 'native-base';
+import { HStack, Image, ScrollView, VStack } from 'native-base';
 import { CustomStackParamList } from '../../navigation';
 import { StackScreenProps } from '@react-navigation/stack';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
-import { useWindowDimensions } from 'react-native';
+import { Linking, useWindowDimensions } from 'react-native';
 import { HelpCard } from '../../components/HelpCard';
 
 const HELP_CARD_DATA = [
@@ -119,13 +120,35 @@ export const Help = ({ navigation }: HelpProps) => {
           }}
         />
       </HStack>
-      <VStack bg="gray.200" mx={-6} pt={6}>
-        <Typography variant="body" color="gray.600" px={6}>
-          Linky 똑똑하게 활용하는 법
-        </Typography>
-        <HelpCarousel onSnapToItem={(newIndex: number) => setIndex(newIndex)} />
-        <HelpDescription index={index} />
-      </VStack>
+      <ScrollView mx={-6} px={6} mb={-6} mt={-2}>
+        <VStack bg="gray.200" mx={-6} pt={6}>
+          <Typography variant="body" color="gray.600" px={6}>
+            Linky 똑똑하게 활용하는 법
+          </Typography>
+          <HelpCarousel
+            onSnapToItem={(newIndex: number) => setIndex(newIndex)}
+          />
+          <HelpDescription index={index} />
+        </VStack>
+        <VStack alignItems="center" py={6} space={4}>
+          <Image
+            w={120}
+            h={120}
+            source={require('../../assets/images/help/question.png')}
+            alt="qna"
+          />
+          <Typography variant="bigText" lineHeight={36} textAlign="center">
+            {'Linky에 대해\n더 궁금한 점이 있으신가요?'}
+          </Typography>
+          <HStack space={4} pb={6} mt={2}>
+            <AnimatedButton
+              bg="teal.500"
+              title="문의•요청하기"
+              onPress={() => Linking.openURL('mailto:linky.dev.app@gmail.com')}
+            />
+          </HStack>
+        </VStack>
+      </ScrollView>
     </ScreenContainer>
   );
 };
@@ -191,7 +214,7 @@ const HelpDescription = ({ index }: HelpDescriptionProps) => {
             variant={idx === 0 ? 'subtitle2' : 'body'}
             mb={idx === 0 ? 1 : 0}
             color="gray.800"
-            lineHeight="30"
+            lineHeight={30}
             flex={1}
           >
             {description}
