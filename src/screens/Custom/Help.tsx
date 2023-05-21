@@ -202,7 +202,7 @@ interface HelpDescriptionProps {
 
 const HelpDescription = ({ index }: HelpDescriptionProps) => {
   return (
-    <Box h={260} mx={-6}>
+    <Box h={202} mx={-6}>
       <VStack bg="gray.300" p={6}>
         {HELP_DESCRIPTION_DATA[index].map((description, idx) => (
           <HStack key={description} space={2}>
