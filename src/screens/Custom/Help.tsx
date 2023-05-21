@@ -6,7 +6,7 @@ import {
   MaterialCommunityIcon,
   AnimatedButton,
 } from '../../components';
-import { HStack, Image, ScrollView, VStack } from 'native-base';
+import { Box, HStack, Image, ScrollView, VStack } from 'native-base';
 import { CustomStackParamList } from '../../navigation';
 import { StackScreenProps } from '@react-navigation/stack';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
@@ -128,9 +128,9 @@ export const Help = ({ navigation }: HelpProps) => {
           <HelpCarousel
             onSnapToItem={(newIndex: number) => setIndex(newIndex)}
           />
-          <HelpDescription index={index} />
         </VStack>
-        <VStack alignItems="center" py={6} space={4}>
+        <HelpDescription index={index} />
+        <VStack alignItems="center" py={6} space={8}>
           <Image
             w={120}
             h={120}
@@ -140,7 +140,7 @@ export const Help = ({ navigation }: HelpProps) => {
           <Typography variant="bigText" lineHeight={36} textAlign="center">
             {'Linky에 대해\n더 궁금한 점이 있으신가요?'}
           </Typography>
-          <HStack space={4} pb={6} mt={2}>
+          <HStack space={4} pb={100} mt={2}>
             <AnimatedButton
               bg="teal.500"
               title="문의•요청하기"
@@ -202,25 +202,32 @@ interface HelpDescriptionProps {
 
 const HelpDescription = ({ index }: HelpDescriptionProps) => {
   return (
-    <VStack bg="gray.300" p={6}>
-      {HELP_DESCRIPTION_DATA[index].map((description, idx) => (
-        <HStack key={description} space={2}>
-          {idx !== 0 && (
-            <Typography variant="body" mb={0} color="gray.800" lineHeight="30">
-              ●
+    <Box h={260} mx={-6}>
+      <VStack bg="gray.300" p={6}>
+        {HELP_DESCRIPTION_DATA[index].map((description, idx) => (
+          <HStack key={description} space={2}>
+            {idx !== 0 && (
+              <Typography
+                variant="body"
+                mb={0}
+                color="gray.800"
+                lineHeight="30"
+              >
+                ●
+              </Typography>
+            )}
+            <Typography
+              variant={idx === 0 ? 'subtitle2' : 'body'}
+              mb={idx === 0 ? 1 : 0}
+              color="gray.800"
+              lineHeight={30}
+              flex={1}
+            >
+              {description}
             </Typography>
-          )}
-          <Typography
-            variant={idx === 0 ? 'subtitle2' : 'body'}
-            mb={idx === 0 ? 1 : 0}
-            color="gray.800"
-            lineHeight={30}
-            flex={1}
-          >
-            {description}
-          </Typography>
-        </HStack>
-      ))}
-    </VStack>
+          </HStack>
+        ))}
+      </VStack>
+    </Box>
   );
 };
