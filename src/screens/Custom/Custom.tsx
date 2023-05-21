@@ -28,11 +28,13 @@ export const Custom = ({ navigation }: Props) => {
     <>
       <ScreenContainer>
         <HStack justifyContent="space-between">
-          <Header
-            hasBackButton={false}
-            title="커스텀 제스처"
-            description="원하는 액션을 커스텀 제스처로 실행해요"
-          />
+          <Box flex={1} mr={-12}>
+            <Header
+              hasBackButton={false}
+              title="커스텀 제스처"
+              description="원하는 액션을 커스텀 제스처로 실행해요"
+            />
+          </Box>
           <HStack space={4}>
             <AnimatedIconButton
               variant="material"
