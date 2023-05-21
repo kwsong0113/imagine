@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Switch, VStack, HStack, Box, useTheme } from 'native-base';
-import { useThemeMode } from '../hooks';
+import { VStack, HStack, Box, useTheme } from 'native-base';
+import { useRenderToast, useThemeMode } from '../hooks';
 import {
   Header,
   IonIcon,
@@ -15,12 +15,7 @@ import {
   AnimatedIconButton,
   AnimatedButton,
 } from '../components';
-import {
-  Language,
-  selectLanguage,
-  settingActions,
-  ThemeMode,
-} from '../store/slices';
+import { Language, selectLanguage, ThemeMode } from '../store/slices';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { gestureActions } from '../store/slices/gesture';
@@ -82,12 +77,14 @@ const languageCaption: Record<Language, string> = {
 
 const SettingLanguageRow = () => {
   const language = useAppSelector(selectLanguage);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
 
   const handlePress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
+
+  const renderToast = useRenderToast();
 
   return (
     <>
@@ -108,11 +105,21 @@ const SettingLanguageRow = () => {
                   key={languageOption}
                   title={caption}
                   isSelected={languageOption === language}
-                  onPress={() =>
-                    dispatch(
-                      settingActions.changeLanguage(languageOption as Language),
-                    )
-                  }
+                  onPress={() => {
+                    // dispatch(
+                    //   settingActions.changeLanguage(languageOption as Language),
+                    // )
+                    if (languageOption !== 'kor') {
+                      renderToast({
+                        iconName: 'construct',
+                        iconColor: 'teal.700',
+                        message: '현재는 한국어만 사용할 수 있어요',
+                        duration: 1000,
+                        placement: 'top',
+                        bg: 'gray.300',
+                      });
+                    }
+                  }}
                 />
               ),
             )}
@@ -123,40 +130,40 @@ const SettingLanguageRow = () => {
   );
 };
 
-const SettingDynamicIslandRow = () => {
-  const [isChecked, setIsChecked] = useState(true);
+// const SettingDynamicIslandRow = () => {
+//   const [isChecked, setIsChecked] = useState(true);
 
-  return (
-    <ListRow
-      left={<IonIcon name="toggle-sharp" size="40px" color="gray.900" />}
-      title="다이나믹 아일랜드"
-      caption="다이나믹 아일랜드에서 앱을 바로 실행해요"
-      right={
-        <Switch
-          size="sm"
-          isChecked={isChecked}
-          onToggle={() => setIsChecked(prev => !prev)}
-          onTrackColor="orange.800"
-          onThumbColor="gray.100"
-          offTrackColor="gray.300"
-          offThumbColor="gray.100"
-        />
-      }
-      isPressable={false}
-    />
-  );
-};
+//   return (
+//     <ListRow
+//       left={<IonIcon name="toggle-sharp" size="40px" color="gray.900" />}
+//       title="다이나믹 아일랜드"
+//       caption="다이나믹 아일랜드에서 앱을 바로 실행해요"
+//       right={
+//         <Switch
+//           size="sm"
+//           isChecked={isChecked}
+//           onToggle={() => setIsChecked(prev => !prev)}
+//           onTrackColor="orange.800"
+//           onThumbColor="gray.100"
+//           offTrackColor="gray.300"
+//           offThumbColor="gray.100"
+//         />
+//       }
+//       isPressable={false}
+//     />
+//   );
+// };
 
-const SettingGestureStorageRow = () => {
-  return (
-    <ListRow
-      left={<IonIcon name="cloud-download" size="40px" color="gray.900" />}
-      title="제스처 저장소에서 가져오기"
-      caption="샘플로 제공하는 제스처를 가져와요"
-      right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
-    />
-  );
-};
+// const SettingGestureStorageRow = () => {
+//   return (
+//     <ListRow
+//       left={<IonIcon name="cloud-download" size="40px" color="gray.900" />}
+//       title="제스처 저장소에서 가져오기"
+//       caption="샘플로 제공하는 제스처를 가져와요"
+//       right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
+//     />
+//   );
+// };
 
 const SettingClearGestureRow = () => {
   const dispatch = useAppDispatch();
@@ -257,8 +264,8 @@ export const Setting = () => {
       <VStack flex={1}>
         <SettingThemeModeRow />
         <SettingLanguageRow />
-        <SettingDynamicIslandRow />
-        <SettingGestureStorageRow />
+        {/* <SettingDynamicIslandRow /> */}
+        {/* <SettingGestureStorageRow /> */}
         <SettingClearGestureRow />
         <SettingHelpRow />
       </VStack>
