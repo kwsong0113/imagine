@@ -7,11 +7,13 @@ export type Language = 'kor' | 'eng';
 interface SettingState {
   themeMode: ThemeMode;
   language: Language;
+  shouldShowHelp: boolean;
 }
 
 const initialState: SettingState = {
   themeMode: 'light',
-  language: 'eng',
+  language: 'kor',
+  shouldShowHelp: true,
 };
 
 const settingSlice = createSlice({
@@ -24,10 +26,15 @@ const settingSlice = createSlice({
     changeLanguage: (state, action: PayloadAction<Language>) => {
       state.language = action.payload;
     },
+    stopShowHelp: state => {
+      state.shouldShowHelp = false;
+    },
   },
 });
 
 export const settingActions = settingSlice.actions;
 export const selectThemeMode = (state: RootState) => state.setting.themeMode;
 export const selectLanguage = (state: RootState) => state.setting.language;
+export const selectShouldShowHelp = (state: RootState) =>
+  state.setting.shouldShowHelp;
 export default settingSlice.reducer;
