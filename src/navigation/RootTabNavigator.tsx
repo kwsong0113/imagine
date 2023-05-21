@@ -13,6 +13,8 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 
+const CUSTOM_SCREEN_WITHOUT_TABBAR = ['BlankCanvas', 'Help'];
+
 export type RootTabParamList = {
   Custom: NavigatorScreenParams<CustomStackParamList>;
   Statistics: undefined;
@@ -70,7 +72,9 @@ export const RootTabNavigator = () => {
             borderTopColor: colors.gray[300],
             borderTopWidth: 1,
           },
-          ...(getFocusedRouteNameFromRoute(route) === 'BlankCanvas'
+          ...(CUSTOM_SCREEN_WITHOUT_TABBAR.includes(
+            getFocusedRouteNameFromRoute(route) ?? '',
+          )
             ? { tabBarStyle: { display: 'none' } }
             : {}),
         })}

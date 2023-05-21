@@ -25,3 +25,4 @@ export * from './AnimatedButton';
 export * from './ListRowButton';
 export * from './StatisticsActionRow';
 export * from './GesturePreview';
+export * from './HelpCard';

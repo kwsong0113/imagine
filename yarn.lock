@@ -3804,6 +3804,7 @@ __metadata:
     react-native: 0.71.4
     react-native-gesture-handler: ^2.9.0
     react-native-reanimated: ^3.0.2
+    react-native-reanimated-carousel: ^3.3.2
     react-native-safe-area-context: ^4.5.0
     react-native-screens: ^3.20.0
     react-native-svg: ^13.8.0
@@ -9284,6 +9285,18 @@ __metadata:
   version: 0.71.16
   resolution: "react-native-gradle-plugin@npm:0.71.16"
   checksum: 4512de0e135fb03b009af7175a5a3264fbe2bf75131fe9335a6614b63a63be7b95a3b8321411b744497fefb8c9802bdffab5d27b405721c8d035bbc3aa8b1b2e
+  languageName: node
+  linkType: hard
+
+"react-native-reanimated-carousel@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "react-native-reanimated-carousel@npm:3.3.2"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-native: ">=0.6.0"
+    react-native-gesture-handler: "*"
+    react-native-reanimated: ">=2.7.0"
+  checksum: 20fe13830d4be8850d3fddf29edc87d02b3d1f7e5ef09da70e578d121ecdfd7cb9f3845b70ee3c2ce204e49fd333ab65e656fcdff6420812b581f8b3c18f22a9
   languageName: node
   linkType: hard
 

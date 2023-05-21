@@ -60,7 +60,11 @@ export const CustomStackNavigator = () => {
         component={BlankCanvas}
         options={{ animationEnabled: false }}
       />
-      <Stack.Screen name="Help" component={Help} />
+      <Stack.Screen
+        name="Help"
+        component={Help}
+        options={{ animationEnabled: false }}
+      />
     </Stack.Navigator>
   );
 };

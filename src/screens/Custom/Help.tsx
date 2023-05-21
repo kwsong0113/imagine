@@ -1,85 +1,203 @@
-import React from 'react';
-import { Header, ScreenContainer, Typography, IonIcon } from '../../components';
-import { ScrollView, HStack, VStack } from 'native-base';
+import React, { useRef, useState } from 'react';
+import {
+  ScreenContainer,
+  Typography,
+  AnimatedIconButton,
+  MaterialCommunityIcon,
+} from '../../components';
+import { HStack, VStack } from 'native-base';
+import { CustomStackParamList } from '../../navigation';
+import { StackScreenProps } from '@react-navigation/stack';
+import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
+import { useWindowDimensions } from 'react-native';
+import { HelpCard } from '../../components/HelpCard';
 
-const Subtitle = ({ children }: { children: string }) => {
-  return (
-    <HStack space={1} alignItems="center" pt={1.5} pb={0.5}>
-      <IonIcon name="alert-circle" color="gray.800" size={5} />
-      <Typography variant="body" color="gray.800">
-        {children}
-      </Typography>
-    </HStack>
-  );
-};
+const HELP_CARD_DATA = [
+  {
+    bg: 'blue.600',
+    color: 'gray.100',
+    imageId: 0,
+    subtitle: '5 Steps',
+    titleArray: ['Linky', '똑똑하게', '활용하는 법'],
+  },
+  {
+    bg: 'blue.200',
+    color: 'gray.900',
+    imageId: 1,
+    subtitle: 'Step 1',
+    titleArray: ['제스처', '추가하기'],
+  },
+  {
+    bg: 'teal.600',
+    color: 'gray.100',
+    imageId: 2,
+    subtitle: 'Step 2',
+    titleArray: ['액션', '추가하기'],
+  },
+  {
+    bg: 'teal.200',
+    color: 'gray.900',
+    imageId: 3,
+    subtitle: 'Step 3',
+    titleArray: ['위젯', '추가하기'],
+  },
+  {
+    bg: 'gray.600',
+    color: 'gray.100',
+    imageId: 4,
+    subtitle: 'Step 4',
+    titleArray: ['Linky 앱을', '사용해', '액션', '실행하기'],
+  },
+  {
+    bg: 'gray.300',
+    color: 'gray.900',
+    imageId: 5,
+    subtitle: 'Step 5',
+    titleArray: ['통계', '확인하기'],
+  },
+];
 
-const Article = ({ children }: { children: string }) => {
-  return (
-    <Typography variant="info" color="gray.600" lineHeight={28}>
-      {children}
-    </Typography>
-  );
-};
+const HELP_DESCRIPTION_DATA = [
+  [
+    'Linky는 어떤 앱인가요?',
+    '빠르게 제스처를 그려서 앱을 실행해요',
+    '어떤 액션을 사용했는지 통계를 분석해요',
+  ],
+  [
+    '알파벳, 하트, 별과 같은 제스처를 추가해요',
+    '점 찍기는 사용할 수 없어요',
+    '같은 제스처를 4번 그리면 등록돼요',
+  ],
+  [
+    '원하는 액션을 추가하고 액션를 실행할 제스처를 선택 또는 추가해요',
+    '원하는 앱이나 액션이 없다면?',
+    '커스텀 URL Scheme 메뉴로 가보세요',
+    '단축어 메뉴에서 단축어도 추가할 수 있어요',
+  ],
+  [
+    '잠금 화면에 위젯을 추가해요',
+    '제스처 그리기 화면으로 바로 이동해요',
+    '평소에 Linky 앱을 닫지 않으면 로딩 없이 바로 실행할 수 있어요',
+  ],
+  [
+    '제스처 그리기 화면에서 액션을 실행해요',
+    '제스처 단 한 번으로',
+    '다양한 앱과 액션을 빠르게 실행할 수 있어요',
+  ],
+  [
+    '통계를 확인해보세요',
+    '먼저 통계 탭으로 이동해요',
+    '어떤 앱과 액션을 얼마나 자주 사용했는지 알 수 있어요',
+  ],
+];
 
-interface LinkWithDescriptionProps {
-  link: string;
-  description?: string;
-}
+type HelpProps = StackScreenProps<CustomStackParamList, 'Help'>;
 
-const LinkWithDescription = ({
-  link,
-  description,
-}: LinkWithDescriptionProps) => {
-  return (
-    <VStack bg="gray.300" px={3} py={4} space={2} borderRadius={8}>
-      <Typography variant="description" color="red.700">
-        {link}
-      </Typography>
-      {description ? (
-        <Typography variant="description" color="gray.600">
-          {description}
-        </Typography>
-      ) : undefined}
-    </VStack>
-  );
-};
+export const Help = ({ navigation }: HelpProps) => {
+  const [index, setIndex] = useState(0);
 
-export const Help = () => {
   return (
     <ScreenContainer>
-      <Header variant="center" title="URL Scheme이 무엇인가요?" />
-      <ScrollView px={5} mx={-3}>
-        <VStack space={4}>
-          {/* <Typography variant="subtitle1">URL Scheme이 무엇인가요?</Typography> */}
-          <VStack space={3}>
-            <Subtitle>URL Scheme = 앱의 주소</Subtitle>
-            <Article>
-              URL Scheme은 앱을 실행시킬 수 있는 주소를 말해요. 웹사이트가
-              주소를 가지고 있는 것처럼, 앱도 주소를 가지고 있는 것이죠. 예를
-              들면, 아래의 URL Scheme은 네이버 앱을 실행시켜요.
-            </Article>
-            <LinkWithDescription link="naversearchapp://" />
-            <Subtitle>앱의 원하는 지점으로 이동하기</Subtitle>
-            <Article>
-              URL Scheme의 특별한 점은 단순히 앱을 실행시키는 것이 아니라 앱의
-              특정 지점으로 바로 이동할 수 있다는 거에요. 인스타그램 앱을 예를
-              들어볼게요.
-            </Article>
-            <LinkWithDescription
-              link="instagram://reels_home"
-              description="인스타그램 앱의 릴스 페이지로 이동해요"
-            />
-            <LinkWithDescription
-              link="instagram://user?username=honggildong"
-              description="아이디가 honggildong인 유저의 페이지로 이동해요"
-            />
-            <LinkWithDescription
-              link="instagram://camera"
-              description="인스타그램 스토리를 올릴 수 있는 카메라를 실행해요"
-            />
-          </VStack>
-        </VStack>
-      </ScrollView>
+      <HStack justifyContent="space-between">
+        <HStack space={3}>
+          <MaterialCommunityIcon
+            name="book-open-page-variant"
+            size={30}
+            color="gray.400"
+          />
+          <Typography variant="bigText" mt={1} color="gray.400">
+            Linky 설명서
+          </Typography>
+        </HStack>
+        <AnimatedIconButton
+          variant="material"
+          name="close"
+          color="gray.400"
+          size={30}
+          onPress={() => {
+            navigation.navigate('Home');
+          }}
+        />
+      </HStack>
+      <VStack bg="gray.200" mx={-6} pt={6}>
+        <Typography variant="body" color="gray.600" px={6}>
+          Linky 똑똑하게 활용하는 법
+        </Typography>
+        <HelpCarousel onSnapToItem={(newIndex: number) => setIndex(newIndex)} />
+        <HelpDescription index={index} />
+      </VStack>
     </ScreenContainer>
+  );
+};
+
+interface HelpCarouselProps {
+  onSnapToItem: (index: number) => void;
+}
+
+const HelpCarousel = ({ onSnapToItem }: HelpCarouselProps) => {
+  const { width } = useWindowDimensions();
+  const ref = useRef<ICarouselInstance>(null);
+
+  return (
+    <Carousel
+      ref={ref}
+      mode="parallax"
+      loop={false}
+      width={width}
+      height={400}
+      modeConfig={{
+        parallaxScrollingScale: (width - 2 * 24) / width,
+        parallaxScrollingOffset:
+          (width *
+            (1 - (((width - 2 * 24) / width) * (width - 2 * 24)) / width)) /
+            2 +
+          24 -
+          12,
+      }}
+      data={HELP_CARD_DATA}
+      renderItem={({ item, index }) => (
+        <HelpCard
+          {...item}
+          isFirstCard={index === 0}
+          isLastCard={index === HELP_CARD_DATA.length - 1}
+          onPressBack={() => {
+            ref.current?.prev();
+          }}
+          onPressForward={() => {
+            ref.current?.next();
+          }}
+        />
+      )}
+      onSnapToItem={onSnapToItem}
+    />
+  );
+};
+
+interface HelpDescriptionProps {
+  index: number;
+}
+
+const HelpDescription = ({ index }: HelpDescriptionProps) => {
+  return (
+    <VStack bg="gray.300" p={6}>
+      {HELP_DESCRIPTION_DATA[index].map((description, idx) => (
+        <HStack key={description} space={2}>
+          {idx !== 0 && (
+            <Typography variant="body" mb={0} color="gray.800" lineHeight="30">
+              ●
+            </Typography>
+          )}
+          <Typography
+            variant={idx === 0 ? 'subtitle2' : 'body'}
+            mb={idx === 0 ? 1 : 0}
+            color="gray.800"
+            lineHeight="30"
+            flex={1}
+          >
+            {description}
+          </Typography>
+        </HStack>
+      ))}
+    </VStack>
   );
 };
