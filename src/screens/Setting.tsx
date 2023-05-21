@@ -250,8 +250,8 @@ const SettingHelpRow = () => {
   return (
     <ListRow
       left={<IonIcon name="hand-left" size="40px" color="gray.900" />}
-      title="도움말 보기"
-      caption="Imagine 앱을 잘 활용하려면 읽어보세요"
+      title="설명서 보기"
+      caption="Linky 앱을 잘 활용하려면 읽어보세요"
       right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
       hasBottomBorder={true}
       onPress={() => {
