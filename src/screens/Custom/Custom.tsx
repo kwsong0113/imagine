@@ -26,12 +26,21 @@ export const Custom = ({ navigation }: Props) => {
           title="커스텀 제스처"
           description="원하는 액션을 커스텀 제스처로 실행해요"
         />
-        <AnimatedIconButton
-          name="hand-left"
-          color="orange.700"
-          size={26}
-          onPress={() => navigation.navigate('BlankCanvas')}
-        />
+        <HStack space={4}>
+          <AnimatedIconButton
+            variant="material"
+            name="draw"
+            color="blue.500"
+            size={26}
+            onPress={() => navigation.navigate('BlankCanvas')}
+          />
+          <AnimatedIconButton
+            name="hand-left"
+            color="orange.700"
+            size={26}
+            onPress={() => navigation.navigate('Help')}
+          />
+        </HStack>
       </HStack>
       <VStack>
         <ListRow

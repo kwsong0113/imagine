@@ -3,9 +3,21 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Setting } from '../screens';
 import { useTheme } from 'native-base';
 import { IonIcon } from '../components';
-import { CustomStackNavigator } from './CustomStackNavigator';
+import {
+  CustomStackNavigator,
+  CustomStackParamList,
+} from './CustomStackNavigator';
 import { StatisticsStackNavigator } from './StatisticsStackNavigator';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import {
+  getFocusedRouteNameFromRoute,
+  NavigatorScreenParams,
+} from '@react-navigation/native';
+
+export type RootTabParamList = {
+  Custom: NavigatorScreenParams<CustomStackParamList>;
+  Statistics: undefined;
+  Setting: undefined;
+};
 
 const Tab = createBottomTabNavigator();
 

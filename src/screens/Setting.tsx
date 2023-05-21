@@ -19,6 +19,9 @@ import { Language, selectLanguage, ThemeMode } from '../store/slices';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { gestureActions } from '../store/slices/gesture';
+import { useNavigation } from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { RootTabParamList } from '../navigation';
 
 const themeModeCaption: Record<ThemeMode, string> = {
   light: '라이트 모드',
@@ -242,6 +245,8 @@ const SettingClearGestureRow = () => {
 };
 
 const SettingHelpRow = () => {
+  const navigation = useNavigation<SettingNavigationProp>();
+
   return (
     <ListRow
       left={<IonIcon name="hand-left" size="40px" color="gray.900" />}
@@ -249,9 +254,19 @@ const SettingHelpRow = () => {
       caption="Imagine 앱을 잘 활용하려면 읽어보세요"
       right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
       hasBottomBorder={true}
+      onPress={() => {
+        navigation.jumpTo('Custom', {
+          screen: 'Help',
+        });
+      }}
     />
   );
 };
+
+type SettingNavigationProp = BottomTabNavigationProp<
+  RootTabParamList,
+  'Setting'
+>;
 
 export const Setting = () => {
   return (

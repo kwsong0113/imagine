@@ -9,12 +9,18 @@ import Animated, {
   Extrapolate,
   Easing,
 } from 'react-native-reanimated';
+import { MaterialCommunityIcon } from './MaterialCommunityIcon';
 
 type Props = {
+  variant?: 'ion' | 'material';
   onPress?: () => void;
 } & ComponentProps<typeof IonIcon>;
 
-export const AnimatedIconButton = ({ onPress, ...props }: Props) => {
+export const AnimatedIconButton = ({
+  variant = 'ion',
+  onPress,
+  ...props
+}: Props) => {
   const pressing = useSharedValue(0);
 
   const outlineStyle = useAnimatedStyle(() => {
@@ -45,7 +51,11 @@ export const AnimatedIconButton = ({ onPress, ...props }: Props) => {
       onPress={onPress}
     >
       <Animated.View style={outlineStyle}>
-        <IonIcon {...props} />
+        {variant === 'ion' ? (
+          <IonIcon {...props} />
+        ) : (
+          <MaterialCommunityIcon {...props} />
+        )}
       </Animated.View>
     </Pressable>
   );
