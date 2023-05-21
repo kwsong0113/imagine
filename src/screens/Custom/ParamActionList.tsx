@@ -113,7 +113,12 @@ export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
         <Header variant="center" title={matchedAction?.description} />
       )}
       {matchedAction && (
-        <ScrollView mx={-3} px={3} mt={type === 'customURLSchemeList' ? -6 : 0}>
+        <ScrollView
+          mx={-3}
+          px={3}
+          mt={type === 'customURLSchemeList' ? -6 : 0}
+          mb={-12}
+        >
           <ListRow
             left={
               <Input

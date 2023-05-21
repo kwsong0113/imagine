@@ -60,7 +60,7 @@ export const GestureList = () => {
   return (
     <ScreenContainer>
       <Header variant="center" title="제스처 목록" />
-      <ScrollView mx={-3} px={3}>
+      <ScrollView mx={-3} px={3} mb={-6}>
         <ListRow
           title="제스처 추가하기"
           right={

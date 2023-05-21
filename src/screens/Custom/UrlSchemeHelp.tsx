@@ -48,7 +48,7 @@ export const UrlSchemeHelp = () => {
   return (
     <ScreenContainer>
       <Header variant="center" title="URL Scheme이 무엇인가요?" />
-      <ScrollView px={5} mx={-3}>
+      <ScrollView px={5} mx={-3} mb={-6}>
         <VStack space={4}>
           {/* <Typography variant="subtitle1">URL Scheme이 무엇인가요?</Typography> */}
           <VStack space={3}>

@@ -36,7 +36,7 @@ export const WholeActionList = () => {
   return (
     <ScreenContainer>
       <Header variant="center" title="액션 목록" />
-      <ScrollView mx={-3} px={3}>
+      <ScrollView mx={-3} px={3} mb={-6}>
         <GestureViewBottomSheetModal
           ref={gestureViewBottomSheetModalRef}
           gesture={selectedGesture}
