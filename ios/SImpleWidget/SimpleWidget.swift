@@ -48,7 +48,7 @@ struct SimpleWidgetEntryView : View {
   
   var body: some View {
     CircularView()
-      .widgetURL(URL(string: "imagine://blank"))
+      .widgetURL(URL(string: "linky://blank"))
   }
 }
 

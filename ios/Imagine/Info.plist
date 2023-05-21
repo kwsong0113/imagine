@@ -25,7 +25,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>imagine</string>
+				<string>linky</string>
 			</array>
 		</dict>
 	</array>
