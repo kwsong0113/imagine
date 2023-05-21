@@ -19,7 +19,8 @@ struct Provider: TimelineProvider {
   }
   
   func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-    let entries: [SimpleEntry] = []
+    let entry = SimpleEntry(date: Date())
+    let entries: [SimpleEntry] = [entry]
     let timeline = Timeline(entries: entries, policy: .atEnd)
     completion(timeline)
   }
@@ -29,23 +30,25 @@ struct SimpleEntry: TimelineEntry {
   let date: Date
 }
 
+struct CircularView: View {
+  
+  var body: some View {
+    ZStack {
+      AccessoryWidgetBackground()
+      Image("Widget")
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .clipShape(Circle())
+    }
+  }
+}
+
 struct SimpleWidgetEntryView : View {
   var entry: Provider.Entry
   
   var body: some View {
-    GeometryReader { geometry in
-      ZStack {
-        AccessoryWidgetBackground()
-          .widgetURL(URL(string: "imagine://blank"))
-        VStack {
-          Gauge(value: 100.0, in: 0.0...100.0) {
-            Text("G")
-          }
-          .gaugeStyle(.accessoryCircularCapacity)
-        }
-      }
-    }
-    
+    CircularView()
+      .widgetURL(URL(string: "imagine://blank"))
   }
 }
 
@@ -56,8 +59,8 @@ struct SimpleWidget: Widget {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in
       SimpleWidgetEntryView(entry: entry)
     }
-    .configurationDisplayName("퀵 제스처")
-    .description("제스처를 그릴 수 있는 화면을 열어요.")
+    .configurationDisplayName("제스처 그리기")
+    .description("제스처를 그릴 수 있는 화면을 엽니다.")
     .supportedFamilies([.accessoryCircular])
   }
 }

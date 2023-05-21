@@ -62,7 +62,7 @@
 		00E356F21AD99517003FC87E /* ImagineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagineTests.m; sourceTree = "<group>"; };
 		086EAFC186114799B1EC6653 /* NanumGothic-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NanumGothic-Regular.ttf"; path = "../src/assets/fonts/NanumGothic-Regular.ttf"; sourceTree = "<group>"; };
 		0893A9DD26B44747A72ADA2E /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NanumGothic-Bold.ttf"; path = "../src/assets/fonts/NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Imagine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Imagine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Linky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Linky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Imagine/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Imagine/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Imagine/Images.xcassets; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Imagine.app */,
+				13B07F961A680F5B00A75B9A /* Linky.app */,
 				00E356EE1AD99517003FC87E /* ImagineTests.xctest */,
 				CA34839E29E722AD00813D31 /* SimpleWidgetExtension.appex */,
 			);
@@ -272,7 +272,7 @@
 			);
 			name = Imagine;
 			productName = Imagine;
-			productReference = 13B07F961A680F5B00A75B9A /* Imagine.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Linky.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CA34839D29E722AD00813D31 /* SimpleWidgetExtension */ = {
@@ -629,7 +629,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiwhan.imagine;
-				PRODUCT_NAME = Imagine;
+				PRODUCT_NAME = Linky;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -657,7 +657,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiwhan.imagine;
-				PRODUCT_NAME = Imagine;
+				PRODUCT_NAME = Linky;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
