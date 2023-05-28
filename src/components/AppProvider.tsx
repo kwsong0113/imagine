@@ -23,7 +23,7 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['imagine://'],
+  prefixes: ['linky://'],
   config,
 };
 

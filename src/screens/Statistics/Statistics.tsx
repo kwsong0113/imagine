@@ -58,6 +58,8 @@ export const Statistics = ({ navigation }: Props) => {
     return actionStat.slice(0, numTopActionStat);
   }, [actionStat, numTopActionStat]);
 
+  const hasShowAllButton = actionStat.length > numTopActionStat;
+
   return (
     <ScreenContainer>
       <Header
@@ -107,10 +109,13 @@ export const Statistics = ({ navigation }: Props) => {
               key={JSON.stringify(props.actionInstance)}
               {...props}
               hasTopBorder={idx > 0}
+              hasBottomBorder={
+                !hasShowAllButton && idx === topActionStat.length - 1
+              }
             />
           );
         })}
-        {topActionStat.length === numTopActionStat && (
+        {hasShowAllButton && (
           <ListRowButton
             title="모두 보기"
             onPress={() => navigation.navigate('Detail')}
