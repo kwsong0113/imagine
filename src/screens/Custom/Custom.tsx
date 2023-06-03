@@ -19,12 +19,14 @@ import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 import { selectShouldShowHelp, settingActions } from '../../store/slices';
 import { useWindowDimensions } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 type Props = StackScreenProps<CustomStackParamList, 'Home'>;
 
 export const Custom = ({ navigation }: Props) => {
   const renderToast = useRenderToast();
   const { height } = useWindowDimensions();
+  const { t } = useTranslation('custom');
 
   return (
     <>
@@ -33,7 +35,7 @@ export const Custom = ({ navigation }: Props) => {
           <Box flex={1} mr={-12}>
             <Header
               hasBackButton={false}
-              title="커스텀 제스처"
+              title={t('title')}
               description="원하는 액션을 커스텀 제스처로 실행해요"
             />
           </Box>
