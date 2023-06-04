@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { VStack, HStack, Box, useTheme } from 'native-base';
-import { useRenderToast, useThemeMode } from '../hooks';
+import { useThemeMode } from '../hooks';
 import {
   Header,
   IonIcon,
@@ -15,13 +15,19 @@ import {
   AnimatedIconButton,
   AnimatedButton,
 } from '../components';
-import { Language, selectLanguage, ThemeMode } from '../store/slices';
+import {
+  Language,
+  selectLanguage,
+  settingActions,
+  ThemeMode,
+} from '../store/slices';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { gestureActions } from '../store/slices/gesture';
 import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { RootTabParamList } from '../navigation';
+import { getLocaleLanguage } from '../utils';
 
 const themeModeCaption: Record<ThemeMode, string> = {
   light: '라이트 모드',
@@ -76,18 +82,17 @@ const SettingThemeModeRow = () => {
 const languageCaption: Record<Language, string> = {
   kor: '한국어',
   eng: '영어',
+  locale: getLocaleLanguage() === 'ko' ? '한국어' : '영어',
 };
 
 const SettingLanguageRow = () => {
   const language = useAppSelector(selectLanguage);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
 
   const handlePress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
-
-  const renderToast = useRenderToast();
 
   return (
     <>
@@ -103,28 +108,21 @@ const SettingLanguageRow = () => {
           <Typography variant="subtitle1">언어</Typography>
           <VStack mx={-3}>
             {Object.entries(languageCaption).map(
-              ([languageOption, caption]) => (
-                <SettingOptionRow
-                  key={languageOption}
-                  title={caption}
-                  isSelected={languageOption === language}
-                  onPress={() => {
-                    // dispatch(
-                    //   settingActions.changeLanguage(languageOption as Language),
-                    // )
-                    if (languageOption !== 'kor') {
-                      renderToast({
-                        iconName: 'construct',
-                        iconColor: 'teal.700',
-                        message: '현재는 한국어만 사용할 수 있어요',
-                        duration: 1000,
-                        placement: 'top',
-                        bg: 'gray.300',
-                      });
-                    }
-                  }}
-                />
-              ),
+              ([languageOption, caption]) =>
+                languageOption !== 'locale' && (
+                  <SettingOptionRow
+                    key={languageOption}
+                    title={caption}
+                    isSelected={languageOption === language}
+                    onPress={() => {
+                      dispatch(
+                        settingActions.changeLanguage(
+                          languageOption as Language,
+                        ),
+                      );
+                    }}
+                  />
+                ),
             )}
           </VStack>
         </VStack>

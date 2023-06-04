@@ -1,25 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Box, HStack, VStack } from 'native-base';
 import {
-  AnimatedButton,
   AnimatedIconButton,
   Feature,
   Header,
   IonIcon,
   ListRow,
   ScreenContainer,
-  SingleBottomSheetModal,
-  Typography,
-} from '../../components';
-import { CustomStackParamList } from '../../navigation';
-import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
-import { CUSTOM_URL_SCHEME_ID, SHORTCUT_ID } from '../../features/action/app';
-import { useAppDispatch, useAppSelector, useRenderToast } from '../../hooks';
-import { useBottomSheetModal } from '@gorhom/bottom-sheet';
-import { useNavigation } from '@react-navigation/native';
-import { selectShouldShowHelp, settingActions } from '../../store/slices';
+} from '../../../components';
+import { CustomStackParamList } from '../../../navigation';
+import { StackScreenProps } from '@react-navigation/stack';
+import {
+  CUSTOM_URL_SCHEME_ID,
+  SHORTCUT_ID,
+} from '../../../features/action/app';
+import { useRenderToast } from '../../../hooks';
 import { useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { HelpBottomSheetModal } from './HelpBottomSheetModal';
+import { LanguageBottomSheetModal } from './LanguageBottomSheetModal';
 
 type Props = StackScreenProps<CustomStackParamList, 'Home'>;
 
@@ -122,66 +121,8 @@ export const Custom = ({ navigation }: Props) => {
           />
         </VStack>
       </ScreenContainer>
-      <OpenHelpBottomSheetModal />
+      <HelpBottomSheetModal />
+      <LanguageBottomSheetModal />
     </>
-  );
-};
-
-type HomeNavigationProp = StackNavigationProp<CustomStackParamList, 'Home'>;
-
-const OpenHelpBottomSheetModal = () => {
-  const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
-  const { dismiss } = useBottomSheetModal();
-  const navigation = useNavigation<HomeNavigationProp>();
-  const dispatch = useAppDispatch();
-  const shouldShowHelp = useAppSelector(selectShouldShowHelp);
-
-  useEffect(() => {
-    if (shouldShowHelp) {
-      bottomSheetModalRef.current?.present();
-    }
-  }, [shouldShowHelp]);
-
-  return (
-    <SingleBottomSheetModal ref={bottomSheetModalRef}>
-      <VStack px={6} pb={7.5} space={4}>
-        <Box position="absolute" right={2} top={-16}>
-          <AnimatedIconButton
-            name="close-circle"
-            size={8}
-            color="gray.400"
-            onPress={() => {
-              dismiss();
-            }}
-          />
-        </Box>
-        <VStack space={2}>
-          <Typography variant="subtitle1">
-            Linky 설명서를 읽어볼래요?
-          </Typography>
-          <Typography variant="description" color="gray.600" py={1}>
-            Linky 앱을 똑똑하게 활용하는 법을 알려드릴게요
-          </Typography>
-        </VStack>
-        <HStack space={4}>
-          <AnimatedButton
-            bg="gray.500"
-            title="그만 보기"
-            onPress={() => {
-              dispatch(settingActions.stopShowHelp());
-              dismiss();
-            }}
-          />
-          <AnimatedButton
-            bg="blue.500"
-            title="설명서 보기"
-            onPress={() => {
-              dismiss();
-              navigation.navigate('Help');
-            }}
-          />
-        </HStack>
-      </VStack>
-    </SingleBottomSheetModal>
   );
 };

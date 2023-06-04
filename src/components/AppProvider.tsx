@@ -7,6 +7,7 @@ import { persistor, store } from '../store';
 import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { initI18n } from '../i18n';
 
 interface Props {
   children: React.ReactNode;
@@ -35,7 +36,12 @@ const NativeBaseThemeProvider = ({ children }: Props) => {
 export const AppProvider = ({ children }: Props) => {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+      <PersistGate
+        persistor={persistor}
+        onBeforeLift={() => {
+          initI18n();
+        }}
+      >
         {/* @ts-ignore */}
         <NavigationContainer linking={linking}>
           <NativeBaseThemeProvider>

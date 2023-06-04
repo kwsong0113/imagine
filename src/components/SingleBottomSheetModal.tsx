@@ -10,7 +10,7 @@ import {
 import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { StyleSheet } from 'react-native';
 
-const CustomBackdrop = (props: BottomSheetBackdropProps) => {
+export const CustomBackdrop = (props: BottomSheetBackdropProps) => {
   const { colors } = useTheme();
 
   return (
