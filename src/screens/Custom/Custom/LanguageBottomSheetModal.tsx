@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { selectLanguage, settingActions } from '../../../store/slices';
 import { getLocaleLanguage } from '../../../utils';
+import { useTranslation } from 'react-i18next';
 
 export const LanguageBottomSheetModal = () => {
   const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
@@ -14,6 +15,7 @@ export const LanguageBottomSheetModal = () => {
   const dispatch = useAppDispatch();
   const language = useAppSelector(selectLanguage);
   const shouldShowLanguagePicker = language === 'locale';
+  const { t } = useTranslation('custom');
 
   useEffect(() => {
     if (shouldShowLanguagePicker) {
@@ -24,7 +26,7 @@ export const LanguageBottomSheetModal = () => {
   return (
     <OptionSingleBottomSheetModal
       ref={bottomSheetModalRef}
-      title="어떤 언어를 사용하시겠어요?"
+      title={t('language_bottomsheet_title')}
       leftButtonTitle="한국어"
       rightButtonTitle="English"
       onPressLeft={() => {

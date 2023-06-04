@@ -27,7 +27,7 @@ export const initI18n = () => {
     resources,
     lng,
     fallbackLng: 'en',
-    keySeparator: false,
+    keySeparator: '.',
     interpolation: {
       escapeValue: false,
     },

@@ -13,6 +13,7 @@ import {
   selectLanguage,
   settingActions,
 } from '../../../store/slices';
+import { useTranslation } from 'react-i18next';
 
 type HomeNavigationProp = StackNavigationProp<CustomStackParamList, 'Home'>;
 
@@ -23,6 +24,7 @@ export const HelpBottomSheetModal = () => {
   const dispatch = useAppDispatch();
   const shouldShowHelp = useAppSelector(selectShouldShowHelp);
   const shouldShowLanguagePicker = useAppSelector(selectLanguage) === 'locale';
+  const { t } = useTranslation('custom');
 
   useEffect(() => {
     if (shouldShowHelp && !shouldShowLanguagePicker) {
@@ -33,15 +35,16 @@ export const HelpBottomSheetModal = () => {
   return (
     <OptionSingleBottomSheetModal
       ref={bottomSheetModalRef}
-      title="Linky 설명서를 읽어볼래요?"
-      description="Linky 앱을 똑똑하게 활용하는 법을 알려드릴게요"
-      leftButtonTitle="그만 보기"
-      rightButtonTitle="설명서 보기"
+      title={t('help_bottomsheet.title')}
+      description={t('help_bottomsheet.desription')}
+      leftButtonTitle={t('help_bottomsheet.left_button_title')}
+      rightButtonTitle={t('help_bottomsheet.right_button_title')}
       onPressLeft={() => {
         dispatch(settingActions.stopShowHelp());
         dismiss();
       }}
       onPressRight={() => {
+        dispatch(settingActions.stopShowHelp());
         dismiss();
         navigation.navigate('Help');
       }}

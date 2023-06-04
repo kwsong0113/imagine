@@ -35,7 +35,7 @@ export const Custom = ({ navigation }: Props) => {
             <Header
               hasBackButton={false}
               title={t('title')}
-              description="원하는 액션을 커스텀 제스처로 실행해요"
+              description={t('description')}
             />
           </Box>
           <HStack space={4}>
@@ -56,13 +56,13 @@ export const Custom = ({ navigation }: Props) => {
         </HStack>
         <VStack>
           <ListRow
-            title="내 제스처 목록 보기 / 추가하기"
+            title={t('gestures')}
             titleColor="blue.600"
             right={<IonIcon size={6} color="blue.600" name="chevron-forward" />}
             onPress={() => navigation.navigate('GestureList')}
           />
           <ListRow
-            title="내 액션 목록 보기"
+            title={t('actions')}
             titleColor="blue.600"
             hasBottomBorder={true}
             right={<IonIcon size={6} color="blue.600" name="chevron-forward" />}
@@ -76,14 +76,14 @@ export const Custom = ({ navigation }: Props) => {
         >
           <Feature
             iconName="logo-apple-appstore"
-            title="앱 빠르게 실행하기"
-            caption="애플 앱, 써드파티 앱, 설정을 모두 지원해요"
+            title={t('app_title')}
+            caption={t('app_description')}
             onPress={() => navigation.navigate('AppList')}
           />
           <Feature
             iconName="layers"
-            title="단축어 실행하기"
-            caption="단축어 이름만 입력하면 등록할 수 있어요"
+            title={t('shortcut_title')}
+            caption={t('shortcut_description')}
             onPress={() =>
               navigation.navigate('ParamActionList', {
                 appId: SHORTCUT_ID,
@@ -94,13 +94,13 @@ export const Custom = ({ navigation }: Props) => {
           />
           <Feature
             iconName="logo-apple"
-            title="네이티브 액션 실행하기"
-            caption="아이폰을 효율적으로 활용하는 기능을 제공해요"
+            title={t('native_action_title')}
+            caption={t('native_action_description')}
             onPress={() => {
               renderToast({
                 iconName: 'construct',
                 iconColor: 'teal.700',
-                message: '아직 준비 중인 기능이에요',
+                message: t('toast_message'),
                 duration: 1000,
                 placement: 'top',
                 bg: 'gray.300',
@@ -109,8 +109,8 @@ export const Custom = ({ navigation }: Props) => {
           />
           <Feature
             iconName="globe"
-            title="커스텀 URL Scheme"
-            caption="내가 원하는 액션이 등록돼 있지 않다면 사용해요"
+            title={t('custom_url_scheme_title')}
+            caption={t('custom_url_scheme_description')}
             onPress={() =>
               navigation.navigate('ParamActionList', {
                 appId: CUSTOM_URL_SCHEME_ID,
