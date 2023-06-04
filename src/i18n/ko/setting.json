@@ -1,0 +1,28 @@
+{
+  "title": "설정",
+  "description": "나에게 맞는 옵션을 찾아보세요",
+  "theme": {
+    "title": "테마",
+    "light": "라이트 모드",
+    "dark": "다크 모드",
+    "system": "시스템 설정과 같이"
+  },
+  "language": {
+    "title": "언어"
+  },
+  "reset": {
+    "title": "제스처 초기화",
+    "caption": "등록된 제스처를 모두 삭제해요",
+    "bottomsheet": {
+      "title": "제스처를 초기화할까요?",
+      "description": "기존 제스처가 모두 삭제되고 되돌릴 수 없으니 주의하세요",
+      "cancel": "취소",
+      "ok": "확인",
+      "message": "제스처를 초기화했어요"
+    },
+  },
+  "help": {
+    "title": "설명서 보기",
+    "description": "Linky 앱을 잘 활용하려면 읽어보세요"
+  }
+}

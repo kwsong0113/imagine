@@ -28,16 +28,14 @@ import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { RootTabParamList } from '../navigation';
 import { getLocaleLanguage } from '../utils';
+import { useTranslation } from 'react-i18next';
 
-const themeModeCaption: Record<ThemeMode, string> = {
-  light: '라이트 모드',
-  dark: '다크 모드',
-  system: '시스템 설정과 같이',
-};
+const themeModeList: ThemeMode[] = ['light', 'dark', 'system'];
 
 const SettingThemeModeRow = () => {
   const { themeMode, changeThemeMode } = useThemeMode();
   const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
+  const { t } = useTranslation('setting');
 
   const handlePress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -53,25 +51,23 @@ const SettingThemeModeRow = () => {
             color="gray.900"
           />
         }
-        title="테마"
-        caption={themeModeCaption[themeMode]}
+        title={t('theme.title')}
+        caption={t(`theme.${themeMode}`)}
         right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
         onPress={handlePress}
       />
       <SingleBottomSheetModal ref={bottomSheetModalRef}>
         <VStack px={6} pt={3.5} pb={7.5} space={4}>
-          <Typography variant="subtitle1">테마</Typography>
+          <Typography variant="subtitle1">{t('theme.title')}</Typography>
           <VStack mx={-3}>
-            {Object.entries(themeModeCaption).map(
-              ([themeModeOption, caption]) => (
-                <SettingOptionRow
-                  key={themeModeOption}
-                  title={caption}
-                  isSelected={themeModeOption === themeMode}
-                  onPress={() => changeThemeMode(themeModeOption as ThemeMode)}
-                />
-              ),
-            )}
+            {themeModeList.map(themeModeOption => (
+              <SettingOptionRow
+                key={themeModeOption}
+                title={t(`theme.${themeModeOption}`)}
+                isSelected={themeModeOption === themeMode}
+                onPress={() => changeThemeMode(themeModeOption as ThemeMode)}
+              />
+            ))}
           </VStack>
         </VStack>
       </SingleBottomSheetModal>
@@ -81,11 +77,12 @@ const SettingThemeModeRow = () => {
 
 const languageCaption: Record<Language, string> = {
   kor: '한국어',
-  eng: '영어',
-  locale: getLocaleLanguage() === 'ko' ? '한국어' : '영어',
+  eng: 'English',
+  locale: getLocaleLanguage() === 'ko' ? '한국어' : 'English',
 };
 
 const SettingLanguageRow = () => {
+  const { t } = useTranslation('setting');
   const language = useAppSelector(selectLanguage);
   const dispatch = useAppDispatch();
   const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
@@ -98,14 +95,14 @@ const SettingLanguageRow = () => {
     <>
       <ListRow
         left={<IonIcon name="language" size="40px" color="gray.900" />}
-        title="언어"
+        title={t('language.title')}
         caption={languageCaption[language]}
         right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
         onPress={handlePress}
       />
       <SingleBottomSheetModal ref={bottomSheetModalRef}>
         <VStack px={6} pt={3.5} pb={7.5} space={4}>
-          <Typography variant="subtitle1">언어</Typography>
+          <Typography variant="subtitle1">{t('language.title')}</Typography>
           <VStack mx={-3}>
             {Object.entries(languageCaption).map(
               ([languageOption, caption]) =>
@@ -167,6 +164,7 @@ const SettingLanguageRow = () => {
 // };
 
 const SettingClearGestureRow = () => {
+  const { t } = useTranslation('setting');
   const dispatch = useAppDispatch();
   const { dismiss } = useBottomSheetModal();
   const { colors } = useTheme();
@@ -186,8 +184,8 @@ const SettingClearGestureRow = () => {
     <>
       <ListRow
         left={<IonIcon name="trash-bin" size="40px" color="gray.900" />}
-        title="제스처 초기화"
-        caption="등록된 제스처를 모두 삭제해요"
+        title={t('reset.title')}
+        caption={t('reset.caption')}
         right={<IonIcon name="close-circle" color="gray.600" size={6} />}
         onPress={handlePress}
       />
@@ -209,7 +207,7 @@ const SettingClearGestureRow = () => {
             <AnimatedSentence
               fontSize="xl"
               color={colors.gray[900]}
-              content="제스처를 초기화했어요"
+              content={t('reset.bottomsheet.message')}
               duration={800}
             />
           </VStack>
@@ -217,21 +215,21 @@ const SettingClearGestureRow = () => {
           <VStack px={6} pt={3.5} pb={7.5} space={4}>
             <VStack space={2}>
               <Typography variant="subtitle1">
-                제스처를 초기화할까요?
+                {t('reset.bottomsheet.title')}
               </Typography>
               <Typography variant="description" color="gray.600" py={1}>
-                기존 제스처가 모두 삭제되고 되돌릴 수 없으니 주의하세요
+                {t('reset.bottomsheet.description')}
               </Typography>
             </VStack>
             <HStack space={4}>
               <AnimatedButton
                 bg="gray.500"
-                title="취소"
+                title={t('reset.bottomsheet.cancel')}
                 onPress={() => dismiss()}
               />
               <AnimatedButton
                 bg="red.600"
-                title="확인"
+                title={t('reset.bottomsheet.ok')}
                 onPress={handleClearGesture}
               />
             </HStack>
@@ -243,13 +241,14 @@ const SettingClearGestureRow = () => {
 };
 
 const SettingHelpRow = () => {
+  const { t } = useTranslation('setting');
   const navigation = useNavigation<SettingNavigationProp>();
 
   return (
     <ListRow
       left={<IonIcon name="hand-left" size="40px" color="gray.900" />}
-      title="설명서 보기"
-      caption="Linky 앱을 잘 활용하려면 읽어보세요"
+      title={t('help.title')}
+      caption={t('help.description')}
       right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
       hasBottomBorder={true}
       onPress={() => {
@@ -267,12 +266,14 @@ type SettingNavigationProp = BottomTabNavigationProp<
 >;
 
 export const Setting = () => {
+  const { t } = useTranslation('setting');
+
   return (
     <ScreenContainer>
       <Header
         hasBackButton={false}
-        title="설정"
-        description="나에게 맞는 옵션을 찾아보세요"
+        title={t('title')}
+        description={t('description')}
       />
       <VStack flex={1}>
         <SettingThemeModeRow />

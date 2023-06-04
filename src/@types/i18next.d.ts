@@ -7,11 +7,9 @@ import * as ko from '../i18n/ko';
 declare module 'i18next' {
   // and extend them!
   interface CustomTypeOptions {
-    // custom namespace type if you changed it
-    // defaultNS: "main";
-    // custom resources type
     resources: {
       custom: typeof ko.custom;
+      setting: typeof ko.setting;
     };
   }
 }
