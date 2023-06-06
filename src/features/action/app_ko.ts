@@ -167,12 +167,12 @@ export const appList: App[] = [
   },
   {
     id: 33,
-    name: '배달의 민족',
+    name: '배달의민족',
     actions: [
       {
         id: 0,
         urlScheme: 'smartbaedal://	',
-        description: '배달의 민족 앱 열기',
+        description: '배달의민족 앱 열기',
       },
     ],
   },
@@ -547,11 +547,6 @@ export const appList: App[] = [
         urlScheme: 'com.google.calendar://?action=create',
         description: 'Google 캘린더 일정 추가',
       },
-      {
-        id: 0,
-        urlScheme: 'com.google.calendar://',
-        description: 'Google 캘린더 앱 열기',
-      },
     ],
   },
   {
@@ -640,33 +635,33 @@ export const appList: App[] = [
   },
   {
     id: 3,
-    name: 'Youtube',
+    name: 'YouTube',
     actions: [
       {
         id: 0,
         urlScheme: 'youtube://',
-        description: 'Youtube 앱 열기',
+        description: 'YouTube 앱 열기',
       },
       {
         id: 1,
         urlScheme: 'youtube://shorts',
-        description: 'Youtube 쇼츠 열기',
+        description: 'YouTube 쇼츠 열기',
       },
     ],
   },
   {
     id: 22,
-    name: 'Youtube Music',
+    name: 'YouTube Music',
     actions: [
       {
         id: 0,
         urlScheme: 'youtubemusic://',
-        description: 'Youtube Music 앱 열기',
+        description: 'YouTube Music 앱 열기',
       },
       {
         id: 1,
         urlSchemeFunc: (param: string) => `youtubemusic://watch?list=${param}`,
-        description: 'Youtube Music 재생목록 재생',
+        description: 'YouTube Music 재생목록 재생',
         placeholder: '재생목록 이름을 입력해주세요',
         descriptionFunc: (param: string) => `${param} 재생목록 재생하기`,
       },

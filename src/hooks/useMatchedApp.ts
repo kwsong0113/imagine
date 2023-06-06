@@ -1,6 +1,10 @@
 import { useMemo } from 'react';
-import { appList } from '../features/action/app_ko';
+import { useAppList } from './useAppList';
 
 export const useMatchedApp = (appId: number) => {
-  return useMemo(() => appList.find(({ id }) => id === appId), [appId]);
+  const appList = useAppList();
+  return useMemo(
+    () => appList.find(({ id }) => id === appId),
+    [appId, appList],
+  );
 };

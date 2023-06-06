@@ -4,23 +4,23 @@ import { App } from './types';
 export const appList: App[] = [
   {
     id: 47,
-    name: '나의 찾기',
+    name: 'Find My',
     actions: [
       {
         id: 0,
         urlScheme: 'fmip1://',
-        description: '나의 찾기 앱 열기',
+        description: 'Open Find My',
       },
     ],
   },
   {
     id: 9,
-    name: '날씨',
+    name: 'Weather',
     actions: [
       {
         id: 0,
         urlScheme: 'weather://',
-        description: '날씨 앱 열기',
+        description: 'Open Weather',
       },
     ],
   },
@@ -31,403 +31,402 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'naversearchapp://',
-        description: 'Open Naver app',
+        description: 'Open Naver',
       },
     ],
   },
   {
     id: 25,
-    name: '네이버 메일',
+    name: 'Naver Mail',
     actions: [
       {
         id: 0,
         urlScheme: 'navermail://',
-        description: '네이버 메일 앱 열기',
+        description: 'Open Naver Mail',
       },
     ],
   },
   {
     id: 28,
-    name: '네이버 블로그',
+    name: 'Naver Blog',
     actions: [
       {
         id: 0,
         urlScheme: 'naverblog://',
-        description: '네이버 블로그 앱 열기',
+        description: 'Open Naver Blog',
       },
     ],
   },
   {
     id: 27,
-    name: '네이버 지도',
+    name: 'Naver Map',
     actions: [
       {
         id: 0,
         urlScheme: 'navermap://',
-        description: '네이버 지도 앱 열기',
+        description: 'Open Naver Map',
       },
     ],
   },
   {
     id: 29,
-    name: '네이버 카페',
+    name: 'Naver Cafe',
     actions: [
       {
         id: 0,
         urlScheme: 'navercafe://',
-        description: '네이버 카페 앱 열기',
+        description: 'Open Naver Cafe',
       },
     ],
   },
   {
     id: SHORTCUT_ID,
-    name: '단축어',
+    name: 'Shortcuts',
     actions: [
       {
         id: 0,
         urlScheme: 'shortcuts://',
-        description: '단축어 앱 열기',
+        description: 'Open Shortcuts',
       },
       {
         id: 1,
         urlSchemeFunc: (param: string) =>
           `shortcuts://run-shortcut?name=${param}`,
-        description: '저장된 단축어 실행하기',
-        placeholder: '단축어 이름을 입력해주세요',
-        descriptionFunc: (param: string) => `${param} 단축어 실행하기`,
+        description: 'Run Shortcut',
+        placeholder: 'Shortcut name',
+        descriptionFunc: (param: string) => `Run ${param} Shortcut`,
       },
     ],
   },
   {
     id: 43,
-    name: '당근마켓',
+    name: 'Karrot',
     actions: [
       {
         id: 0,
         urlScheme: 'daangn://',
-        description: '당근마켓 앱 열기',
+        description: 'Open Karrot',
       },
     ],
   },
   {
     id: 13,
-    name: '메모',
+    name: 'Notes',
     actions: [
       {
         id: 0,
         urlScheme: 'mobilenotes://',
-        description: '메모 앱 열기',
+        description: 'Open Notes',
       },
     ],
   },
   {
     id: 0,
-    name: '메시지',
+    name: 'Messages',
     actions: [
       {
         id: 0,
         urlScheme: 'messages://',
-        description: '메시지 앱 열기',
+        description: 'Open Messages',
       },
       {
         id: 1,
         urlScheme: 'sms://',
-        description: '새로운 메시지',
+        description: 'New Message',
       },
       {
         id: 2,
         urlSchemeFunc: (param: string) => `sms://${param}`,
-        description: '저장된 번호로 메시지 보내기',
-        placeholder: '전화번호를 입력해주세요',
-        descriptionFunc: (param: string) => `${param}으로 메시지 보내기`,
+        description: 'Send a Message to Your Friend',
+        placeholder: 'Phone number',
+        descriptionFunc: (param: string) => `Send a Message to ${param}`,
       },
     ],
   },
   {
     id: 24,
-    name: '멜론',
+    name: 'Melon',
     actions: [
       {
         id: 0,
         urlScheme: 'fb329785880437397://',
-        description: '멜론 앱 열기',
+        description: 'Open Melon',
       },
     ],
   },
   {
     id: 15,
-    name: '미리 알림',
+    name: 'Reminders',
     actions: [
       {
         id: 0,
         urlScheme: 'x-apple-reminderkit://',
-        description: '미리 알림 앱 열기',
+        description: 'Open Reminders',
       },
     ],
   },
   {
     id: 33,
-    name: '배달의 민족',
+    name: 'Baemin',
     actions: [
       {
         id: 0,
         urlScheme: 'smartbaedal://	',
-        description: '배달의 민족 앱 열기',
+        description: 'Open Baemin',
       },
     ],
   },
   {
     id: 34,
-    name: '비트윈',
+    name: 'Between',
     actions: [
       {
         id: 0,
         urlScheme: 'between://	',
-        description: '비트윈 앱 열기',
+        description: 'Open Between',
       },
     ],
   },
   {
     id: 16,
-    name: '사진',
+    name: 'Photos',
     actions: [
       {
         id: 0,
         urlScheme: 'photos-redirect://',
-        description: '사진 앱 열기',
+        description: 'Open Photos',
       },
     ],
   },
   {
     id: 17,
-    name: '설정',
+    name: 'Settings',
     actions: [
       {
         id: 0,
         urlScheme: 'App-prefs://',
-        description: '설정 열기',
+        description: 'Open Settings',
       },
     ],
   },
   {
     id: 42,
-    name: '스타벅스',
+    name: 'Starbucks',
     actions: [
       {
         id: 0,
         urlScheme: 'starbucks://',
-        description: '스타벅스 앱 열기',
+        description: 'Open Starbucks',
       },
     ],
   },
   {
     id: 7,
-    name: '음악',
+    name: 'Music',
     actions: [
       {
         id: 0,
         urlScheme: 'music://',
-        description: '음악 앱 열기',
+        description: 'Open Music',
       },
     ],
   },
   {
     id: 1,
-    name: '인스타그램',
+    name: 'Instagram',
     actions: [
       {
         id: 0,
         urlScheme: 'instagram://',
-        description: '인스타그램 앱 열기',
+        description: 'Open Instagram',
       },
       {
         id: 1,
         urlScheme: 'instagram://reels_home',
-        description: '인스타그램 릴스 열기',
+        description: 'Open Instagram Reels',
       },
       {
         id: 2,
         urlScheme: 'instagram://camera',
-        description: '인스타그램 스토리 카메라 열기',
+        description: 'Post a Story on Instagram',
       },
       {
         id: 3,
         urlSchemeFunc: (param: string) => `instagram://user?username=${param}`,
-        description: '즐겨찾는 유저 페이지로 이동하기',
-        placeholder: '@없이 아이디를 입력해주세요',
-        descriptionFunc: (param: string) =>
-          `@${param} 유저의 페이지로 이동하기`,
+        description: "View Your Friend's Instagram",
+        placeholder: 'Instagram ID without @',
+        descriptionFunc: (param: string) => `View @${param} on Instagram`,
       },
     ],
   },
   {
     id: 4,
-    name: '전화',
+    name: 'Phone',
     actions: [
       {
         id: 0,
         urlScheme: 'tel://',
-        description: '전화 앱 열기',
+        description: 'Open Phone',
       },
       {
         id: 1,
         urlSchemeFunc: (param: string) => `tel://${param}`,
-        description: '저장된 번호로 전화 걸기',
-        placeholder: '전화번호를 입력해주세요',
-        descriptionFunc: (param: string) => `${param}으로 전화 걸기`,
+        description: 'Call Your Friend',
+        placeholder: 'Phone number',
+        descriptionFunc: (param: string) => `Call ${param}`,
       },
     ],
   },
   {
     id: 19,
-    name: '주식',
+    name: 'Stocks',
     actions: [
       {
         id: 0,
         urlScheme: 'stocks://',
-        description: '주식 앱 열기',
+        description: 'Open Stocks',
       },
     ],
   },
   {
     id: 18,
-    name: '지갑',
+    name: 'Wallet',
     actions: [
       {
         id: 0,
         urlScheme: 'shoebox://',
-        description: '지갑 앱 열기',
+        description: 'Open Wallet',
       },
     ],
   },
   {
     id: 20,
-    name: '지도',
+    name: 'Maps',
     actions: [
       {
         id: 0,
         urlScheme: 'map://',
-        description: '지도 앱 열기',
+        description: 'Open Maps',
       },
     ],
   },
   {
     id: 41,
-    name: '카카오 T',
+    name: 'Kakao T',
     actions: [
       {
         id: 0,
         urlScheme: 'kakaot://',
-        description: '카카오 T 앱 열기',
+        description: 'Open Kakao T',
       },
     ],
   },
   {
     id: 11,
-    name: '카카오맵',
+    name: 'KakaoMap',
     actions: [
       {
         id: 0,
         urlScheme: 'kakaomap://',
-        description: '카카오맵 앱 열기',
+        description: 'Open KakaoMap',
       },
     ],
   },
   {
     id: 6,
-    name: '카카오톡',
+    name: 'KakaoTalk',
     actions: [
       {
         id: 0,
         urlScheme: 'kakaotalk://',
-        description: '카카오톡 앱 열기',
+        description: 'Open KakaoTalk',
       },
     ],
   },
   {
     id: 23,
-    name: '카카오페이',
+    name: 'KakaoPay',
     actions: [
       {
         id: 0,
         urlScheme: 'kakaopay://',
-        description: '카카오페이 앱 열기',
+        description: 'Open KakaoPay',
       },
     ],
   },
   {
     id: 14,
-    name: '캘린더',
+    name: 'Calendar',
     actions: [
       {
         id: 0,
         urlScheme: 'calshow://',
-        description: '캘린더 앱 열기',
+        description: 'Open Calendar',
       },
     ],
   },
   {
     id: 38,
-    name: '쿠팡',
+    name: 'Coupang',
     actions: [
       {
         id: 0,
         urlScheme: 'coupang://	',
-        description: '쿠팡 앱 열기',
+        description: 'Open Coupang',
       },
     ],
   },
   {
     id: 40,
-    name: '테이블링',
+    name: 'Tabling',
     actions: [
       {
         id: 0,
         urlScheme: 'tabling://',
-        description: '테이블링 앱 열기',
+        description: 'Open Tabling',
       },
     ],
   },
   {
     id: 2,
-    name: '토스',
+    name: 'Toss',
     actions: [
       {
         id: 0,
         urlScheme: 'supertoss://',
-        description: '토스 앱 열기',
+        description: 'Open Toss',
       },
       {
         id: 1,
         urlScheme: 'supertoss://stock',
-        description: '토스증권 열기',
+        description: 'Open Toss Invest',
       },
       {
         id: 2,
         urlScheme: 'supertoss://send',
-        description: '토스로 송금하기',
+        description: 'Transfer Money with Toss',
       },
     ],
   },
   {
     id: 10,
-    name: '파일',
+    name: 'Files',
     actions: [
       {
         id: 0,
         urlScheme: 'sharedDocuments://',
-        description: 'iCloud Drive 열기',
+        description: 'Open iCloud Drive',
       },
     ],
   },
   {
     id: 37,
-    name: '현대카드',
+    name: 'Hyundai Card',
     actions: [
       {
         id: 0,
         urlScheme: 'hyundaicardappcard://	',
-        description: '현대카드 앱 열기',
+        description: 'Open Hyundai Card',
       },
     ],
   },
@@ -438,7 +437,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'bandapp://',
-        description: 'BAND 앱 열기',
+        description: 'Open BAND',
       },
     ],
   },
@@ -449,7 +448,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'googlechrome://',
-        description: 'Chrome 앱 열기',
+        description: 'Open Chrome',
       },
     ],
   },
@@ -460,7 +459,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'fb://	',
-        description: 'Facebook 앱 열기',
+        description: 'Open Facebook',
       },
     ],
   },
@@ -471,21 +470,21 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'facetime://',
-        description: 'FaceTime 앱 열기',
+        description: 'Open FaceTime',
       },
       {
         id: 1,
         urlSchemeFunc: (param: string) => `facetime://${param}`,
-        description: '저장된 번호로 FaceTime 걸기',
-        placeholder: '전화번호를 입력해주세요',
-        descriptionFunc: (param: string) => `${param}으로 FaceTime 걸기`,
+        description: 'FaceTime with Your Friend',
+        placeholder: 'Phone number',
+        descriptionFunc: (param: string) => `FaceTime call to ${param}`,
       },
       {
         id: 2,
         urlSchemeFunc: (param: string) => `facetime-audio://${param}`,
-        description: '저장된 번호로 FaceTime 음성 통화 걸기',
-        placeholder: '전화번호를 입력해주세요',
-        descriptionFunc: (param: string) => `${param}으로 음성 FaceTime 걸기`,
+        description: 'Audio FaceTime with Your Friend',
+        placeholder: 'Phone number',
+        descriptionFunc: (param: string) => `Audio FaceTime call to ${param}`,
       },
     ],
   },
@@ -496,7 +495,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'github://',
-        description: 'GitHub 앱 열기',
+        description: 'Open GitHub',
       },
     ],
   },
@@ -507,7 +506,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'googlegmail://',
-        description: 'Gmail 앱 열기',
+        description: 'Open Gmail',
       },
     ],
   },
@@ -518,7 +517,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'goodnotes5://',
-        description: 'GoodNotes 5 앱 열기',
+        description: 'Open GoodNotes 5',
       },
     ],
   },
@@ -529,28 +528,23 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'google://',
-        description: 'Google 앱 열기',
+        description: 'Open Google',
       },
     ],
   },
   {
     id: 21,
-    name: 'Google 캘린더',
+    name: 'Google Calendar',
     actions: [
       {
         id: 0,
         urlScheme: 'com.google.calendar://',
-        description: 'Google 캘린더 앱 열기',
+        description: 'Open Google Calendar',
       },
       {
         id: 1,
         urlScheme: 'com.google.calendar://?action=create',
-        description: 'Google 캘린더 일정 추가',
-      },
-      {
-        id: 0,
-        urlScheme: 'com.google.calendar://',
-        description: 'Google 캘린더 앱 열기',
+        description: 'Create an Event on Google Calendar',
       },
     ],
   },
@@ -561,7 +555,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'googledrive://',
-        description: 'Google Drive 앱 열기',
+        description: 'Open Google Drive',
       },
     ],
   },
@@ -572,7 +566,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'googlemaps://',
-        description: 'Google Maps 앱 열기',
+        description: 'Open Google Maps',
       },
     ],
   },
@@ -583,7 +577,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'message://	',
-        description: 'Mail 앱 열기',
+        description: 'Open Mail',
       },
     ],
   },
@@ -594,7 +588,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'nflx://',
-        description: 'Netflix 앱 열기',
+        description: 'Open Netflix',
       },
     ],
   },
@@ -605,14 +599,14 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'x-web-search://',
-        description: 'Safari 앱 열기',
+        description: 'Open Safari',
       },
       {
         id: 1,
         urlSchemeFunc: (param: string) => `${param}`,
-        description: 'Safari 앱으로 특정 사이트 접속하기',
-        placeholder: 'https://... 또는 http://...',
-        descriptionFunc: (param: string) => `${param} 이동하기`,
+        description: 'Go to a Website Using Safari',
+        placeholder: 'https://... or http://...',
+        descriptionFunc: (param: string) => `Go to ${param}`,
       },
     ],
   },
@@ -623,7 +617,7 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'spotify://',
-        description: 'Spotify 앱 열기',
+        description: 'Open Spotify',
       },
     ],
   },
@@ -634,23 +628,23 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'videos://',
-        description: 'TV 앱 열기',
+        description: 'Open TV',
       },
     ],
   },
   {
     id: 3,
-    name: 'Youtube',
+    name: 'YouTube',
     actions: [
       {
         id: 0,
         urlScheme: 'youtube://',
-        description: 'Youtube 앱 열기',
+        description: 'Open YouTube',
       },
       {
         id: 1,
         urlScheme: 'youtube://shorts',
-        description: 'Youtube 쇼츠 열기',
+        description: 'Open YouTube Shorts',
       },
     ],
   },
@@ -661,27 +655,27 @@ export const appList: App[] = [
       {
         id: 0,
         urlScheme: 'youtubemusic://',
-        description: 'Youtube Music 앱 열기',
+        description: 'Open YouTube Music',
       },
       {
         id: 1,
         urlSchemeFunc: (param: string) => `youtubemusic://watch?list=${param}`,
-        description: 'Youtube Music 재생목록 재생',
-        placeholder: '재생목록 이름을 입력해주세요',
-        descriptionFunc: (param: string) => `${param} 재생목록 재생하기`,
+        description: 'Play Playlist on YouTube Music',
+        placeholder: 'Playlist name',
+        descriptionFunc: (param: string) => `Play ${param} playlist`,
       },
     ],
   },
   {
     id: CUSTOM_URL_SCHEME_ID,
-    name: '커스텀 URL Scheme',
+    name: 'Custom URL Scheme',
     actions: [
       {
         id: 0,
         urlSchemeFunc: (param: string) => `${param}`,
-        description: '커스텀 URL Scheme 실행하기',
-        placeholder: 'URL Scheme을 입력해주세요',
-        descriptionFunc: (param: string) => `${param} 이동하기`,
+        description: 'Open Custom URL Scheme',
+        placeholder: 'URL scheme',
+        descriptionFunc: (param: string) => `Go to ${param}`,
       },
     ],
   },
