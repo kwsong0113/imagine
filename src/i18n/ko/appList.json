@@ -1,0 +1,9 @@
+{
+  "header": {
+    "title": "앱 빠르게 실행하기",
+    "description": "앱의 원하는 지점으로 빠르게 이동하세요"
+  },
+  "gesture_description": "{{gestureName}} 제스처",
+  "num_active_actions": "{{numActions}}개의 액션 중 {{numActiveActions}}개 사용 중 ",
+  "num_actions": "{{numActions}}개의 액션"
+}

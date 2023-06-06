@@ -10,15 +10,15 @@ import {
 } from '../../../components';
 import { CustomStackParamList } from '../../../navigation';
 import { StackScreenProps } from '@react-navigation/stack';
-import {
-  CUSTOM_URL_SCHEME_ID,
-  SHORTCUT_ID,
-} from '../../../features/action/app_ko';
 import { useRenderToast } from '../../../hooks';
 import { useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { HelpBottomSheetModal } from './HelpBottomSheetModal';
 import { LanguageBottomSheetModal } from './LanguageBottomSheetModal';
+import {
+  CUSTOM_URL_SCHEME_ID,
+  SHORTCUT_ID,
+} from '../../../features/action/consts';
 
 type Props = StackScreenProps<CustomStackParamList, 'Home'>;
 

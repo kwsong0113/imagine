@@ -22,6 +22,7 @@ import {
 import { Action, App } from '../../features/action/types';
 import { Gesture } from '../../features/gesture/types';
 import { CUSTOM_URL_SCHEME_ID } from '../../features/action/consts';
+import { useTranslation } from 'react-i18next';
 
 interface AppRowProps {
   app: App;
@@ -40,6 +41,8 @@ const AppRow = ({
   onPress,
   onRemove,
 }: AppRowProps) => {
+  const { t } = useTranslation('appList');
+
   return (
     <ListRow
       key={id}
@@ -62,11 +65,16 @@ const AppRow = ({
       description={
         actions.length === 1
           ? gestureName
-            ? `${gestureName} 제스처`
+            ? t('gesture_description')
             : actions[0].description
-          : `${actions.length}개의 액션${
-              numActiveActions > 0 ? ` 중 ${numActiveActions}개 사용 중` : ''
-            }`
+          : numActiveActions > 0
+          ? t('num_active_actions', {
+              numActions: actions.length,
+              numActiveActions,
+            })
+          : t('num_actions', {
+              numActions: actions.length,
+            })
       }
       hasBottomBorder={hasBottomBorder}
       onPress={onPress}
@@ -77,6 +85,7 @@ const AppRow = ({
 type AppListProps = StackScreenProps<CustomStackParamList, 'AppList'>;
 
 export const AppList = ({ navigation }: AppListProps) => {
+  const { t } = useTranslation('appList');
   const appList = useAppList();
   const getNumActiveActions = useGetNumActiveActions();
   const gesturePickerBottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
@@ -87,10 +96,7 @@ export const AppList = ({ navigation }: AppListProps) => {
 
   return (
     <ScreenContainer>
-      <Header
-        title="앱 빠르게 실행하기"
-        description="앱의 원하는 지점으로 빠르게 이동하세요"
-      />
+      <Header title={t('header.title')} description={t('header.description')} />
       <ScrollView mx={-3} px={3} mb={-12}>
         {appList.map((app, idx) => {
           if (app.id === CUSTOM_URL_SCHEME_ID) {
@@ -112,7 +118,7 @@ export const AppList = ({ navigation }: AppListProps) => {
               key={app.id}
               app={app}
               numActiveActions={numActiveActions}
-              hasBottomBorder={idx === appList.length - 2}
+              hasBottomBorder={idx === appList.length - 1}
               gestureName={hasSingleAction ? gesture?.name : undefined}
               onPress={() => {
                 if (hasSingleAction) {
