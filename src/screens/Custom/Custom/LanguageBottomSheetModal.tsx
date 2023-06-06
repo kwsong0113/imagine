@@ -39,11 +39,7 @@ export const LanguageBottomSheetModal = () => {
       }}
       onDismiss={() => {
         if (language === 'locale') {
-          dispatch(
-            settingActions.changeLanguage(
-              getLocaleLanguage() === 'ko' ? 'kor' : 'eng',
-            ),
-          );
+          dispatch(settingActions.changeLanguage(getLocaleLanguage()));
         }
       }}
     />

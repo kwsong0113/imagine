@@ -16,9 +16,9 @@ import { Input, ScrollView, VStack, HStack, Box, Pressable } from 'native-base';
 import { useAppSelector, useHandleRemoveAction } from '../../hooks';
 import { selectGestureToActionMap } from '../../store/slices/gesture';
 import { ActionInstance, ParamAction } from '../../features/action/types';
-import { getActionDescription } from '../../features/action/utils';
 import { useGetGestureForActionInstance } from '../../hooks/useGetGestureForActionInstance';
 import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
+import { useGetActionDescription } from '../../features/action/utils';
 
 type ParamActionProps = StackScreenProps<
   CustomStackParamList,
@@ -75,6 +75,7 @@ export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
   const [selectedActionParam, setSelectedActionParam] = useState('');
   const gesturePickerBottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
   const getGestureForActionInstance = useGetGestureForActionInstance();
+  const getActionDescription = useGetActionDescription();
 
   const handleRemoveParamAction = useHandleRemoveAction();
 

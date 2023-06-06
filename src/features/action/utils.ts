@@ -1,24 +1,24 @@
+import { useCallback } from 'react';
 import { Linking } from 'react-native';
+import { useAppList } from '../../hooks';
 import { sleepTimeout } from '../../utils';
-import { appList } from './app';
 import { Action, ActionInstance } from './types';
 
-export const executeActionInstance = (actionInstance: ActionInstance) => {
-  const action = getActionFromActionInstance(actionInstance);
-  if (action) {
-    executeAction(action, actionInstance.param);
-  }
-};
-
-export const getActionFromActionInstance = (actionInstance: ActionInstance) => {
-  const matchedApp = getAppForAction(actionInstance);
-  if (!matchedApp) {
-    return undefined;
-  }
-  const matchedAction = matchedApp.actions.find(
-    action => action.id === actionInstance.actionId,
+export const useGetActionFromActionInstance = () => {
+  const getAppForAction = useGetAppForAction();
+  return useCallback(
+    (actionInstance: ActionInstance) => {
+      const matchedApp = getAppForAction(actionInstance);
+      if (!matchedApp) {
+        return undefined;
+      }
+      const matchedAction = matchedApp.actions.find(
+        action => action.id === actionInstance.actionId,
+      );
+      return matchedAction;
+    },
+    [getAppForAction],
   );
-  return matchedAction;
 };
 
 export const executeAction = async (
@@ -39,17 +39,28 @@ export const executeAction = async (
   return success;
 };
 
-export const getActionDescription = (actionInstance: ActionInstance) => {
-  const action = getActionFromActionInstance(actionInstance);
-  if (!action) {
-    return undefined;
-  }
-  if ('descriptionFunc' in action && actionInstance.param !== undefined) {
-    return action.descriptionFunc(actionInstance.param);
-  }
-  return action.description;
+export const useGetActionDescription = () => {
+  const getActionFromActionInstance = useGetActionFromActionInstance();
+  return useCallback(
+    (actionInstance: ActionInstance) => {
+      const action = getActionFromActionInstance(actionInstance);
+      if (!action) {
+        return undefined;
+      }
+      if ('descriptionFunc' in action && actionInstance.param !== undefined) {
+        return action.descriptionFunc(actionInstance.param);
+      }
+      return action.description;
+    },
+    [getActionFromActionInstance],
+  );
 };
 
-export const getAppForAction = (actionInstance: ActionInstance) => {
-  return appList.find(app => app.id === actionInstance.appId);
+export const useGetAppForAction = () => {
+  const appList = useAppList();
+  return useCallback(
+    (actionInstance: ActionInstance) =>
+      appList.find(app => app.id === actionInstance.appId),
+    [appList],
+  );
 };

@@ -19,10 +19,10 @@
       "cancel": "취소",
       "ok": "확인",
       "message": "제스처를 초기화했어요"
-    },
+    }
   },
   "help": {
     "title": "설명서 보기",
     "description": "Linky 앱을 잘 활용하려면 읽어보세요"
-  }
+  } 
 }

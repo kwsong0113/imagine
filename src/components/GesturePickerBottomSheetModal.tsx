@@ -13,7 +13,6 @@ import {
 import { ListRow } from './ListRow';
 import { AnimatedCheckmark } from './AnimatedCheckmark';
 import { useBottomSheetModal } from '@gorhom/bottom-sheet';
-import { getActionDescription } from '../features/action/utils';
 import Animated, {
   FadeInDown,
   Layout,
@@ -23,6 +22,7 @@ import { useGetGestureIdForActionInstance } from '../hooks/useGetGestureIdForAct
 import { GestureAdditionBottomSheetModal } from './GestureAdditionBottomSheetModal';
 import { IonIcon } from './IonIcon';
 import { GesturePreview } from './GesturePreview';
+import { useGetActionDescription } from '../features/action/utils';
 
 interface Props {
   appId: number;
@@ -38,6 +38,7 @@ export const GesturePickerBottomSheetModal = forwardRef<
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const dispatch = useAppDispatch();
   const getGestureIdForActionInstance = useGetGestureIdForActionInstance();
+  const getActionDescription = useGetActionDescription();
   const selectedGestureId = getGestureIdForActionInstance({
     appId,
     actionId,

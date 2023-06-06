@@ -13,14 +13,15 @@ import {
   AnimatedIconButton,
 } from '../../components';
 import { CustomStackParamList } from '../../navigation';
-import { appList, CUSTOM_URL_SCHEME_ID } from '../../features/action/app';
 import {
+  useAppList,
   useGetGestureForActionInstance,
   useGetNumActiveActions,
   useHandleRemoveAction,
 } from '../../hooks';
 import { Action, App } from '../../features/action/types';
 import { Gesture } from '../../features/gesture/types';
+import { CUSTOM_URL_SCHEME_ID } from '../../features/action/consts';
 
 interface AppRowProps {
   app: App;
@@ -76,6 +77,7 @@ const AppRow = ({
 type AppListProps = StackScreenProps<CustomStackParamList, 'AppList'>;
 
 export const AppList = ({ navigation }: AppListProps) => {
+  const appList = useAppList();
   const getNumActiveActions = useGetNumActiveActions();
   const gesturePickerBottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
   const [selectedAppId, setSelectedAppId] = useState<number>(0);

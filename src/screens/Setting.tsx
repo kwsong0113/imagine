@@ -78,7 +78,7 @@ const SettingThemeModeRow = () => {
 const languageCaption: Record<Language, string> = {
   kor: '한국어',
   eng: 'English',
-  locale: getLocaleLanguage() === 'ko' ? '한국어' : 'English',
+  locale: getLocaleLanguage() === 'kor' ? '한국어' : 'English',
 };
 
 const SettingLanguageRow = () => {

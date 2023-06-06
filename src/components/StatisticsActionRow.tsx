@@ -1,8 +1,8 @@
 import React from 'react';
 import { ActionInstance } from '../features/action/types';
 import {
-  getAppForAction,
-  getActionDescription,
+  useGetActionDescription,
+  useGetAppForAction,
 } from '../features/action/utils';
 import { Typography } from './Typography';
 import { AppIcon } from './AppIcon';
@@ -21,6 +21,8 @@ export const StatisticsActionRow = ({
   hasTopBorder = true,
   hasBottomBorder = false,
 }: Props) => {
+  const getAppForAction = useGetAppForAction();
+  const getActionDescription = useGetActionDescription();
   const app = getAppForAction(actionInstance);
   const description = getActionDescription(actionInstance);
 

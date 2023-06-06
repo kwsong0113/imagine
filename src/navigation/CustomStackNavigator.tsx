@@ -7,7 +7,6 @@ import {
   AppList,
   Custom,
   ActionList,
-  CanvasTest,
   GestureList,
   WholeActionList,
   ParamActionList,
@@ -25,7 +24,6 @@ export type CustomStackParamList = {
     actionId: number;
     type?: 'shortcutList' | 'customURLSchemeList';
   };
-  CanvasTest: undefined;
   GestureList: undefined;
   WholeActionList: undefined;
   BlankCanvas: undefined;
@@ -51,7 +49,6 @@ export const CustomStackNavigator = () => {
       <Stack.Screen name="AppList" component={AppList} />
       <Stack.Screen name="ActionList" component={ActionList} />
       <Stack.Screen name="ParamActionList" component={ParamActionList} />
-      <Stack.Screen name="CanvasTest" component={CanvasTest} />
       <Stack.Screen name="GestureList" component={GestureList} />
       <Stack.Screen name="WholeActionList" component={WholeActionList} />
       <Stack.Screen name="UrlSchemeHelp" component={UrlSchemeHelp} />

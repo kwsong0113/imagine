@@ -16,12 +16,9 @@ const resources: Resource = {
 
 export const initI18n = () => {
   const settingLanguage = store.getState().setting.language;
-  const lng =
-    settingLanguage === 'kor'
-      ? 'ko'
-      : settingLanguage === 'eng'
-      ? 'en'
-      : getLocaleLanguage();
+  const language =
+    settingLanguage === 'locale' ? getLocaleLanguage() : settingLanguage;
+  const lng = language === 'kor' ? 'ko' : 'en';
 
   i18n.use(initReactI18next).init({
     resources,

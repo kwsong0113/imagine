@@ -15,14 +15,15 @@ import {
   selectActiveGestureList,
   selectGestureToActionMap,
 } from '../../store/slices/gesture';
-import { getActionDescription } from '../../features/action/utils';
 import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
 import { Gesture } from '../../features/gesture/types';
+import { useGetActionDescription } from '../../features/action/utils';
 
 export const WholeActionList = () => {
   const activeGestureList = useAppSelector(selectActiveGestureList);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const [selectedGesture, setSelectedGesture] = useState<Gesture>();
+  const getActionDescription = useGetActionDescription();
 
   const gestureViewBottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
 

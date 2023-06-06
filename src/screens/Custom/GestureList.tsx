@@ -19,14 +19,15 @@ import {
   selectGestureList,
   selectGestureToActionMap,
 } from '../../store/slices/gesture';
-import { getActionDescription } from '../../features/action/utils';
 import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
 import { Gesture } from '../../features/gesture/types';
+import { useGetActionDescription } from '../../features/action/utils';
 
 export const GestureList = () => {
   const gestureList = useAppSelector(selectGestureList);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const dispatch = useAppDispatch();
+  const getActionDescription = useGetActionDescription();
   const [selectedGesture, setSelectedGesture] = useState<Gesture>();
   const toast = useToast();
 
