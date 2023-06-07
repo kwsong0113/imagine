@@ -17,6 +17,7 @@ import {
 import { ActionInstance } from '../../features/action/types';
 import { StatisticsStackParamList } from '../../navigation/StatisticsStackNavigator';
 import { useWindowDimensions } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 type CountInfoProps = {
   count: number;
@@ -44,6 +45,7 @@ const CountInfo = ({ count, description, ...props }: CountInfoProps) => {
 type Props = StackScreenProps<StatisticsStackParamList, 'StatisticsHome'>;
 
 export const Statistics = ({ navigation }: Props) => {
+  const { t } = useTranslation('statistics');
   const activeGestureList = useAppSelector(selectActiveGestureList);
   const numActionsPerDay = useAppSelector(selectNumActionsPerDay);
   const actionHistoryListToday = useAppSelector(selectActionHistoryListToday);
@@ -64,24 +66,24 @@ export const Statistics = ({ navigation }: Props) => {
     <ScreenContainer>
       <Header
         hasBackButton={false}
-        title="통계"
-        description="어떤 액션을 주로 사용했는지 확인해보세요"
+        title={t('header.title')}
+        description={t('header.description')}
       />
       <VStack space={4}>
         <CountInfo
           count={activeGestureList.length}
-          description="등록된 액션의 수"
+          description={t('countInfo.num_actions')}
         />
         <HStack space={4}>
           <CountInfo
             flex={1}
             count={actionHistoryListToday.length}
-            description="오늘 액션 실행 횟수"
+            description={t('countInfo.num_actions_today')}
           />
           <CountInfo
             flex={1}
             count={Math.round(numActionsPerDay)}
-            description="하루 평균 액션 실행 횟수"
+            description={t('countInfo.num_actions_per_day')}
           />
         </HStack>
       </VStack>
@@ -95,12 +97,12 @@ export const Statistics = ({ navigation }: Props) => {
         >
           <Typography variant="description" color="red.700">
             {actionHistoryListToday.length === 0
-              ? '오늘 액션을 실행하지 않았어요!'
+              ? t('message.no_actions_today')
               : actionHistoryListToday.length > numActionsPerDay
-              ? '평소보다 액션을 더 많이 실행했어요!'
+              ? t('message.more_actions_today')
               : actionHistoryListToday.length === numActionsPerDay
-              ? '평소만큼 액션을 실행했어요!'
-              : '평소보다 액션을 더 적게 실행했어요!'}
+              ? t('message.same_actions_today')
+              : t('message.less_actions_today')}
           </Typography>
         </HStack>
         {topActionStat.map((props, idx) => {
@@ -117,7 +119,7 @@ export const Statistics = ({ navigation }: Props) => {
         })}
         {hasShowAllButton && (
           <ListRowButton
-            title="모두 보기"
+            title={t('see_all')}
             onPress={() => navigation.navigate('Detail')}
           />
         )}

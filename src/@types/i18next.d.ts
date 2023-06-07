@@ -12,6 +12,7 @@ declare module 'i18next' {
       setting: typeof ko.setting;
       appList: typeof ko.appList;
       paramActionList: typeof ko.paramActionList;
+      statistics: typeof ko.statistics;
     };
   }
 }
