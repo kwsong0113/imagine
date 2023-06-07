@@ -23,6 +23,7 @@ import { GestureAdditionBottomSheetModal } from './GestureAdditionBottomSheetMod
 import { IonIcon } from './IonIcon';
 import { GesturePreview } from './GesturePreview';
 import { useGetActionDescription } from '../features/action/utils';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   appId: number;
@@ -34,6 +35,7 @@ export const GesturePickerBottomSheetModal = forwardRef<
   SingleBottomSheetModal,
   Props
 >(({ appId, actionId, param }, ref) => {
+  const { t } = useTranslation('gesture');
   const gestureList = useAppSelector(selectGestureList);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const dispatch = useAppDispatch();
@@ -88,7 +90,7 @@ export const GesturePickerBottomSheetModal = forwardRef<
         >
           <AnimatedIconButton name="close-circle" size={10} color="gray.300" />
           <VStack flex={1} space={2} alignItems="center">
-            <Typography variant="body">제스처 선택</Typography>
+            <Typography variant="body">{t('gesturePicker.title')}</Typography>
             <Typography variant="description" color="gray.600" isTruncated>
               {getActionDescription({ appId, actionId, param })}
             </Typography>
@@ -106,7 +108,7 @@ export const GesturePickerBottomSheetModal = forwardRef<
         </HStack>
         <ScrollView mx={-3} px={3}>
           <ListRow
-            title="새로운 제스처"
+            title={t('gesturePicker.new_gesture')}
             right={
               <IonIcon name="add-circle-outline" color="blue.500" size={8} />
             }
@@ -157,7 +159,7 @@ export const GesturePickerBottomSheetModal = forwardRef<
                           }
                           isTruncated
                         >
-                          {description ?? '선택 가능'}
+                          {description ?? t('gesturePicker.can_select')}
                         </Typography>
                       </VStack>
                     </HStack>
@@ -187,7 +189,7 @@ export const GesturePickerBottomSheetModal = forwardRef<
             variant="description"
             color={shouldFilterGestures ? 'blue.500' : 'gray.500'}
           >
-            사용 중인 제스처 숨기기
+            {t('gesturePicker.hide_gesture_in_use')}
           </Typography>
         </HStack>
       </VStack>

@@ -1,0 +1,31 @@
+{
+  "gesture_list": "My Gestures",
+  "action_list": "My Actions",
+  "add_gesture": "New Gesture",
+  "unassigned_gesture": "Unassigned gesture",
+  "message": {
+    "remove_gesture": "{{name}} gesture deleted",
+    "remove_action": "{{name}} action deleted",
+    "enter_gesture_name": "Enter the gesture name",
+    "draw_gesture": "Please draw a gesture",
+    "no_dot_stroke": "Dotting is not allowed",
+    "not_allowed": "This gesture is not allowed",
+    "one_time_left": "Last 1",
+    "few_times_left": "{{num}} more",
+    "gesture_added": "Successfully Added",
+    "no_gesture_in_use": "No gesture in use",
+    "inexecutable_action": "Unable to execute this action",
+    "cannot_find_action": "Action not found"
+  },
+  "gestureAddition": {
+    "name_placeholder": "Gesture name",
+    "title": "New Gesture",
+    "clear": "Clear"
+  },
+  "gesturePicker": {
+    "title": "Gestures",
+    "new_gesture": "New Gesture",
+    "can_select": "Available",
+    "hide_gesture_in_use": "Hide gestures in use"
+  }
+}

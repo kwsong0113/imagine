@@ -22,8 +22,10 @@ import {
 import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
 import { Gesture } from '../../features/gesture/types';
 import { useGetActionDescription } from '../../features/action/utils';
+import { useTranslation } from 'react-i18next';
 
 export const GestureList = () => {
+  const { t } = useTranslation('gesture');
   const gestureList = useAppSelector(selectGestureList);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const dispatch = useAppDispatch();
@@ -49,21 +51,21 @@ export const GestureList = () => {
             iconName="checkmark-circle"
             iconColor="red.700"
             bg="gray.300"
-            message={`${name} 제스처를 삭제했어요`}
+            message={t('message.remove_gesture', { name })}
           />
         ),
         duration: 1000,
       });
     },
-    [dispatch, toast],
+    [dispatch, toast, t],
   );
 
   return (
     <ScreenContainer>
-      <Header variant="center" title="제스처 목록" />
+      <Header variant="center" title={t('gesture_list')} />
       <ScrollView mx={-3} px={3} mb={-6}>
         <ListRow
-          title="제스처 추가하기"
+          title={t('add_gesture')}
           right={
             <IonIcon name="add-circle-outline" color="blue.500" size={8} />
           }
@@ -104,7 +106,7 @@ export const GestureList = () => {
                         color={description ? 'teal.600' : 'gray.600'}
                         isTruncated
                       >
-                        {description ?? '할당되지 않은 제스처'}
+                        {description ?? t('unassigned_gesture')}
                       </Typography>
                     </VStack>
                   </HStack>

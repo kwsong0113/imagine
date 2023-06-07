@@ -65,7 +65,7 @@ const AppRow = ({
       description={
         actions.length === 1
           ? gestureName
-            ? t('gesture_description')
+            ? t('gesture_description', { gestureName })
             : actions[0].description
           : numActiveActions > 0
           ? t('num_active_actions', {

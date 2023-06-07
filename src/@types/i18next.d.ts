@@ -13,6 +13,7 @@ declare module 'i18next' {
       appList: typeof ko.appList;
       paramActionList: typeof ko.paramActionList;
       statistics: typeof ko.statistics;
+      gesture: typeof ko.gesture;
     };
   }
 }

@@ -31,6 +31,7 @@ import { AnimatedIconButton } from './AnimatedIconButton';
 import { AnimatedConfirm } from './AnimatedConfirm';
 import { AnimatedSentence } from './AnimatedSentence';
 import { Toast } from './Toast';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   onRedirect?: (id: string) => void;
@@ -40,6 +41,7 @@ export const GestureAdditionBottomSheetModal = forwardRef<
   SingleBottomSheetModal,
   Props
 >(({ onRedirect }, ref) => {
+  const { t } = useTranslation('gesture');
   const dispatch = useAppDispatch();
   const canvasRef = useRef<Canvas>(null);
   const inputRef = useRef<ComponentRef<typeof Input>>(null);
@@ -59,7 +61,7 @@ export const GestureAdditionBottomSheetModal = forwardRef<
             <Toast
               iconName="text"
               iconColor="orange.700"
-              message="제스처 이름을 입력해주세요"
+              message={t('message.enter_gesture_name')}
             />
           ),
           placement: 'top',
@@ -74,14 +76,14 @@ export const GestureAdditionBottomSheetModal = forwardRef<
       let message = '';
       switch (gestureResult?.error) {
         case GestureError.EmptyPoints:
-          message = '제스처를 그려주세요';
+          message = t('message.draw_gesture');
 
           break;
         case GestureError.DotStroke:
-          message = '점 찍기는 사용할 수 없어요';
+          message = t('message.no_dot_stroke');
           break;
         default:
-          message = '허용되지 않은 제스처에요';
+          message = t('message.not_allowed');
       }
       toast.show({
         render: () => (
@@ -91,7 +93,7 @@ export const GestureAdditionBottomSheetModal = forwardRef<
         placement: 'top',
       });
     }
-  }, [gestureData, name, toast]);
+  }, [gestureData, name, toast, t]);
 
   const handleDismiss = useCallback(() => {
     setGestureData([]);
@@ -122,8 +124,8 @@ export const GestureAdditionBottomSheetModal = forwardRef<
             iconColor="blue.500"
             message={
               gestureData.length === 3
-                ? '마지막 1번 남았어요'
-                : `4번 중 ${4 - gestureData.length}번 남았어요`
+                ? t('message.one_time_left')
+                : t('message.few_times_left', { num: 4 - gestureData.length })
             }
           />
         ),
@@ -166,18 +168,22 @@ export const GestureAdditionBottomSheetModal = forwardRef<
                   borderRadius={25}
                 >
                   <IonIcon name="close-circle" size={18} color="gray.500" />
-                  <Typography variant="caption">지우기</Typography>
+                  <Typography variant="caption">
+                    {t('gestureAddition.clear')}
+                  </Typography>
                 </Center>
               )}
             </Pressable>
             <VStack flex={1} space={2} alignItems="center">
-              <Typography variant="body">제스처 추가</Typography>
+              <Typography variant="body">
+                {t('gestureAddition.title')}
+              </Typography>
               <Input
                 ref={inputRef}
                 variant="unstyled"
                 defaultValue={name}
                 onChangeText={text => setName(text)}
-                placeholder="제스처 이름을 입력해주세요"
+                placeholder={t('gestureAddition.name_placeholder')}
                 placeholderTextColor="gray.600"
                 color="gray.900"
                 p={0}
@@ -229,7 +235,7 @@ export const GestureAdditionBottomSheetModal = forwardRef<
           <AnimatedSentence
             fontSize="xl"
             color={colors.gray[900]}
-            content="제스처를 추가했어요"
+            content={t('message.gesture_added')}
             duration={800}
           />
         </VStack>

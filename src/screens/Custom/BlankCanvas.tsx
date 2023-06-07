@@ -8,6 +8,7 @@ import { selectGestureToActionMap } from '../../store/slices/gesture';
 import { GestureError, RecognitionError } from '../../features/gesture/types';
 import { useExecuteActionInstance } from '../../hooks/useExecuteActionInstance';
 import { useGetActionDescription } from '../../features/action/utils';
+import { useTranslation } from 'react-i18next';
 
 type FloatingButtonProps = {
   children: ReactNode;
@@ -40,6 +41,7 @@ const FloatingButton = ({
 type BlankCanvasProps = StackScreenProps<CustomStackParamList, 'BlankCanvas'>;
 
 export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
+  const { t } = useTranslation('gesture');
   const canvasRef = useRef<Canvas>(null);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const toast = useToast();
@@ -74,7 +76,7 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
               <Toast
                 iconName="close-circle"
                 iconColor="red.600"
-                message="이 액션을 실행할 수 없어요"
+                message={t('message.inexecutable_action')}
               />
             ),
             duration: 500,
@@ -82,23 +84,23 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
           });
         });
       } else {
-        message = '액션을 찾지 못했어요';
+        message = t('message.cannot_find_action');
         iconName = 'close-circle';
         iconColor = 'red.600';
       }
     } else {
       switch (recognitionResult?.error) {
         case RecognitionError.NoGesture:
-          message = '사용 중인 제스처가 없어요';
+          message = t('message.no_gesture_in_use');
           break;
         case GestureError.EmptyPoints:
-          message = '제스처를 그려주세요';
+          message = t('message.draw_gesture');
           break;
         case GestureError.DotStroke:
-          message = '점 찍기는 사용할 수 없어요';
+          message = t('message.no_dot_stroke');
           break;
         default:
-          message = '허용되지 않은 제스처에요';
+          message = t('message.not_allowed');
       }
       iconName = 'warning';
       iconColor = 'orange.700';
