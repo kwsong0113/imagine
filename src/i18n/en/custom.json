@@ -7,7 +7,7 @@
   "app_description": "Supports apple & third-party apps",
   "shortcut_title": "Shortcuts",
   "shortcut_description": "Only enter the name of the shortcut",
-  "native_action_title": "Native Actions",
+  "native_action_title": "Linky Actions",
   "native_action_description": "Makes you a more efficient iPhone user",
   "custom_url_scheme_title": "Custom URL Scheme",
   "custom_url_scheme_description": "Create your own custom action",
