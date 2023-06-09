@@ -42,6 +42,7 @@ export const darkThemeColors = {
     300: '#00766E',
     200: '#00665F',
     100: '#004A42',
+    50: '#00322C',
   },
   gray: {
     900: '#F6F6F6',

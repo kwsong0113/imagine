@@ -10,6 +10,11 @@
   "language": {
     "title": "Language"
   },
+  "autolaunch": {
+    "title": "Auto Launch",
+    "caption": "Automatically execute actions",
+    "beta": "beta"
+  },
   "reset": {
     "title": "Reset",
     "caption": "Delete all gestures and actions",

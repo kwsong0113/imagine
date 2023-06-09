@@ -10,12 +10,14 @@ interface SettingState {
   themeMode: ThemeMode;
   language: Language;
   shouldShowHelp: boolean;
+  autoLaunch: boolean;
 }
 
 const initialState: SettingState = {
   themeMode: 'light',
   language: 'locale',
   shouldShowHelp: true,
+  autoLaunch: true,
 };
 
 const settingSlice = createSlice({
@@ -35,6 +37,9 @@ const settingSlice = createSlice({
     stopShowHelp: state => {
       state.shouldShowHelp = false;
     },
+    toggleAutoLaunch: state => {
+      state.autoLaunch = !state.autoLaunch;
+    },
   },
 });
 
@@ -43,4 +48,5 @@ export const selectThemeMode = (state: RootState) => state.setting.themeMode;
 export const selectLanguage = (state: RootState) => state.setting.language;
 export const selectShouldShowHelp = (state: RootState) =>
   state.setting.shouldShowHelp;
+export const selectAutoLaunch = (state: RootState) => state.setting.autoLaunch;
 export default settingSlice.reducer;

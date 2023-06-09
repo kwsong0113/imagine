@@ -12,3 +12,4 @@ export * from './useActionStat';
 export * from './useRenderToast';
 export * from './useCurrentLanguage';
 export * from './useAppList';
+export * from './useInterval';

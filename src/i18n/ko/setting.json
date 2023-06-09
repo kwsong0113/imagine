@@ -10,6 +10,11 @@
   "language": {
     "title": "언어"
   },
+  "autolaunch": {
+    "title": "자동 실행",
+    "caption": "손을 떼면 액션이 자동으로 실행돼요",
+    "beta": "베타"
+  },
   "reset": {
     "title": "제스처 초기화",
     "caption": "등록된 제스처를 모두 삭제해요",
@@ -24,5 +29,5 @@
   "help": {
     "title": "설명서 보기",
     "description": "Linky 앱을 잘 활용하려면 읽어보세요"
-  } 
+  }
 }

@@ -33,6 +33,7 @@ export const lightThemeColors = {
     900: '#DA0000',
   },
   teal: {
+    50: '#DBF1F1',
     100: '#B1DEDD',
     200: '#7EC9C7',
     300: '#4AB3B0',

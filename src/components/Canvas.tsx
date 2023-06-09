@@ -33,6 +33,7 @@ type GestureResult =
 interface CanvasRef extends SketchCanvasRef {
   getGesture: () => GestureResult;
   recognize: () => RecognitionResult;
+  getIsEmpty: () => boolean;
 }
 
 type Canvas = CanvasRef;
@@ -84,6 +85,13 @@ const Canvas = forwardRef<CanvasRef, {}>((_, ref) => {
         return gestureRecognize(
           activeGestureList,
           canvasPoints as CanvasPoints,
+        );
+      },
+      getIsEmpty: () => {
+        const canvasPoints = sketchCanvasRef.current?.toPoints();
+        return (
+          canvasPoints === undefined ||
+          canvasPoints.every(points => points.length === 0)
         );
       },
     }),

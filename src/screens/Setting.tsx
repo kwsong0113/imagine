@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { VStack, HStack, Box, useTheme } from 'native-base';
+import { VStack, HStack, Box, useTheme, Center, Switch } from 'native-base';
 import { useThemeMode } from '../hooks';
 import {
   Header,
@@ -17,6 +17,7 @@ import {
 } from '../components';
 import {
   Language,
+  selectAutoLaunch,
   selectLanguage,
   settingActions,
   ThemeMode,
@@ -124,6 +125,56 @@ const SettingLanguageRow = () => {
           </VStack>
         </VStack>
       </SingleBottomSheetModal>
+    </>
+  );
+};
+
+const SettingAutoLaunchRow = () => {
+  const { t } = useTranslation('setting');
+  const isChecked = useAppSelector(selectAutoLaunch);
+  const dispatch = useAppDispatch();
+
+  return (
+    <>
+      <ListRow
+        left={
+          <MaterialCommunityIcon
+            name="rocket-launch"
+            size="40px"
+            color="gray.900"
+          />
+        }
+        title={t('autolaunch.title')}
+        caption={t('autolaunch.caption')}
+        right={
+          <HStack alignItems="center">
+            <Center
+              bg="teal.50"
+              px={2}
+              h={23}
+              borderRadius={12}
+              borderColor="teal.700"
+              borderWidth={1}
+            >
+              <Typography variant="caption" color="teal.700">
+                {t('autolaunch.beta')}
+              </Typography>
+            </Center>
+            <Switch
+              size="sm"
+              isChecked={isChecked}
+              onToggle={() => {
+                dispatch(settingActions.toggleAutoLaunch());
+              }}
+              onTrackColor="teal.700"
+              onThumbColor="gray.100"
+              offTrackColor="gray.300"
+              offThumbColor="gray.100"
+            />
+          </HStack>
+        }
+        isPressable={false}
+      />
     </>
   );
 };
@@ -278,6 +329,7 @@ export const Setting = () => {
       <VStack flex={1}>
         <SettingThemeModeRow />
         <SettingLanguageRow />
+        <SettingAutoLaunchRow />
         {/* <SettingDynamicIslandRow /> */}
         {/* <SettingGestureStorageRow /> */}
         <SettingClearGestureRow />

@@ -3,12 +3,15 @@ import { Box, Center, Pressable, useToast } from 'native-base';
 import { Canvas, IonIcon, Toast } from '../../components';
 import { StackScreenProps } from '@react-navigation/stack';
 import { CustomStackParamList } from '../../navigation';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useInterval } from '../../hooks';
 import { selectGestureToActionMap } from '../../store/slices/gesture';
 import { GestureError, RecognitionError } from '../../features/gesture/types';
 import { useExecuteActionInstance } from '../../hooks/useExecuteActionInstance';
 import { useGetActionDescription } from '../../features/action/utils';
 import { useTranslation } from 'react-i18next';
+import { selectAutoLaunch } from '../../store/slices';
+
+const DRAWING_CLOCK_COUNT = 3;
 
 type FloatingButtonProps = {
   children: ReactNode;
@@ -47,6 +50,8 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
   const toast = useToast();
   const [shouldShowButtons, setShouldShowButtons] = useState(true);
   const [shouldAlsoShowButtons, setShouldAlsoShowButtons] = useState(true);
+  const autoLaunch = useAppSelector(selectAutoLaunch);
+  const [drawingClock, setDrawingClock] = useState(DRAWING_CLOCK_COUNT);
   const executeActionInstance = useExecuteActionInstance();
   const getActionDescription = useGetActionDescription();
 
@@ -123,6 +128,23 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
 
     canvasRef.current?.reset();
   };
+
+  useInterval(
+    () => {
+      const isDrawing = canvasRef.current?.getIsDrawing();
+      if (isDrawing === false && !canvasRef.current?.getIsEmpty()) {
+        if (drawingClock === 1) {
+          handleRecognize();
+          setDrawingClock(DRAWING_CLOCK_COUNT);
+        } else {
+          setDrawingClock(prev => prev - 1);
+        }
+      } else if (isDrawing === false) {
+        setDrawingClock(DRAWING_CLOCK_COUNT);
+      }
+    },
+    autoLaunch ? 100 : null,
+  );
 
   return (
     <Box flex={1} bg="gray.300" safeAreaTop>
