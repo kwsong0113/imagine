@@ -1,9 +1,10 @@
 import { HStack, Image, VStack } from 'native-base';
 import React, { ComponentProps } from 'react';
+import { useCurrentLangauge } from '../hooks';
 import { AnimatedIconButton } from './AnimatedIconButton';
 import { Typography } from './Typography';
 
-const imageMap: Record<number, any> = {
+const imageMap_ko: Record<number, any> = {
   0: {
     source: require('../assets/images/help/launch.png'),
     width: 155,
@@ -11,31 +12,70 @@ const imageMap: Record<number, any> = {
     alt: 'launch',
   },
   1: {
-    source: require('../assets/images/help/add_gesture.png'),
+    source: require('../assets/images/help/ko/add_gesture.png'),
     width: 127,
     height: 360,
     alt: 'add_gesture',
   },
   2: {
-    source: require('../assets/images/help/add_action.png'),
+    source: require('../assets/images/help/ko/add_action.png'),
     width: 177,
     height: 360,
     alt: 'add_action',
   },
   3: {
-    source: require('../assets/images/help/widget.png'),
+    source: require('../assets/images/help/ko/widget.png'),
     width: 177,
     height: 360,
     alt: 'widget',
   },
   4: {
-    source: require('../assets/images/help/execute.png'),
+    source: require('../assets/images/help/ko/execute.png'),
     width: 177,
     height: 360,
     alt: 'execute',
   },
   5: {
-    source: require('../assets/images/help/statistics.png'),
+    source: require('../assets/images/help/ko/statistics.png'),
+    width: 177,
+    height: 360,
+    alt: 'statistics',
+  },
+};
+
+const imageMap_en: Record<number, any> = {
+  0: {
+    source: require('../assets/images/help/launch.png'),
+    width: 155,
+    height: 360,
+    alt: 'launch',
+  },
+  1: {
+    source: require('../assets/images/help/en/add_gesture.png'),
+    width: 127,
+    height: 360,
+    alt: 'add_gesture',
+  },
+  2: {
+    source: require('../assets/images/help/en/add_action.png'),
+    width: 177,
+    height: 360,
+    alt: 'add_action',
+  },
+  3: {
+    source: require('../assets/images/help/en/widget.png'),
+    width: 177,
+    height: 360,
+    alt: 'widget',
+  },
+  4: {
+    source: require('../assets/images/help/en/execute.png'),
+    width: 177,
+    height: 360,
+    alt: 'execute',
+  },
+  5: {
+    source: require('../assets/images/help/en/statistics.png'),
     width: 177,
     height: 360,
     alt: 'statistics',
@@ -65,6 +105,8 @@ export const HelpCard = ({
   onPressBack,
   onPressForward,
 }: Props) => {
+  const imageMap = useCurrentLangauge() === 'kor' ? imageMap_ko : imageMap_en;
+
   return (
     <HStack
       bg={bg}
