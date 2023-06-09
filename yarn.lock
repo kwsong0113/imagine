@@ -9937,7 +9937,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rn-perfect-sketch-canvas@npm:^0.3.0":
+"rn-perfect-sketch-canvas@npm:0.3.0":
   version: 0.3.0
   resolution: "rn-perfect-sketch-canvas@npm:0.3.0"
   dependencies:
@@ -9948,6 +9948,20 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 97e06a3fc3bd477554c12a74f274552c598933e7b1a0e050a3c7a96193a26ca49df68b261946bbd35db56c033a432828172397b41b97d082595fde4ec48b33c7
+  languageName: node
+  linkType: hard
+
+"rn-perfect-sketch-canvas@patch:rn-perfect-sketch-canvas@npm%3A0.3.0#./.yarn/patches/rn-perfect-sketch-canvas-npm-0.3.0-d013467b34.patch::locator=Imagine%40workspace%3A.":
+  version: 0.3.0
+  resolution: "rn-perfect-sketch-canvas@patch:rn-perfect-sketch-canvas@npm%3A0.3.0#./.yarn/patches/rn-perfect-sketch-canvas-npm-0.3.0-d013467b34.patch::version=0.3.0&hash=ae9523&locator=Imagine%40workspace%3A."
+  dependencies:
+    perfect-freehand: ^1.1.0
+    valtio: ^1.6.1
+  peerDependencies:
+    "@shopify/react-native-skia": "*"
+    react: "*"
+    react-native: "*"
+  checksum: d61696f1a2143d77dd4be8abdf251f1fec26c6be74fd3b510e1ee5e34f8338c1bb5905d9bd9d4cb58b997c69f7bbba6ade704941bf21b0f65b19a9a0168e36d2
   languageName: node
   linkType: hard
 
