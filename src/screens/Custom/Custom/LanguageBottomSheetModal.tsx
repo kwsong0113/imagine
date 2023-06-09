@@ -6,7 +6,6 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { selectLanguage, settingActions } from '../../../store/slices';
-import { getLocaleLanguage } from '../../../utils';
 import { useTranslation } from 'react-i18next';
 
 export const LanguageBottomSheetModal = () => {
@@ -39,7 +38,7 @@ export const LanguageBottomSheetModal = () => {
       }}
       onDismiss={() => {
         if (language === 'locale') {
-          dispatch(settingActions.changeLanguage(getLocaleLanguage()));
+          dispatch(settingActions.changeLanguageFromLocale());
         }
       }}
     />
