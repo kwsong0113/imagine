@@ -26,3 +26,4 @@ export * from './ListRowButton';
 export * from './StatisticsActionRow';
 export * from './GesturePreview';
 export * from './HelpCard';
+export * from './OptionBottomSheetModal';

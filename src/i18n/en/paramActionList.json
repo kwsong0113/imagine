@@ -1,0 +1,11 @@
+{
+  "shortcuts": {
+    "title": "Shortcuts",
+    "description": "Run shortcuts and get tasks done quickly"
+  },
+  "custom_url_scheme": {
+    "title": "Custom URL Scheme",
+    "description": "Add your custom action using URL scheme",
+    "help": "What is URL scheme?"
+  }
+}

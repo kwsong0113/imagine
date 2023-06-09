@@ -1,0 +1,19 @@
+{
+  "header": {
+    "title": "통계",
+    "description": "어떤 액션을 주로 사용했는지 확인해보세요"
+  },
+  "countInfo": {
+    "num_actions": "등록된 액션의 수",
+    "num_actions_today": "오늘 액션 실행 횟수",
+    "num_actions_per_day": "하루 평균 액션 실행 횟수"
+  },
+  "message": {
+    "no_actions_today": "오늘 액션을 실행하지 않았어요!",
+    "more_actions_today": "평소보다 액션을 더 많이 실행했어요!",
+    "less_actions_today": "평소보다 액션을 더 적게 실행했어요!",
+    "same_actions_today": "평소만큼 액션을 실행했어요!"
+  },
+  "see_all": "모두 보기",
+  "detail_title": "오늘의 액션 통계"
+}

@@ -1,0 +1,53 @@
+import React, { useEffect, useRef } from 'react';
+import {
+  OptionSingleBottomSheetModal,
+  SingleBottomSheetModal,
+} from '../../../components';
+import { CustomStackParamList } from '../../../navigation';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useBottomSheetModal } from '@gorhom/bottom-sheet';
+import { useNavigation } from '@react-navigation/native';
+import {
+  selectShouldShowHelp,
+  selectLanguage,
+  settingActions,
+} from '../../../store/slices';
+import { useTranslation } from 'react-i18next';
+
+type HomeNavigationProp = StackNavigationProp<CustomStackParamList, 'Home'>;
+
+export const HelpBottomSheetModal = () => {
+  const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
+  const { dismiss } = useBottomSheetModal();
+  const navigation = useNavigation<HomeNavigationProp>();
+  const dispatch = useAppDispatch();
+  const shouldShowHelp = useAppSelector(selectShouldShowHelp);
+  const shouldShowLanguagePicker = useAppSelector(selectLanguage) === 'locale';
+  const { t } = useTranslation('custom');
+
+  useEffect(() => {
+    if (shouldShowHelp && !shouldShowLanguagePicker) {
+      bottomSheetModalRef.current?.present();
+    }
+  }, [shouldShowHelp, shouldShowLanguagePicker]);
+
+  return (
+    <OptionSingleBottomSheetModal
+      ref={bottomSheetModalRef}
+      title={t('help_bottomsheet.title')}
+      description={t('help_bottomsheet.desription')}
+      leftButtonTitle={t('help_bottomsheet.left_button_title')}
+      rightButtonTitle={t('help_bottomsheet.right_button_title')}
+      onPressLeft={() => {
+        dispatch(settingActions.stopShowHelp());
+        dismiss();
+      }}
+      onPressRight={() => {
+        dispatch(settingActions.stopShowHelp());
+        dismiss();
+        navigation.navigate('Help');
+      }}
+    />
+  );
+};

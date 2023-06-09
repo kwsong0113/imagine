@@ -1,0 +1,11 @@
+{
+  "shortcuts": {
+    "title": "단축어 실행하기",
+    "description": "단축어를 실행해 작업을 빠르게 완료하세요"
+  },
+  "custom_url_scheme": {
+    "title": "커스텀 URL Scheme",
+    "description": "URL Scheme을 활용해 액션을 등록하세요",
+    "help": "URL Scheme이 무엇인가요?"
+  }
+}

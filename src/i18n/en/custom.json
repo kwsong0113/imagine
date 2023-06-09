@@ -1,0 +1,22 @@
+{
+  "title": "Custom Gesture",
+  "description": "Choose an action & Draw your gesture",
+  "gestures": "My Gestures",
+  "actions": "My Actions",
+  "app_title": "Apps",
+  "app_description": "Supports apple & third-party apps",
+  "shortcut_title": "Shortcuts",
+  "shortcut_description": "Only enter the name of the shortcut",
+  "native_action_title": "Linky Actions",
+  "native_action_description": "Makes you a more efficient iPhone user",
+  "custom_url_scheme_title": "Custom URL Scheme",
+  "custom_url_scheme_description": "Create your own custom action",
+  "toast_message": "This feature is under development",
+  "language_bottomsheet_title": "Choose Your Language",
+  "help_bottomsheet": {
+    "title": "Learn How to Use Linky!",
+    "desription": "5 Steps to smartly utilize the Linky app",
+    "left_button_title": "Not now",
+    "right_button_title": "OK"
+  }
+}

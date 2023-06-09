@@ -13,12 +13,17 @@ import {
 import { CustomStackParamList } from '../../navigation';
 import { useMatchedAction } from '../../hooks/useMatchedAction';
 import { Input, ScrollView, VStack, HStack, Box, Pressable } from 'native-base';
-import { useAppSelector, useHandleRemoveAction } from '../../hooks';
+import {
+  useAppSelector,
+  useCurrentLangauge,
+  useHandleRemoveAction,
+} from '../../hooks';
 import { selectGestureToActionMap } from '../../store/slices/gesture';
 import { ActionInstance, ParamAction } from '../../features/action/types';
-import { getActionDescription } from '../../features/action/utils';
 import { useGetGestureForActionInstance } from '../../hooks/useGetGestureForActionInstance';
 import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
+import { useGetActionDescription } from '../../features/action/utils';
+import { useTranslation } from 'react-i18next';
 
 type ParamActionProps = StackScreenProps<
   CustomStackParamList,
@@ -39,11 +44,14 @@ const ParamActionRow = ({
   onRemove,
   ...props
 }: ParamActionRowProps) => {
+  const { t } = useTranslation('appList');
   return (
     <Animated.View layout={Layout.springify()} exiting={LightSpeedOutRight}>
       <ListRow
         title={actionInstance.param}
-        description={gestureName ? `${gestureName} 제스처` : undefined}
+        description={
+          gestureName ? t('gesture_description', { gestureName }) : undefined
+        }
         right={
           <AnimatedIconButton
             name="remove-circle-outline"
@@ -59,9 +67,11 @@ const ParamActionRow = ({
 };
 
 export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
+  const { t } = useTranslation('paramActionList');
   const { appId, actionId, type } = route.params;
   const matchedAction = useMatchedAction(appId, actionId);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
+  const showUrlSchemeHelp = useCurrentLangauge() === 'kor';
   const filteredParamActionList = useMemo(
     () =>
       Object.entries(gestureToActionMap).filter(
@@ -75,6 +85,7 @@ export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
   const [selectedActionParam, setSelectedActionParam] = useState('');
   const gesturePickerBottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
   const getGestureForActionInstance = useGetGestureForActionInstance();
+  const getActionDescription = useGetActionDescription();
 
   const handleRemoveParamAction = useHandleRemoveAction();
 
@@ -82,32 +93,34 @@ export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
     <ScreenContainer>
       {type === 'shortcutList' ? (
         <Header
-          title="단축어 실행하기"
-          description="단축어를 실행해 작업을 빠르게 완료하세요"
+          title={t('shortcuts.title')}
+          description={t('shortcuts.description')}
         />
       ) : type === 'customURLSchemeList' ? (
         <VStack>
           <Header
-            title="커스텀 URL Scheme"
-            description="URL Scheme을 활용해 액션을 등록하세요"
+            title={t('custom_url_scheme.title')}
+            description={t('custom_url_scheme.description')}
           />
-          <Pressable onPress={() => navigation.navigate('UrlSchemeHelp')}>
-            {({ isPressed }) => (
-              <HStack
-                space={1}
-                py={3.5}
-                alignItems="center"
-                opacity={isPressed ? 0.4 : 1}
-              >
-                <IonIcon name="help-circle" color="gray.500" size={3} />
-                <Box borderBottomWidth={1} borderBottomColor="gray.500">
-                  <Typography variant="caption" color="gray.500">
-                    URL Scheme이 무엇인가요?
-                  </Typography>
-                </Box>
-              </HStack>
-            )}
-          </Pressable>
+          {showUrlSchemeHelp && (
+            <Pressable onPress={() => navigation.navigate('UrlSchemeHelp')}>
+              {({ isPressed }) => (
+                <HStack
+                  space={1}
+                  py={3.5}
+                  alignItems="center"
+                  opacity={isPressed ? 0.4 : 1}
+                >
+                  <IonIcon name="help-circle" color="gray.500" size={3} />
+                  <Box borderBottomWidth={1} borderBottomColor="gray.500">
+                    <Typography variant="caption" color="gray.500">
+                      {t('custom_url_scheme.help')}
+                    </Typography>
+                  </Box>
+                </HStack>
+              )}
+            </Pressable>
+          )}
         </VStack>
       ) : (
         <Header variant="center" title={matchedAction?.description} />
@@ -116,7 +129,7 @@ export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
         <ScrollView
           mx={-3}
           px={3}
-          mt={type === 'customURLSchemeList' ? -6 : 0}
+          mt={type === 'customURLSchemeList' && showUrlSchemeHelp ? -6 : 0}
           mb={-12}
         >
           <ListRow

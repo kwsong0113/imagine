@@ -1,0 +1,26 @@
+{
+  "title": "커스텀 제스처",
+  "description": "원하는 액션을 커스텀 제스처로 실행해요",
+  "gestures": "내 제스처 목록 보기 / 추가하기",
+  "actions": "내 액션 목록 보기",
+  "app_title": "앱 빠르게 실행하기",
+  "app_description": "애플 앱, 써드파티 앱, 설정을 모두 지원해요",
+  "shortcut_title": "단축어 실행하기",
+  "shortcut_description": "단축어 이름만 입력하면 등록할 수 있어요",
+  "native_action_title": "Linky 액션 실행하기",
+  "native_action_description": "아이폰을 효율적으로 활용하는 기능을 제공해요",
+  "custom_url_scheme_title": "커스텀 URL Scheme",
+  "custom_url_scheme_description": "내가 원하는 액션이 등록돼 있지 않다면 사용해요",
+  "toast_message": "아직 준비 중인 기능이에요",
+  "language_bottomsheet_title": "언어를 선택하세요",
+  "help_bottomsheet_title": "Linky 설명서를 읽어볼래요?",
+  "help_bottomsheet_desription": "Linky 앱을 똑똑하게 활용하는 법을 알려드릴게요",
+  "help_bottomsheet_left_button_title": "그만 보기",
+  "help_bottomsheet_right_button_title": "설명서 보기",
+  "help_bottomsheet": {
+    "title": "Linky 설명서를 읽어볼래요?",
+    "desription": "Linky 앱을 똑똑하게 활용하는 법을 알려드릴게요",
+    "left_button_title": "그만 보기",
+    "right_button_title": "설명서 보기"
+  }
+}

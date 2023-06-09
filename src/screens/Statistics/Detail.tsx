@@ -1,14 +1,16 @@
 import { ScrollView } from 'native-base';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ScreenContainer, Header, StatisticsActionRow } from '../../components';
 import { useActionStat } from '../../hooks';
 
 export const Detail = () => {
+  const { t } = useTranslation('statistics');
   const actionStat = useActionStat();
 
   return (
     <ScreenContainer>
-      <Header variant="center" title="오늘의 액션 통계" />
+      <Header variant="center" title={t('detail_title')} />
       <ScrollView mx={-3} px={3}>
         {actionStat.map((props, idx) => {
           return (

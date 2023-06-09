@@ -12,8 +12,10 @@ import { StackScreenProps } from '@react-navigation/stack';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { Linking, useWindowDimensions } from 'react-native';
 import { HelpCard } from '../../components/HelpCard';
+import { useTranslation } from 'react-i18next';
+import { useCurrentLangauge } from '../../hooks';
 
-const HELP_CARD_DATA = [
+const HELP_CARD_DATA_KO = [
   {
     bg: 'blue.600',
     color: 'gray.100',
@@ -58,7 +60,52 @@ const HELP_CARD_DATA = [
   },
 ];
 
-const HELP_DESCRIPTION_DATA = [
+const HELP_CARD_DATA_EN = [
+  {
+    bg: 'blue.600',
+    color: 'gray.100',
+    imageId: 0,
+    subtitle: '5 Steps',
+    titleArray: ['How to ', 'Smartly', 'Utilize Linky'],
+  },
+  {
+    bg: 'blue.200',
+    color: 'gray.900',
+    imageId: 1,
+    subtitle: 'Step 1',
+    titleArray: ['Add', 'Gestures'],
+  },
+  {
+    bg: 'teal.600',
+    color: 'gray.100',
+    imageId: 2,
+    subtitle: 'Step 2',
+    titleArray: ['Add', 'Actions'],
+  },
+  {
+    bg: 'teal.200',
+    color: 'gray.900',
+    imageId: 3,
+    subtitle: 'Step 3',
+    titleArray: ['Add a', 'Lock', 'Screen', 'Widget'],
+  },
+  {
+    bg: 'gray.600',
+    color: 'gray.100',
+    imageId: 4,
+    subtitle: 'Step 4',
+    titleArray: ['Execute', 'Actions', 'Using', 'Linky'],
+  },
+  {
+    bg: 'gray.300',
+    color: 'gray.900',
+    imageId: 5,
+    subtitle: 'Step 5',
+    titleArray: ['View', 'Statistics'],
+  },
+];
+
+const HELP_DESCRIPTION_DATA_KO = [
   [
     'Linky는 어떤 앱인가요?',
     '빠르게 제스처를 그려서 앱을 실행해요',
@@ -93,9 +140,45 @@ const HELP_DESCRIPTION_DATA = [
   ],
 ];
 
+const HELP_DESCRIPTION_DATA_EN = [
+  [
+    'What can you do with Linky?',
+    'Execute apps quickly by drawing gestures.',
+    'Check statistics to see which actions you used.',
+  ],
+  [
+    'Add gestures like alphabet, heart, star.',
+    'Dotting is not supported.',
+    'Draw the same gesture four times to add it.',
+  ],
+  [
+    'Select actions and assign gestures.',
+    'Cannot find the action you want?',
+    'Check out the Custom URL Scheme menu.',
+    'You can also add shortcuts in the Shortcuts menu.',
+  ],
+  [
+    'Add a widget to the lock screen.',
+    'You can directly access the gesture drawing screen.',
+    'If you keep Linky app open, you can execute actions without loading time.',
+    'Supported on iOS 16.0+',
+  ],
+  [
+    'Execute actions from the gesture drawing screen.',
+    'Just draw it...',
+    'and you can quickly execute various actions.',
+  ],
+  [
+    'Check the statistics.',
+    'Navigate to the Statistics tab.',
+    'Find out how often you have used different apps and actions.',
+  ],
+];
+
 type HelpProps = StackScreenProps<CustomStackParamList, 'Help'>;
 
 export const Help = ({ navigation }: HelpProps) => {
+  const { t } = useTranslation('help');
   const [index, setIndex] = useState(0);
 
   return (
@@ -108,7 +191,7 @@ export const Help = ({ navigation }: HelpProps) => {
             color="gray.400"
           />
           <Typography variant="bigText" mt={1} color="gray.400">
-            Linky 설명서
+            {t('title')}
           </Typography>
         </HStack>
         <AnimatedIconButton
@@ -124,14 +207,14 @@ export const Help = ({ navigation }: HelpProps) => {
       <ScrollView mx={-6} px={6} mb={-6} mt={-2}>
         <VStack bg="gray.200" mx={-6} pt={6}>
           <Typography variant="body" color="gray.600" px={6}>
-            Linky 똑똑하게 활용하는 법
+            {t('description')}
           </Typography>
           <HelpCarousel
             onSnapToItem={(newIndex: number) => setIndex(newIndex)}
           />
         </VStack>
         <HelpDescription index={index} />
-        <VStack alignItems="center" py={6} space={8}>
+        <VStack alignItems="center" pt={12} pb={6} space={8}>
           <Image
             w={120}
             h={120}
@@ -139,12 +222,12 @@ export const Help = ({ navigation }: HelpProps) => {
             alt="qna"
           />
           <Typography variant="bigText" lineHeight={36} textAlign="center">
-            {'Linky에 대해\n더 궁금한 점이 있으신가요?'}
+            {t('more_question')}
           </Typography>
           <HStack space={4} pb={100} mt={2}>
             <AnimatedButton
               bg="teal.500"
-              title="문의•요청하기"
+              title={t('button_title')}
               onPress={() => Linking.openURL('mailto:linky.dev.app@gmail.com')}
             />
           </HStack>
@@ -161,6 +244,8 @@ interface HelpCarouselProps {
 const HelpCarousel = ({ onSnapToItem }: HelpCarouselProps) => {
   const { width } = useWindowDimensions();
   const ref = useRef<ICarouselInstance>(null);
+  const langauge = useCurrentLangauge();
+  const data = langauge === 'kor' ? HELP_CARD_DATA_KO : HELP_CARD_DATA_EN;
 
   return (
     <Carousel
@@ -178,12 +263,12 @@ const HelpCarousel = ({ onSnapToItem }: HelpCarouselProps) => {
           24 -
           12,
       }}
-      data={HELP_CARD_DATA}
+      data={data}
       renderItem={({ item, index }) => (
         <HelpCard
           {...item}
           isFirstCard={index === 0}
-          isLastCard={index === HELP_CARD_DATA.length - 1}
+          isLastCard={index === data.length - 1}
           onPressBack={() => {
             ref.current?.prev();
           }}
@@ -202,10 +287,14 @@ interface HelpDescriptionProps {
 }
 
 const HelpDescription = ({ index }: HelpDescriptionProps) => {
+  const language = useCurrentLangauge();
+  const data =
+    language === 'kor' ? HELP_DESCRIPTION_DATA_KO : HELP_DESCRIPTION_DATA_EN;
+
   return (
     <Box h={202} mx={-6}>
       <VStack bg="gray.300" p={6}>
-        {HELP_DESCRIPTION_DATA[index].map((description, idx) => (
+        {data[index].map((description, idx) => (
           <HStack key={description} space={2}>
             {idx !== 0 && (
               <Typography

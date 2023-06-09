@@ -1,0 +1,31 @@
+{
+  "gesture_list": "제스처 목록",
+  "action_list": "액션 목록",
+  "add_gesture": "제스처 추가하기",
+  "unassigned_gesture": "할당되지 않은 제스처",
+  "message": {
+    "remove_gesture": "{{name}} 제스처를 삭제했어요",
+    "remove_action": "{{name}} 액션을 삭제했어요",
+    "enter_gesture_name": "제스처 이름을 입력해주세요",
+    "draw_gesture": "제스처를 그려주세요",
+    "no_dot_stroke": "점 찍기는 사용할 수 없어요",
+    "not_allowed": "허용되지 않은 제스처에요",
+    "one_time_left": "마지막 1번 남았어요",
+    "few_times_left": "4번 중 {{num}}번 남았어요",
+    "gesture_added": "제스처를 추가했어요",
+    "no_gesture_in_use": "사용 중인 제스처가 없어요",
+    "inexecutable_action": "이 액션을 실행할 수 없어요",
+    "cannot_find_action": "액션을 찾지 못했어요"
+  },
+  "gestureAddition": {
+    "name_placeholder": "제스처 이름을 입력해주세요",
+    "title": "제스처 추가",
+    "clear": "지우기"
+  },
+  "gesturePicker": {
+    "title": "제스처 선택",
+    "new_gesture": "새로운 제스처",
+    "can_select": "선택 가능",
+    "hide_gesture_in_use": "사용 중인 제스처 숨기기"
+  }
+}

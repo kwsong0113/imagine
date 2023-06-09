@@ -19,6 +19,7 @@ import {
   useGetNumActiveActions,
   useHandleRemoveAction,
 } from '../../hooks';
+import { useTranslation } from 'react-i18next';
 
 interface ActionRowProps {
   action: Action;
@@ -38,10 +39,14 @@ const ActionRow = ({
   onRemove,
   ...props
 }: ActionRowProps) => {
+  const { t } = useTranslation('appList');
+
   return (
     <ListRow
       title={action.description}
-      description={gestureName ? `${gestureName} 제스처` : undefined}
+      description={
+        gestureName ? t('gesture_description', { gestureName }) : undefined
+      }
       right={
         numActiveActions === 0 ? (
           <IonIcon name="add-circle-outline" color="gray.500" size={8} />

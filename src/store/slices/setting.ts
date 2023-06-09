@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import i18next from 'i18next';
 import { RootState } from '..';
+import { getLocaleLanguage } from '../../utils';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
-export type Language = 'kor' | 'eng';
+export type Language = 'kor' | 'eng' | 'locale';
 
 interface SettingState {
   themeMode: ThemeMode;
@@ -12,7 +14,7 @@ interface SettingState {
 
 const initialState: SettingState = {
   themeMode: 'light',
-  language: 'kor',
+  language: 'locale',
   shouldShowHelp: true,
 };
 
@@ -25,6 +27,10 @@ const settingSlice = createSlice({
     },
     changeLanguage: (state, action: PayloadAction<Language>) => {
       state.language = action.payload;
+      i18next.changeLanguage(action.payload === 'eng' ? 'en' : 'ko');
+    },
+    changeLanguageFromLocale: state => {
+      state.language = getLocaleLanguage();
     },
     stopShowHelp: state => {
       state.shouldShowHelp = false;

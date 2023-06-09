@@ -1,0 +1,28 @@
+{
+  "title": "Settings",
+  "description": "Choose options that suit your needs",
+  "theme": {
+    "title": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "language": {
+    "title": "Language"
+  },
+  "reset": {
+    "title": "Reset",
+    "caption": "Delete all gestures and actions",
+    "bottomsheet": {
+      "title": "Reset?",
+      "description": "This action cannot be undone!",
+      "cancel": "Cancel",
+      "ok": "Reset",
+      "message": "Successfully Deleted!"
+    }
+  },
+  "help": {
+    "title": "Help",
+    "description": "How to smartly utilize the Linky app"
+  }
+}

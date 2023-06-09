@@ -15,14 +15,17 @@ import {
   selectActiveGestureList,
   selectGestureToActionMap,
 } from '../../store/slices/gesture';
-import { getActionDescription } from '../../features/action/utils';
 import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
 import { Gesture } from '../../features/gesture/types';
+import { useGetActionDescription } from '../../features/action/utils';
+import { useTranslation } from 'react-i18next';
 
 export const WholeActionList = () => {
+  const { t } = useTranslation('gesture');
   const activeGestureList = useAppSelector(selectActiveGestureList);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const [selectedGesture, setSelectedGesture] = useState<Gesture>();
+  const getActionDescription = useGetActionDescription();
 
   const gestureViewBottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
 
@@ -35,7 +38,7 @@ export const WholeActionList = () => {
 
   return (
     <ScreenContainer>
-      <Header variant="center" title="액션 목록" />
+      <Header variant="center" title={t('action_list')} />
       <ScrollView mx={-3} px={3} mb={-6}>
         <GestureViewBottomSheetModal
           ref={gestureViewBottomSheetModalRef}

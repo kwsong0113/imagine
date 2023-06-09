@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  Imagine
+
+  Created by 송기환 on 2023/06/09.
+  
+*/
+"SimpleWidget ConfigurationDisplayName" = "Draw Gesture";
+"SimpleWidget Description" = "Lets you quickly draw a gesture and execute an action.";

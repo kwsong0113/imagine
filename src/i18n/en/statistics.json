@@ -1,0 +1,19 @@
+{
+  "header": {
+    "title": "Statistics",
+    "description": "Check your favorite actions"
+  },
+  "countInfo": {
+    "num_actions": "# Actions in Use",
+    "num_actions_today": "# Actions Today",
+    "num_actions_per_day": "# Actions Per Day"
+  },
+  "message": {
+    "no_actions_today": "You havent' executed any actions today!",
+    "more_actions_today": "Today, you have executed more actions than usual",
+    "less_actions_today": "Today, you have executed fewer actions than usual!",
+    "same_actions_today": "Today, you have executed actions as usual!"
+  },
+  "see_all": "See All",
+  "detail_title": "Today's Action Statistics"
+}
