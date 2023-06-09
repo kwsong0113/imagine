@@ -13,7 +13,11 @@ import {
 import { CustomStackParamList } from '../../navigation';
 import { useMatchedAction } from '../../hooks/useMatchedAction';
 import { Input, ScrollView, VStack, HStack, Box, Pressable } from 'native-base';
-import { useAppSelector, useHandleRemoveAction } from '../../hooks';
+import {
+  useAppSelector,
+  useCurrentLangauge,
+  useHandleRemoveAction,
+} from '../../hooks';
 import { selectGestureToActionMap } from '../../store/slices/gesture';
 import { ActionInstance, ParamAction } from '../../features/action/types';
 import { useGetGestureForActionInstance } from '../../hooks/useGetGestureForActionInstance';
@@ -67,6 +71,7 @@ export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
   const { appId, actionId, type } = route.params;
   const matchedAction = useMatchedAction(appId, actionId);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
+  const showUrlSchemeHelp = useCurrentLangauge() === 'kor';
   const filteredParamActionList = useMemo(
     () =>
       Object.entries(gestureToActionMap).filter(
@@ -97,23 +102,25 @@ export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
             title={t('custom_url_scheme.title')}
             description={t('custom_url_scheme.description')}
           />
-          <Pressable onPress={() => navigation.navigate('UrlSchemeHelp')}>
-            {({ isPressed }) => (
-              <HStack
-                space={1}
-                py={3.5}
-                alignItems="center"
-                opacity={isPressed ? 0.4 : 1}
-              >
-                <IonIcon name="help-circle" color="gray.500" size={3} />
-                <Box borderBottomWidth={1} borderBottomColor="gray.500">
-                  <Typography variant="caption" color="gray.500">
-                    {t('custom_url_scheme.help')}
-                  </Typography>
-                </Box>
-              </HStack>
-            )}
-          </Pressable>
+          {showUrlSchemeHelp && (
+            <Pressable onPress={() => navigation.navigate('UrlSchemeHelp')}>
+              {({ isPressed }) => (
+                <HStack
+                  space={1}
+                  py={3.5}
+                  alignItems="center"
+                  opacity={isPressed ? 0.4 : 1}
+                >
+                  <IonIcon name="help-circle" color="gray.500" size={3} />
+                  <Box borderBottomWidth={1} borderBottomColor="gray.500">
+                    <Typography variant="caption" color="gray.500">
+                      {t('custom_url_scheme.help')}
+                    </Typography>
+                  </Box>
+                </HStack>
+              )}
+            </Pressable>
+          )}
         </VStack>
       ) : (
         <Header variant="center" title={matchedAction?.description} />
@@ -122,7 +129,7 @@ export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
         <ScrollView
           mx={-3}
           px={3}
-          mt={type === 'customURLSchemeList' ? -6 : 0}
+          mt={type === 'customURLSchemeList' && showUrlSchemeHelp ? -6 : 0}
           mb={-12}
         >
           <ListRow
