@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  Imagine
+
+  Created by 송기환 on 2023/06/09.
+  
+*/
+"SimpleWidget ConfigurationDisplayName" = "제스처 그리기";
+"SimpleWidget Description" = "제스처를 그릴 수 있는 화면을 엽니다.";

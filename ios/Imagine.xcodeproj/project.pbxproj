@@ -21,6 +21,8 @@
 		CA3483A729E722AD00813D31 /* SimpleWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3483A629E722AD00813D31 /* SimpleWidget.swift */; };
 		CA3483A929E722B300813D31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA3483A829E722B300813D31 /* Assets.xcassets */; };
 		CA3483AD29E722B300813D31 /* SimpleWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CA34839E29E722AD00813D31 /* SimpleWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CAC3824D2A335BD700DC2466 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAC382502A335BD700DC2466 /* Localizable.strings */; };
+		CAC3824E2A335BD700DC2466 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAC382502A335BD700DC2466 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		CA3483A629E722AD00813D31 /* SimpleWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWidget.swift; sourceTree = "<group>"; };
 		CA3483A829E722B300813D31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA3483AA29E722B300813D31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAC3824F2A335BD700DC2466 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CAC382512A335BDA00DC2466 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FE1A70976B11468AA3146BDD /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = ../src/assets/fonts/Ionicons.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,6 +122,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				CAC382502A335BD700DC2466 /* Localizable.strings */,
 			);
 			name = Imagine;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				CAC3824D2A335BD700DC2466 /* Localizable.strings in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				AF3A1F11DBBC4121925B1716 /* NanumGothic-Bold.ttf in Resources */,
 				0A62E325247B40D38E1296D8 /* NanumGothic-ExtraBold.ttf in Resources */,
@@ -287,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA3483A929E722B300813D31 /* Assets.xcassets in Resources */,
+				CAC3824E2A335BD700DC2466 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +421,18 @@
 			targetProxy = CA3483AB29E722B300813D31 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CAC382502A335BD700DC2466 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAC3824F2A335BD700DC2466 /* ko */,
+				CAC382512A335BDA00DC2466 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {

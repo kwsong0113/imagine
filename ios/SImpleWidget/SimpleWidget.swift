@@ -59,8 +59,8 @@ struct SimpleWidget: Widget {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in
       SimpleWidgetEntryView(entry: entry)
     }
-    .configurationDisplayName("제스처 그리기")
-    .description("제스처를 그릴 수 있는 화면을 엽니다.")
+    .configurationDisplayName("SimpleWidget ConfigurationDisplayName")
+    .description(LocalizedStringKey("SimpleWidget Description"))
     .supportedFamilies([.accessoryCircular])
   }
 }
