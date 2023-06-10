@@ -14,6 +14,8 @@ export type BlankCanvasButtonPosition =
   | 'bottom left'
   | 'none';
 
+export type Version = '1.1.0';
+
 export type BlankCanvas = {
   autoLaunch: boolean;
   blankCanvasButtonPosition: BlankCanvasButtonPosition;
@@ -23,6 +25,8 @@ export interface SettingState {
   themeMode: ThemeMode;
   language: Language;
   shouldShowHelp: boolean;
+  shouldShowNewFeature: boolean;
+  version: Version;
   blankCanvas: BlankCanvas;
 }
 
@@ -30,6 +34,8 @@ export const initialState: SettingState = {
   themeMode: 'system',
   language: 'locale',
   shouldShowHelp: true,
+  shouldShowNewFeature: true,
+  version: '1.1.0',
   blankCanvas: {
     autoLaunch: true,
     blankCanvasButtonPosition: 'bottom right',
@@ -62,6 +68,9 @@ const settingSlice = createSlice({
     ) => {
       state.blankCanvas.blankCanvasButtonPosition = action.payload;
     },
+    stopShowNewFeature: state => {
+      state.shouldShowNewFeature = false;
+    },
   },
 });
 
@@ -74,4 +83,7 @@ export const selectAutoLaunch = (state: RootState) =>
   state.setting.blankCanvas.autoLaunch;
 export const selectBlankCanvasButtonPosition = (state: RootState) =>
   state.setting.blankCanvas.blankCanvasButtonPosition;
+export const selectVersion = (state: RootState) => state.setting.version;
+export const selectShouldShowNewFeature = (state: RootState) =>
+  state.setting.shouldShowNewFeature;
 export default settingSlice.reducer;

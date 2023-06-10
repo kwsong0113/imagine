@@ -24,17 +24,18 @@ export const LanguageBottomSheetModal = () => {
 
   return (
     <OptionSingleBottomSheetModal
+      name="langauge"
       ref={bottomSheetModalRef}
       title={t('language_bottomsheet_title')}
       leftButtonTitle="한국어"
       rightButtonTitle="English"
       onPressLeft={() => {
         dispatch(settingActions.changeLanguage('kor'));
-        dismiss();
+        dismiss('langauge');
       }}
       onPressRight={() => {
         dispatch(settingActions.changeLanguage('eng'));
-        dismiss();
+        dismiss('langauge');
       }}
       onDismiss={() => {
         if (language === 'locale') {

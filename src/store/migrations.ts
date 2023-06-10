@@ -1,3 +1,4 @@
+import { pick } from '../utils/pick';
 import { WhiteListApplicationState } from './slices';
 import { initialState as settingInitialState } from './slices/setting';
 
@@ -10,7 +11,12 @@ export const migrations = {
       ...state,
       setting: {
         ...state.setting,
-        blankCanvas: settingInitialState.blankCanvas,
+        ...pick(
+          settingInitialState,
+          'blankCanvas',
+          'version',
+          'shouldShowNewFeature',
+        ),
       },
     };
   },

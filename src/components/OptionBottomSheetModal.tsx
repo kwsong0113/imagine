@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo, ComponentProps } from 'react';
+import React, { forwardRef, useMemo, ComponentProps, ReactNode } from 'react';
 import { Box, Center, HStack, useTheme, VStack } from 'native-base';
 import {
   BottomSheetModal,
@@ -15,7 +15,8 @@ import { CustomBackdrop } from './SingleBottomSheetModal';
 type OptionBottomSheetModalProps = {
   title: string;
   description?: string;
-  leftButtonTitle: string;
+  descriptionComponent?: ReactNode;
+  leftButtonTitle?: string;
   rightButtonTitle: string;
   onPressLeft?: () => void;
   onPressRight?: () => void;
@@ -41,6 +42,7 @@ export const OptionSingleBottomSheetModal = forwardRef<
     {
       title,
       description,
+      descriptionComponent,
       leftButtonTitle,
       rightButtonTitle,
       onPressLeft,
@@ -93,13 +95,16 @@ export const OptionSingleBottomSheetModal = forwardRef<
               ) : (
                 <Box h={0} />
               )}
+              {descriptionComponent}
             </VStack>
             <HStack space={4}>
-              <AnimatedButton
-                bg="gray.500"
-                title={leftButtonTitle}
-                onPress={onPressLeft}
-              />
+              {leftButtonTitle && (
+                <AnimatedButton
+                  bg="gray.500"
+                  title={leftButtonTitle}
+                  onPress={onPressLeft}
+                />
+              )}
               <AnimatedButton
                 bg="blue.500"
                 title={rightButtonTitle}

@@ -18,5 +18,17 @@
     "desription": "5 Steps to smartly utilize the Linky app",
     "left_button_title": "Not now",
     "right_button_title": "OK"
+  },
+  "new_feature_bottomsheet": {
+    "title": "New Feature!",
+    "auto_launch": {
+      "title": "Auto Launch Mode (ON / OFF)",
+      "description": "Draw a gesture and just release your hand to execute an action."
+    },
+    "gesture_drawing_screen": {
+      "title": "Customize Gesture Drawing Screen",
+      "description": "You can adjust the position of buttons."
+    },
+    "right_button_title": "Go to Settings"
   }
 }
