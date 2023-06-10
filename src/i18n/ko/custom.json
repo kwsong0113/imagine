@@ -29,9 +29,14 @@
     "auto_launch": {
       "title": "제스처 자동 실행 모드 (ON / OFF)",
       "description": "제스처를 그리고 손을 떼면 액션이 바로 실행돼요"
-    },"gesture_drawing_screen": {
+    },
+    "gesture_drawing_screen": {
       "title": "제스처 그리기 화면 커스텀",
       "description": "실행, 지우기 버튼의 위치를 조정할 수 있어요"
+    },
+    "more_apps": {
+      "title": "지원하는 앱 추가",
+      "description": "30개의 앱, 34개의 액션이 추가됐어요"
     },
     "right_button_title": "설정하러 가기"
   }
