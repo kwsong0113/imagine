@@ -1,5 +1,12 @@
 import React, { useState, useRef, ReactNode } from 'react';
-import { Box, Center, Pressable, useToast, VStack } from 'native-base';
+import {
+  Box,
+  Center,
+  Pressable,
+  useTheme,
+  useToast,
+  VStack,
+} from 'native-base';
 import { Canvas, IonIcon, Toast } from '../../components';
 import { StackScreenProps } from '@react-navigation/stack';
 import { CustomStackParamList } from '../../navigation';
@@ -42,6 +49,7 @@ type BlankCanvasProps = StackScreenProps<CustomStackParamList, 'BlankCanvas'>;
 
 export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
   const { t } = useTranslation('gesture');
+  const { colors } = useTheme();
   const canvasRef = useRef<Canvas>(null);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const toast = useToast();
@@ -148,8 +156,13 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
   );
 
   return (
-    <Box flex={1} bg="gray.300" safeAreaTop>
-      <Canvas ref={canvasRef} />
+    <Box flex={1} bg="canvas.background" safeAreaTop>
+      <Canvas
+        bg={colors.canvas.background}
+        strokeColor={colors.canvas.stroke}
+        strokeWidth={10}
+        ref={canvasRef}
+      />
       <Box position="absolute" left={6} bottom={10}>
         <FloatingButton onPress={() => navigation.navigate('Home')}>
           <IonIcon name="home" size={5} color="orange.700" />
@@ -178,7 +191,7 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
           >
             {splitButtonPosition[0] !== 'top' && (
               <FloatingButton onPress={handleRecognize}>
-                <IonIcon name="scan" size={18} color="blue.500" />
+                <IonIcon name="scan" size={18} color="canvas.stroke" />
               </FloatingButton>
             )}
             <FloatingButton onPress={() => canvasRef.current?.reset()}>
@@ -186,7 +199,7 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
             </FloatingButton>
             {splitButtonPosition[0] === 'top' && (
               <FloatingButton onPress={handleRecognize}>
-                <IonIcon name="scan" size={18} color="blue.500" />
+                <IonIcon name="scan" size={18} color="canvas.stroke" />
               </FloatingButton>
             )}
           </VStack>

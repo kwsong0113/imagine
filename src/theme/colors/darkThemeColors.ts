@@ -55,4 +55,8 @@ export const darkThemeColors = {
     200: '#4A4A4A',
     100: '#282828',
   },
+  canvas: {
+    background: '#000000',
+    stroke: '#74FA99',
+  },
 };

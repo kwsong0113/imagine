@@ -19,15 +19,15 @@ export type BlankCanvas = {
   blankCanvasButtonPosition: BlankCanvasButtonPosition;
 };
 
-interface SettingState {
+export interface SettingState {
   themeMode: ThemeMode;
   language: Language;
   shouldShowHelp: boolean;
   blankCanvas: BlankCanvas;
 }
 
-const initialState: SettingState = {
-  themeMode: 'light',
+export const initialState: SettingState = {
+  themeMode: 'system',
   language: 'locale',
   shouldShowHelp: true,
   blankCanvas: {

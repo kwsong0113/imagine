@@ -55,4 +55,8 @@ export const lightThemeColors = {
     800: '#4A4A4A',
     900: '#282828',
   },
+  canvas: {
+    background: '#FFFFFF',
+    stroke: '#499F66',
+  },
 };
