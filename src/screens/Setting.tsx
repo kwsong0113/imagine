@@ -16,8 +16,10 @@ import {
   AnimatedButton,
 } from '../components';
 import {
+  BlankCanvasButtonPosition,
   Language,
   selectAutoLaunch,
+  selectBlankCanvasButtonPosition,
   selectLanguage,
   settingActions,
   ThemeMode,
@@ -121,6 +123,71 @@ const SettingLanguageRow = () => {
                     }}
                   />
                 ),
+            )}
+          </VStack>
+        </VStack>
+      </SingleBottomSheetModal>
+    </>
+  );
+};
+
+const blankCanvasButtonPositionList: BlankCanvasButtonPosition[] = [
+  'none',
+  'bottom right',
+  'bottom left',
+  'mid right',
+  'mid left',
+  'top right',
+  'top left',
+];
+
+const SettingBlankCanvasButtonPositionRow = () => {
+  const { t } = useTranslation('setting');
+  const blankCanvasButtonPosition = useAppSelector(
+    selectBlankCanvasButtonPosition,
+  );
+  const dispatch = useAppDispatch();
+  const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
+
+  const handlePress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+
+  return (
+    <>
+      <ListRow
+        left={<IonIcon name="move" size="40px" color="gray.900" />}
+        title={t('blankCanvasButtonPosition.title')}
+        caption={t(`blankCanvasButtonPosition.${blankCanvasButtonPosition}`)}
+        right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
+        onPress={handlePress}
+      />
+      <SingleBottomSheetModal ref={bottomSheetModalRef}>
+        <VStack px={6} pt={3.5} pb={7.5} space={4}>
+          <Typography variant="subtitle1">
+            {t('blankCanvasButtonPosition.sheet_title')}
+          </Typography>
+          <VStack mx={-3}>
+            {blankCanvasButtonPositionList.map(
+              blankCanvasButtonPositionOption => (
+                <SettingOptionRow
+                  key={blankCanvasButtonPositionOption}
+                  title={t(
+                    `blankCanvasButtonPosition.${blankCanvasButtonPositionOption}`,
+                  )}
+                  isSelected={
+                    blankCanvasButtonPosition ===
+                    blankCanvasButtonPositionOption
+                  }
+                  onPress={() => {
+                    dispatch(
+                      settingActions.changeBlankCanvasButtonPosition(
+                        blankCanvasButtonPositionOption,
+                      ),
+                    );
+                  }}
+                />
+              ),
             )}
           </VStack>
         </VStack>
@@ -330,6 +397,7 @@ export const Setting = () => {
         <SettingThemeModeRow />
         <SettingLanguageRow />
         <SettingAutoLaunchRow />
+        <SettingBlankCanvasButtonPositionRow />
         {/* <SettingDynamicIslandRow /> */}
         {/* <SettingGestureStorageRow /> */}
         <SettingClearGestureRow />

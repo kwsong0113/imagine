@@ -5,19 +5,35 @@ import { getLocaleLanguage } from '../../utils';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
 export type Language = 'kor' | 'eng' | 'locale';
+export type BlankCanvasButtonPosition =
+  | 'top right'
+  | 'top left'
+  | 'mid right'
+  | 'mid left'
+  | 'bottom right'
+  | 'bottom left'
+  | 'none';
+
+export type BlankCanvas = {
+  autoLaunch: boolean;
+  blankCanvasButtonPosition: BlankCanvasButtonPosition;
+};
 
 interface SettingState {
   themeMode: ThemeMode;
   language: Language;
   shouldShowHelp: boolean;
-  autoLaunch: boolean;
+  blankCanvas: BlankCanvas;
 }
 
 const initialState: SettingState = {
   themeMode: 'light',
   language: 'locale',
   shouldShowHelp: true,
-  autoLaunch: true,
+  blankCanvas: {
+    autoLaunch: true,
+    blankCanvasButtonPosition: 'bottom right',
+  },
 };
 
 const settingSlice = createSlice({
@@ -38,7 +54,13 @@ const settingSlice = createSlice({
       state.shouldShowHelp = false;
     },
     toggleAutoLaunch: state => {
-      state.autoLaunch = !state.autoLaunch;
+      state.blankCanvas.autoLaunch = !state.blankCanvas.autoLaunch;
+    },
+    changeBlankCanvasButtonPosition: (
+      state,
+      action: PayloadAction<BlankCanvasButtonPosition>,
+    ) => {
+      state.blankCanvas.blankCanvasButtonPosition = action.payload;
     },
   },
 });
@@ -48,5 +70,8 @@ export const selectThemeMode = (state: RootState) => state.setting.themeMode;
 export const selectLanguage = (state: RootState) => state.setting.language;
 export const selectShouldShowHelp = (state: RootState) =>
   state.setting.shouldShowHelp;
-export const selectAutoLaunch = (state: RootState) => state.setting.autoLaunch;
+export const selectAutoLaunch = (state: RootState) =>
+  state.setting.blankCanvas.autoLaunch;
+export const selectBlankCanvasButtonPosition = (state: RootState) =>
+  state.setting.blankCanvas.blankCanvasButtonPosition;
 export default settingSlice.reducer;

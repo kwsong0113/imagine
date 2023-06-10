@@ -15,6 +15,17 @@
     "caption": "Automatically execute actions",
     "beta": "beta"
   },
+  "blankCanvasButtonPosition": {
+    "title": "Gesture Drawing Screen",
+    "sheet_title": "Choose the button placement",
+    "none": "No buttons",
+    "bottom right": "Bottom right",
+    "bottom left": "Bottom left",
+    "mid right": "Mid right",
+    "mid left": "Mid left",
+    "top right": "Top right",
+    "top left": "Top left"
+  },
   "reset": {
     "title": "Reset",
     "caption": "Delete all gestures and actions",

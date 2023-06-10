@@ -15,6 +15,17 @@
     "caption": "손을 떼면 액션이 자동으로 실행돼요",
     "beta": "베타"
   },
+  "blankCanvasButtonPosition": {
+    "title": "제스처 그리기 화면",
+    "sheet_title": "버튼의 위치를 고르세요",
+    "none": "없음",
+    "bottom right": "오른쪽 아래",
+    "bottom left": "왼쪽 아래",
+    "mid right": "오른쪽 중앙",
+    "mid left": "왼쪽 중앙",
+    "top right": "오른쪽 위",
+    "top left": "왼쪽 위"
+  },
   "reset": {
     "title": "제스처 초기화",
     "caption": "등록된 제스처를 모두 삭제해요",
