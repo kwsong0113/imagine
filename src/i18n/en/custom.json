@@ -29,6 +29,10 @@
       "title": "Customize Gesture Drawing Screen",
       "description": "You can adjust the position of buttons."
     },
+    "more_apps": {
+      "title": "More Supported Apps",
+      "description": "30 apps and 34 actions have been added."
+    },
     "right_button_title": "Go to Settings"
   }
 }

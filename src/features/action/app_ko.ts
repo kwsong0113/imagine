@@ -451,6 +451,13 @@ export const appList: App[] = [
         urlScheme: 'googlechrome://',
         description: 'Chrome 앱 열기',
       },
+      {
+        id: 1,
+        urlSchemeFunc: (param: string) => `googlechrome://${param}`,
+        description: 'Chrome 앱으로 특정 사이트 접속하기',
+        placeholder: 'https://... 또는 http://...',
+        descriptionFunc: (param: string) => `${param} 이동하기`,
+      },
     ],
   },
   {
@@ -664,6 +671,351 @@ export const appList: App[] = [
         description: 'YouTube Music 재생목록 재생',
         placeholder: '재생목록 이름을 입력해주세요',
         descriptionFunc: (param: string) => `${param} 재생목록 재생하기`,
+      },
+    ],
+  },
+  {
+    id: 51,
+    name: 'Apple Store',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'applestore://',
+        description: 'Apple Store 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 52,
+    name: 'GarageBand',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'garageband://',
+        description: 'GarageBand 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 53,
+    name: '건강',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'x-apple-health://',
+        description: '건강 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 54,
+    name: '팟캐스트',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'podcasts://',
+        description: '팟캐스트 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 55,
+    name: 'ChatGPT',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'chatgpt://',
+        description: 'ChatGPT 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 56,
+    name: 'Notion',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'notion://',
+        description: 'Notion 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 57,
+    name: 'Airbnb',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'airbnb://',
+        description: 'Airbnb 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 58,
+    name: 'Slack',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'slack://',
+        description: 'Slack 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 59,
+    name: 'Twitter',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'twitter://',
+        description: 'Twitter 앱 열기',
+      },
+      {
+        id: 1,
+        urlScheme: 'twitter://search',
+        description: 'Twitter에서 검색하기',
+      },
+      {
+        id: 2,
+        urlScheme: 'twitter://post',
+        description: '트윗하기',
+      },
+      {
+        id: 3,
+        urlScheme: 'twitter://messages',
+        description: 'Twitter DM 보기',
+      },
+    ],
+  },
+  {
+    id: 60,
+    name: 'Telegram',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'telegram://',
+        description: 'Telegram 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 61,
+    name: 'Cash App',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'squarecash://',
+        description: 'Cash App 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 62,
+    name: 'WhatsApp',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'whatsapp://',
+        description: 'WhatsApp 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 63,
+    name: 'Snapchat',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'snapchat://',
+        description: 'Snapchat 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 64,
+    name: 'Uber',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'uber://',
+        description: 'Uber 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 65,
+    name: 'Lyft',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'lyft://',
+        description: 'Lyft 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 66,
+    name: 'DoorDash',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'doordash://',
+        description: 'DoorDash 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 67,
+    name: 'Amazon Alexa',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'alexa://',
+        description: 'Amazon Alexa 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 68,
+    name: 'Discord',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'discord://',
+        description: 'Discord 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 69,
+    name: 'PayPal',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'paypal://',
+        description: 'PayPal 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 70,
+    name: 'Google Meet',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'gmeet://',
+        description: 'Google Meet 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 71,
+    name: 'TikTok',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'tiktok://',
+        description: 'TikTok 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 72,
+    name: 'Pinterest',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'pinterest://',
+        description: 'Pinterest 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 73,
+    name: 'Google Photos',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'googlephotos://',
+        description: 'Google Photos 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 74,
+    name: 'Shop',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'shopapp://',
+        description: 'Shop 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 75,
+    name: 'Reddit',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'reddit://',
+        description: 'Reddit 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 76,
+    name: 'Outlook',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'ms-outlook://',
+        description: 'Outlook 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 77,
+    name: 'Zoom',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'zoomus://',
+        description: 'Zoom 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 78,
+    name: 'Twitch',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'twitch://',
+        description: 'Twitch 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 79,
+    name: 'KB스타뱅킹',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'kBbank://',
+        description: 'KB스타뱅킹 앱 열기',
+      },
+    ],
+  },
+  {
+    id: 80,
+    name: '네이버 웹툰',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'fb455753897775430://',
+        description: '네이버 웹툰 앱 열기',
       },
     ],
   },

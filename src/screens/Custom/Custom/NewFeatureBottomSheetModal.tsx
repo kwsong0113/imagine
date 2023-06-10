@@ -76,6 +76,20 @@ const NewFeatureDescription = () => {
       <Typography variant="description" color="gray.900" lineHeight={24}>
         {t('new_feature_bottomsheet.gesture_drawing_screen.description')}
       </Typography>
+      <HStack space={2} alignItems="center">
+        <IonIcon
+          name="logo-apple-appstore"
+          mt={0.5}
+          size={4}
+          color="teal.700"
+        />
+        <Typography variant="body" lineHeight={24} color="teal.700">
+          {t('new_feature_bottomsheet.more_apps.title')}
+        </Typography>
+      </HStack>
+      <Typography variant="description" color="gray.900" lineHeight={24}>
+        {t('new_feature_bottomsheet.more_apps.description')}
+      </Typography>
     </VStack>
   );
 };
