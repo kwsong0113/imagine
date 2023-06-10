@@ -36,7 +36,7 @@ const FloatingButton = ({ children, onPress }: FloatingButtonProps) => {
           width={50}
           height={50}
           borderRadius={25}
-          bg={isPressed ? 'gray.300' : 'gray.100'}
+          bg={isPressed ? 'canvas.background' : 'gray.100'}
         >
           {children}
         </Center>
@@ -165,7 +165,7 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
       />
       <Box position="absolute" left={6} bottom={10}>
         <FloatingButton onPress={() => navigation.navigate('Home')}>
-          <IonIcon name="home" size={5} color="orange.700" />
+          <IonIcon name="home" size={5} color="gray.500" />
         </FloatingButton>
       </Box>
       {shouldShowButtons &&
