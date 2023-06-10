@@ -95,63 +95,68 @@ export const AppList = ({ navigation }: AppListProps) => {
   const getGestureForActionInstance = useGetGestureForActionInstance();
 
   return (
-    <ScreenContainer>
-      <Header title={t('header.title')} description={t('header.description')} />
-      <ScrollView mx={-3} px={3} mb={-12}>
-        {appList.map((app, idx) => {
-          if (app.id === CUSTOM_URL_SCHEME_ID) {
-            return;
-          }
-          const numActiveActions = getNumActiveActions(app.id);
-          const hasSingleAction = app.actions.length === 1;
-          let gesture: Gesture | undefined;
-          let singleAction: Action;
-          if (hasSingleAction) {
-            singleAction = app.actions[0];
-            gesture = getGestureForActionInstance({
-              appId: app.id,
-              actionId: singleAction.id,
-            });
-          }
-          return (
-            <AppRow
-              key={app.id}
-              app={app}
-              numActiveActions={numActiveActions}
-              hasBottomBorder={idx === appList.length - 1}
-              gestureName={hasSingleAction ? gesture?.name : undefined}
-              onPress={() => {
-                if (hasSingleAction) {
-                  setSelectedAppId(app.id);
-                  setSelectedActionId(singleAction.id);
-                  gesturePickerBottomSheetModalRef.current?.present();
-                } else {
-                  navigation.navigate('ActionList', {
-                    appId: app.id,
-                  });
-                }
-              }}
-              onRemove={
-                hasSingleAction
-                  ? () => {
-                      if (gesture?.id) {
-                        handleRemoveAction(
-                          gesture.id,
-                          singleAction.description,
-                        );
+    <>
+      <ScreenContainer>
+        <Header
+          title={t('header.title')}
+          description={t('header.description')}
+        />
+        <ScrollView mx={-3} px={3} mb={-6}>
+          {appList.map((app, idx) => {
+            if (app.id === CUSTOM_URL_SCHEME_ID) {
+              return;
+            }
+            const numActiveActions = getNumActiveActions(app.id);
+            const hasSingleAction = app.actions.length === 1;
+            let gesture: Gesture | undefined;
+            let singleAction: Action;
+            if (hasSingleAction) {
+              singleAction = app.actions[0];
+              gesture = getGestureForActionInstance({
+                appId: app.id,
+                actionId: singleAction.id,
+              });
+            }
+            return (
+              <AppRow
+                key={app.id}
+                app={app}
+                numActiveActions={numActiveActions}
+                hasBottomBorder={idx === appList.length - 1}
+                gestureName={hasSingleAction ? gesture?.name : undefined}
+                onPress={() => {
+                  if (hasSingleAction) {
+                    setSelectedAppId(app.id);
+                    setSelectedActionId(singleAction.id);
+                    gesturePickerBottomSheetModalRef.current?.present();
+                  } else {
+                    navigation.navigate('ActionList', {
+                      appId: app.id,
+                    });
+                  }
+                }}
+                onRemove={
+                  hasSingleAction
+                    ? () => {
+                        if (gesture?.id) {
+                          handleRemoveAction(
+                            gesture.id,
+                            singleAction.description,
+                          );
+                        }
                       }
-                    }
-                  : undefined
-              }
-            />
-          );
-        })}
-      </ScrollView>
+                    : undefined
+                }
+              />
+            );
+          })}
+        </ScrollView>
+      </ScreenContainer>
       <GesturePickerBottomSheetModal
         ref={gesturePickerBottomSheetModalRef}
         appId={selectedAppId}
         actionId={selectedActionId}
       />
-    </ScreenContainer>
+    </>
   );
 };
