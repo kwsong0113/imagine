@@ -3,7 +3,7 @@ import { App } from './types';
 
 export const appList: App[] = [
   {
-    id: 47,
+    id: 472,
     name: 'Find My',
     actions: [
       {
@@ -450,6 +450,13 @@ export const appList: App[] = [
         urlScheme: 'googlechrome://',
         description: 'Open Chrome',
       },
+      {
+        id: 1,
+        urlSchemeFunc: (param: string) => `googlechrome://${param}`,
+        description: 'Go to a Website Using Chrome',
+        placeholder: 'Without https://... or http://...',
+        descriptionFunc: (param: string) => `Go to ${param}`,
+      },
     ],
   },
   {
@@ -663,6 +670,351 @@ export const appList: App[] = [
         description: 'Play Playlist on YouTube Music',
         placeholder: 'Playlist name',
         descriptionFunc: (param: string) => `Play ${param} playlist`,
+      },
+    ],
+  },
+  {
+    id: 51,
+    name: 'Apple Store',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'applestore://',
+        description: 'Open Apple Store',
+      },
+    ],
+  },
+  {
+    id: 52,
+    name: 'GarageBand',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'garageband://',
+        description: 'Open GarageBand',
+      },
+    ],
+  },
+  {
+    id: 53,
+    name: 'Health',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'x-apple-health://',
+        description: 'Open Health',
+      },
+    ],
+  },
+  {
+    id: 54,
+    name: 'Podcasts',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'podcasts://',
+        description: 'Open Podcasts',
+      },
+    ],
+  },
+  {
+    id: 55,
+    name: 'ChatGPT',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'chatgpt://',
+        description: 'Open ChatGPT',
+      },
+    ],
+  },
+  {
+    id: 56,
+    name: 'Notion',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'notion://',
+        description: 'Open Notion',
+      },
+    ],
+  },
+  {
+    id: 57,
+    name: 'Airbnb',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'airbnb://',
+        description: 'Open Airbnb',
+      },
+    ],
+  },
+  {
+    id: 58,
+    name: 'Slack',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'slack://',
+        description: 'Open Slack',
+      },
+    ],
+  },
+  {
+    id: 59,
+    name: 'Twitter',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'twitter://',
+        description: 'Open Twitter',
+      },
+      {
+        id: 1,
+        urlScheme: 'twitter://search',
+        description: 'Search on Twitter',
+      },
+      {
+        id: 2,
+        urlScheme: 'twitter://post',
+        description: 'Start a New Tweet',
+      },
+      {
+        id: 3,
+        urlScheme: 'twitter://messages',
+        description: 'View Direct Messages on Twitter',
+      },
+    ],
+  },
+  {
+    id: 60,
+    name: 'Telegram',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'telegram://',
+        description: 'Open Telegram',
+      },
+    ],
+  },
+  {
+    id: 61,
+    name: 'Cash App',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'squarecash://',
+        description: 'Open Cash App',
+      },
+    ],
+  },
+  {
+    id: 62,
+    name: 'WhatsApp',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'whatsapp://',
+        description: 'Open WhatsApp',
+      },
+    ],
+  },
+  {
+    id: 63,
+    name: 'Snapchat',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'snapchat://',
+        description: 'Open Snapchat',
+      },
+    ],
+  },
+  {
+    id: 64,
+    name: 'Uber',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'uber://',
+        description: 'Open Uber',
+      },
+    ],
+  },
+  {
+    id: 65,
+    name: 'Lyft',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'lyft://',
+        description: 'Open Lyft',
+      },
+    ],
+  },
+  {
+    id: 66,
+    name: 'DoorDash',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'doordash://',
+        description: 'Open DoorDash',
+      },
+    ],
+  },
+  {
+    id: 67,
+    name: 'Amazon Alexa',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'alexa://',
+        description: 'Open Amazon Alexa',
+      },
+    ],
+  },
+  {
+    id: 68,
+    name: 'Discord',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'discord://',
+        description: 'Open Discord',
+      },
+    ],
+  },
+  {
+    id: 69,
+    name: 'PayPal',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'paypal://',
+        description: 'Open PayPal',
+      },
+    ],
+  },
+  {
+    id: 70,
+    name: 'Google Meet',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'gmeet://',
+        description: 'Open Google Meet',
+      },
+    ],
+  },
+  {
+    id: 71,
+    name: 'TikTok',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'tiktok://',
+        description: 'Open TikTok',
+      },
+    ],
+  },
+  {
+    id: 72,
+    name: 'Pinterest',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'pinterest://',
+        description: 'Open Pinterest',
+      },
+    ],
+  },
+  {
+    id: 73,
+    name: 'Google Photos',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'googlephotos://',
+        description: 'Open Google Photos',
+      },
+    ],
+  },
+  {
+    id: 74,
+    name: 'Shop',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'shopapp://',
+        description: 'Open Shop',
+      },
+    ],
+  },
+  {
+    id: 75,
+    name: 'Reddit',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'reddit://',
+        description: 'Open Reddit',
+      },
+    ],
+  },
+  {
+    id: 76,
+    name: 'Outlook',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'ms-outlook://',
+        description: 'Open Outlook',
+      },
+    ],
+  },
+  {
+    id: 77,
+    name: 'Zoom',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'zoomus://',
+        description: 'Open Zoom',
+      },
+    ],
+  },
+  {
+    id: 78,
+    name: 'Twitch',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'twitch://',
+        description: 'Open Twitch',
+      },
+    ],
+  },
+  {
+    id: 79,
+    name: 'KB Kookmin Bank',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'kBbank://',
+        description: 'Open KB Kookmin Bank',
+      },
+    ],
+  },
+  {
+    id: 80,
+    name: 'Naver Webtoon',
+    actions: [
+      {
+        id: 0,
+        urlScheme: 'fb455753897775430://',
+        description: 'Open Naver Webtoon',
       },
     ],
   },
