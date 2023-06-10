@@ -34,6 +34,7 @@ export const HelpBottomSheetModal = () => {
 
   return (
     <OptionSingleBottomSheetModal
+      name="help"
       ref={bottomSheetModalRef}
       title={t('help_bottomsheet.title')}
       description={t('help_bottomsheet.desription')}
@@ -41,11 +42,11 @@ export const HelpBottomSheetModal = () => {
       rightButtonTitle={t('help_bottomsheet.right_button_title')}
       onPressLeft={() => {
         dispatch(settingActions.stopShowHelp());
-        dismiss();
+        dismiss('help');
       }}
       onPressRight={() => {
         dispatch(settingActions.stopShowHelp());
-        dismiss();
+        dismiss('help');
         navigation.navigate('Help');
       }}
     />

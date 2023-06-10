@@ -8,7 +8,7 @@ interface ActionHistory {
   date: number;
 }
 
-interface HistoryState {
+export interface HistoryState {
   actionHistoryList: ActionHistory[];
 }
 

@@ -10,19 +10,24 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+  createMigrate,
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { reducers } from './slices';
 import reactotron from '../../ReactotronConfig';
+import { migrations } from './migrations';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 const rootReducer = combineReducers({ ...reducers });
 type ReducersState = ReturnType<typeof rootReducer>;
 
 const persistConfig: PersistConfig<ReducersState> = {
   key: 'root',
+  version: 0,
   storage: AsyncStorage,
   whitelist: ['setting', 'gesture', 'history'],
+  migrate: createMigrate(migrations as any, { debug: false }),
+  stateReconciler: autoMergeLevel2,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

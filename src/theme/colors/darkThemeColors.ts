@@ -42,6 +42,7 @@ export const darkThemeColors = {
     300: '#00766E',
     200: '#00665F',
     100: '#004A42',
+    50: '#00322C',
   },
   gray: {
     900: '#F6F6F6',
@@ -53,5 +54,9 @@ export const darkThemeColors = {
     300: '#696969',
     200: '#4A4A4A',
     100: '#282828',
+  },
+  canvas: {
+    background: '#000000',
+    stroke: '#74FA99',
   },
 };

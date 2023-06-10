@@ -33,72 +33,91 @@ type GestureResult =
 interface CanvasRef extends SketchCanvasRef {
   getGesture: () => GestureResult;
   recognize: () => RecognitionResult;
+  getIsEmpty: () => boolean;
+}
+
+interface CanvasProps {
+  bg?: string;
+  strokeColor?: string;
+  strokeWidth?: number;
 }
 
 type Canvas = CanvasRef;
 
-const Canvas = forwardRef<CanvasRef, {}>((_, ref) => {
-  const { colors } = useTheme();
-  const sketchCanvasRef = useRef<SketchCanvasRef>(null);
-  const activeGestureList = useAppSelector(selectActiveGestureList);
+const Canvas = forwardRef<CanvasRef, CanvasProps>(
+  ({ bg, strokeColor, strokeWidth = 15 }, ref) => {
+    const { colors } = useTheme();
+    const sketchCanvasRef = useRef<SketchCanvasRef>(null);
+    const activeGestureList = useAppSelector(selectActiveGestureList);
 
-  useLayoutEffect(() => {
-    sketchCanvasRef.current?.reset();
-  }, []);
+    useLayoutEffect(() => {
+      sketchCanvasRef.current?.reset();
+    }, []);
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      ...sketchCanvasRef.current!,
-      getGesture: () => {
-        const canvasPoints = sketchCanvasRef.current?.toPoints();
-        const base64 = sketchCanvasRef.current?.toImage()?.encodeToBase64();
-        if (!canvasPoints || !base64) {
-          return {
-            success: false,
-            error: GestureError.Else,
-          };
-        }
-        const pointCloudResult = getPointCloud(canvasPoints);
-        if (pointCloudResult.success) {
-          return {
-            success: true,
-            data: {
-              canvasPoints,
-              pointCloud: pointCloudResult.pointCloud,
-              base64,
-            },
-          };
-        } else {
-          return pointCloudResult;
-        }
-      },
-      recognize: () => {
-        const canvasPoints = sketchCanvasRef.current?.toPoints();
-        if (!canvasPoints) {
-          return {
-            success: false,
-            error: GestureError.Else,
-          };
-        }
-        return gestureRecognize(
-          activeGestureList,
-          canvasPoints as CanvasPoints,
-        );
-      },
-    }),
-    [activeGestureList],
-  );
+    useImperativeHandle(
+      ref,
+      () => ({
+        ...sketchCanvasRef.current!,
+        getGesture: () => {
+          const canvasPoints = sketchCanvasRef.current?.toPoints();
+          const base64 = sketchCanvasRef.current?.toImage()?.encodeToBase64();
+          if (!canvasPoints || !base64) {
+            return {
+              success: false,
+              error: GestureError.Else,
+            };
+          }
+          const pointCloudResult = getPointCloud(canvasPoints);
+          if (pointCloudResult.success) {
+            return {
+              success: true,
+              data: {
+                canvasPoints,
+                pointCloud: pointCloudResult.pointCloud,
+                base64,
+              },
+            };
+          } else {
+            return pointCloudResult;
+          }
+        },
+        recognize: () => {
+          const canvasPoints = sketchCanvasRef.current?.toPoints();
+          if (!canvasPoints) {
+            return {
+              success: false,
+              error: GestureError.Else,
+            };
+          }
+          return gestureRecognize(
+            activeGestureList,
+            canvasPoints as CanvasPoints,
+          );
+        },
+        getIsEmpty: () => {
+          const canvasPoints = sketchCanvasRef.current?.toPoints();
+          return (
+            canvasPoints === undefined ||
+            canvasPoints.every(points => points.length === 0)
+          );
+        },
+      }),
+      [activeGestureList],
+    );
 
-  return (
-    <SketchCanvas
-      ref={sketchCanvasRef}
-      strokeColor={colors.blue[500]}
-      strokeWidth={15}
-      containerStyle={[styles.container, { backgroundColor: colors.gray[300] }]}
-    />
-  );
-});
+    return (
+      <SketchCanvas
+        ref={sketchCanvasRef}
+        strokeColor={strokeColor ?? colors.blue[500]}
+        strokeWidth={strokeWidth}
+        containerStyle={[
+          styles.container,
+          { backgroundColor: bg ?? colors.gray[300] },
+        ]}
+      />
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   container: {

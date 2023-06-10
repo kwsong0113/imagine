@@ -1,40 +1,47 @@
-import React, { useState, useRef, ComponentProps, ReactNode } from 'react';
-import { Box, Center, Pressable, useToast } from 'native-base';
+import React, { useState, useRef, ReactNode } from 'react';
+import {
+  Box,
+  Center,
+  Pressable,
+  useTheme,
+  useToast,
+  VStack,
+} from 'native-base';
 import { Canvas, IonIcon, Toast } from '../../components';
 import { StackScreenProps } from '@react-navigation/stack';
 import { CustomStackParamList } from '../../navigation';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useInterval } from '../../hooks';
 import { selectGestureToActionMap } from '../../store/slices/gesture';
 import { GestureError, RecognitionError } from '../../features/gesture/types';
 import { useExecuteActionInstance } from '../../hooks/useExecuteActionInstance';
 import { useGetActionDescription } from '../../features/action/utils';
 import { useTranslation } from 'react-i18next';
+import {
+  selectAutoLaunch,
+  selectBlankCanvasButtonPosition,
+} from '../../store/slices';
+
+const DRAWING_CLOCK_COUNT = 3;
 
 type FloatingButtonProps = {
   children: ReactNode;
   onPress?: () => void;
-} & Partial<ComponentProps<typeof Box>>;
+};
 
-const FloatingButton = ({
-  children,
-  onPress,
-  ...props
-}: FloatingButtonProps) => {
+const FloatingButton = ({ children, onPress }: FloatingButtonProps) => {
   return (
-    <Box position="absolute" {...props}>
-      <Pressable flex={1} onPress={onPress}>
-        {({ isPressed }) => (
-          <Center
-            width={50}
-            height={50}
-            borderRadius={25}
-            bg={isPressed ? 'gray.300' : 'gray.100'}
-          >
-            {children}
-          </Center>
-        )}
-      </Pressable>
-    </Box>
+    <Pressable onPress={onPress}>
+      {({ isPressed }) => (
+        <Center
+          width={50}
+          height={50}
+          borderRadius={25}
+          bg={isPressed ? 'canvas.background' : 'gray.100'}
+        >
+          {children}
+        </Center>
+      )}
+    </Pressable>
   );
 };
 
@@ -42,11 +49,18 @@ type BlankCanvasProps = StackScreenProps<CustomStackParamList, 'BlankCanvas'>;
 
 export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
   const { t } = useTranslation('gesture');
+  const { colors } = useTheme();
   const canvasRef = useRef<Canvas>(null);
   const gestureToActionMap = useAppSelector(selectGestureToActionMap);
   const toast = useToast();
   const [shouldShowButtons, setShouldShowButtons] = useState(true);
   const [shouldAlsoShowButtons, setShouldAlsoShowButtons] = useState(true);
+  const autoLaunch = useAppSelector(selectAutoLaunch);
+  const blankCanvasButtonPosition = useAppSelector(
+    selectBlankCanvasButtonPosition,
+  );
+  const splitButtonPosition = blankCanvasButtonPosition.split(' ');
+  const [drawingClock, setDrawingClock] = useState(DRAWING_CLOCK_COUNT);
   const executeActionInstance = useExecuteActionInstance();
   const getActionDescription = useGetActionDescription();
 
@@ -124,30 +138,72 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
     canvasRef.current?.reset();
   };
 
+  useInterval(
+    () => {
+      const isDrawing = canvasRef.current?.getIsDrawing();
+      if (isDrawing === false && !canvasRef.current?.getIsEmpty()) {
+        if (drawingClock === 1) {
+          handleRecognize();
+          setDrawingClock(DRAWING_CLOCK_COUNT);
+        } else {
+          setDrawingClock(prev => prev - 1);
+        }
+      } else if (isDrawing === false) {
+        setDrawingClock(DRAWING_CLOCK_COUNT);
+      }
+    },
+    autoLaunch ? 100 : null,
+  );
+
   return (
-    <Box flex={1} bg="gray.300" safeAreaTop>
-      <Canvas ref={canvasRef} />
-      <FloatingButton
-        bottom={10}
-        left={6}
-        onPress={() => navigation.navigate('Home')}
-      >
-        <IonIcon name="home" size={5} color="orange.700" />
-      </FloatingButton>
-      {shouldShowButtons && shouldAlsoShowButtons && (
-        <>
-          <FloatingButton
-            top={60}
-            left={6}
-            onPress={() => canvasRef.current?.reset()}
+    <Box flex={1} bg="canvas.background" safeAreaTop>
+      <Canvas
+        bg={colors.canvas.background}
+        strokeColor={colors.canvas.stroke}
+        strokeWidth={10}
+        ref={canvasRef}
+      />
+      <Box position="absolute" left={6} bottom={10}>
+        <FloatingButton onPress={() => navigation.navigate('Home')}>
+          <IonIcon name="home" size={5} color="gray.500" />
+        </FloatingButton>
+      </Box>
+      {shouldShowButtons &&
+        shouldAlsoShowButtons &&
+        splitButtonPosition.length > 1 && (
+          <VStack
+            position="absolute"
+            h="full"
+            {...(splitButtonPosition[1] === 'left'
+              ? { left: 6 }
+              : { right: 6 })}
+            bottom={0}
+            pt={2}
+            pb={10}
+            space={2}
+            justifyContent={
+              splitButtonPosition[0] === 'top'
+                ? 'flex-start'
+                : splitButtonPosition[0] === 'mid'
+                ? 'center'
+                : 'flex-end'
+            }
           >
-            <IonIcon name="close-circle" size={5} color="gray.500" />
-          </FloatingButton>
-          <FloatingButton top={60} right={6} onPress={handleRecognize}>
-            <IonIcon name="scan" size={18} color="blue.500" />
-          </FloatingButton>
-        </>
-      )}
+            {splitButtonPosition[0] !== 'top' && (
+              <FloatingButton onPress={handleRecognize}>
+                <IonIcon name="scan" size={18} color="canvas.stroke" />
+              </FloatingButton>
+            )}
+            <FloatingButton onPress={() => canvasRef.current?.reset()}>
+              <IonIcon name="close-circle" size={5} color="gray.500" />
+            </FloatingButton>
+            {splitButtonPosition[0] === 'top' && (
+              <FloatingButton onPress={handleRecognize}>
+                <IonIcon name="scan" size={18} color="canvas.stroke" />
+              </FloatingButton>
+            )}
+          </VStack>
+        )}
     </Box>
   );
 };

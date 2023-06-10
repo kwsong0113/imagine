@@ -3,7 +3,7 @@ import { Gesture, GestureDataElement } from '../../features/gesture/types';
 import { RootState } from '..';
 import { ActionInstance } from '../../features/action/types';
 
-interface GestureState {
+export interface GestureState {
   gestureList: Gesture[];
   gestureToActionMap: Record<string, ActionInstance>;
 }

@@ -19,6 +19,7 @@ import {
   CUSTOM_URL_SCHEME_ID,
   SHORTCUT_ID,
 } from '../../../features/action/consts';
+import { NewFeatureBottomSheetModal } from './NewFeatureBottomSheetModal';
 
 type Props = StackScreenProps<CustomStackParamList, 'Home'>;
 
@@ -123,6 +124,7 @@ export const Custom = ({ navigation }: Props) => {
       </ScreenContainer>
       <HelpBottomSheetModal />
       <LanguageBottomSheetModal />
+      <NewFeatureBottomSheetModal />
     </>
   );
 };
