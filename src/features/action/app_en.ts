@@ -3,7 +3,7 @@ import { App } from './types';
 
 export const appList: App[] = [
   {
-    id: 472,
+    id: 47,
     name: 'Find My',
     actions: [
       {

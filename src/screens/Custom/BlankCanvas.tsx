@@ -163,7 +163,11 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
         strokeWidth={10}
         ref={canvasRef}
       />
-      <Box position="absolute" left={6} bottom={10}>
+      <Box
+        position="absolute"
+        {...(splitButtonPosition[1] === 'left' ? { right: 6 } : { left: 6 })}
+        bottom={10}
+      >
         <FloatingButton onPress={() => navigation.navigate('Home')}>
           <IonIcon name="home" size={5} color="gray.500" />
         </FloatingButton>
