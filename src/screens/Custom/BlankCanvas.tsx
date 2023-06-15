@@ -20,6 +20,7 @@ import {
   selectAutoLaunch,
   selectBlankCanvasButtonPosition,
 } from '../../store/slices';
+import { useIsFocused } from '@react-navigation/native';
 
 const DRAWING_CLOCK_COUNT = 3;
 
@@ -63,6 +64,8 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
   const [drawingClock, setDrawingClock] = useState(DRAWING_CLOCK_COUNT);
   const executeActionInstance = useExecuteActionInstance();
   const getActionDescription = useGetActionDescription();
+
+  const isFocused = useIsFocused();
 
   const handleRecognize = async () => {
     const recognitionResult = canvasRef.current?.recognize();
@@ -152,7 +155,7 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
         setDrawingClock(DRAWING_CLOCK_COUNT);
       }
     },
-    autoLaunch ? 100 : null,
+    autoLaunch && isFocused ? 100 : null,
   );
 
   return (
