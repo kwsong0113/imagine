@@ -1,27 +1,41 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Setting } from '../screens';
+import {
+  BottomTabNavigationProp,
+  BottomTabScreenProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
+import { Setting, Statistics, Custom } from '../screens';
 import { useTheme } from 'native-base';
 import { IonIcon } from '../components';
 import {
-  CustomStackNavigator,
-  CustomStackParamList,
-} from './CustomStackNavigator';
-import { StatisticsStackNavigator } from './StatisticsStackNavigator';
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import { AppStackParamList } from './AppStackNavigator';
 import {
-  getFocusedRouteNameFromRoute,
-  NavigatorScreenParams,
+  CompositeNavigationProp,
+  CompositeScreenProps,
 } from '@react-navigation/native';
 
-const CUSTOM_SCREEN_WITHOUT_TABBAR = ['BlankCanvas', 'Help'];
-
 export type RootTabParamList = {
-  Custom: NavigatorScreenParams<CustomStackParamList>;
+  Custom: undefined;
   Statistics: undefined;
   Setting: undefined;
 };
 
-const Tab = createBottomTabNavigator();
+export type RootTabNavigationProp<T extends keyof RootTabParamList> =
+  CompositeNavigationProp<
+    BottomTabNavigationProp<RootTabParamList, T>,
+    NativeStackNavigationProp<AppStackParamList>
+  >;
+
+export type RootTabScreenProps<T extends keyof RootTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<RootTabParamList, T>,
+    NativeStackScreenProps<AppStackParamList>
+  >;
+
+const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const tabBarIconMap: Record<
   string,
@@ -55,7 +69,7 @@ export const RootTabNavigator = () => {
     >
       <Tab.Screen
         name="Statistics"
-        component={StatisticsStackNavigator}
+        component={Statistics}
         options={{
           tabBarItemStyle: {
             borderTopLeftRadius: 30,
@@ -66,18 +80,13 @@ export const RootTabNavigator = () => {
       />
       <Tab.Screen
         name="Custom"
-        component={CustomStackNavigator}
-        options={({ route }) => ({
+        component={Custom}
+        options={{
           tabBarItemStyle: {
             borderTopColor: colors.gray[300],
             borderTopWidth: 1,
           },
-          ...(CUSTOM_SCREEN_WITHOUT_TABBAR.includes(
-            getFocusedRouteNameFromRoute(route) ?? '',
-          )
-            ? { tabBarStyle: { display: 'none' } }
-            : {}),
-        })}
+        }}
       />
       <Tab.Screen
         name="Setting"

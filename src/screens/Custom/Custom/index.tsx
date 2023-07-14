@@ -8,8 +8,7 @@ import {
   ListRow,
   ScreenContainer,
 } from '../../../components';
-import { CustomStackParamList } from '../../../navigation';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootTabScreenProps } from '../../../navigation';
 import { useRenderToast } from '../../../hooks';
 import { useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -21,9 +20,7 @@ import {
 } from '../../../features/action/consts';
 import { NewFeatureBottomSheetModal } from './NewFeatureBottomSheetModal';
 
-type Props = NativeStackScreenProps<CustomStackParamList, 'Home'>;
-
-export const Custom = ({ navigation }: Props) => {
+export const Custom = ({ navigation }: RootTabScreenProps<'Custom'>) => {
   const renderToast = useRenderToast();
   const { height } = useWindowDimensions();
   const { t } = useTranslation('custom');
@@ -60,14 +57,18 @@ export const Custom = ({ navigation }: Props) => {
             title={t('gestures')}
             titleColor="blue.600"
             right={<IonIcon size={6} color="blue.600" name="chevron-forward" />}
-            onPress={() => navigation.navigate('GestureList')}
+            onPress={() =>
+              navigation.navigate('CustomStack', { screen: 'GestureList' })
+            }
           />
           <ListRow
             title={t('actions')}
             titleColor="blue.600"
             hasBottomBorder={true}
             right={<IonIcon size={6} color="blue.600" name="chevron-forward" />}
-            onPress={() => navigation.navigate('WholeActionList')}
+            onPress={() =>
+              navigation.navigate('CustomStack', { screen: 'WholeActionList' })
+            }
           />
         </VStack>
         <VStack
@@ -79,17 +80,22 @@ export const Custom = ({ navigation }: Props) => {
             iconName="logo-apple-appstore"
             title={t('app_title')}
             caption={t('app_description')}
-            onPress={() => navigation.navigate('AppList')}
+            onPress={() =>
+              navigation.navigate('CustomStack', { screen: 'AppList' })
+            }
           />
           <Feature
             iconName="layers"
             title={t('shortcut_title')}
             caption={t('shortcut_description')}
             onPress={() =>
-              navigation.navigate('ParamActionList', {
-                appId: SHORTCUT_ID,
-                actionId: 1,
-                type: 'shortcutList',
+              navigation.navigate('CustomStack', {
+                screen: 'ParamActionList',
+                params: {
+                  appId: SHORTCUT_ID,
+                  actionId: 1,
+                  type: 'shortcutList',
+                },
               })
             }
           />
@@ -113,10 +119,13 @@ export const Custom = ({ navigation }: Props) => {
             title={t('custom_url_scheme_title')}
             caption={t('custom_url_scheme_description')}
             onPress={() =>
-              navigation.navigate('ParamActionList', {
-                appId: CUSTOM_URL_SCHEME_ID,
-                actionId: 0,
-                type: 'customURLSchemeList',
+              navigation.navigate('CustomStack', {
+                screen: 'ParamActionList',
+                params: {
+                  appId: CUSTOM_URL_SCHEME_ID,
+                  actionId: 0,
+                  type: 'customURLSchemeList',
+                },
               })
             }
           />

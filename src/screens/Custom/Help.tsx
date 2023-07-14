@@ -7,8 +7,7 @@ import {
   AnimatedButton,
 } from '../../components';
 import { Box, HStack, Image, ScrollView, VStack } from 'native-base';
-import { CustomStackParamList } from '../../navigation';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AppStackScreenProps } from '../../navigation';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { Linking, useWindowDimensions } from 'react-native';
 import { HelpCard } from '../../components/HelpCard';
@@ -175,9 +174,7 @@ const HELP_DESCRIPTION_DATA_EN = [
   ],
 ];
 
-type HelpProps = NativeStackScreenProps<CustomStackParamList, 'Help'>;
-
-export const Help = ({ navigation }: HelpProps) => {
+export const Help = ({ navigation }: AppStackScreenProps<'Help'>) => {
   const { t } = useTranslation('help');
   const [index, setIndex] = useState(0);
 
@@ -200,7 +197,7 @@ export const Help = ({ navigation }: HelpProps) => {
           color="gray.400"
           size={30}
           onPress={() => {
-            navigation.navigate('Home');
+            navigation.goBack();
           }}
         />
       </HStack>
