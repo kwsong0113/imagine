@@ -1,7 +1,11 @@
-import { ScrollView } from 'native-base';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScreenContainer, Header, StatisticsActionRow } from '../../components';
+import {
+  ScreenContainer,
+  Header,
+  StatisticsActionRow,
+  ScrollableList,
+} from '../../components';
 import { useActionStat } from '../../hooks';
 
 export const Detail = () => {
@@ -11,7 +15,7 @@ export const Detail = () => {
   return (
     <ScreenContainer>
       <Header variant="center" title={t('detail_title')} />
-      <ScrollView mx={-3} px={3}>
+      <ScrollableList>
         {actionStat.map((props, idx) => {
           return (
             <StatisticsActionRow
@@ -21,7 +25,7 @@ export const Detail = () => {
             />
           );
         })}
-      </ScrollView>
+      </ScrollableList>
     </ScreenContainer>
   );
 };
