@@ -4,18 +4,15 @@ import { useAppList } from '../../hooks';
 import { sleepTimeout } from '../../utils';
 import { Action, ActionInstance } from './types';
 
-export const useGetActionFromActionInstance = () => {
+export const useParseActionInstance = () => {
   const getAppForAction = useGetAppForAction();
   return useCallback(
     (actionInstance: ActionInstance) => {
       const matchedApp = getAppForAction(actionInstance);
-      if (!matchedApp) {
-        return undefined;
-      }
-      const matchedAction = matchedApp.actions.find(
+      const matchedAction = matchedApp?.actions?.find(
         action => action.id === actionInstance.actionId,
       );
-      return matchedAction;
+      return { app: matchedApp, action: matchedAction };
     },
     [getAppForAction],
   );
@@ -40,10 +37,10 @@ export const executeAction = async (
 };
 
 export const useGetActionDescription = () => {
-  const getActionFromActionInstance = useGetActionFromActionInstance();
+  const parseActionInstance = useParseActionInstance();
   return useCallback(
     (actionInstance: ActionInstance) => {
-      const action = getActionFromActionInstance(actionInstance);
+      const { action } = parseActionInstance(actionInstance);
       if (!action) {
         return undefined;
       }
@@ -52,7 +49,7 @@ export const useGetActionDescription = () => {
       }
       return action.description;
     },
-    [getActionFromActionInstance],
+    [parseActionInstance],
   );
 };
 
