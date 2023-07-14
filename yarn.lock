@@ -3535,6 +3535,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4":
+  version: 4.14.195
+  resolution: "@types/lodash@npm:4.14.195"
+  checksum: 39b75ca635b3fa943d17d3d3aabc750babe4c8212485a4df166fe0516e39288e14b0c60afc6e21913cc0e5a84734633c71e617e2bd14eaa1cf51b8d7799c432e
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 18.15.3
   resolution: "@types/node@npm:18.15.3"
@@ -3826,6 +3833,7 @@ __metadata:
     "@shopify/react-native-skia": ^0.1.182
     "@tsconfig/react-native": ^2.0.2
     "@types/jest": ^29.2.1
+    "@types/lodash": ^4
     "@types/react": ^18.0.24
     "@types/react-native": ^0.71.3
     "@types/react-native-vector-icons": ^6.4.13
@@ -3835,6 +3843,7 @@ __metadata:
     husky: ^8.0.0
     i18next: ^22.5.0
     lint-staged: ^13.2.0
+    lodash: ^4.17.21
     metro-react-native-babel-preset: 0.73.8
     native-base: ^3.4.28
     prettier: ^2.4.1
