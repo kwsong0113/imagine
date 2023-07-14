@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ScrollView } from 'native-base';
 import {
   ScreenContainer,
@@ -66,7 +66,10 @@ const ActionRow = ({
   );
 };
 
-type ActionListProps = StackScreenProps<CustomStackParamList, 'ActionList'>;
+type ActionListProps = NativeStackScreenProps<
+  CustomStackParamList,
+  'ActionList'
+>;
 
 export const ActionList = ({ navigation, route }: ActionListProps) => {
   const { appId } = route.params;

@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack';
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 import {
   AppList,
   Custom,
@@ -32,9 +32,9 @@ export type CustomStackParamList = {
 };
 
 export type CustomStackNavigationProp =
-  StackNavigationProp<CustomStackParamList>;
+  NativeStackNavigationProp<CustomStackParamList>;
 
-const Stack = createStackNavigator<CustomStackParamList>();
+const Stack = createNativeStackNavigator<CustomStackParamList>();
 
 export const CustomStackNavigator = () => {
   return (
@@ -55,12 +55,12 @@ export const CustomStackNavigator = () => {
       <Stack.Screen
         name="BlankCanvas"
         component={BlankCanvas}
-        options={{ animationEnabled: false }}
+        options={{ presentation: 'fullScreenModal' }}
       />
       <Stack.Screen
         name="Help"
         component={Help}
-        options={{ animationEnabled: false }}
+        options={{ presentation: 'modal' }}
       />
     </Stack.Navigator>
   );

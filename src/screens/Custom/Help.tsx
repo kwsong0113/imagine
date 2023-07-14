@@ -8,7 +8,7 @@ import {
 } from '../../components';
 import { Box, HStack, Image, ScrollView, VStack } from 'native-base';
 import { CustomStackParamList } from '../../navigation';
-import { StackScreenProps } from '@react-navigation/stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { Linking, useWindowDimensions } from 'react-native';
 import { HelpCard } from '../../components/HelpCard';
@@ -175,7 +175,7 @@ const HELP_DESCRIPTION_DATA_EN = [
   ],
 ];
 
-type HelpProps = StackScreenProps<CustomStackParamList, 'Help'>;
+type HelpProps = NativeStackScreenProps<CustomStackParamList, 'Help'>;
 
 export const Help = ({ navigation }: HelpProps) => {
   const { t } = useTranslation('help');

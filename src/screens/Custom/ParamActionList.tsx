@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   ScreenContainer,
   Header,
@@ -25,7 +25,7 @@ import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
 import { useGetActionDescription } from '../../features/action/utils';
 import { useTranslation } from 'react-i18next';
 
-type ParamActionProps = StackScreenProps<
+type ParamActionProps = NativeStackScreenProps<
   CustomStackParamList,
   'ParamActionList'
 >;

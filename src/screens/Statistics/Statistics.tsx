@@ -1,6 +1,6 @@
 import React, { ComponentProps, useMemo } from 'react';
 import { HStack, VStack } from 'native-base';
-import { StackScreenProps } from '@react-navigation/stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   ScreenContainer,
   Header,
@@ -42,7 +42,7 @@ const CountInfo = ({ count, description, ...props }: CountInfoProps) => {
   );
 };
 
-type Props = StackScreenProps<StatisticsStackParamList, 'StatisticsHome'>;
+type Props = NativeStackScreenProps<StatisticsStackParamList, 'StatisticsHome'>;
 
 export const Statistics = ({ navigation }: Props) => {
   const { t } = useTranslation('statistics');

@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack';
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 import { Statistics, Detail } from '../screens/Statistics';
 
 export type StatisticsStackParamList = {
@@ -11,9 +11,9 @@ export type StatisticsStackParamList = {
 };
 
 export type StatisticsStackNavigationProp =
-  StackNavigationProp<StatisticsStackParamList>;
+  NativeStackNavigationProp<StatisticsStackParamList>;
 
-const Stack = createStackNavigator<StatisticsStackParamList>();
+const Stack = createNativeStackNavigator<StatisticsStackParamList>();
 
 export const StatisticsStackNavigator = () => {
   return (

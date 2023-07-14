@@ -4,7 +4,7 @@ import {
   SingleBottomSheetModal,
 } from '../../../components';
 import { CustomStackParamList } from '../../../navigation';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
@@ -15,7 +15,10 @@ import {
 } from '../../../store/slices';
 import { useTranslation } from 'react-i18next';
 
-type HomeNavigationProp = StackNavigationProp<CustomStackParamList, 'Home'>;
+type HomeNavigationProp = NativeStackNavigationProp<
+  CustomStackParamList,
+  'Home'
+>;
 
 export const HelpBottomSheetModal = () => {
   const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);

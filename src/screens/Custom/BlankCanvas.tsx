@@ -8,7 +8,7 @@ import {
   VStack,
 } from 'native-base';
 import { Canvas, IonIcon, Toast } from '../../components';
-import { StackScreenProps } from '@react-navigation/stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { CustomStackParamList } from '../../navigation';
 import { useAppSelector, useInterval } from '../../hooks';
 import { selectGestureToActionMap } from '../../store/slices/gesture';
@@ -46,7 +46,10 @@ const FloatingButton = ({ children, onPress }: FloatingButtonProps) => {
   );
 };
 
-type BlankCanvasProps = StackScreenProps<CustomStackParamList, 'BlankCanvas'>;
+type BlankCanvasProps = NativeStackScreenProps<
+  CustomStackParamList,
+  'BlankCanvas'
+>;
 
 export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
   const { t } = useTranslation('gesture');

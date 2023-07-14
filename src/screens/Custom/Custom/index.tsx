@@ -9,7 +9,7 @@ import {
   ScreenContainer,
 } from '../../../components';
 import { CustomStackParamList } from '../../../navigation';
-import { StackScreenProps } from '@react-navigation/stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useRenderToast } from '../../../hooks';
 import { useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +21,7 @@ import {
 } from '../../../features/action/consts';
 import { NewFeatureBottomSheetModal } from './NewFeatureBottomSheetModal';
 
-type Props = StackScreenProps<CustomStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<CustomStackParamList, 'Home'>;
 
 export const Custom = ({ navigation }: Props) => {
   const renderToast = useRenderToast();

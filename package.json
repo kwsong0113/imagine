@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
+    "compile": "tsc --noEmit -p . --pretty",
     "start": "react-native start",
     "postinstall": "husky install"
   },
@@ -16,7 +17,7 @@
     "@react-native-firebase/app": "^18.2.0",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
-    "@react-navigation/stack": "^6.3.16",
+    "@react-navigation/native-stack": "^6.9.13",
     "@reduxjs/toolkit": "^1.9.3",
     "@shopify/react-native-skia": "^0.1.182",
     "date-fns": "^2.29.3",

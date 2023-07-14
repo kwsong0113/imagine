@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { ScrollView } from 'native-base';
-import { StackScreenProps } from '@react-navigation/stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   AppIcon,
   Header,
@@ -82,7 +82,7 @@ const AppRow = ({
   );
 };
 
-type AppListProps = StackScreenProps<CustomStackParamList, 'AppList'>;
+type AppListProps = NativeStackScreenProps<CustomStackParamList, 'AppList'>;
 
 export const AppList = ({ navigation }: AppListProps) => {
   const { t } = useTranslation('appList');
