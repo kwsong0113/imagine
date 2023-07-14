@@ -20,11 +20,7 @@ interface Props {
 
 const config = {
   screens: {
-    Custom: {
-      screens: {
-        BlankCanvas: 'blank',
-      },
-    },
+    BlankCanvas: 'blank',
   },
 };
 

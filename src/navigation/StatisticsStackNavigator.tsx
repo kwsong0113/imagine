@@ -1,19 +1,35 @@
 import React from 'react';
 import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack';
-import { Statistics, Detail } from '../screens/Statistics';
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import { Detail } from '../screens/Statistics';
+import {
+  CompositeNavigationProp,
+  CompositeScreenProps,
+} from '@react-navigation/native';
+import { AppStackParamList } from './AppStackNavigator';
 
 export type StatisticsStackParamList = {
-  StatisticsHome: undefined;
   Detail: undefined;
 };
 
-export type StatisticsStackNavigationProp =
-  StackNavigationProp<StatisticsStackParamList>;
+export type StatisticsStackNavigationProp<
+  T extends keyof StatisticsStackParamList,
+> = CompositeNavigationProp<
+  NativeStackNavigationProp<StatisticsStackParamList, T>,
+  NativeStackNavigationProp<AppStackParamList>
+>;
 
-const Stack = createStackNavigator<StatisticsStackParamList>();
+export type StatisticsStackScreenProps<
+  T extends keyof StatisticsStackParamList,
+> = CompositeScreenProps<
+  NativeStackScreenProps<StatisticsStackParamList, T>,
+  NativeStackScreenProps<AppStackParamList>
+>;
+
+const Stack = createNativeStackNavigator<StatisticsStackParamList>();
 
 export const StatisticsStackNavigator = () => {
   return (
@@ -22,9 +38,7 @@ export const StatisticsStackNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="StatisticsHome"
     >
-      <Stack.Screen name="StatisticsHome" component={Statistics} />
       <Stack.Screen name="Detail" component={Detail} />
     </Stack.Navigator>
   );

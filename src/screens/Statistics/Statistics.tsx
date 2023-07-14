@@ -1,6 +1,5 @@
 import React, { ComponentProps, useMemo } from 'react';
 import { HStack, VStack } from 'native-base';
-import { StackScreenProps } from '@react-navigation/stack';
 import {
   ScreenContainer,
   Header,
@@ -15,9 +14,9 @@ import {
   selectNumActionsPerDay,
 } from '../../store/slices/history';
 import { ActionInstance } from '../../features/action/types';
-import { StatisticsStackParamList } from '../../navigation/StatisticsStackNavigator';
 import { useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { RootTabScreenProps } from '../../navigation';
 
 type CountInfoProps = {
   count: number;
@@ -42,9 +41,9 @@ const CountInfo = ({ count, description, ...props }: CountInfoProps) => {
   );
 };
 
-type Props = StackScreenProps<StatisticsStackParamList, 'StatisticsHome'>;
-
-export const Statistics = ({ navigation }: Props) => {
+export const Statistics = ({
+  navigation,
+}: RootTabScreenProps<'Statistics'>) => {
   const { t } = useTranslation('statistics');
   const activeGestureList = useAppSelector(selectActiveGestureList);
   const numActionsPerDay = useAppSelector(selectNumActionsPerDay);
@@ -120,7 +119,9 @@ export const Statistics = ({ navigation }: Props) => {
         {hasShowAllButton && (
           <ListRowButton
             title={t('see_all')}
-            onPress={() => navigation.navigate('Detail')}
+            onPress={() =>
+              navigation.navigate('StatisticsStack', { screen: 'Detail' })
+            }
           />
         )}
       </VStack>

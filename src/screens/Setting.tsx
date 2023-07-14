@@ -28,8 +28,7 @@ import { useAppSelector, useAppDispatch } from '../hooks';
 import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { gestureActions } from '../store/slices/gesture';
 import { useNavigation } from '@react-navigation/native';
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import { RootTabParamList } from '../navigation';
+import { RootTabNavigationProp } from '../navigation';
 import { getLocaleLanguage } from '../utils';
 import { useTranslation } from 'react-i18next';
 
@@ -360,7 +359,7 @@ const SettingClearGestureRow = () => {
 
 const SettingHelpRow = () => {
   const { t } = useTranslation('setting');
-  const navigation = useNavigation<SettingNavigationProp>();
+  const navigation = useNavigation<RootTabNavigationProp<'Setting'>>();
 
   return (
     <ListRow
@@ -370,18 +369,11 @@ const SettingHelpRow = () => {
       right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
       hasBottomBorder={true}
       onPress={() => {
-        navigation.jumpTo('Custom', {
-          screen: 'Help',
-        });
+        navigation.navigate('Help');
       }}
     />
   );
 };
-
-type SettingNavigationProp = BottomTabNavigationProp<
-  RootTabParamList,
-  'Setting'
->;
 
 export const Setting = () => {
   const { t } = useTranslation('setting');

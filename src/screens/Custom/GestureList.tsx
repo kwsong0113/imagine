@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { VStack, HStack, ScrollView, Text, useToast } from 'native-base';
+import { VStack, HStack, Text, useToast } from 'native-base';
 import {
   ScreenContainer,
   Header,
@@ -12,6 +12,7 @@ import {
   GestureViewBottomSheetModal,
   Toast,
   GesturePreview,
+  ScrollableList,
 } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
@@ -63,7 +64,7 @@ export const GestureList = () => {
   return (
     <ScreenContainer>
       <Header variant="center" title={t('gesture_list')} />
-      <ScrollView mx={-3} px={3} mb={-6}>
+      <ScrollableList>
         <ListRow
           title={t('add_gesture')}
           right={
@@ -125,7 +126,7 @@ export const GestureList = () => {
             </Animated.View>
           );
         })}
-      </ScrollView>
+      </ScrollableList>
     </ScreenContainer>
   );
 };

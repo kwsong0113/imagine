@@ -3,8 +3,7 @@ import {
   OptionSingleBottomSheetModal,
   SingleBottomSheetModal,
 } from '../../../components';
-import { CustomStackParamList } from '../../../navigation';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { RootTabNavigationProp } from '../../../navigation';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
@@ -15,12 +14,10 @@ import {
 } from '../../../store/slices';
 import { useTranslation } from 'react-i18next';
 
-type HomeNavigationProp = StackNavigationProp<CustomStackParamList, 'Home'>;
-
 export const HelpBottomSheetModal = () => {
   const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
   const { dismiss } = useBottomSheetModal();
-  const navigation = useNavigation<HomeNavigationProp>();
+  const navigation = useNavigation<RootTabNavigationProp<'Custom'>>();
   const dispatch = useAppDispatch();
   const shouldShowHelp = useAppSelector(selectShouldShowHelp);
   const shouldShowLanguagePicker = useAppSelector(selectLanguage) === 'locale';

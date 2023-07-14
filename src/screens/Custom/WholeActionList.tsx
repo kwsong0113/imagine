@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { VStack, HStack, ScrollView, Text } from 'native-base';
+import { VStack, HStack, Text } from 'native-base';
 import {
   ScreenContainer,
   Header,
@@ -9,6 +9,7 @@ import {
   Typography,
   GestureViewBottomSheetModal,
   GesturePreview,
+  ScrollableList,
 } from '../../components';
 import { useAppSelector, useHandleRemoveAction } from '../../hooks';
 import {
@@ -37,54 +38,56 @@ export const WholeActionList = () => {
   const handleRemoveAction = useHandleRemoveAction();
 
   return (
-    <ScreenContainer>
-      <Header variant="center" title={t('action_list')} />
-      <ScrollView mx={-3} px={3} mb={-6}>
-        <GestureViewBottomSheetModal
-          ref={gestureViewBottomSheetModalRef}
-          gesture={selectedGesture}
-        />
-        {activeGestureList.map(({ id, name, data }, idx) => {
-          const description = gestureToActionMap[id]
-            ? getActionDescription(gestureToActionMap[id])
-            : undefined;
-          return (
-            <Animated.View
-              key={id}
-              layout={Layout.springify()}
-              exiting={LightSpeedOutRight}
-            >
-              <ListRow
-                left={
-                  <HStack flex={1} space={3} alignItems="center">
-                    <HStack space={1}>
-                      <GesturePreview name={name} base64={data[0].base64} />
+    <>
+      <ScreenContainer>
+        <Header variant="center" title={t('action_list')} />
+        <ScrollableList>
+          {activeGestureList.map(({ id, name, data }, idx) => {
+            const description = gestureToActionMap[id]
+              ? getActionDescription(gestureToActionMap[id])
+              : undefined;
+            return (
+              <Animated.View
+                key={id}
+                layout={Layout.springify()}
+                exiting={LightSpeedOutRight}
+              >
+                <ListRow
+                  left={
+                    <HStack flex={1} space={3} alignItems="center">
+                      <HStack space={1}>
+                        <GesturePreview name={name} base64={data[0].base64} />
+                      </HStack>
+                      <VStack flex={1} space={1}>
+                        <Typography variant="info" isTruncated>
+                          {description}
+                        </Typography>
+                        <Text fontSize="xs" color={'teal.600'} isTruncated>
+                          {name}
+                        </Text>
+                      </VStack>
                     </HStack>
-                    <VStack flex={1} space={1}>
-                      <Typography variant="info" isTruncated>
-                        {description}
-                      </Typography>
-                      <Text fontSize="xs" color={'teal.600'} isTruncated>
-                        {name}
-                      </Text>
-                    </VStack>
-                  </HStack>
-                }
-                right={
-                  <AnimatedIconButton
-                    name="remove-circle-outline"
-                    color="red.500"
-                    size={8}
-                    onPress={() => handleRemoveAction(id, description ?? '')}
-                  />
-                }
-                hasBottomBorder={idx === activeGestureList.length - 1}
-                onPress={() => handleViewGesture({ id, name, data })}
-              />
-            </Animated.View>
-          );
-        })}
-      </ScrollView>
-    </ScreenContainer>
+                  }
+                  right={
+                    <AnimatedIconButton
+                      name="remove-circle-outline"
+                      color="red.500"
+                      size={8}
+                      onPress={() => handleRemoveAction(id, description ?? '')}
+                    />
+                  }
+                  hasBottomBorder={idx === activeGestureList.length - 1}
+                  onPress={() => handleViewGesture({ id, name, data })}
+                />
+              </Animated.View>
+            );
+          })}
+        </ScrollableList>
+      </ScreenContainer>
+      <GestureViewBottomSheetModal
+        ref={gestureViewBottomSheetModalRef}
+        gesture={selectedGesture}
+      />
+    </>
   );
 };

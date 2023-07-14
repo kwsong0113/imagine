@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { ScrollView } from 'native-base';
-import { StackScreenProps } from '@react-navigation/stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   AppIcon,
   Header,
@@ -11,6 +10,7 @@ import {
   GesturePickerBottomSheetModal,
   SingleBottomSheetModal,
   AnimatedIconButton,
+  ScrollableList,
 } from '../../components';
 import { CustomStackParamList } from '../../navigation';
 import {
@@ -82,7 +82,7 @@ const AppRow = ({
   );
 };
 
-type AppListProps = StackScreenProps<CustomStackParamList, 'AppList'>;
+type AppListProps = NativeStackScreenProps<CustomStackParamList, 'AppList'>;
 
 export const AppList = ({ navigation }: AppListProps) => {
   const { t } = useTranslation('appList');
@@ -101,7 +101,7 @@ export const AppList = ({ navigation }: AppListProps) => {
           title={t('header.title')}
           description={t('header.description')}
         />
-        <ScrollView mx={-3} px={3} mb={-6}>
+        <ScrollableList>
           {appList.map((app, idx) => {
             if (app.id === CUSTOM_URL_SCHEME_ID) {
               return;
@@ -150,7 +150,7 @@ export const AppList = ({ navigation }: AppListProps) => {
               />
             );
           })}
-        </ScrollView>
+        </ScrollableList>
       </ScreenContainer>
       <GesturePickerBottomSheetModal
         ref={gesturePickerBottomSheetModalRef}

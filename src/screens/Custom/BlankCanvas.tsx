@@ -8,8 +8,7 @@ import {
   VStack,
 } from 'native-base';
 import { Canvas, IonIcon, Toast } from '../../components';
-import { StackScreenProps } from '@react-navigation/stack';
-import { CustomStackParamList } from '../../navigation';
+import { AppStackScreenProps } from '../../navigation';
 import { useAppSelector, useInterval } from '../../hooks';
 import { selectGestureToActionMap } from '../../store/slices/gesture';
 import { GestureError, RecognitionError } from '../../features/gesture/types';
@@ -46,9 +45,9 @@ const FloatingButton = ({ children, onPress }: FloatingButtonProps) => {
   );
 };
 
-type BlankCanvasProps = StackScreenProps<CustomStackParamList, 'BlankCanvas'>;
-
-export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
+export const BlankCanvas = ({
+  navigation,
+}: AppStackScreenProps<'BlankCanvas'>) => {
   const { t } = useTranslation('gesture');
   const { colors } = useTheme();
   const canvasRef = useRef<Canvas>(null);
@@ -171,7 +170,9 @@ export const BlankCanvas = ({ navigation }: BlankCanvasProps) => {
         {...(splitButtonPosition[1] === 'left' ? { right: 6 } : { left: 6 })}
         bottom={10}
       >
-        <FloatingButton onPress={() => navigation.navigate('Home')}>
+        <FloatingButton
+          onPress={() => navigation.replace('Root', { screen: 'Custom' })}
+        >
           <IonIcon name="home" size={5} color="gray.500" />
         </FloatingButton>
       </Box>

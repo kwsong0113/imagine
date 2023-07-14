@@ -2768,6 +2768,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-navigation/elements@npm:^1.3.18":
+  version: 1.3.18
+  resolution: "@react-navigation/elements@npm:1.3.18"
+  peerDependencies:
+    "@react-navigation/native": ^6.0.0
+    react: "*"
+    react-native: "*"
+    react-native-safe-area-context: ">= 3.0.0"
+  checksum: 02293f0932e5f53bb9c4df46f97063bfa27f05a1f606ea556de42189e6bf3e928f70a531ae64e0f56072d6525178cee9bd41eafbcbbce4653476f4aa2346524a
+  languageName: node
+  linkType: hard
+
+"@react-navigation/native-stack@npm:^6.9.13":
+  version: 6.9.13
+  resolution: "@react-navigation/native-stack@npm:6.9.13"
+  dependencies:
+    "@react-navigation/elements": ^1.3.18
+    warn-once: ^0.1.0
+  peerDependencies:
+    "@react-navigation/native": ^6.0.0
+    react: "*"
+    react-native: "*"
+    react-native-safe-area-context: ">= 3.0.0"
+    react-native-screens: ">= 3.0.0"
+  checksum: 10d1f2ef4f1f2f4543f77b9c378dd3b49ee3c20e6e9d15b1b3ce3489d46c634411f6bc4c3cda379e47e7f3a669fb765c99954229479cd20aff5fae800e886574
+  languageName: node
+  linkType: hard
+
 "@react-navigation/native@npm:^6.1.6":
   version: 6.1.6
   resolution: "@react-navigation/native@npm:6.1.6"
@@ -2789,24 +2817,6 @@ __metadata:
   dependencies:
     nanoid: ^3.1.23
   checksum: f703ab9015e514e218a71a5cded79b1f2d2b7bb3d508e252aaa4b75cc1537b539177b1a66b4278322ce866320535fc1ebda7ea7f2f740abe6eac31f3b40e2c70
-  languageName: node
-  linkType: hard
-
-"@react-navigation/stack@npm:^6.3.16":
-  version: 6.3.16
-  resolution: "@react-navigation/stack@npm:6.3.16"
-  dependencies:
-    "@react-navigation/elements": ^1.3.17
-    color: ^4.2.3
-    warn-once: ^0.1.0
-  peerDependencies:
-    "@react-navigation/native": ^6.0.0
-    react: "*"
-    react-native: "*"
-    react-native-gesture-handler: ">= 1.0.0"
-    react-native-safe-area-context: ">= 3.0.0"
-    react-native-screens: ">= 3.0.0"
-  checksum: 99a460d20e542a29cc673c30df38a0ef3906f8965c6d3285384c59a9662f3b86ce27c22818928646f60661da65ad3a8137b87d4e2472b95a56bbd5e26fe458e9
   languageName: node
   linkType: hard
 
@@ -3828,7 +3838,7 @@ __metadata:
     "@react-native-firebase/app": ^18.2.0
     "@react-navigation/bottom-tabs": ^6.5.7
     "@react-navigation/native": ^6.1.6
-    "@react-navigation/stack": ^6.3.16
+    "@react-navigation/native-stack": ^6.9.13
     "@reduxjs/toolkit": ^1.9.3
     "@shopify/react-native-skia": ^0.1.182
     "@tsconfig/react-native": ^2.0.2

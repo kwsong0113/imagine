@@ -1,14 +1,13 @@
 import React, { useRef, useState } from 'react';
 import {
-  ScreenContainer,
   Typography,
   AnimatedIconButton,
   MaterialCommunityIcon,
   AnimatedButton,
+  ScrollableList,
 } from '../../components';
-import { Box, HStack, Image, ScrollView, VStack } from 'native-base';
-import { CustomStackParamList } from '../../navigation';
-import { StackScreenProps } from '@react-navigation/stack';
+import { Box, HStack, Image, VStack } from 'native-base';
+import { AppStackScreenProps } from '../../navigation';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { Linking, useWindowDimensions } from 'react-native';
 import { HelpCard } from '../../components/HelpCard';
@@ -175,15 +174,13 @@ const HELP_DESCRIPTION_DATA_EN = [
   ],
 ];
 
-type HelpProps = StackScreenProps<CustomStackParamList, 'Help'>;
-
-export const Help = ({ navigation }: HelpProps) => {
+export const Help = ({ navigation }: AppStackScreenProps<'Help'>) => {
   const { t } = useTranslation('help');
   const [index, setIndex] = useState(0);
 
   return (
-    <ScreenContainer>
-      <HStack justifyContent="space-between">
+    <VStack flex={1} px={6} pb={6}>
+      <HStack justifyContent="space-between" py={4}>
         <HStack space={3}>
           <MaterialCommunityIcon
             name="book-open-page-variant"
@@ -200,12 +197,12 @@ export const Help = ({ navigation }: HelpProps) => {
           color="gray.400"
           size={30}
           onPress={() => {
-            navigation.navigate('Home');
+            navigation.goBack();
           }}
         />
       </HStack>
-      <ScrollView mx={-6} px={6} mb={-6} mt={-2}>
-        <VStack bg="gray.200" mx={-6} pt={6}>
+      <ScrollableList>
+        <VStack bg="gray.200" mx={-6} pt={2}>
           <Typography variant="body" color="gray.600" px={6}>
             {t('description')}
           </Typography>
@@ -232,8 +229,8 @@ export const Help = ({ navigation }: HelpProps) => {
             />
           </HStack>
         </VStack>
-      </ScrollView>
-    </ScreenContainer>
+      </ScrollableList>
+    </VStack>
   );
 };
 

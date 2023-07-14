@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
-import { ScrollView } from 'native-base';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   ScreenContainer,
   Header,
@@ -10,6 +9,7 @@ import {
   SingleBottomSheetModal,
   AnimatedIconButton,
   ProgressIcon,
+  ScrollableList,
 } from '../../components';
 import { Action } from '../../features/action/types';
 import { CustomStackParamList } from '../../navigation';
@@ -66,7 +66,10 @@ const ActionRow = ({
   );
 };
 
-type ActionListProps = StackScreenProps<CustomStackParamList, 'ActionList'>;
+type ActionListProps = NativeStackScreenProps<
+  CustomStackParamList,
+  'ActionList'
+>;
 
 export const ActionList = ({ navigation, route }: ActionListProps) => {
   const { appId } = route.params;
@@ -78,48 +81,50 @@ export const ActionList = ({ navigation, route }: ActionListProps) => {
   const handleRemoveAction = useHandleRemoveAction();
 
   return (
-    <ScreenContainer>
-      <Header variant="center" title={matchedApp?.name} />
-      <ScrollView mx={-3} px={3} mb={-12}>
-        {matchedApp?.actions.map((action, idx) => {
-          const isParam = 'urlSchemeFunc' in action;
-          const gesture = getGestureForActionInstance({
-            appId,
-            actionId: action.id,
-          });
-          return (
-            <ActionRow
-              key={action.id}
-              action={action}
-              gestureName={isParam ? undefined : gesture?.name}
-              isParam={isParam}
-              numActiveActions={getNumActiveActions(appId, action.id)}
-              hasBottomBorder={idx === matchedApp?.actions.length - 1}
-              onPress={() => {
-                if (isParam) {
-                  navigation.navigate('ParamActionList', {
-                    appId,
-                    actionId: action.id,
-                  });
-                } else {
-                  setSelectedActionId(action.id);
-                  gesturePickerBottomSheetModalRef.current?.present();
-                }
-              }}
-              onRemove={() => {
-                if (!isParam && gesture?.id) {
-                  handleRemoveAction(gesture.id, action.description);
-                }
-              }}
-            />
-          );
-        })}
-      </ScrollView>
+    <>
+      <ScreenContainer>
+        <Header variant="center" title={matchedApp?.name} />
+        <ScrollableList>
+          {matchedApp?.actions.map((action, idx) => {
+            const isParam = 'urlSchemeFunc' in action;
+            const gesture = getGestureForActionInstance({
+              appId,
+              actionId: action.id,
+            });
+            return (
+              <ActionRow
+                key={action.id}
+                action={action}
+                gestureName={isParam ? undefined : gesture?.name}
+                isParam={isParam}
+                numActiveActions={getNumActiveActions(appId, action.id)}
+                hasBottomBorder={idx === matchedApp?.actions.length - 1}
+                onPress={() => {
+                  if (isParam) {
+                    navigation.navigate('ParamActionList', {
+                      appId,
+                      actionId: action.id,
+                    });
+                  } else {
+                    setSelectedActionId(action.id);
+                    gesturePickerBottomSheetModalRef.current?.present();
+                  }
+                }}
+                onRemove={() => {
+                  if (!isParam && gesture?.id) {
+                    handleRemoveAction(gesture.id, action.description);
+                  }
+                }}
+              />
+            );
+          })}
+        </ScrollableList>
+      </ScreenContainer>
       <GesturePickerBottomSheetModal
         ref={gesturePickerBottomSheetModalRef}
         appId={appId}
         actionId={selectedActionId}
       />
-    </ScreenContainer>
+    </>
   );
 };

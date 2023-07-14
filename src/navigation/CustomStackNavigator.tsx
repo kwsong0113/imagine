@@ -1,22 +1,24 @@
 import React from 'react';
 import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack';
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 import {
   AppList,
-  Custom,
   ActionList,
   GestureList,
   WholeActionList,
   ParamActionList,
-  BlankCanvas,
   UrlSchemeHelp,
-  Help,
 } from '../screens/Custom';
+import {
+  CompositeNavigationProp,
+  CompositeScreenProps,
+} from '@react-navigation/native';
+import { AppStackParamList } from './AppStackNavigator';
 
 export type CustomStackParamList = {
-  Home: undefined;
   AppList: undefined;
   ActionList: { appId: number };
   ParamActionList: {
@@ -26,15 +28,22 @@ export type CustomStackParamList = {
   };
   GestureList: undefined;
   WholeActionList: undefined;
-  BlankCanvas: undefined;
   UrlSchemeHelp: undefined;
-  Help: undefined;
 };
 
-export type CustomStackNavigationProp =
-  StackNavigationProp<CustomStackParamList>;
+export type CustomStackNavigationProp<T extends keyof CustomStackParamList> =
+  CompositeNavigationProp<
+    NativeStackNavigationProp<CustomStackParamList, T>,
+    NativeStackNavigationProp<AppStackParamList>
+  >;
 
-const Stack = createStackNavigator<CustomStackParamList>();
+export type CustomStackScreenProps<T extends keyof CustomStackParamList> =
+  CompositeScreenProps<
+    NativeStackScreenProps<CustomStackParamList, T>,
+    NativeStackScreenProps<AppStackParamList>
+  >;
+
+const Stack = createNativeStackNavigator<CustomStackParamList>();
 
 export const CustomStackNavigator = () => {
   return (
@@ -43,25 +52,13 @@ export const CustomStackNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Home"
     >
-      <Stack.Screen name="Home" component={Custom} />
       <Stack.Screen name="AppList" component={AppList} />
       <Stack.Screen name="ActionList" component={ActionList} />
       <Stack.Screen name="ParamActionList" component={ParamActionList} />
       <Stack.Screen name="GestureList" component={GestureList} />
       <Stack.Screen name="WholeActionList" component={WholeActionList} />
       <Stack.Screen name="UrlSchemeHelp" component={UrlSchemeHelp} />
-      <Stack.Screen
-        name="BlankCanvas"
-        component={BlankCanvas}
-        options={{ animationEnabled: false }}
-      />
-      <Stack.Screen
-        name="Help"
-        component={Help}
-        options={{ animationEnabled: false }}
-      />
     </Stack.Navigator>
   );
 };
