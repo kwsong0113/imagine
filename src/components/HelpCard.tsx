@@ -1,84 +1,47 @@
 import { HStack, Image, VStack } from 'native-base';
 import React, { ComponentProps } from 'react';
 import { useCurrentLangauge } from '../hooks';
+import { getStaticImageUrl } from '../utils';
 import { AnimatedIconButton } from './AnimatedIconButton';
 import { Typography } from './Typography';
 
-const imageMap_ko: Record<number, any> = {
+const imageMap: Record<
+  number,
+  {
+    width: number;
+    height: number;
+    key: string;
+  }
+> = {
   0: {
-    source: require('../assets/images/help/launch.png'),
     width: 155,
     height: 360,
-    alt: 'launch',
+    key: 'launch',
   },
   1: {
-    source: require('../assets/images/help/ko/add_gesture.png'),
     width: 127,
     height: 360,
-    alt: 'add_gesture',
+    key: 'add_gesture',
   },
   2: {
-    source: require('../assets/images/help/ko/add_action.png'),
     width: 177,
     height: 360,
-    alt: 'add_action',
+    key: 'add_action',
   },
   3: {
-    source: require('../assets/images/help/ko/widget.png'),
     width: 177,
     height: 360,
-    alt: 'widget',
+    key: 'widget',
   },
   4: {
-    source: require('../assets/images/help/ko/execute.png'),
     width: 177,
     height: 360,
-    alt: 'execute',
+    key: 'execute',
   },
   5: {
-    source: require('../assets/images/help/ko/statistics.png'),
     width: 177,
     height: 360,
-    alt: 'statistics',
-  },
-};
-
-const imageMap_en: Record<number, any> = {
-  0: {
-    source: require('../assets/images/help/launch.png'),
-    width: 155,
-    height: 360,
-    alt: 'launch',
-  },
-  1: {
-    source: require('../assets/images/help/en/add_gesture.png'),
-    width: 127,
-    height: 360,
-    alt: 'add_gesture',
-  },
-  2: {
-    source: require('../assets/images/help/en/add_action.png'),
-    width: 177,
-    height: 360,
-    alt: 'add_action',
-  },
-  3: {
-    source: require('../assets/images/help/en/widget.png'),
-    width: 177,
-    height: 360,
-    alt: 'widget',
-  },
-  4: {
-    source: require('../assets/images/help/en/execute.png'),
-    width: 177,
-    height: 360,
-    alt: 'execute',
-  },
-  5: {
-    source: require('../assets/images/help/en/statistics.png'),
-    width: 177,
-    height: 360,
-    alt: 'statistics',
+    key: 'statistics',
   },
 };
 
@@ -105,7 +68,8 @@ export const HelpCard = ({
   onPressBack,
   onPressForward,
 }: Props) => {
-  const imageMap = useCurrentLangauge() === 'kor' ? imageMap_ko : imageMap_en;
+  const prefix = useCurrentLangauge() === 'kor' ? 'ko' : 'en';
+  const { key, ...restImageProps } = imageMap[imageId];
 
   return (
     <HStack
@@ -148,7 +112,16 @@ export const HelpCard = ({
           )}
         </HStack>
       </VStack>
-      <Image alignSelf="flex-end" resizeMode="contain" {...imageMap[imageId]} />
+      <Image
+        alignSelf="flex-end"
+        resizeMode="contain"
+        alt={key}
+        source={{
+          uri: getStaticImageUrl(`/help/${prefix}/${key}.png`),
+        }}
+        fallbackElement={<></>}
+        {...restImageProps}
+      />
     </HStack>
   );
 };
