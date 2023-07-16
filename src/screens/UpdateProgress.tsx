@@ -6,6 +6,7 @@ import { CodePushStatus } from '../hooks';
 import { Bar } from 'react-native-progress';
 import Animated, { Layout, SlideInDown } from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 export interface UpdateProgressProps {
   status:
@@ -21,6 +22,7 @@ export const UpdateProgress = ({
 }: UpdateProgressProps) => {
   const progress = totalBytes === 0 ? 0 : receivedBytes / totalBytes;
   const [gray, primary] = useToken('colors', ['gray', 'primary']);
+  const { t } = useTranslation('updateProgress');
 
   return (
     <VStack flex={1} bg="gray.100">
@@ -38,10 +40,10 @@ export const UpdateProgress = ({
             <HStack>
               <Typography variant="subtitle2" color="grey.100" lineHeight={30}>
                 {status === CodePushStatus.DOWNLOADING
-                  ? '업데이트 다운로드 중 · '
+                  ? t('message.downloading')
                   : status === CodePushStatus.INSTALLING
-                  ? '업데이트 설치 중...'
-                  : '업데이트 적용 준비가 완료됐어요'}
+                  ? t('message.installing')
+                  : t('message.success')}
               </Typography>
               {status === CodePushStatus.DOWNLOADING && (
                 <Typography
@@ -66,7 +68,7 @@ export const UpdateProgress = ({
                     color="grey.900"
                     lineHeight={30}
                   >
-                    앱 재실행
+                    {t('restartButton')}
                   </Typography>
                 </Center>
               </TouchableOpacity>

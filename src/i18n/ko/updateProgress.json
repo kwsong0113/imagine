@@ -1,0 +1,8 @@
+{
+  "message": {
+    "downloading": "업데이트 다운로드 중 · ",
+    "installing": "업데이트 설치 중...",
+    "success": "업데이트 적용 준비가 완료됐어요"
+  },
+  "restartButton": "앱 재실행"
+}
