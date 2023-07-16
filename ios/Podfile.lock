@@ -1,5 +1,11 @@
 PODS:
+  - Base64 (1.1.2)
   - boost (1.76.0)
+  - CodePush (8.0.2):
+    - Base64 (~> 1.1)
+    - JWT (~> 3.0.0-beta.12)
+    - React-Core
+    - SSZipArchive (~> 2.2.2)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.71.4)
   - FBReactNativeSpec (0.71.4):
@@ -89,6 +95,8 @@ PODS:
   - hermes-engine (0.71.4):
     - hermes-engine/Pre-built (= 0.71.4)
   - hermes-engine/Pre-built (0.71.4)
+  - JWT (3.0.0-beta.14):
+    - Base64 (~> 1.1.2)
   - libevent (2.1.12)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
@@ -488,10 +496,12 @@ PODS:
     - React-Core
   - RNVectorIcons (9.2.0):
     - React-Core
+  - SSZipArchive (2.2.3)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
+  - CodePush (from `../node_modules/react-native-code-push`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -541,6 +551,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Base64
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -549,13 +560,17 @@ SPEC REPOS:
     - fmt
     - GoogleAppMeasurement
     - GoogleUtilities
+    - JWT
     - libevent
     - nanopb
     - PromisesObjC
+    - SSZipArchive
 
 EXTERNAL SOURCES:
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
+  CodePush:
+    :path: "../node_modules/react-native-code-push"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -646,7 +661,9 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
+  CodePush: 9eddecce05cd10491e2673b259c85885a462be33
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 446e84642979fff0ba57f3c804c2228a473aeac2
   FBReactNativeSpec: 241709e132e3bf1526c1c4f00bc5384dd39dfba9
@@ -660,6 +677,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 2d800fab85e7848b1e66a6f8ce5bca06c5aad892
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   hermes-engine: a1f157c49ea579c28b0296bda8530e980c45bdb3
+  JWT: ef71dfb03e1f842081e64dc42eef0e164f35d251
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
@@ -701,6 +719,7 @@ SPEC CHECKSUMS:
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
   RNSVG: c1e76b81c76cdcd34b4e1188852892dc280eb902
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
+  SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   Yoga: 79dd7410de6f8ad73a77c868d3d368843f0c93e0
 
 PODFILE CHECKSUM: 7666afb59f930e3d0b17469b54a2de39508fb14b
