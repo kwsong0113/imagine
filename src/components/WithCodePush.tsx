@@ -1,18 +1,27 @@
-import React from 'react';
-import { Center } from 'native-base';
+import React, { useEffect, useState } from 'react';
 import { PropsWithChildren } from 'react';
 import { CodePushStatus, useCodePush } from '../hooks';
-import { Typography } from './Typography';
+import RNBootSplash from 'react-native-bootsplash';
+import { Box } from 'native-base';
 
 export const WithCodePush = ({ children }: PropsWithChildren<{}>) => {
   const { status, isMandatory } = useCodePush();
-  if (status === CodePushStatus.CHECKING) {
-    // Show Splash Screen
-    return (
-      <Center flex={1}>
-        <Typography variant="description">Splash Screen</Typography>
-      </Center>
-    );
+  const [showingBootSplash, setShowingBootSplash] = useState(true);
+
+  useEffect(() => {
+    if (
+      showingBootSplash &&
+      status !== CodePushStatus.CHECKING &&
+      status !== CodePushStatus.IDLE
+    ) {
+      setShowingBootSplash(false);
+      RNBootSplash.hide({ fade: true, duration: 100 });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
+  if (showingBootSplash) {
+    return <Box flex={1} bg="gray.100" />;
   }
 
   if (isMandatory) {
