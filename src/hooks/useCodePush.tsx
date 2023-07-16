@@ -25,6 +25,7 @@ export const useCodePush = () => {
 
   const checkCodePush = async () => {
     try {
+      CodePush.notifyAppReady();
       CodePush.disallowRestart();
       setStatus(CodePushStatus.CHECKING);
       const update = await CodePush.checkForUpdate();
@@ -56,7 +57,6 @@ export const useCodePush = () => {
             )
             .then(() => {
               setStatus(CodePushStatus.SUCCESS);
-              CodePush.allowRestart();
             });
         });
     } catch (error) {

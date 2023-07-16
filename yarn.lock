@@ -3878,6 +3878,7 @@ __metadata:
     react-native-code-push: ^8.0.2
     react-native-gesture-handler: ^2.9.0
     react-native-localize: ^3.0.0
+    react-native-progress: ^5.0.0
     react-native-reanimated: ^3.0.2
     react-native-reanimated-carousel: ^3.3.2
     react-native-safe-area-context: ^4.5.0
@@ -10149,6 +10150,17 @@ __metadata:
     react-native-macos:
       optional: true
   checksum: c03bacddc05c02b7bac70aceb23f65cbf93d48c0630c7a460fcb6c247379970b3e75c4689b4c281763d425a2272f0f563c0b47c38be8efbfa231e502c0f06480
+  languageName: node
+  linkType: hard
+
+"react-native-progress@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "react-native-progress@npm:5.0.0"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react-native-svg: "*"
+  checksum: c634373c9b667db763cb92bc3fb766aa399fc59e2621072b5fcf1671677563b46e8ff398e3bcbac3760c0e4400c469958b0c00d2434149010f94a3a5edc360f5
   languageName: node
   linkType: hard
 
