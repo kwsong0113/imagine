@@ -59,4 +59,12 @@ export const darkThemeColors = {
     background: '#000000',
     stroke: '#74FA99',
   },
+  grey: {
+    900: '#FFFFFF',
+    100: '#000000',
+  },
+  primary: {
+    dark: '#74FA99',
+    light: '#499F66',
+  },
 };

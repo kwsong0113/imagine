@@ -1,0 +1,8 @@
+{
+  "message": {
+    "downloading": "Downloading updates · ",
+    "installing": "Installing updates...",
+    "success": "Restart is required to use the update."
+  },
+  "restartButton": "Restart now"
+}

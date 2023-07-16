@@ -13,6 +13,8 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { initI18n } from '../i18n';
 import analytics from '@react-native-firebase/analytics';
 import { isEqual } from 'lodash';
+import { WithCodePush } from './WithCodePush';
+import { StatusBar } from './StatusBar';
 
 interface Props {
   children: React.ReactNode;
@@ -70,7 +72,12 @@ export const AppProvider = ({ children }: Props) => {
           <NativeBaseThemeProvider>
             {/* eslint-disable react-native/no-inline-styles */}
             <GestureHandlerRootView style={{ flex: 1 }}>
-              <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+              <BottomSheetModalProvider>
+                <WithCodePush>
+                  <StatusBar />
+                  {children}
+                </WithCodePush>
+              </BottomSheetModalProvider>
             </GestureHandlerRootView>
           </NativeBaseThemeProvider>
         </NavigationContainer>

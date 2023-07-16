@@ -13,6 +13,7 @@ import { Linking, useWindowDimensions } from 'react-native';
 import { HelpCard } from '../../components/HelpCard';
 import { useTranslation } from 'react-i18next';
 import { useCurrentLangauge } from '../../hooks';
+import { getStaticImageUrl } from '../../utils';
 
 const HELP_CARD_DATA_KO = [
   {
@@ -215,7 +216,8 @@ export const Help = ({ navigation }: AppStackScreenProps<'Help'>) => {
           <Image
             w={120}
             h={120}
-            source={require('../../assets/images/help/question.png')}
+            source={{ uri: getStaticImageUrl('/help/question.png') }}
+            fallbackElement={<></>}
             alt="qna"
           />
           <Typography variant="bigText" lineHeight={36} textAlign="center">

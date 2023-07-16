@@ -15,6 +15,7 @@ declare module 'i18next' {
       statistics: typeof ko.statistics;
       gesture: typeof ko.gesture;
       help: typeof ko.help;
+      updateProgress: typeof ko.updateProgress;
     };
   }
 }
