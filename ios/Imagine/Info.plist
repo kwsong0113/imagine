@@ -44,11 +44,11 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>NanumGothic-Bold.ttf</string>
-		<string>NanumGothic-ExtraBold.ttf</string>
-		<string>NanumGothic-Regular.ttf</string>
 		<string>Ionicons.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
+		<string>LINESeedKR-Bold.ttf</string>
+		<string>LINESeedKR-Regular.ttf</string>
+		<string>LINESeedKR-Thin.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>BootSplash.storyboard</string>

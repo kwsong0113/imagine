@@ -90,7 +90,9 @@ export const GesturePickerBottomSheetModal = forwardRef<
         >
           <AnimatedIconButton name="close-circle" size={10} color="gray.300" />
           <VStack flex={1} space={2} alignItems="center">
-            <Typography variant="body">{t('gesturePicker.title')}</Typography>
+            <Typography bold variant="body">
+              {t('gesturePicker.title')}
+            </Typography>
             <Typography variant="description" color="gray.600" isTruncated>
               {getActionDescription({ appId, actionId, param })}
             </Typography>
@@ -145,7 +147,12 @@ export const GesturePickerBottomSheetModal = forwardRef<
                         <GesturePreview name={name} base64={data[0].base64} />
                       </HStack>
                       <VStack flex={1} space={1} pb={1}>
-                        <Text fontSize="md" color="gray.900" isTruncated>
+                        <Text
+                          fontWeight="normal"
+                          fontSize="md"
+                          color="gray.900"
+                          isTruncated
+                        >
                           {name}
                         </Text>
                         <Typography

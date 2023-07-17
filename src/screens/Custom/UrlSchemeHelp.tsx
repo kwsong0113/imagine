@@ -6,7 +6,7 @@ const Subtitle = ({ children }: { children: string }) => {
   return (
     <HStack space={1} alignItems="center" pt={1.5} pb={0.5}>
       <IonIcon name="alert-circle" color="gray.800" size={5} />
-      <Typography variant="body" color="gray.800">
+      <Typography bold variant="body" color="gray.800">
         {children}
       </Typography>
     </HStack>
