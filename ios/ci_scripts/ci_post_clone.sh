@@ -10,10 +10,6 @@ brew link node@20
 brew install yarn
 yarn set version 3.5.0
 
-yarn -v
-node -v
-pod --version
-
 # Install dependencies you manage with CocoaPods.
 yarn
 pod install
