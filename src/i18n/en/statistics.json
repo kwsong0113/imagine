@@ -9,7 +9,7 @@
     "num_actions_per_day": "# Actions Per Day"
   },
   "message": {
-    "no_actions_today": "You havent' executed any actions today!",
+    "no_actions_today": "You haven't executed any actions today!",
     "more_actions_today": "Today, you have executed more actions than usual",
     "less_actions_today": "Today, you have executed fewer actions than usual!",
     "same_actions_today": "Today, you have executed actions as usual!"
