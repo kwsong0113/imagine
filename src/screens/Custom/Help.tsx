@@ -180,8 +180,8 @@ export const Help = ({ navigation }: AppStackScreenProps<'Help'>) => {
   const [index, setIndex] = useState(0);
 
   return (
-    <VStack flex={1} px={6} pb={6}>
-      <HStack justifyContent="space-between" py={4}>
+    <VStack bg="gray.100" flex={1} px={6} pb={6}>
+      <HStack justifyContent="space-between" py={5}>
         <HStack space={3}>
           <MaterialCommunityIcon
             name="book-open-page-variant"
@@ -203,7 +203,7 @@ export const Help = ({ navigation }: AppStackScreenProps<'Help'>) => {
         />
       </HStack>
       <ScrollableList>
-        <VStack bg="gray.200" mx={-6} pt={2}>
+        <VStack bg="gray.200" mx={-6} pt={5}>
           <Typography variant="body" color="gray.600" px={6}>
             {t('description')}
           </Typography>
