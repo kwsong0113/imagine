@@ -1,11 +1,11 @@
 #!/bin/sh
 
 export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
-brew install cocoapods@1.12.1
+brew install cocoapods
 # have to add node yourself
-brew install node@20.0.0
+brew install node@20
 # link it to the path
-brew link node@20.0.0
+brew link node@20
 
 brew install yarn
 yarn set version 3.5.0
