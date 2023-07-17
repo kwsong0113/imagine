@@ -31,10 +31,14 @@ export const Header = ({
           />
         )}
         {variant === 'left' ? (
-          <Typography variant="title">{title}</Typography>
+          <Typography bold variant="title">
+            {title}
+          </Typography>
         ) : (
           <Center flex={1} pr={hasBackButton ? 10 : 0}>
-            <Typography variant="subtitle2">{title}</Typography>
+            <Typography bold variant="subtitle2">
+              {title}
+            </Typography>
           </Center>
         )}
       </HStack>

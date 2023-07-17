@@ -188,7 +188,7 @@ export const Help = ({ navigation }: AppStackScreenProps<'Help'>) => {
             size={30}
             color="gray.400"
           />
-          <Typography variant="bigText" mt={1} color="gray.400">
+          <Typography bold variant="bigText" mt={1} color="gray.400">
             {t('title')}
           </Typography>
         </HStack>

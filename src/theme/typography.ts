@@ -1,7 +1,7 @@
 const fonts = {
-  heading: 'NanumGothic',
-  body: 'NanumGothic',
-  mono: 'NanumGothic',
+  heading: 'LINE Seed Sans KR',
+  body: 'LINE Seed Sans KR',
+  mono: 'LINE Seed Sans KR',
 };
 
 const fontSizes = {

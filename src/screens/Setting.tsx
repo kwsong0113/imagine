@@ -60,7 +60,9 @@ const SettingThemeModeRow = () => {
       />
       <SingleBottomSheetModal ref={bottomSheetModalRef}>
         <VStack px={6} pt={3.5} pb={7.5} space={4}>
-          <Typography variant="subtitle1">{t('theme.title')}</Typography>
+          <Typography bold variant="subtitle1">
+            {t('theme.title')}
+          </Typography>
           <VStack mx={-3}>
             {themeModeList.map(themeModeOption => (
               <SettingOptionRow
@@ -104,7 +106,9 @@ const SettingLanguageRow = () => {
       />
       <SingleBottomSheetModal ref={bottomSheetModalRef}>
         <VStack px={6} pt={3.5} pb={7.5} space={4}>
-          <Typography variant="subtitle1">{t('language.title')}</Typography>
+          <Typography bold variant="subtitle1">
+            {t('language.title')}
+          </Typography>
           <VStack mx={-3}>
             {Object.entries(languageCaption).map(
               ([languageOption, caption]) =>
@@ -163,7 +167,7 @@ const SettingBlankCanvasButtonPositionRow = () => {
       />
       <SingleBottomSheetModal ref={bottomSheetModalRef}>
         <VStack px={6} pt={3.5} pb={7.5} space={4}>
-          <Typography variant="subtitle1">
+          <Typography bold variant="subtitle1">
             {t('blankCanvasButtonPosition.sheet_title')}
           </Typography>
           <VStack mx={-3}>
@@ -323,6 +327,7 @@ const SettingClearGestureRow = () => {
             <AnimatedConfirm color={colors.red[600]} />
             <AnimatedSentence
               fontSize="xl"
+              fontWeight="bold"
               color={colors.gray[900]}
               content={t('reset.bottomsheet.message')}
               duration={800}
@@ -331,7 +336,7 @@ const SettingClearGestureRow = () => {
         ) : (
           <VStack px={6} pt={3.5} pb={7.5} space={4}>
             <VStack space={2}>
-              <Typography variant="subtitle1">
+              <Typography bold variant="subtitle1">
                 {t('reset.bottomsheet.title')}
               </Typography>
               <Typography variant="description" color="gray.600" py={1}>

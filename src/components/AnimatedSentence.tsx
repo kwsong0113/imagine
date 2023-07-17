@@ -5,7 +5,7 @@ import { Animated } from 'react-native';
 type Props = {
   content: string;
   duration: number;
-} & Pick<ComponentProps<typeof Text>, 'fontSize' | 'color'>;
+} & Pick<ComponentProps<typeof Text>, 'fontSize' | 'color' | 'fontWeight'>;
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -44,6 +44,7 @@ export class AnimatedSentence extends React.Component<Props, {}> {
             <AnimatedText
               key={`${word}-${index}`}
               fontSize={this.props.fontSize}
+              fontWeight={this.props.fontWeight}
               color={this.props.color}
               style={[
                 {

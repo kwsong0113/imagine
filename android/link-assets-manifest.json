@@ -6,20 +6,20 @@
       "sha1": "0f178b4b286fe6dcbb453d725a81628c472f268d"
     },
     {
+      "path": "src/assets/fonts/LINESeedKR-Bold.ttf",
+      "sha1": "51ed4f03313c1de83443ad7bd0e560acbede747c"
+    },
+    {
+      "path": "src/assets/fonts/LINESeedKR-Regular.ttf",
+      "sha1": "6e23409cc74ad17183dbf1925ac7c3725cb37b43"
+    },
+    {
+      "path": "src/assets/fonts/LINESeedKR-Thin.ttf",
+      "sha1": "7f6798cc91ba4651bfd295f574e4ae9172dd0447"
+    },
+    {
       "path": "src/assets/fonts/MaterialCommunityIcons.ttf",
       "sha1": "4c2a838b00dbb5e8bb1b368fce0de534e8eb241c"
-    },
-    {
-      "path": "src/assets/fonts/NanumGothic-Bold.ttf",
-      "sha1": "c036b6e55f5b44a924dc28229afbbad8b0eca908"
-    },
-    {
-      "path": "src/assets/fonts/NanumGothic-ExtraBold.ttf",
-      "sha1": "d904153dbcf659ab2a704f7aba5909114dee57ae"
-    },
-    {
-      "path": "src/assets/fonts/NanumGothic-Regular.ttf",
-      "sha1": "16b60dd27e95e2898aee302aeb0ee8546a24b4ac"
     }
   ]
 }
