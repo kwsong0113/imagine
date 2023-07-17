@@ -87,7 +87,9 @@ export const OptionSingleBottomSheetModal = forwardRef<
           </Center>
           <VStack pt={4} px={6} pb={7.5} space={4}>
             <VStack space={2}>
-              <Typography variant="subtitle1">{title}</Typography>
+              <Typography bold variant="subtitle1">
+                {title}
+              </Typography>
               {description ? (
                 <Typography variant="description" color="gray.600" py={1}>
                   {description}

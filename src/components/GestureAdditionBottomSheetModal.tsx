@@ -175,7 +175,7 @@ export const GestureAdditionBottomSheetModal = forwardRef<
               )}
             </Pressable>
             <VStack flex={1} space={2} alignItems="center">
-              <Typography variant="body">
+              <Typography bold variant="body">
                 {t('gestureAddition.title')}
               </Typography>
               <Input
@@ -189,7 +189,7 @@ export const GestureAdditionBottomSheetModal = forwardRef<
                 p={0}
                 textAlign="center"
                 lineHeight={14}
-                fontWeight={500}
+                fontWeight="normal"
               />
             </VStack>
             <Pressable onPress={handleAddGestureData}>
@@ -234,6 +234,7 @@ export const GestureAdditionBottomSheetModal = forwardRef<
           <AnimatedConfirm />
           <AnimatedSentence
             fontSize="xl"
+            fontWeight="bold"
             color={colors.gray[900]}
             content={t('message.gesture_added')}
             duration={800}

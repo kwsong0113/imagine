@@ -60,7 +60,7 @@ const NewFeatureDescription = () => {
     <VStack space={2} my={1}>
       <HStack space={2} alignItems="center">
         <MaterialCommunityIcon name="rocket-launch" size={4} color="teal.700" />
-        <Typography variant="body" lineHeight={24} color="teal.700">
+        <Typography bold variant="body" lineHeight={24} color="teal.700">
           {t('new_feature_bottomsheet.auto_launch.title')}
         </Typography>
       </HStack>
@@ -69,7 +69,7 @@ const NewFeatureDescription = () => {
       </Typography>
       <HStack space={2} alignItems="center">
         <IonIcon name="move" size={4} color="teal.700" />
-        <Typography variant="body" lineHeight={24} color="teal.700">
+        <Typography bold variant="body" lineHeight={24} color="teal.700">
           {t('new_feature_bottomsheet.gesture_drawing_screen.title')}
         </Typography>
       </HStack>
@@ -83,7 +83,7 @@ const NewFeatureDescription = () => {
           size={4}
           color="teal.700"
         />
-        <Typography variant="body" lineHeight={24} color="teal.700">
+        <Typography bold variant="body" lineHeight={24} color="teal.700">
           {t('new_feature_bottomsheet.more_apps.title')}
         </Typography>
       </HStack>

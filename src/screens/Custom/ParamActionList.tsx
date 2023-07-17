@@ -145,7 +145,7 @@ export const ParamActionList = ({ navigation, route }: ParamActionProps) => {
                 p={0}
                 fontSize="md"
                 lineHeight={18}
-                fontWeight={500}
+                fontWeight="normal"
               />
             }
             right={

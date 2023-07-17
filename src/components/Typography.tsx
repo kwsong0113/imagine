@@ -68,7 +68,7 @@ export const Typography = ({
 }: TypographyProps) => {
   return (
     <Text
-      fontWeight={400}
+      fontWeight="normal"
       color={color ?? 'gray.900'}
       {...typographyMap[variant]}
       {...props}

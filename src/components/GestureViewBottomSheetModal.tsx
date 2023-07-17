@@ -53,10 +53,15 @@ export const GestureViewBottomSheetModal = forwardRef<
             onPress={handleDecreaseIdx}
           />
           <VStack flex={1} space={2} alignItems="center">
-            <Typography variant="body" color="teal.600">
+            <Typography bold variant="body" color="teal.600">
               {`${dataIdx + 1} / 4`}
             </Typography>
-            <Text fontSize="xs" color="gray.600" isTruncated>
+            <Text
+              fontWeight="normal"
+              fontSize="xs"
+              color="gray.600"
+              isTruncated
+            >
               {gesture?.name}
             </Text>
           </VStack>
