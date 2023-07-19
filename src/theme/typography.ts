@@ -1,7 +1,7 @@
 const fonts = {
-  heading: 'LINE Seed Sans KR',
-  body: 'LINE Seed Sans KR',
-  mono: 'LINE Seed Sans KR',
+  heading: 'Apple SD Gothic Neo',
+  body: 'Apple SD Gothic Neo',
+  mono: 'Apple SD Gothic Neo',
 };
 
 const fontSizes = {
