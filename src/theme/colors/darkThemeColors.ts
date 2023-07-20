@@ -104,5 +104,8 @@ export const darkThemeColors = {
     quaternaryFill: '#E6E6E8',
     seperator: '#98989B',
     opaqueSeperator: '#38383A',
+    grayButtonBackground: '#262529',
+    tintedButtonBackground: '#081F40',
+    filledButtonText: '#FFFEFC',
   },
 };

@@ -104,5 +104,8 @@ export const lightThemeColors = {
     quaternaryFill: '#F4F4F5',
     seperator: '#C6C6C8',
     opaqueSeperator: '#C5C5C8',
+    grayButtonBackground: '#E9E9EB',
+    tintedButtonBackground: '#DEECFF',
+    filledButtonText: '#FEFCFE',
   },
 };

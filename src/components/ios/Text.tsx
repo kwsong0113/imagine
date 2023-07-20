@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
 import { Text as RNText } from 'native-base';
 
-type Font =
+export type Font =
   | 'largeTitle'
   | 'title1'
   | 'title2'
@@ -51,13 +51,12 @@ const FONT_TO_TYPOGRAPHY_MAP: Record<
     fontWeight: 600,
     fontSize: 17,
     lineHeight: 22,
-    boldFontWeight: 600,
+    boldFontWeight: 700,
   },
   body: {
     fontWeight: 400,
     fontSize: 17,
     lineHeight: 22,
-
     boldFontWeight: 600,
   },
   callout: {
@@ -92,7 +91,7 @@ const FONT_TO_TYPOGRAPHY_MAP: Record<
   },
 };
 
-interface TextProps extends Omit<ComponentProps<typeof RNText>, 'font'> {
+export interface TextProps extends Omit<ComponentProps<typeof RNText>, 'font'> {
   font: Font;
   bold?: boolean;
 }
