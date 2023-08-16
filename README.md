@@ -15,10 +15,9 @@
 [$Q Recognizer]: https://depts.washington.edu/acelab/proj/dollar/qdollar.html
 
 
-
 <div align="center">
    <a href="https://apple.co/458U0ul">
-     <img src="https://github.com/kwsong0113/imagine/assets/53707540/b7ae71ef-6cd0-4fb5-a2ae-6022832ad94c" alt="Linky">
+     <img src="https://github.com/kwsong0113/imagine/assets/53707540/22d45ff7-59ab-4e89-b7fc-f5e39aca5cbf" alt="Linky">
    </a>
     <h3>Linky</h3>
 </div>
