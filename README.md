@@ -17,7 +17,7 @@
 
 <div align="center">
    <a href="https://apple.co/458U0ul">
-     <img src="https://github.com/kwsong0113/imagine/assets/53707540/22d45ff7-59ab-4e89-b7fc-f5e39aca5cbf" alt="Linky">
+     <img src="https://leafy-wisp-bfecb8.netlify.app/images/screenshot/github_preview.png" alt="Linky">
    </a>
     <h3>Linky</h3>
 </div>
