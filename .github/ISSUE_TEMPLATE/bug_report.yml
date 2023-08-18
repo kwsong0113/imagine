@@ -1,0 +1,19 @@
+name: 🐛 Bug report
+description: File a bug report
+labels: ["bug"]
+assignees:
+  - kwsong0113
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: summary
+    attributes:
+      label: Bug summary
+      description: |
+        Provide a clear and concise description of what the bug is.
+        If needed, you can also provide other samples: error messages / stack traces, screenshots, gifs, etc.
+    validations:
+      required: true
