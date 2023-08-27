@@ -10,11 +10,11 @@ import Animated, {
 } from 'react-native-reanimated';
 
 export interface ButtonProps {
-  variant: 'plain' | 'gray' | 'tinted' | 'filled';
-  size: Size;
-  title: string;
-  color: TextProps['color'];
+  variant?: 'plain' | 'gray' | 'tinted' | 'filled';
+  size?: Size;
+  color?: TextProps['color'];
   flex?: boolean;
+  title: string;
   onPress?: () => void;
 }
 
@@ -54,11 +54,11 @@ const SIZE_TO_FONT_MAP: Record<Size, Font> = {
 };
 
 export const Button = ({
-  variant,
-  size,
+  variant = 'filled',
+  size = 'full',
+  color = 'system.blue',
+  flex = false,
   title,
-  color,
-  flex,
   onPress,
 }: ButtonProps) => {
   const buttonStyle = SIZE_TO_BUTTON_STYLE_MAP[size];
@@ -107,7 +107,7 @@ export const Button = ({
         <Text
           font={SIZE_TO_FONT_MAP[size]}
           color={variant === 'filled' ? 'system.filledButtonText' : color}
-          // bold={size === 'full'}
+          bold
         >
           {title}
         </Text>

@@ -9,3 +9,8 @@ export const useCurrentLangauge = (): Exclude<Language, 'locale'> => {
   }
   return language;
 };
+
+export const useCurrentLangaugeValue = <T>(korValue: T, engValue: T): T => {
+  const currentLanguage = useCurrentLangauge();
+  return currentLanguage === 'kor' ? korValue : engValue;
+};

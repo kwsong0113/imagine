@@ -15,3 +15,4 @@ export * from './useAppList';
 export * from './useInterval';
 export * from './useCodePush';
 export * from './useEffectOnce';
+export * from './useHeader';
