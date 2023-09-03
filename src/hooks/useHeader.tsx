@@ -8,15 +8,26 @@ import { useToken } from 'native-base';
 import { useColorMode } from './useColorMode';
 
 type Options = NativeStackNavigatorProps['screenOptions'] & {
+  headerMainTitle?: [string, string];
   headerRightTitle?: [string, string];
+  useTransparent?: boolean;
   onHeaderRightPress?: () => void;
 };
 
 export function useHeader(
-  { headerRightTitle, onHeaderRightPress, ...restOptions }: Options = {},
+  {
+    headerMainTitle,
+    headerRightTitle,
+    onHeaderRightPress,
+    useTransparent = false,
+    ...restOptions
+  }: Options = {},
   deps: Parameters<typeof useLayoutEffect>[1] = [],
 ) {
   const navigation = useNavigation();
+  const headerTitleValue = useCurrentLangaugeValue(
+    ...(headerMainTitle ?? ['', '']),
+  );
   const headerRightTitleValue = useCurrentLangaugeValue(
     ...(headerRightTitle ?? ['', '']),
   );
@@ -26,16 +37,17 @@ export function useHeader(
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTransparent: true,
-      headerBlurEffect: colorMode,
+      headerTransparent: useTransparent,
+      headerBlurEffect: useTransparent ? colorMode : undefined,
       headerTintColor: system.label,
       headerStyle: {
-        backgroundColor: 'transparent',
+        backgroundColor: useTransparent ? 'transparent' : system.background,
       },
+      title: headerTitleValue,
       headerRight: headerRightTitle
         ? () => (
             <TouchableOpacity onPress={onHeaderRightPress}>
-              <Text font="headline" color="system.blue">
+              <Text font="headline" color="system.blue" bold>
                 {headerRightTitleValue}
               </Text>
             </TouchableOpacity>

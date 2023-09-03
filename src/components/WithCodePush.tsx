@@ -22,7 +22,7 @@ export const WithCodePush = ({ children }: PropsWithChildren<{}>) => {
   }, [status]);
 
   if (showingBootSplash) {
-    return <Box flex={1} bg="gray.100" />;
+    return <Box flex={1} bg="system.background" />;
   }
 
   if (

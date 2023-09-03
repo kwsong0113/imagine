@@ -15,13 +15,16 @@ import {
   CustomStackParamList,
 } from './CustomStackNavigator';
 import { BlankCanvas, Help } from '../screens/Custom';
+import { Home, Settings } from '../screens';
 
 export type AppStackParamList = {
+  Home: undefined;
   Root: NavigatorScreenParams<RootTabParamList>;
   CustomStack: NavigatorScreenParams<CustomStackParamList>;
   StatisticsStack: NavigatorScreenParams<StatisticsStackParamList>;
   BlankCanvas: undefined;
   Help: undefined;
+  Settings: undefined;
 };
 
 export type AppStackNavigationProp<T extends keyof AppStackParamList> =
@@ -37,10 +40,11 @@ export const AppStackNavigator = () => {
     <Stack.Navigator
       id="App"
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
       }}
-      initialRouteName="Root"
+      initialRouteName="Home"
     >
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Root" component={RootTabNavigator} />
       <Stack.Screen name="CustomStack" component={CustomStackNavigator} />
       <Stack.Screen
@@ -56,6 +60,11 @@ export const AppStackNavigator = () => {
         <Stack.Screen
           name="Help"
           component={Help}
+          options={{ presentation: 'modal' }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
           options={{ presentation: 'modal' }}
         />
       </Stack.Group>
