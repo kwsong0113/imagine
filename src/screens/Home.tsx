@@ -1,5 +1,12 @@
+import { Box, VStack } from 'native-base';
 import React from 'react';
-import { Button, IconButton, ScrollableScreen } from '../components/ios';
+import {
+  BorderedBox,
+  Button,
+  IconButton,
+  ScrollableScreen,
+  Text,
+} from '../components/ios';
 import { useHeader } from '../hooks';
 import { AppStackNavigationProp, AppStackScreenProps } from '../navigation';
 
@@ -27,9 +34,19 @@ export const Home = ({ navigation }: AppStackScreenProps<'Home'>) => {
   );
 
   return (
-    <ScrollableScreen padding>
+    <ScrollableScreen padding pt={4}>
+      <BorderedBox>
+        <VStack space={1.5}>
+          <Text font="headline" bold>
+            View Recently Released Features
+          </Text>
+          <Text font="footnote" bold color="system.gray">
+            234 people viewed this post
+          </Text>
+        </VStack>
+      </BorderedBox>
+      <Box h={4} />
       <Button title="Button" variant="filled" />
     </ScrollableScreen>
-    // </VStackScreen>
   );
 };
