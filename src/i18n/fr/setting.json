@@ -1,0 +1,44 @@
+{
+  "title": "Paramètres",
+  "description": "Choisissez les options qui répondent à vos besoins",
+  "theme": {
+    "title": "Theme",
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
+  },
+  "language": {
+    "title": "Langue"
+  },
+  "autolaunch": {
+    "title": "Lancement automatique",
+    "caption": "Executer les actions automatiquement",
+    "beta": "beta"
+  },
+  "blankCanvasButtonPosition": {
+    "title": "Écran de dessin gestuel",
+    "sheet_title": "Choisissez le placement du bouton",
+    "none": "Pas de boutons",
+    "bottom right": "En bas à droite",
+    "bottom left": "En bas à gauche",
+    "mid right": "Au milieu à droite",
+    "mid left": "Au milieu à gauche",
+    "top right": "En haut à droite",
+    "top left": "En bas à gauche"
+  },
+  "reset": {
+    "title": "Réinitialiser",
+    "caption": "Supprimer tous les gestes et actions",
+    "bottomsheet": {
+      "title": "Réinitialiser ?",
+      "description": "Cette action ne peut être annulée !",
+      "cancel": "Annuler",
+      "ok": "Réinitialiser",
+      "message": "Supprimé avec succès !"
+    }
+  },
+  "help": {
+    "title": "Aide",
+    "description": "Comment utiliser l'application Linky intelligement"
+  }
+}

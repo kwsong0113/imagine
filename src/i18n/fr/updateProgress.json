@@ -1,0 +1,8 @@
+{
+  "message": {
+    "downloading": "Téléchargement des mises à jour · ",
+    "installing": "Installation des mises à jour...",
+    "success": "Un redémarrage est requis pour utiliser les mises à jour."
+  },
+  "restartButton": "Redémarrer maintenant"
+}

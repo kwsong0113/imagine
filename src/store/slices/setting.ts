@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import i18next from 'i18next';
 import { RootState } from '..';
-import { getLocaleLanguage } from '../../utils';
+import { getLanguage, getLocaleLanguage } from '../../utils';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
-export type Language = 'kor' | 'eng' | 'locale';
+export type Language = 'kor' | 'eng' | 'fre' | 'locale';
+export type NonLocaleLanguage = Exclude<Language, 'locale'>;
+export type LocaleLanguage = '한국어' | 'English' | 'Français';
 export type BlankCanvasButtonPosition =
   | 'top right'
   | 'top left'
@@ -51,7 +53,7 @@ const settingSlice = createSlice({
     },
     changeLanguage: (state, action: PayloadAction<Language>) => {
       state.language = action.payload;
-      i18next.changeLanguage(action.payload === 'eng' ? 'en' : 'ko');
+      i18next.changeLanguage(getLanguage(action.payload));
     },
     changeLanguageFromLocale: state => {
       state.language = getLocaleLanguage();

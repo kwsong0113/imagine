@@ -1,0 +1,19 @@
+{
+  "header": {
+    "title": "Statistiques",
+    "description": "Jetez un oeil à vos actions préférées"
+  },
+  "countInfo": {
+    "num_actions": "# Actions utilisées",
+    "num_actions_today": "# Actions Aujourd'hui",
+    "num_actions_per_day": "# Actions par jour"
+  },
+  "message": {
+    "no_actions_today": "Vous avez éxécuté aucune action aujourd'hui !",
+    "more_actions_today": "Aujourd'hui, vous avez éxécuté plus d'actions qu'habituellement !",
+    "less_actions_today": "Aujourd'hui, vous avez éxécuté moins d'actions qu'habituellement !",
+    "same_actions_today": "Aujourd'hui, vous avez éxécuté autant d'actions qu'habituellement !"
+  },
+  "see_all": "Voir tout",
+  "detail_title": "Statistiques des actions d'aujourd'hui"
+}

@@ -1,0 +1,38 @@
+{
+  "title": "Gestes personnalisés",
+  "description": "Choisissez une action et dessinez votre geste",
+  "gestures": "Mes gestes",
+  "actions": "Mes actions",
+  "app_title": "Applications",
+  "app_description": "Prend en charge les applications Apple et tierces",
+  "shortcut_title": "Raccourcis",
+  "shortcut_description": "Entrez seulement le nom du raccourci",
+  "native_action_title": "Actions Linky",
+  "native_action_description": "Fait de vous un utilisateur d'iPhone plus efficace",
+  "custom_url_scheme_title": "Schema d'URL",
+  "custom_url_scheme_description": "Créez votre propre action personnalisée",
+  "toast_message": "Cette fonctionnalité est en développement",
+  "language_bottomsheet_title": "Choisissez votre langage",
+  "help_bottomsheet": {
+    "title": "Apprenez comment utiliser Linky!",
+    "desription": "5 Étapes pour utiliser l'application Linky intelligement",
+    "left_button_title": "Pas maintenant",
+    "right_button_title": "OK"
+  },
+  "new_feature_bottomsheet": {
+    "title": "Nouvelle fonctionnalité!",
+    "auto_launch": {
+      "title": "Mode de lancement automatique (ON / OFF)",
+      "description": "Dessinez un geste et relâchez juste votre main pour executer une action."
+    },
+    "gesture_drawing_screen": {
+      "title": "Personnaliser l'écran de dessin gestuel",
+      "description": "Vous pouvez ajuster la position des boutons."
+    },
+    "more_apps": {
+      "title": "Autres applications supportées",
+      "description": "30 applications et 34 actions ont été ajoutées."
+    },
+    "right_button_title": "Aller dans les paramètres"
+  }
+}

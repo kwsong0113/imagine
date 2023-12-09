@@ -1,0 +1,31 @@
+{
+  "gesture_list": "Mes gestes",
+  "action_list": "Mes actions",
+  "add_gesture": "Nouveau geste",
+  "unassigned_gesture": "Geste non assigné",
+  "message": {
+    "remove_gesture": "{{name}} geste supprimé",
+    "remove_action": "{{name}} action supprimée",
+    "enter_gesture_name": "Entrez le nom du geste",
+    "draw_gesture": "Veuillez dessiner un geste",
+    "no_dot_stroke": "Le pointage n'est pas autorisé",
+    "not_allowed": "Ce geste n'est pas autorisé",
+    "one_time_left": "Dernière fois",
+    "few_times_left": "{{num}} plus",
+    "gesture_added": "Ajouté avec succès",
+    "no_gesture_in_use": "Pas de geste utilisé",
+    "inexecutable_action": "Impossible d'executer cette action",
+    "cannot_find_action": "Action introuvable"
+  },
+  "gestureAddition": {
+    "name_placeholder": "Nom du geste",
+    "title": "Nouveau geste",
+    "clear": "Effacer"
+  },
+  "gesturePicker": {
+    "title": "Gestes",
+    "new_gesture": "Nouveau geste",
+    "can_select": "Disponible",
+    "hide_gesture_in_use": "Cacher gestes utilisés"
+  }
+}

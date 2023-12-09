@@ -1,0 +1,9 @@
+{
+  "header": {
+    "title": "Applications",
+    "description": "Ouvrez des applications et effectuez des actions spécifiques"
+  },
+  "gesture_description": "{{gestureName}} geste",
+  "num_active_actions": "Utilise {{numActiveActions}} / {{numActions}} actions",
+  "num_actions": "{{numActions}} actions"
+}

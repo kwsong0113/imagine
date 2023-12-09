@@ -4,3 +4,4 @@ export * from './sleepTimeout';
 export * from './getLocaleLanguage';
 export * from './pick';
 export * from './getStaticUrl';
+export * from './getHelpData';

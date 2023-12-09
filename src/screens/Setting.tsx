@@ -14,10 +14,10 @@ import {
   AnimatedSentence,
   AnimatedIconButton,
   AnimatedButton,
+  LanguageBottomSheetModal,
 } from '../components';
 import {
   BlankCanvasButtonPosition,
-  Language,
   selectAutoLaunch,
   selectBlankCanvasButtonPosition,
   selectLanguage,
@@ -29,8 +29,8 @@ import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { gestureActions } from '../store/slices/gesture';
 import { useNavigation } from '@react-navigation/native';
 import { RootTabNavigationProp } from '../navigation';
-import { getLocaleLanguage } from '../utils';
 import { useTranslation } from 'react-i18next';
+import { languageCaption } from '../utils';
 
 const themeModeList: ThemeMode[] = ['light', 'dark', 'system'];
 
@@ -79,16 +79,9 @@ const SettingThemeModeRow = () => {
   );
 };
 
-const languageCaption: Record<Language, string> = {
-  kor: '한국어',
-  eng: 'English',
-  locale: getLocaleLanguage() === 'kor' ? '한국어' : 'English',
-};
-
 const SettingLanguageRow = () => {
   const { t } = useTranslation('setting');
   const language = useAppSelector(selectLanguage);
-  const dispatch = useAppDispatch();
   const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
 
   const handlePress = useCallback(() => {
@@ -104,32 +97,10 @@ const SettingLanguageRow = () => {
         right={<IonIcon name="chevron-forward" color="gray.600" size={6} />}
         onPress={handlePress}
       />
-      <SingleBottomSheetModal ref={bottomSheetModalRef}>
-        <VStack px={6} pt={3.5} pb={7.5} space={4}>
-          <Typography bold variant="subtitle1">
-            {t('language.title')}
-          </Typography>
-          <VStack mx={-3}>
-            {Object.entries(languageCaption).map(
-              ([languageOption, caption]) =>
-                languageOption !== 'locale' && (
-                  <SettingOptionRow
-                    key={languageOption}
-                    title={caption}
-                    isSelected={languageOption === language}
-                    onPress={() => {
-                      dispatch(
-                        settingActions.changeLanguage(
-                          languageOption as Language,
-                        ),
-                      );
-                    }}
-                  />
-                ),
-            )}
-          </VStack>
-        </VStack>
-      </SingleBottomSheetModal>
+      <LanguageBottomSheetModal
+        ref={bottomSheetModalRef}
+        title={t('language.title')}
+      />
     </>
   );
 };

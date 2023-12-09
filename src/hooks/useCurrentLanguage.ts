@@ -1,8 +1,8 @@
-import { Language, selectLanguage } from '../store/slices';
+import { NonLocaleLanguage, selectLanguage } from '../store/slices';
 import { getLocaleLanguage } from '../utils';
 import { useAppSelector } from './useApp';
 
-export const useCurrentLangauge = (): Exclude<Language, 'locale'> => {
+export const useCurrentLangauge = (): NonLocaleLanguage => {
   const language = useAppSelector(selectLanguage);
   if (language === 'locale') {
     return getLocaleLanguage();
