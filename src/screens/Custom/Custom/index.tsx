@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Box, HStack, VStack } from 'native-base';
 import {
   AnimatedIconButton,
@@ -7,23 +7,34 @@ import {
   IonIcon,
   ListRow,
   ScreenContainer,
+  LanguageBottomSheetModal,
+  SingleBottomSheetModal,
 } from '../../../components';
 import { RootTabScreenProps } from '../../../navigation';
-import { useRenderToast } from '../../../hooks';
+import { useAppSelector, useRenderToast } from '../../../hooks';
 import { useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { HelpBottomSheetModal } from './HelpBottomSheetModal';
-import { LanguageBottomSheetModal } from './LanguageBottomSheetModal';
 import {
   CUSTOM_URL_SCHEME_ID,
   SHORTCUT_ID,
 } from '../../../features/action/consts';
 import { NewFeatureBottomSheetModal } from './NewFeatureBottomSheetModal';
+import { selectLanguage } from '../../../store/slices';
 
 export const Custom = ({ navigation }: RootTabScreenProps<'Custom'>) => {
+  const bottomSheetModalRef = useRef<SingleBottomSheetModal>(null);
   const renderToast = useRenderToast();
   const { height } = useWindowDimensions();
   const { t } = useTranslation('custom');
+  const language = useAppSelector(selectLanguage);
+  const shouldShowLanguagePicker = language === 'locale';
+
+  useEffect(() => {
+    if (shouldShowLanguagePicker) {
+      bottomSheetModalRef.current?.present();
+    }
+  }, [shouldShowLanguagePicker]);
 
   return (
     <>
@@ -132,7 +143,10 @@ export const Custom = ({ navigation }: RootTabScreenProps<'Custom'>) => {
         </VStack>
       </ScreenContainer>
       <HelpBottomSheetModal />
-      <LanguageBottomSheetModal />
+      <LanguageBottomSheetModal
+        title={t('language_bottomsheet_title')}
+        ref={bottomSheetModalRef}
+      />
       <NewFeatureBottomSheetModal />
     </>
   );

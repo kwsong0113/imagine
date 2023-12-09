@@ -10,7 +10,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2DB4C2A118AA4F9D8597BC5A /* LINESeedKR-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B920DCD6C144DA5BAF95C06 /* LINESeedKR-Thin.ttf */; };
 		363CA0F2F5BD447FB683A657 /* Pods_Imagine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B946B5DE6DBA7DB77118E894 /* Pods_Imagine.framework */; };
+		64B22FC4683644B9A2C3CCA1 /* LINESeedKR-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E81BC71C79AF4221990EF077 /* LINESeedKR-Regular.ttf */; };
+		C9DDAB3C823A467892EC87A8 /* LINESeedKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F08AA322206A4680B655CC85 /* LINESeedKR-Bold.ttf */; };
 		CA3483A029E722AD00813D31 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA34839F29E722AD00813D31 /* WidgetKit.framework */; };
 		CA3483A229E722AD00813D31 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3483A129E722AD00813D31 /* SwiftUI.framework */; };
 		CA3483A529E722AD00813D31 /* SimpleWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3483A429E722AD00813D31 /* SimpleWidgetBundle.swift */; };
@@ -21,9 +24,6 @@
 		CA673C142A63E17400DF7854 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA673C132A63E17400DF7854 /* BootSplash.storyboard */; };
 		CAC3824D2A335BD700DC2466 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAC382502A335BD700DC2466 /* Localizable.strings */; };
 		CAC3824E2A335BD700DC2466 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAC382502A335BD700DC2466 /* Localizable.strings */; };
-		C9DDAB3C823A467892EC87A8 /* LINESeedKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F08AA322206A4680B655CC85 /* LINESeedKR-Bold.ttf */; };
-		64B22FC4683644B9A2C3CCA1 /* LINESeedKR-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E81BC71C79AF4221990EF077 /* LINESeedKR-Regular.ttf */; };
-		2DB4C2A118AA4F9D8597BC5A /* LINESeedKR-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B920DCD6C144DA5BAF95C06 /* LINESeedKR-Thin.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +60,7 @@
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Imagine-ImagineTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Imagine-ImagineTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC303A9E616489585115905 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../src/assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-Imagine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Imagine.debug.xcconfig"; path = "Target Support Files/Pods-Imagine/Pods-Imagine.debug.xcconfig"; sourceTree = "<group>"; };
+		3B920DCD6C144DA5BAF95C06 /* LINESeedKR-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "LINESeedKR-Thin.ttf"; path = "../src/assets/fonts/LINESeedKR-Thin.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Imagine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Imagine.release.xcconfig"; path = "Target Support Files/Pods-Imagine/Pods-Imagine.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-Imagine-ImagineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Imagine-ImagineTests.debug.xcconfig"; path = "Target Support Files/Pods-Imagine-ImagineTests/Pods-Imagine-ImagineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Imagine-ImagineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Imagine-ImagineTests.release.xcconfig"; path = "Target Support Files/Pods-Imagine-ImagineTests/Pods-Imagine-ImagineTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -76,11 +77,10 @@
 		CA673C132A63E17400DF7854 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = Imagine/BootSplash.storyboard; sourceTree = "<group>"; };
 		CAC3824F2A335BD700DC2466 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CAC382512A335BDA00DC2466 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E81BC71C79AF4221990EF077 /* LINESeedKR-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "LINESeedKR-Regular.ttf"; path = "../src/assets/fonts/LINESeedKR-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F08AA322206A4680B655CC85 /* LINESeedKR-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "LINESeedKR-Bold.ttf"; path = "../src/assets/fonts/LINESeedKR-Bold.ttf"; sourceTree = "<group>"; };
 		FE1A70976B11468AA3146BDD /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = ../src/assets/fonts/Ionicons.ttf; sourceTree = "<group>"; };
-		F08AA322206A4680B655CC85 /* LINESeedKR-Bold.ttf */ = {isa = PBXFileReference; name = "LINESeedKR-Bold.ttf"; path = "../src/assets/fonts/LINESeedKR-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E81BC71C79AF4221990EF077 /* LINESeedKR-Regular.ttf */ = {isa = PBXFileReference; name = "LINESeedKR-Regular.ttf"; path = "../src/assets/fonts/LINESeedKR-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3B920DCD6C144DA5BAF95C06 /* LINESeedKR-Thin.ttf */ = {isa = PBXFileReference; name = "LINESeedKR-Thin.ttf"; path = "../src/assets/fonts/LINESeedKR-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

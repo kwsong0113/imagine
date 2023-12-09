@@ -1,0 +1,11 @@
+{
+  "shortcuts": {
+    "title": "Raccourcis",
+    "description": "Lancez Raccourcis et obtenez les tâches faites rapidement."
+  },
+  "custom_url_scheme": {
+    "title": "Schéma d'URL personnalisé",
+    "description": "Ajoutez votre action personnalisé utilisant le schéma d'URL",
+    "help": "Est-ce votre schéma d'URL"
+  }
+}
